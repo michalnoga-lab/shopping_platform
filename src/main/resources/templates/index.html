@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+	<meta charset="UTF-8">
+	<title>Polish Political Scanner</title>
+</head>
+<body>
+<div th:replace="fragments/stylesheet"></div>
+<div th:replace="fragments/mainTopMenu"></div>
+
+<div class="container">
+	<div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+		<h1 class="display-4 font-italic">Polski skaner polityczny ...</h1>
+		<p>Chcesz wiedzieć który polityk zarobił najwięcej ??? który opuścił dużo głosowań ??? może interesują
+			Cię wydatki polityków na wyjazdy zagraniczne ???</p>
+		<p>Teraz wszystko jest na wyciągnięcie ręki - bez żmudnego przeglądania internetu w poszukiwaniu danych ...</p>
+		<p>Wszysto jest w zasięgu jednego kliknięcia ...</p>
+	</div>
+	<div class="btn btn-block btn-dark display-4 text-white font-italic p-2">
+		<a class="nav-link" href="/data/downloadData">POBIERZ DANE</a>
+	</div>
+</div>
+
+<div th:replace="fragments/footer">footer</div>
+</body>
+</html>
