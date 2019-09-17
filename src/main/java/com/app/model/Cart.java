@@ -26,4 +26,7 @@ public class Cart {
     private boolean cartClosed;
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "cart")
     private Set<Product> products;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 }

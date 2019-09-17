@@ -26,4 +26,6 @@ public class Customer {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "customer_id")
     private Company company;
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "customer")
+    private Set<Cart> carts;
 }
