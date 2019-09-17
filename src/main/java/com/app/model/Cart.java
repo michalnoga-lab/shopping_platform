@@ -23,7 +23,7 @@ public class Cart {
     private BigDecimal totalNetValue;
     private BigDecimal totalVatValue;
     private BigDecimal totalGrossValue;
-    private boolean cartClosed;
+    private Boolean cartClosed;
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "cart")
     private Set<Product> products;
     @ManyToOne

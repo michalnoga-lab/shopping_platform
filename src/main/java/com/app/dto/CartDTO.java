@@ -18,6 +18,6 @@ public class CartDTO {
     private BigDecimal totalNetValue;
     private BigDecimal totalVatValue;
     private BigDecimal totalGrossValue;
-    private boolean cartClosed;
+    private Boolean cartClosed;
     private Customer customer;
 }

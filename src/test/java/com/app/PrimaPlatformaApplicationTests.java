@@ -12,5 +12,4 @@ public class PrimaPlatformaApplicationTests {
     @Test
     public void contextLoads() {
     }
-
 }
