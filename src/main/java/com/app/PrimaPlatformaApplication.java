@@ -9,5 +9,4 @@ public class PrimaPlatformaApplication {
     public static void main(String[] args) {
         SpringApplication.run(PrimaPlatformaApplication.class, args);
     }
-
 }

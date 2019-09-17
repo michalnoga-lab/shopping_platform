@@ -6,27 +6,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
 @Entity
-@Table(name = "products")
-public class Product {
+@Table(name = "customers")
+public class Customer {
 
     @Id
     @GeneratedValue
     private Long id;
     private String name;
-    private String description;
-    private Integer quantity;
-    private BigDecimal nettPrice;
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Cart cart;
-    @ManyToOne
-    @JoinColumn(name = "product_id")
+    private String surname;
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "customer")
+    private Set<DeliveryAddress> deliveryAddresses;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "customer_id")
     private Company company;
 }
