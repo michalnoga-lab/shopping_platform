@@ -24,9 +24,9 @@ public class Product {
     private Integer quantity;
     private BigDecimal nettPrice;
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "cart_id")
     private Cart cart;
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "company_id")
     private Company company;
 }
