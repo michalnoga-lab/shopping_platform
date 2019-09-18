@@ -25,6 +25,7 @@ public class Company {
     private String streetNumber;
     private String city;
     private String postCode;
+    private Boolean active;
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "company")
     private Set<Customer> customers;
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "company")

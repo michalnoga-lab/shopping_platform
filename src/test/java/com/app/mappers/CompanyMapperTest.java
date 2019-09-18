@@ -29,6 +29,7 @@ public class CompanyMapperTest {
                 .products(new HashSet<>(List.of(Product.builder().id(3L).build())))
                 .street("Example street")
                 .streetNumber("12A")
+                .active(true)
                 .build();
 
         CompanyDTO expectedCompany = CompanyDTO.builder()
@@ -39,6 +40,7 @@ public class CompanyMapperTest {
                 .postCode("12-345")
                 .street("Example street")
                 .streetNumber("12A")
+                .active(true)
                 .build();
 
         CompanyDTO actualCompany = CompanyMapper.toDto(company);
@@ -57,6 +59,7 @@ public class CompanyMapperTest {
                 .postCode("12-345")
                 .street("Example street")
                 .streetNumber("12A")
+                .active(false)
                 .build();
 
         Company expectedCompany = Company.builder()
@@ -69,6 +72,7 @@ public class CompanyMapperTest {
                 .streetNumber("12A")
                 .products(new HashSet<>())
                 .customers(new HashSet<>())
+                .active(false)
                 .build();
 
         Company actualCompany = CompanyMapper.fromDto(companyDTO);

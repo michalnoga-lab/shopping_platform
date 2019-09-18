@@ -16,6 +16,7 @@ public interface CompanyMapper {
                 .postCode(company.getPostCode())
                 .street(company.getStreet())
                 .streetNumber(company.getStreetNumber())
+                .active(company.getActive())
                 .build();
     }
 
@@ -30,6 +31,7 @@ public interface CompanyMapper {
                 .streetNumber(companyDTO.getStreetNumber())
                 .customers(new HashSet<>())
                 .products(new HashSet<>())
+                .active(companyDTO.getActive())
                 .build();
     }
 }
