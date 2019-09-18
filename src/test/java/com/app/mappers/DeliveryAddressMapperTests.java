@@ -1,7 +1,7 @@
 package com.app.mappers;
 
 import com.app.dto.DeliveryAddressDTO;
-import com.app.model.Customer;
+import com.app.model.User;
 import com.app.model.DeliveryAddress;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -19,13 +19,13 @@ public class DeliveryAddressMapperTests {
         DeliveryAddress deliveryAddress = DeliveryAddress.builder()
                 .id(1L)
                 .address("Example address")
-                .customer(Customer.builder().id(2L).build())
+                .customer(User.builder().id(2L).build())
                 .build();
 
         DeliveryAddressDTO expectedResult = DeliveryAddressDTO.builder()
                 .id(1L)
                 .address("Example address")
-                .customer(Customer.builder().id(2L).build())
+                .customer(User.builder().id(2L).build())
                 .build();
         DeliveryAddressDTO actualResult = DeliveryAddressMapper.toDto(deliveryAddress);
 
@@ -39,13 +39,13 @@ public class DeliveryAddressMapperTests {
         DeliveryAddressDTO deliveryAddressDTO = DeliveryAddressDTO.builder()
                 .id(1L)
                 .address("Example address")
-                .customer(Customer.builder().id(2L).build())
+                .customer(User.builder().id(2L).build())
                 .build();
 
         DeliveryAddress expectedResult = DeliveryAddress.builder()
                 .id(1L)
                 .address("Example address")
-                .customer(Customer.builder().id(2L).build())
+                .customer(User.builder().id(2L).build())
                 .build();
 
         DeliveryAddress actualResult = DeliveryAddressMapper.fromDto(deliveryAddressDTO);

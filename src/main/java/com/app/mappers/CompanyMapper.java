@@ -29,7 +29,7 @@ public interface CompanyMapper {
                 .postCode(companyDTO.getPostCode())
                 .street(companyDTO.getStreet())
                 .streetNumber(companyDTO.getStreetNumber())
-                .customers(new HashSet<>())
+                .users(new HashSet<>())
                 .products(new HashSet<>())
                 .active(companyDTO.getActive())
                 .build();

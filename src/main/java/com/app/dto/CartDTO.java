@@ -1,6 +1,6 @@
 package com.app.dto;
 
-import com.app.model.Customer;
+import com.app.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,5 +19,5 @@ public class CartDTO {
     private BigDecimal totalVatValue;
     private BigDecimal totalGrossValue;
     private Boolean cartClosed;
-    private Customer customer;
+    private User customer;
 }

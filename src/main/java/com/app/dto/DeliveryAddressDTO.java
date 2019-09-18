@@ -1,6 +1,6 @@
 package com.app.dto;
 
-import com.app.model.Customer;
+import com.app.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,5 +14,5 @@ public class DeliveryAddressDTO {
 
     private Long id;
     private String address;
-    private Customer customer;
+    private User customer;
 }

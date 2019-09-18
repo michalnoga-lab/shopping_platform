@@ -19,6 +19,7 @@ public class Company {
     @Id
     @GeneratedValue
     private Long id;
+
     private String name;
     private String nip;
     private String street;
@@ -26,8 +27,10 @@ public class Company {
     private String city;
     private String postCode;
     private Boolean active;
+
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "company")
-    private Set<Customer> customers;
+    private Set<User> users;
+
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "company")
     private Set<Product> products;
 }

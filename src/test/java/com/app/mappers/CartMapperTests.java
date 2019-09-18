@@ -2,7 +2,7 @@ package com.app.mappers;
 
 import com.app.dto.CartDTO;
 import com.app.model.Cart;
-import com.app.model.Customer;
+import com.app.model.User;
 import com.app.model.Product;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -26,7 +26,7 @@ public class CartMapperTests {
                 .totalGrossValue(BigDecimal.valueOf(123))
                 .totalNetValue(BigDecimal.valueOf(100))
                 .products(new HashSet<>(List.of(Product.builder().build())))
-                .customer(Customer.builder().id(2L).build())
+                .customer(User.builder().id(2L).build())
                 .cartClosed(false)
                 .build();
 
@@ -35,7 +35,7 @@ public class CartMapperTests {
                 .totalVatValue(BigDecimal.valueOf(23))
                 .totalGrossValue(BigDecimal.valueOf(123))
                 .totalNetValue(BigDecimal.valueOf(100))
-                .customer(Customer.builder().id(2L).build())
+                .customer(User.builder().id(2L).build())
                 .cartClosed(false)
                 .build();
 
@@ -52,7 +52,7 @@ public class CartMapperTests {
                 .totalVatValue(BigDecimal.valueOf(23))
                 .totalGrossValue(BigDecimal.valueOf(123))
                 .totalNetValue(BigDecimal.valueOf(100))
-                .customer(Customer.builder().id(2L).build())
+                .customer(User.builder().id(2L).build())
                 .cartClosed(false)
                 .build();
         Cart expectedCart = Cart.builder()
@@ -61,7 +61,7 @@ public class CartMapperTests {
                 .totalGrossValue(BigDecimal.valueOf(123))
                 .totalNetValue(BigDecimal.valueOf(100))
                 .products(new HashSet<>())
-                .customer(Customer.builder().id(2L).build())
+                .customer(User.builder().id(2L).build())
                 .cartClosed(false)
                 .build();
 

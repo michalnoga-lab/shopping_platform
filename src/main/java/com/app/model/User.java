@@ -13,19 +13,29 @@ import java.util.Set;
 @Builder
 @Data
 @Entity
-@Table(name = "customers")
-public class Customer {
+@Table(name = "users")
+public class User {
 
     @Id
     @GeneratedValue
     private Long id;
+    private String login;
     private String name;
     private String surname;
+    private String password;
+    private Boolean enabled;
+    private Role role;
+
+    @Transient
+    private String passwordConfirmation;
+
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "customer")
     private Set<DeliveryAddress> deliveryAddresses;
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "customer_id")
     private Company company;
+
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "customer")
     private Set<Cart> carts;
 }

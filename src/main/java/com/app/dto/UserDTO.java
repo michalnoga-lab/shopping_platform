@@ -1,6 +1,6 @@
 package com.app.dto;
 
-import com.app.model.Company;
+import com.app.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,10 +10,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Data
-public class CustomerDTO {
+public class UserDTO {
 
     private Long id;
+    private String login;
     private String name;
     private String surname;
-    private Company company;
+    private String password;
+    private String passwordConfirmation;
+    private Boolean enabled;
+    private Role role;
+    private CompanyDTO companyDTO;
 }

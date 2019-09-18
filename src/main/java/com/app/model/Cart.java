@@ -28,5 +28,5 @@ public class Cart {
     private Set<Product> products;
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private User customer;
 }

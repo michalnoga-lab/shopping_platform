@@ -21,5 +21,5 @@ public class DeliveryAddress {
     private String address;
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private User customer;
 }
