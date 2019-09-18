@@ -4,9 +4,9 @@ import com.app.dto.CartDTO;
 import com.app.model.Cart;
 import com.app.model.Customer;
 import com.app.model.Product;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -19,7 +19,7 @@ public class CartMapperTests {
 
     @Test
     @DisplayName("toDto")
-    public void test1() {
+    void test1() {
         Cart cart = Cart.builder()
                 .id(1L)
                 .totalVatValue(BigDecimal.valueOf(23))
@@ -46,7 +46,7 @@ public class CartMapperTests {
 
     @Test
     @DisplayName("fromDto")
-    public void test2(){
+    void test2() {
         CartDTO cartDTO = CartDTO.builder()
                 .id(1L)
                 .totalVatValue(BigDecimal.valueOf(23))

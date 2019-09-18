@@ -4,9 +4,9 @@ import com.app.dto.CompanyDTO;
 import com.app.model.Company;
 import com.app.model.Customer;
 import com.app.model.Product;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -18,7 +18,7 @@ public class CompanyMapperTest {
 
     @Test
     @DisplayName("toDto")
-    public void test1() {
+    void test1() {
         Company company = Company.builder()
                 .id(1L)
                 .city("Example city")
@@ -50,7 +50,7 @@ public class CompanyMapperTest {
 
     @Test
     @DisplayName("fromDto")
-    public void test2() {
+    void test2() {
         CompanyDTO companyDTO = CompanyDTO.builder()
                 .id(1L)
                 .city("Example city")
