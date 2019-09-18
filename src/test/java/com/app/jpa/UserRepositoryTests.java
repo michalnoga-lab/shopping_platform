@@ -37,5 +37,5 @@ public class UserRepositoryTests {
         Assertions.assertEquals(3, userRepository.findAll().size());
     }
 
-    // TODO: 2019-09-18
+    // TODO: 2019-09-18 reszta testów
 }
