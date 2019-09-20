@@ -19,13 +19,13 @@ public class DeliveryAddressMapperTests {
         DeliveryAddress deliveryAddress = DeliveryAddress.builder()
                 .id(1L)
                 .address("Example address")
-                .customer(User.builder().id(2L).build())
+                .user(User.builder().id(2L).build())
                 .build();
 
         DeliveryAddressDTO expectedResult = DeliveryAddressDTO.builder()
                 .id(1L)
                 .address("Example address")
-                .customer(User.builder().id(2L).build())
+                .user(User.builder().id(2L).build())
                 .build();
         DeliveryAddressDTO actualResult = DeliveryAddressMapper.toDto(deliveryAddress);
 
@@ -39,13 +39,13 @@ public class DeliveryAddressMapperTests {
         DeliveryAddressDTO deliveryAddressDTO = DeliveryAddressDTO.builder()
                 .id(1L)
                 .address("Example address")
-                .customer(User.builder().id(2L).build())
+                .user(User.builder().id(2L).build())
                 .build();
 
         DeliveryAddress expectedResult = DeliveryAddress.builder()
                 .id(1L)
                 .address("Example address")
-                .customer(User.builder().id(2L).build())
+                .user(User.builder().id(2L).build())
                 .build();
 
         DeliveryAddress actualResult = DeliveryAddressMapper.fromDto(deliveryAddressDTO);

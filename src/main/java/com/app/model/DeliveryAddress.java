@@ -18,8 +18,10 @@ public class DeliveryAddress {
     @Id
     @GeneratedValue
     private Long id;
+
     private String address;
+
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "customer_id")
-    private User customer;
+    @JoinColumn(name = "user_id")
+    private User user;
 }

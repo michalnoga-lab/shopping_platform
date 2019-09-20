@@ -14,5 +14,5 @@ public class DeliveryAddressDTO {
 
     private Long id;
     private String address;
-    private User customer;
+    private User user;
 }

@@ -77,17 +77,22 @@ public class CompanyServiceTests {
         Mockito
                 .when(companyRepository.findAll()).thenReturn(companies);
 
-
-        System.out.println("##############################");
-
-        companyRepository
-                .findAll()
-                .stream()
-                .forEach(company -> System.out.println(company));
-
         CompanyDTO expectedCompany1 = CompanyMapper.toDto(company1);
+        CompanyDTO expectedCompany2 = CompanyMapper.toDto(company2);
+        CompanyDTO expectedCompany3 = CompanyMapper.toDto(company3);
+
         CompanyDTO actualCompany1 = companyService.getCompanyOfUser("login A");
+        CompanyDTO actualCompany2 = companyService.getCompanyOfUser("login B");
+        CompanyDTO actualCompany3 = companyService.getCompanyOfUser("login C");
+        CompanyDTO actualCompany4 = companyService.getCompanyOfUser("login D");
+        CompanyDTO actualCompany5 = companyService.getCompanyOfUser("login E");
+        CompanyDTO actualCompany6 = companyService.getCompanyOfUser("login F");
 
         Assertions.assertEquals(expectedCompany1, actualCompany1);
+        Assertions.assertEquals(expectedCompany1, actualCompany2);
+        Assertions.assertEquals(expectedCompany1, actualCompany3);
+        Assertions.assertEquals(expectedCompany2, actualCompany4);
+        Assertions.assertEquals(expectedCompany3, actualCompany5);
+        Assertions.assertEquals(expectedCompany3, actualCompany6);
     }
 }

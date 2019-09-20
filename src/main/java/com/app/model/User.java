@@ -33,7 +33,7 @@ public class User {
     private Set<DeliveryAddress> deliveryAddresses;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "company_id")
     private Company company;
 
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "customer")

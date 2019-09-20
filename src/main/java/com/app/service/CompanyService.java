@@ -1,7 +1,6 @@
 package com.app.service;
 
 import com.app.dto.CompanyDTO;
-import com.app.dto.ProductDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.CompanyMapper;
@@ -12,7 +11,7 @@ import com.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,16 +19,6 @@ public class CompanyService {
 
     private final CompanyRepository companyRepository;
     private final UserRepository userRepository;
-
-  /*  public List<ProductDTO> getAllProductsForSpecificUser(String userLogin) {
-        if (userLogin == null) {
-            throw new AppException(ExceptionCodes.SERVICE, "getAllProductsForSpecificUser - user login is null");
-        }
-
-        CompanyDTO companyDTO = getCompanyOfUser(userLogin);
-
-        return null; // TODO: 2019-09-18
-    }*/
 
     public CompanyDTO getCompanyOfUser(String userLogin) {
         if (userLogin == null || userLogin.length() == 0) {
@@ -40,9 +29,16 @@ public class CompanyService {
         Company company = companyRepository
                 .findAll()
                 .stream()
-                .filter(cmp -> cmp.getUsers().contains(user))
+                .filter(cmp -> {
+                    Optional<User> userOptional = cmp
+                            .getUsers()
+                            .stream()
+                            .filter(usr -> usr.getLogin().equals(userLogin))
+                            .findFirst();
+                    return userOptional.isPresent();
+                })
                 .findFirst()
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE, "getCompanyOfUser - no company related with user"));
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE, "getCompanyOfUser - no company related with user: " + userLogin));
         return CompanyMapper.toDto(company);
     }
 }

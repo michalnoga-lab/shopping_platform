@@ -26,7 +26,7 @@ public class CartMapperTests {
                 .totalGrossValue(BigDecimal.valueOf(123))
                 .totalNetValue(BigDecimal.valueOf(100))
                 .products(new HashSet<>(List.of(Product.builder().build())))
-                .customer(User.builder().id(2L).build())
+                .user(User.builder().id(2L).build())
                 .cartClosed(false)
                 .build();
 
@@ -61,7 +61,7 @@ public class CartMapperTests {
                 .totalGrossValue(BigDecimal.valueOf(123))
                 .totalNetValue(BigDecimal.valueOf(100))
                 .products(new HashSet<>())
-                .customer(User.builder().id(2L).build())
+                .user(User.builder().id(2L).build())
                 .cartClosed(false)
                 .build();
 
