@@ -6,9 +6,11 @@ import com.app.repository.CompanyRepository;
 import com.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 @RequiredArgsConstructor
 public class dataInitialization implements CommandLineRunner {
 
@@ -27,17 +29,21 @@ public class dataInitialization implements CommandLineRunner {
     User user1 = User.builder()
             .login("log")
             .name("name 1")
-            .company(company1)
             .build();
     User user2 = User.builder()
             .login("log2")
             .name("name 2")
-            .company(company1)
             .build();
 
     @Override
     public void run(String... args) throws Exception {
+
         companyRepository.saveAll(List.of(company1, company2));
         userRepository.saveAll(List.of(user1, user2));
+
+        user1.setCompany(company1);
+        user2.setCompany(company1);
+
+        userRepository.saveAndFlush(user1);
     }
 }
