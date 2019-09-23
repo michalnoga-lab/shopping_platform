@@ -50,9 +50,9 @@ public class ProductServiceTests {
         Product product4 = Product.builder().name("Product 4").build();
         Product product5 = Product.builder().name("Product 5").build();
 
-        CompanyDTO companyDTO1 = CompanyDTO.builder().name("Example company 1").build();
-        CompanyDTO companyDTO2 = CompanyDTO.builder().name("Example company 2").build();
-        CompanyDTO companyDTO3 = CompanyDTO.builder().name("Example company 3").build();
+        CompanyDTO companyDTO1 = CompanyDTO.builder().name("Example company 1").id(1L).build();
+        CompanyDTO companyDTO2 = CompanyDTO.builder().name("Example company 2").id(2L).build();
+        CompanyDTO companyDTO3 = CompanyDTO.builder().name("Example company 3").id(3L).build();
 
         product1.setCompany(CompanyMapper.fromDto(companyDTO1));
         product2.setCompany(CompanyMapper.fromDto(companyDTO1));

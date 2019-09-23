@@ -27,7 +27,7 @@ public class ProductService {
         return productRepository
                 .findAll()
                 .stream()
-                .filter(product -> product.getCompany().equals(CompanyMapper.fromDto(companyDTO)))
+                .filter(product -> product.getCompany().getId().equals((companyDTO.getId())))
                 .map(ProductMapper::toDto)
                 .collect(Collectors.toList());
     }
