@@ -1,0 +1,22 @@
+.table {
+    counter-reset: serial-number;
+}
+
+.table-counter td:first-child:before {
+    counter-increment: serial-number;
+    content: counter(serial-number);
+}
+
+.table-head-custom {
+    color: white;
+    text-align: center;
+    background-color: #343a40;
+}
+
+.table-body-custom {
+    text-align: center;
+}
+
+table tbody tr:hover {
+    background-color: whitesmoke;
+}
