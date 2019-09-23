@@ -9,8 +9,21 @@
 <div th:replace="fragments/top">TOP MENU</div>
 
 <div class="container">
+    <table class="table">
+        <thead class="table-head-custom">
+        <tr>
+            <td>BLA</td>
+            <td>BLA</td>
+            <td>BLA</td>
+        </tr>
+        </thead>
+        <tbody class="table-body-custom" th:each="p:${products}">
+        <tr>
+            <td><p th:text="${p.name}"></p></td>
+        </tr>
+        </tbody>
+    </table>
 
-    all products!
 
 </div>
 

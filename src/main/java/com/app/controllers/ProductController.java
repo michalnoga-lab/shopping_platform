@@ -1,5 +1,6 @@
 package com.app.controllers;
 
+import com.app.dto.ProductDTO;
 import com.app.service.CompanyService;
 import com.app.service.ProductService;
 import com.app.service.SecurityService;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -20,9 +23,7 @@ public class ProductController {
 
     @GetMapping("/all")
     public String all(Model model) {
-        model.addAttribute("products",
-                productService.getProductsOfCompany(companyService.getCompanyOfUser(securityService.getLoggedInUser())));
-
+        model.addAttribute("products", List.of(ProductDTO.builder().name("AAAA").build()));
         return "/products/all";
     }
 }
