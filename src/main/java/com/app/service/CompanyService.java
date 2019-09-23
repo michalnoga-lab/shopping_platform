@@ -24,7 +24,6 @@ public class CompanyService {
         if (userLogin == null || userLogin.length() == 0) {
             throw new AppException(ExceptionCodes.SERVICE, "getCompanyOfUser - user login is null");
         }
-        User user = userRepository.findUserByLogin(userLogin);
 
         Company company = companyRepository
                 .findAll()
