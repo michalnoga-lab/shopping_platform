@@ -10,7 +10,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -42,7 +44,7 @@ public class ProductServiceTests {
 
     @Test
     @DisplayName("getProductsOfCompany")
-    public void test1() {
+    void test1() {
 
         Product product1 = Product.builder().name("Product 1").build();
         Product product2 = Product.builder().name("Product 2").build();
@@ -74,5 +76,4 @@ public class ProductServiceTests {
         Assertions.assertEquals(expectedProductOfCompany1, actualProductOfCompany1);
         Assertions.assertEquals(expectedProductOfCompany2, actualProductOfCompany2);
     }
-
 }

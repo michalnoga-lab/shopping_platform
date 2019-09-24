@@ -21,15 +21,13 @@
         <tr>
             <td><p th:text="${p.name}"></p></td>
             <td><p th:text="${p.nettPrice}+' PLN'"></td>
-            <td><p><a th:href="@{/products/one/{id}(id=${p.id})}">
-                <i class="glyphicon glyphicon-shopping-cart"></i></a></p>
-            </td>
+            <td><p><a th:href="@{/products/one/{id}(id=${p.id})}">DODAJ</a></p></td>
         </tr>
         </tbody>
     </table>
 
+    <div th:replace="/fragments/footer">FOOTER</div>
 </div>
 
-<div th:replace="/fragments/footer">FOOTER</div>
 </body>
 </html>
