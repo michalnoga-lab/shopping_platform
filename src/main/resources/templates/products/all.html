@@ -12,18 +12,21 @@
     <table class="table">
         <thead class="table-head-custom">
         <tr>
-            <td>BLA</td>
-            <td>BLA</td>
-            <td>BLA</td>
+            <td>NAZWA</td>
+            <td>CENA NETTO</td>
+            <td>DODAJ DO KOSZKA</td>
         </tr>
         </thead>
         <tbody class="table-body-custom" th:each="p:${products}">
         <tr>
             <td><p th:text="${p.name}"></p></td>
+            <td><p th:text="${p.nettPrice}+' PLN'"></td>
+            <td><p><a th:href="@{/products/one/{id}(id=${p.id})}">
+                <i class="glyphicon glyphicon-shopping-cart"></i></a></p>
+            </td>
         </tr>
         </tbody>
     </table>
-
 
 </div>
 

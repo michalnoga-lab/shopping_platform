@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -21,14 +22,16 @@ public class ProductController {
     private final SecurityService securityService;
     private final ProductService productService;
     private final CompanyService companyService;
-    private final ProductRepository productRepository;
-    private final UserRepository userRepository;
-    private final CompanyRepository companyRepository;
 
     @GetMapping("/all")
     public String all(Model model) {
         model.addAttribute("products", productService.getProductsOfCompany(
                 companyService.getCompanyOfUser(securityService.getLoggedInUser())));
         return "/products/all";
+    }
+
+    @GetMapping("/one/{id}")
+    public String one(@PathVariable Long id, Model model) {
+        return "/products/one";
     }
 }

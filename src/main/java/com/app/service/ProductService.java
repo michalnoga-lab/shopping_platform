@@ -4,7 +4,6 @@ import com.app.dto.CompanyDTO;
 import com.app.dto.ProductDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
-import com.app.mappers.CompanyMapper;
 import com.app.mappers.ProductMapper;
 import com.app.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,5 +29,18 @@ public class ProductService {
                 .filter(product -> product.getCompany().getId().equals((companyDTO.getId())))
                 .map(ProductMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    public ProductDTO getOneProduct(Long id) {
+        if (id == null) {
+            throw new AppException(ExceptionCodes.SERVICE, "getOneProduct - id is null");
+        }
+        if (id < 0) {
+            throw new AppException(ExceptionCodes.SERVICE, "getOneProduct - id less than zero");
+        }
+        return productRepository
+                .findById(id)
+                .map(ProductMapper::toDto)
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE, "getOneProduct - no product with ID: " + id));
     }
 }
