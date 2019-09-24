@@ -27,7 +27,8 @@ public class ProductController {
 
     @GetMapping("/all")
     public String all(Model model) {
-        model.addAttribute("products", productRepository.findAll()); // TODO: 2019-09-23 od tego zacząć!
+        model.addAttribute("products", productService.getProductsOfCompany(
+                companyService.getCompanyOfUser(securityService.getLoggedInUser())));
         return "/products/all";
     }
 }
