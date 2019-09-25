@@ -36,4 +36,44 @@ public class ProductControllerTests {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }
+
+    @Test
+    @DisplayName("added")
+    void test2() throws Exception {
+
+        mockMvc
+                .perform(MockMvcRequestBuilders.get("/products/added").contentType(MediaType.TEXT_HTML))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
+    }
+
+    @Test
+    @DisplayName("one")
+    void test3() throws Exception {
+
+        mockMvc
+                .perform(MockMvcRequestBuilders.get("/products/one").contentType(MediaType.TEXT_HTML))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
+    } // TODO: 2019-09-25
+
+    @Test
+    @DisplayName("buy")
+    void test4() throws Exception {
+
+        mockMvc
+                .perform(MockMvcRequestBuilders.post("/products/added").contentType(MediaType.TEXT_HTML))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
+    }
+
+    @Test
+    @DisplayName("buy")
+    void test5() throws Exception {
+
+        mockMvc
+                .perform(MockMvcRequestBuilders.get("/products/added").contentType(MediaType.TEXT_HTML))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
+    }
 }

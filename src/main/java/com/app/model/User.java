@@ -49,13 +49,12 @@ public class User {
                 Objects.equals(login, user.login) &&
                 Objects.equals(name, user.name) &&
                 Objects.equals(surname, user.surname) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(enabled, user.enabled);
+                Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, login, name, surname, password, enabled, role, passwordConfirmation, deliveryAddresses, company, carts);
+        return Objects.hash(id, login, name, surname, password, enabled, role, passwordConfirmation);
     }
 
     @Override
@@ -68,10 +67,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", enabled=" + enabled +
                 ", role=" + role +
-                ", passwordConfirmation='" + passwordConfirmation + '\'' +
-                ", deliveryAddresses=" + deliveryAddresses +
-                ", company=" + company +
-                ", carts=" + carts +
+                ", passwordConfirmation='" + passwordConfirmation +
                 '}';
     }
 }

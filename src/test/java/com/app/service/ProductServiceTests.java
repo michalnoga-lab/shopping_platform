@@ -5,14 +5,13 @@ import com.app.dto.ProductDTO;
 import com.app.mappers.CompanyMapper;
 import com.app.mappers.ProductMapper;
 import com.app.model.Product;
+import com.app.repository.CartRepository;
 import com.app.repository.ProductRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -28,6 +27,9 @@ public class ProductServiceTests {
     private ProductRepository productRepository;
 
     @Autowired
+    private CartRepository cartRepository;
+
+    @Autowired
     private ProductService productService;
 
     @TestConfiguration
@@ -36,9 +38,12 @@ public class ProductServiceTests {
         @MockBean
         private ProductRepository productRepository;
 
+        @MockBean
+        private CartRepository cartRepository;
+
         @Bean
         public ProductService productService() {
-            return new ProductService(productRepository);
+            return new ProductService(productRepository, cartRepository);
         }
     }
 

@@ -2,6 +2,7 @@ package com.app.service;
 
 import com.app.dto.CompanyDTO;
 import com.app.mappers.CompanyMapper;
+import com.app.mappers.UserMapper;
 import com.app.model.Company;
 import com.app.model.User;
 import com.app.repository.CompanyRepository;
@@ -51,26 +52,21 @@ public class CompanyServiceTests {
     @DisplayName("getCompanyOfUser")
     void test1() {
 
+        User userA = User.builder().login("login A").build();
+        User userB = User.builder().login("login B").build();
+        User userC = User.builder().login("login C").build();
+        User userD = User.builder().login("login D").build();
+        User userE = User.builder().login("login E").build();
+        User userF = User.builder().login("login F").build();
+
         Company company1 = Company.builder()
-                .users(new HashSet<>(List.of(
-                        User.builder().login("login A").build(),
-                        User.builder().login("login B").build(),
-                        User.builder().login("login C").build()
-                )))
-                .build();
+                .users(new HashSet<>(List.of(userA, userB, userC))).build();
 
         Company company2 = Company.builder()
-                .users(new HashSet<>(List.of(
-                        User.builder().login("login D").build(),
-                        User.builder().login("login E").build()
-                )))
-                .build();
+                .users(new HashSet<>(List.of(userD, userE))).build();
 
         Company company3 = Company.builder()
-                .users(new HashSet<>(List.of(
-                        User.builder().login("login F").build()
-                )))
-                .build();
+                .users(new HashSet<>(List.of(userF))).build();
 
         List<Company> companies = List.of(company1, company2, company3);
 
@@ -81,12 +77,12 @@ public class CompanyServiceTests {
         CompanyDTO expectedCompany2 = CompanyMapper.toDto(company2);
         CompanyDTO expectedCompany3 = CompanyMapper.toDto(company3);
 
-        CompanyDTO actualCompany1 = companyService.getCompanyOfUser("login A");
-        CompanyDTO actualCompany2 = companyService.getCompanyOfUser("login B");
-        CompanyDTO actualCompany3 = companyService.getCompanyOfUser("login C");
-        CompanyDTO actualCompany4 = companyService.getCompanyOfUser("login D");
-        CompanyDTO actualCompany5 = companyService.getCompanyOfUser("login E");
-        CompanyDTO actualCompany6 = companyService.getCompanyOfUser("login F");
+        CompanyDTO actualCompany1 = companyService.getCompanyOfUser(UserMapper.toDto(userA));
+        CompanyDTO actualCompany2 = companyService.getCompanyOfUser(UserMapper.toDto(userB));
+        CompanyDTO actualCompany3 = companyService.getCompanyOfUser(UserMapper.toDto(userC));
+        CompanyDTO actualCompany4 = companyService.getCompanyOfUser(UserMapper.toDto(userD));
+        CompanyDTO actualCompany5 = companyService.getCompanyOfUser(UserMapper.toDto(userE));
+        CompanyDTO actualCompany6 = companyService.getCompanyOfUser(UserMapper.toDto(userF));
 
         Assertions.assertEquals(expectedCompany1, actualCompany1);
         Assertions.assertEquals(expectedCompany1, actualCompany2);

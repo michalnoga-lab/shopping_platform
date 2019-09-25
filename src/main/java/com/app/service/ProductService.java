@@ -1,15 +1,21 @@
 package com.app.service;
 
+import com.app.dto.CartDTO;
 import com.app.dto.CompanyDTO;
 import com.app.dto.ProductDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
+import com.app.mappers.CartMapper;
 import com.app.mappers.ProductMapper;
+import com.app.model.Cart;
+import com.app.model.Product;
+import com.app.repository.CartRepository;
 import com.app.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,6 +23,7 @@ import java.util.stream.Collectors;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final CartRepository cartRepository;
 
     public List<ProductDTO> getProductsOfCompany(CompanyDTO companyDTO) {
         if (companyDTO == null) {

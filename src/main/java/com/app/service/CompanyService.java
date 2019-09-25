@@ -1,6 +1,7 @@
 package com.app.service;
 
 import com.app.dto.CompanyDTO;
+import com.app.dto.UserDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.CompanyMapper;
@@ -20,9 +21,9 @@ public class CompanyService {
     private final CompanyRepository companyRepository;
     private final UserRepository userRepository;
 
-    public CompanyDTO getCompanyOfUser(String userLogin) {
-        if (userLogin == null || userLogin.length() == 0) {
-            throw new AppException(ExceptionCodes.SERVICE, "getCompanyOfUser - user login is null");
+    public CompanyDTO getCompanyOfUser(UserDTO userDTO) {
+        if (userDTO == null) {
+            throw new AppException(ExceptionCodes.SERVICE, "getCompanyOfUser - user is null");
         }
 
         Company company = companyRepository
@@ -32,12 +33,12 @@ public class CompanyService {
                     Optional<User> userOptional = cmp
                             .getUsers()
                             .stream()
-                            .filter(usr -> usr.getLogin().equals(userLogin))
+                            .filter(usr -> usr.getLogin().equals(userDTO.getLogin()))
                             .findFirst();
                     return userOptional.isPresent();
                 })
                 .findFirst()
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE, "getCompanyOfUser - no company related with user: " + userLogin));
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE, "getCompanyOfUser - no company related with user: " + userDTO.getLogin()));
         return CompanyMapper.toDto(company);
     }
 }
