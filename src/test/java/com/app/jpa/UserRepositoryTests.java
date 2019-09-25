@@ -37,5 +37,27 @@ public class UserRepositoryTests {
         Assertions.assertEquals(3, userRepository.findAll().size());
     }
 
-    // TODO: 2019-09-18 reszta testów
+    @Test
+    @DisplayName("remove user from DB")
+    public void test2() {
+
+        User user1 = User.builder().name("Name 1").build();
+        User user2 = User.builder().name("Name 2").build();
+        User user3 = User.builder().name("Name 3").build();
+
+        testEntityManager.persist(user1);
+        testEntityManager.persist(user2);
+        testEntityManager.persist(user3);
+
+        Assertions.assertEquals(3, userRepository.findAll().size());
+
+        testEntityManager.remove(user1);
+        Assertions.assertEquals(2, userRepository.findAll().size());
+
+        testEntityManager.remove(user2);
+        Assertions.assertEquals(1, userRepository.findAll().size());
+
+        testEntityManager.remove(user3);
+        Assertions.assertEquals(0, userRepository.findAll().size());
+    }
 }
