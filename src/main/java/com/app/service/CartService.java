@@ -1,9 +1,11 @@
 package com.app.service;
 
+import com.app.dto.CartDTO;
 import com.app.dto.ProductDTO;
 import com.app.dto.UserDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
+import com.app.mappers.CartMapper;
 import com.app.mappers.ProductMapper;
 import com.app.model.Cart;
 import com.app.model.Product;
@@ -28,14 +30,21 @@ public class CartService {
             throw new AppException(ExceptionCodes.SERVICE, "addProductToCart - product is null");
         }
 
-        Cart cart = getUsersCart(userDTO);
+        CartDTO cartDTO = getUsersCart(userDTO);
+        Cart cart = cartRepository
+                .findAll()
+                .stream()
+                .filter(c -> c.getId().equals(cartDTO.getId()))
+                .findFirst()
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE, "addProductToCart - cart is null"));
+
         Set<Product> products = cart.getProducts();
         products.add(ProductMapper.fromDto(productDTO));
         cart.setProducts(products);
         cartRepository.save(cart);
     }
 
-    private Cart getUsersCart(UserDTO userDTO) {
+    public CartDTO getUsersCart(UserDTO userDTO) {
         if (userDTO == null) {
             throw new AppException(ExceptionCodes.SERVICE, "getUsersCart - login is null");
         }
@@ -46,15 +55,17 @@ public class CartService {
                 .filter(cart -> cart.getUser().getLogin().equals(userDTO.getLogin()))
                 .filter(cart -> cart.getCartClosed().equals(false))
                 .findFirst();
+
         if (cartOptional.isEmpty()) {
             Optional<User> userOptional = userRepository
                     .findUserByLogin(userDTO.getLogin());
             if (userOptional.isPresent()) {
                 Cart cart = Cart.builder().build();
                 cart.setUser(userOptional.get());
-                return cart;
+                cartRepository.save(cart);
+                return CartMapper.toDto(cart);
             }
         }
-        return cartOptional.get();
+        return CartMapper.toDto(cartOptional.get());
     }
 }
