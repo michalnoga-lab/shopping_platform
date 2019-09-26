@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -62,15 +61,55 @@ public class CartServiceTests {
                 .when(cartRepository.findAll())
                 .thenReturn(List.of());
 
-
-        System.out.println("%%%%%%%%%%%%%%%%%%%");
-        System.out.println(userRepository.findAll());
-        System.out.println(cartRepository.findAll());
-
         CartDTO expectedCart = CartDTO.builder().customer(user).build();
         CartDTO actualCart = cartService.getUsersCart(UserMapper.toDto(user));
 
-        // TODO: 2019-09-25 tutaj skończyłem
+        Assertions.assertEquals(expectedCart, actualCart);
+    }
+
+    @Test
+    @DisplayName("getUsersCart - user has got one cart")
+    void test2() {
+        User user = User.builder().login("User A").build();
+        Cart cart = Cart.builder().cartClosed(false).build();
+        cart.setUser(user);
+
+        Mockito
+                .when(userRepository.findAll())
+                .thenReturn(List.of(user));
+
+        Mockito
+                .when(cartRepository.findAll())
+                .thenReturn(List.of(cart));
+
+        CartDTO expectedCart = CartDTO.builder().cartClosed(false).customer(user).build();
+        CartDTO actualCart = cartService.getUsersCart(UserMapper.toDto(user));
+
+        Assertions.assertEquals(expectedCart, actualCart);
+    }
+
+    @Test
+    @DisplayName("getUsersCart - user has got many carts")
+    void test3() {
+        User user = User.builder().login("User A").build();
+        Cart cart1 = Cart.builder().cartClosed(true).build();
+        Cart cart2 = Cart.builder().cartClosed(false).build();
+        Cart cart3 = Cart.builder().cartClosed(true).build();
+
+        cart1.setUser(user);
+        cart2.setUser(user);
+        cart3.setUser(user);
+
+        Mockito
+                .when(userRepository.findAll())
+                .thenReturn(List.of(user));
+
+        Mockito
+                .when(cartRepository.findAll())
+                .thenReturn(List.of(cart1, cart2, cart3));
+
+        CartDTO expectedCart = CartMapper.toDto(cart2);
+        CartDTO actualCart = cartService.getUsersCart(UserMapper.toDto(user));
 
         Assertions.assertEquals(expectedCart, actualCart);
     }

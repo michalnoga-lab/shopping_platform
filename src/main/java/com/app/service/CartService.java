@@ -7,6 +7,7 @@ import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.CartMapper;
 import com.app.mappers.ProductMapper;
+import com.app.mappers.UserMapper;
 import com.app.model.Cart;
 import com.app.model.Product;
 import com.app.model.User;
@@ -49,10 +50,6 @@ public class CartService {
             throw new AppException(ExceptionCodes.SERVICE, "getUsersCart - login is null");
         }
 
-
-        System.out.println("#######################");
-        System.out.println(userDTO);
-
         Optional<Cart> cartOptional = cartRepository
                 .findAll()
                 .stream()
@@ -60,17 +57,12 @@ public class CartService {
                 .filter(cart -> cart.getCartClosed().equals(false))
                 .findFirst();
 
-        System.out.println("cart opt "+cartOptional);
-
-
         if (cartOptional.isEmpty()) {
-
-            System.out.println("inside IF");
-
             Optional<User> userOptional = userRepository
-                    .findUserByLogin(userDTO.getLogin());
-
-            System.out.println("USER OPTI: "+userOptional);
+                    .findAll()
+                    .stream()
+                    .filter(user -> user.getLogin().equals(userDTO.getLogin()))
+                    .findFirst();
 
             if (userOptional.isPresent()) {
                 Cart cart = Cart.builder().build();
