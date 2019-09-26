@@ -49,6 +49,10 @@ public class CartService {
             throw new AppException(ExceptionCodes.SERVICE, "getUsersCart - login is null");
         }
 
+
+        System.out.println("#######################");
+        System.out.println(userDTO);
+
         Optional<Cart> cartOptional = cartRepository
                 .findAll()
                 .stream()
@@ -56,9 +60,18 @@ public class CartService {
                 .filter(cart -> cart.getCartClosed().equals(false))
                 .findFirst();
 
+        System.out.println("cart opt "+cartOptional);
+
+
         if (cartOptional.isEmpty()) {
+
+            System.out.println("inside IF");
+
             Optional<User> userOptional = userRepository
                     .findUserByLogin(userDTO.getLogin());
+
+            System.out.println("USER OPTI: "+userOptional);
+
             if (userOptional.isPresent()) {
                 Cart cart = Cart.builder().build();
                 cart.setUser(userOptional.get());

@@ -55,8 +55,17 @@ public class CartServiceTests {
         User user = User.builder().login("User A").build();
 
         Mockito
+                .when(userRepository.findAll())
+                .thenReturn(List.of(user));
+
+        Mockito
                 .when(cartRepository.findAll())
                 .thenReturn(List.of());
+
+
+        System.out.println("%%%%%%%%%%%%%%%%%%%");
+        System.out.println(userRepository.findAll());
+        System.out.println(cartRepository.findAll());
 
         CartDTO expectedCart = CartDTO.builder().customer(user).build();
         CartDTO actualCart = cartService.getUsersCart(UserMapper.toDto(user));
