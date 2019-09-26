@@ -32,7 +32,7 @@
         </tr>
         </tbody>
     </table>
-    <form method="post" th:action="@{products/buy}" th:object="${product}" enctype="multipart/form-data">
+    <form method="post" th:action="@{/products/buy}" th:object="${product}" enctype="multipart/form-data">
         <div class="form-group">
             <label class="text-secondary" for="quantity">ILOSC</label>
             <input id="quantity" type="text" class="form-control" th:field="*{quantity}"/>

@@ -7,7 +7,6 @@ import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.CartMapper;
 import com.app.mappers.ProductMapper;
-import com.app.mappers.UserMapper;
 import com.app.model.Cart;
 import com.app.model.Product;
 import com.app.model.User;
@@ -32,17 +31,13 @@ public class CartService {
         }
 
         CartDTO cartDTO = getUsersCart(userDTO);
-        Cart cart = cartRepository
-                .findAll()
-                .stream()
-                .filter(c -> c.getId().equals(cartDTO.getId()))
-                .findFirst()
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE, "addProductToCart - cart is null"));
+        Cart cart = CartMapper.fromDto(cartDTO);
 
         Set<Product> products = cart.getProducts();
         products.add(ProductMapper.fromDto(productDTO));
+        cart.setCartClosed(false);
         cart.setProducts(products);
-        cartRepository.save(cart);
+        cartRepository.saveAndFlush(cart);
     }
 
     public CartDTO getUsersCart(UserDTO userDTO) {

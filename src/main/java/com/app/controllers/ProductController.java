@@ -33,12 +33,12 @@ public class ProductController {
         return "/products/one";
     }
 
-    @PostMapping("/one/{id}")
+/*    @PostMapping("/one/{id}")
     public String buy(@ModelAttribute ProductDTO productDTO, Model model){
         model.addAttribute("product", new ProductDTO());
         cartService.addProductToCart(productDTO, securityService.getLoggedInUser());
         return "/products/added";
-    }
+    }*/
 
     @PostMapping("/buy")
     public String buyPOST(@ModelAttribute ProductDTO productDTO, Model model) {
