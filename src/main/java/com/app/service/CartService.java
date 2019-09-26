@@ -25,7 +25,7 @@ public class CartService {
     private final CartRepository cartRepository;
     private final UserRepository userRepository;
 
-    public void addProductToCart(ProductDTO productDTO, UserDTO userDTO) {
+    public CartDTO addProductToCart(ProductDTO productDTO, UserDTO userDTO) {
         if (productDTO == null) {
             throw new AppException(ExceptionCodes.SERVICE, "addProductToCart - product is null");
         }
@@ -33,11 +33,15 @@ public class CartService {
         CartDTO cartDTO = getUsersCart(userDTO);
         Cart cart = CartMapper.fromDto(cartDTO);
 
+        // TODO: 2019-09-26 product repository ??? find all and one product ???
+
         Set<Product> products = cart.getProducts();
         products.add(ProductMapper.fromDto(productDTO));
         cart.setCartClosed(false);
         cart.setProducts(products);
         cartRepository.saveAndFlush(cart);
+
+        return CartMapper.toDto(cart);
     }
 
     public CartDTO getUsersCart(UserDTO userDTO) {

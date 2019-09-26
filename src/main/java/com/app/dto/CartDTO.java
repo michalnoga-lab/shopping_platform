@@ -19,5 +19,5 @@ public class CartDTO {
     private BigDecimal totalVatValue;
     private BigDecimal totalGrossValue;
     private Boolean cartClosed;
-    private User customer;
+    private User user;
 }

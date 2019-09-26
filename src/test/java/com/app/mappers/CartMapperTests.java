@@ -35,7 +35,7 @@ public class CartMapperTests {
                 .totalVatValue(BigDecimal.valueOf(23))
                 .totalGrossValue(BigDecimal.valueOf(123))
                 .totalNetValue(BigDecimal.valueOf(100))
-                .customer(User.builder().id(2L).build())
+                .user(User.builder().id(2L).build())
                 .cartClosed(false)
                 .build();
 
@@ -52,7 +52,7 @@ public class CartMapperTests {
                 .totalVatValue(BigDecimal.valueOf(23))
                 .totalGrossValue(BigDecimal.valueOf(123))
                 .totalNetValue(BigDecimal.valueOf(100))
-                .customer(User.builder().id(2L).build())
+                .user(User.builder().id(2L).build())
                 .cartClosed(false)
                 .build();
         Cart expectedCart = Cart.builder()

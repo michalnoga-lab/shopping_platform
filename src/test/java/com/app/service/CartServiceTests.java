@@ -66,7 +66,7 @@ public class CartServiceTests {
                 .when(cartRepository.findAll())
                 .thenReturn(List.of());
 
-        CartDTO expectedCart = CartDTO.builder().customer(user).build();
+        CartDTO expectedCart = CartDTO.builder().user(user).build();
         CartDTO actualCart = cartService.getUsersCart(UserMapper.toDto(user));
 
         Assertions.assertEquals(expectedCart, actualCart);
@@ -87,7 +87,7 @@ public class CartServiceTests {
                 .when(cartRepository.findAll())
                 .thenReturn(List.of(cart));
 
-        CartDTO expectedCart = CartDTO.builder().cartClosed(false).customer(user).build();
+        CartDTO expectedCart = CartDTO.builder().cartClosed(false).user(user).build();
         CartDTO actualCart = cartService.getUsersCart(UserMapper.toDto(user));
 
         Assertions.assertEquals(expectedCart, actualCart);
@@ -142,5 +142,28 @@ public class CartServiceTests {
 
         // TODO: 2019-09-26 finish
         Assertions.assertEquals(expectedCart, CartMapper.fromDto(cartService.getUsersCart(userDTO)));
+    }
+
+    @Test
+    @DisplayName("addProductToCart - user has got one cart")
+    void test5() {
+
+        User user = User.builder().id(1L).login("User A").build();
+        Cart cart = Cart.builder().user(user).cartClosed(false).build();
+        Product product = Product.builder().name("Prodcut 1").build();
+
+        Mockito
+                .when(userRepository.findAll())
+                .thenReturn(List.of(user));
+
+        Mockito
+                .when(cartRepository.findAll())
+                .thenReturn(List.of(cart));
+
+        CartDTO expectedCart = CartDTO.builder().user(user)
+                .cartClosed(false).build();
+
+        Assertions.assertEquals(expectedCart, cartService.addProductToCart(ProductMapper.toDto(product), UserMapper.toDto(user)));
+        Assertions.assertEquals(product, cartService.getUsersCart(UserMapper.toDto(user)));
     }
 }
