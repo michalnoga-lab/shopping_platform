@@ -30,7 +30,7 @@ public class SecurityService {
                 /*.map(UserMapper::toDto)
                 .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE, "getLoggedInUser - no user with login: " + login));*/
 
-        System.out.println(userOptional);
+        //System.out.println(userOptional);
 
         return userOptional.isPresent() ? UserMapper.toDto(userOptional.get()) : UserDTO.builder().login("BLA").build();
     }

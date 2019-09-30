@@ -11,6 +11,7 @@ import com.app.model.Cart;
 import com.app.model.Product;
 import com.app.model.User;
 import com.app.repository.CartRepository;
+import com.app.repository.ProductRepository;
 import com.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,22 +25,43 @@ public class CartService {
 
     private final CartRepository cartRepository;
     private final UserRepository userRepository;
+    private final ProductRepository productRepository;
 
     public CartDTO addProductToCart(ProductDTO productDTO, UserDTO userDTO) {
         if (productDTO == null) {
             throw new AppException(ExceptionCodes.SERVICE, "addProductToCart - product is null");
         }
-
         CartDTO cartDTO = getUsersCart(userDTO);
         Cart cart = CartMapper.fromDto(cartDTO);
 
-        // TODO: 2019-09-26 product repository ??? find all and one product ???
+        Set<Product> productsInCart = cart.getProducts();
+        Optional<Product> productOptional = productRepository
+                .findAll()
+                .stream()
+                .filter(product -> product.getId().equals(productDTO.getId()))
+                .findFirst();
 
-        Set<Product> products = cart.getProducts();
-        products.add(ProductMapper.fromDto(productDTO));
+        if (productOptional.isPresent()) {
+            if (productsInCart.contains(productOptional.get())) {
+                Product product = productsInCart
+                        .stream()
+                        .filter(p -> p.getId().equals(productOptional.get().getId()))
+                        .findFirst()
+                        .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE,
+                                "addProductToCart - no product in cart with ID: " + productOptional.get().getId()));
+                product.setQuantity(product.getQuantity() + productDTO.getQuantity());
+                productsInCart.add(product);
+            } else {
+                productsInCart.add(productOptional.get());
+            }
+        }
+
         cart.setCartClosed(false);
-        cart.setProducts(products);
+        cart.setProducts(productsInCart);
         cartRepository.saveAndFlush(cart);
+
+        // TODO: 2019-09-27
+        System.out.println("cart erposiotory    " + cartRepository.findAll());
 
         return CartMapper.toDto(cart);
     }

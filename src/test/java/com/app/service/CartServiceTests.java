@@ -10,6 +10,7 @@ import com.app.model.Cart;
 import com.app.model.Product;
 import com.app.model.User;
 import com.app.repository.CartRepository;
+import com.app.repository.ProductRepository;
 import com.app.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -35,6 +36,9 @@ public class CartServiceTests {
     private UserRepository userRepository;
 
     @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
     private CartService cartService;
 
     @TestConfiguration
@@ -46,9 +50,12 @@ public class CartServiceTests {
         @MockBean
         private UserRepository userRepository;
 
+        @MockBean
+        ProductRepository productRepository;
+
         @Bean
         public CartService cartService() {
-            return new CartService(cartRepository, userRepository);
+            return new CartService(cartRepository, userRepository, productRepository);
         }
     }
 
@@ -162,6 +169,8 @@ public class CartServiceTests {
 
         CartDTO expectedCart = CartDTO.builder().user(user)
                 .cartClosed(false).build();
+
+        // TODO: 2019-09-30 nie działa 
 
         Assertions.assertEquals(expectedCart, cartService.addProductToCart(ProductMapper.toDto(product), UserMapper.toDto(user)));
         Assertions.assertEquals(product, cartService.getUsersCart(UserMapper.toDto(user)));
