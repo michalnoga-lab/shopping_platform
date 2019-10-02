@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Platforma</a>
+    <!--<a class="navbar-brand" href="/">Strona główna</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-    </button>
+    </button>-->
     <!--<div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="col-8">
             <ul class="navbar-nav mr-auto">
@@ -19,7 +19,19 @@
             </ul>
         </div>
     </div>--> <!--todo to zostaje ???-->
-    <div class="row col-10"></div>
+    <div class="row col-10">
+        <div class="btn-group mr-5" role="group" aria-label="Main page button">
+            <a href="/" class="btn btn-sm btn-outline-secondary" role="button" aria-pressed="true"> Start </a>
+        </div>
+        <div class="btn-group mr-2" role="group" aria-label="All products button">
+            <a href="/products/all" class="btn btn-sm btn-outline-secondary" role="button" aria-pressed="true">Moje
+                produkty</a>
+        </div>
+        <div class="btn-group mr-2" role="group" aria-label="User's carts">
+            <a href="/carts/all" class="btn btn-sm btn-outline-secondary" role="button" aria-pressed="true">Moje
+                koszyki</a>
+        </div>
+    </div>
     <div class="row col-2 float-right" role="toolbar" aria-label="Toolbar with button groups">
         <div class="btn-group mr-2" role="group" aria-label="First button">
             <a href="/users/login" class="btn btn-sm btn-outline-secondary" role="button"

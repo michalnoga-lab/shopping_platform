@@ -16,6 +16,7 @@ import com.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -60,10 +61,11 @@ public class CartService {
         cart.setProducts(productsInCart);
         cartRepository.saveAndFlush(cart);
 
-        // TODO: 2019-09-27
-        System.out.println("cart erposiotory    " + cartRepository.findAll());
-
         return CartMapper.toDto(cart);
+    }
+
+    public List<CartDTO> getAllUsersCarts(UserDTO userDTO) {
+
     }
 
     public CartDTO getUsersCart(UserDTO userDTO) {
