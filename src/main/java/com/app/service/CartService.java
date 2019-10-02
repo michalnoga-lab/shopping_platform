@@ -6,7 +6,6 @@ import com.app.dto.UserDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.CartMapper;
-import com.app.mappers.ProductMapper;
 import com.app.model.Cart;
 import com.app.model.Product;
 import com.app.model.User;
@@ -16,7 +15,6 @@ import com.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.awt.desktop.AppReopenedEvent;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -34,7 +32,7 @@ public class CartService {
         if (productDTO == null) {
             throw new AppException(ExceptionCodes.SERVICE, "addProductToCart - product is null");
         }
-        CartDTO cartDTO = getUsersCart(userDTO);
+        CartDTO cartDTO = getUsersActiveCart(userDTO);
         Cart cart = CartMapper.fromDto(cartDTO);
 
         Set<Product> productsInCart = cart.getProducts();
@@ -79,9 +77,25 @@ public class CartService {
                 .collect(Collectors.toList());
     }
 
-    public CartDTO getUsersCart(UserDTO userDTO) {
+    public CartDTO getOneCart(Long id) {
+        if (id == null) {
+            throw new AppException(ExceptionCodes.SERVICE, "getOneProduct - id is null");
+        }
+        if (id < 0) {
+            throw new AppException(ExceptionCodes.SERVICE, "getOneProduct - id less than zero");
+        }
+        return cartRepository
+                .findAll()
+                .stream()
+                .filter(cart -> cart.getId().equals(id))
+                .map(CartMapper::toDto)
+                .findFirst()
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE, "getOneCart - no cart with ID: " + id));
+    }
+
+    public CartDTO getUsersActiveCart(UserDTO userDTO) {
         if (userDTO == null) {
-            throw new AppException(ExceptionCodes.SERVICE, "getUsersCart - login is null");
+            throw new AppException(ExceptionCodes.SERVICE, "getUsersActiveCart - login is null");
         }
 
         Optional<Cart> cartOptional = cartRepository

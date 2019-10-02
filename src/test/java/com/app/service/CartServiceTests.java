@@ -55,7 +55,7 @@ public class CartServiceTests {
     }
 
     @Test
-    @DisplayName("getUsersCart - user has no cart")
+    @DisplayName("getUsersActiveCart - user has no cart")
     void test1() {
 
         User user = User.builder().id(5L).login("User A").build();
@@ -69,13 +69,13 @@ public class CartServiceTests {
                 .thenReturn(List.of());
 
         CartDTO expectedCart = CartDTO.builder().user(user).build();
-        CartDTO actualCart = cartService.getUsersCart(UserMapper.toDto(user));
+        CartDTO actualCart = cartService.getUsersActiveCart(UserMapper.toDto(user));
 
         Assertions.assertEquals(expectedCart, actualCart);
     }
 
     @Test
-    @DisplayName("getUsersCart - user has got one cart")
+    @DisplayName("getUsersActiveCart - user has got one cart")
     void test2() {
         User user = User.builder().id(4L).login("User A").build();
         Cart cart = Cart.builder().cartClosed(false).build();
@@ -90,13 +90,13 @@ public class CartServiceTests {
                 .thenReturn(List.of(cart));
 
         CartDTO expectedCart = CartDTO.builder().cartClosed(false).user(user).build();
-        CartDTO actualCart = cartService.getUsersCart(UserMapper.toDto(user));
+        CartDTO actualCart = cartService.getUsersActiveCart(UserMapper.toDto(user));
 
         Assertions.assertEquals(expectedCart, actualCart);
     }
 
     @Test
-    @DisplayName("getUsersCart - user has got many carts")
+    @DisplayName("getUsersActiveCart - user has got many carts")
     void test3() {
         User user = User.builder().id(3L).login("User A").build();
         Cart cart1 = Cart.builder().cartClosed(true).build();
@@ -116,7 +116,7 @@ public class CartServiceTests {
                 .thenReturn(List.of(cart1, cart2, cart3));
 
         CartDTO expectedCart = CartMapper.toDto(cart2);
-        CartDTO actualCart = cartService.getUsersCart(UserMapper.toDto(user));
+        CartDTO actualCart = cartService.getUsersActiveCart(UserMapper.toDto(user));
 
         Assertions.assertEquals(expectedCart, actualCart);
     }
@@ -213,5 +213,26 @@ public class CartServiceTests {
 
         Assertions.assertEquals(4, actualCartsList.size());
         Assertions.assertEquals(expectedCartsList, actualCartsList);
+    }
+
+    @Test
+    @DisplayName("getOneCart")
+    void test8() {
+        User user = User.builder().id(4L).login("User A").build();
+        Cart cart = Cart.builder().id(6L).cartClosed(false).build();
+        cart.setUser(user);
+
+        Mockito
+                .when(userRepository.findAll())
+                .thenReturn(List.of(user));
+
+        Mockito
+                .when(cartRepository.findAll())
+                .thenReturn(List.of(cart));
+
+        CartDTO expectedCart = CartDTO.builder().id(6L).cartClosed(false).user(user).build();
+        CartDTO actualCart = cartService.getOneCart(6L);
+
+        Assertions.assertEquals(expectedCart, actualCart);
     }
 }
