@@ -19,7 +19,7 @@ public class CartController {
 
     @GetMapping("/all")
     public String all(Model model) {
-        model.addAttribute("carts", ""); // TODO: 2019-09-30  
+        model.addAttribute("carts", cartService.getAllUsersCarts(securityService.getLoggedInUser()));
         return "/carts/all";
     }
 
