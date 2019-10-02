@@ -20,7 +20,7 @@
         </thead>
         <tbody class="table-body-custom" th:each="c:${carts}">
         <tr>
-            <td><p th:text="${c.cartClosed}"></p></td>
+            <td><p th:text="${c.cartClosed} ? 'ZAMKNIĘTY':'OTWARTY'"></p></td>
             <td><p th:text="${c.totalNetValue}+' PLN'"></p></td>
             <td><p th:text="${c.totalGrossValue}+' PLN'"></p></td>
             <td><p><a th:href="@{/carts/one/{id}(id=${c.id})}">PODGLĄD</a></p></td>

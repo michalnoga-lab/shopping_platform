@@ -5,11 +5,13 @@ import com.app.dto.ProductDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.ProductMapper;
+import com.app.model.Cart;
 import com.app.repository.CartRepository;
 import com.app.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,5 +46,22 @@ public class ProductService {
                 .findById(id)
                 .map(ProductMapper::toDto)
                 .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE, "getOneProduct - no product with ID: " + id));
+    }
+
+    public List<ProductDTO> getProductsOfCart(Long cartId) {
+        if (cartId == null) {
+            throw new AppException(ExceptionCodes.SERVICE, "getProductsOfCart - cartId is null");
+        }
+        if (cartId < 0) {
+            throw new AppException(ExceptionCodes.SERVICE, "getProductsOfCart - cartId less than zero");
+        }
+        return cartRepository
+                .findAll()
+                .stream()
+                .filter(cart -> cart.getId().equals(cartId))
+                .map(Cart::getProducts)
+                .flatMap(Collection::stream)
+                .map(ProductMapper::toDto)
+                .collect(Collectors.toList());
     }
 }

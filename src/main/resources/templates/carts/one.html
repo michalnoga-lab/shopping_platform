@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Platform</title>
+</head>
+<body>
+<div th:replace="fragments/stylesheet">STYLESHEET</div>
+<div th:replace="fragments/top">TOP MENU</div>
+
+<div class="container">
+
+    <table>
+        <thead class="table-head-custom">
+        <tr>
+            <td>WARTOŚĆ NETTO</td>
+            <td>WARTOŚĆ VAT</td>
+            <td>WARTOŚĆ BRUTTO</td>
+            <td>STATUS</td>
+        </tr>
+        </thead>
+        <tbody class="table-body-custom" th:text="${cart}">
+        <tr>
+            <td><p th:text="${cart.totalNetValue}+' PLN'"></p></td>
+            <td><p th:text="${cart.totalVatValue}+' PLN'"></p></td>
+            <td><p th:text="${cart.totalGrossValue}+' PLN'"></p></td>
+            <td><p th:text="${cart.cartClosed} ? 'ZAMKNIĘTY':'OTWARTY'"></p></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <thead class="table-head-custom">
+        <tr>
+            <td>PRODUKT</td>
+            <td>ILOŚĆ</td>
+            <td>CENA NETTO</td>
+        </tr>
+        </thead>
+        <tbody class="table-body-custom" th:each="p:${products}">
+        <tr>
+            <td><p th:text="${p.name}"></p></td>
+            <td><p th:text="${p.quantity}"></p></td>
+            <td><p th:text="${p.nettPrice}+' PLN'"></p></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:replace="/fragments/footer">FOOTER</div>
+</div>
+
+</body>
+</html>
