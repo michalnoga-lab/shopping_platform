@@ -4,6 +4,7 @@ import com.app.dto.CompanyDTO;
 import com.app.dto.ProductDTO;
 import com.app.mappers.CompanyMapper;
 import com.app.mappers.ProductMapper;
+import com.app.model.Cart;
 import com.app.model.Product;
 import com.app.repository.CartRepository;
 import com.app.repository.ProductRepository;
@@ -18,7 +19,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ExtendWith(SpringExtension.class)
 public class ProductServiceTests {
@@ -80,5 +84,42 @@ public class ProductServiceTests {
 
         Assertions.assertEquals(expectedProductOfCompany1, actualProductOfCompany1);
         Assertions.assertEquals(expectedProductOfCompany2, actualProductOfCompany2);
+    }
+
+    @Test
+    @DisplayName("getProductsOfCart")
+    void test2() {
+
+        Product product1 = Product.builder().name("Product 1").build();
+        Product product2 = Product.builder().name("Product 2").build();
+        Product product3 = Product.builder().name("Product 3").build();
+        Product product4 = Product.builder().name("Product 4").build();
+        Product product5 = Product.builder().name("Product 5").build();
+
+        List<Product> products = List.of(product1, product2, product3, product4, product5);
+
+        Mockito
+                .when(productRepository.findAll())
+                .thenReturn(products);
+
+        Cart cart = Cart.builder().id(2L).build();
+        cart.setProducts(new HashSet<>(products));
+
+        Mockito
+                .when(cartRepository.findAll())
+                .thenReturn(List.of(cart));
+
+        List<ProductDTO> expectedProducts = products
+                .stream()
+                .map(ProductMapper::toDto)
+                .sorted(Comparator.comparing(ProductDTO::getName))
+                .collect(Collectors.toList());
+
+        List<ProductDTO> actualProducts = productService.getProductsOfCart(2L)
+                .stream()
+                .sorted(Comparator.comparing(ProductDTO::getName))
+                .collect(Collectors.toList());
+
+        Assertions.assertEquals(expectedProducts, actualProducts);
     }
 }

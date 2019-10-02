@@ -19,7 +19,7 @@
             <td>STATUS</td>
         </tr>
         </thead>
-        <tbody class="table-body-custom" th:text="${cart}">
+        <tbody class="table-body-custom">
         <tr>
             <td><p th:text="${cart.totalNetValue}+' PLN'"></p></td>
             <td><p th:text="${cart.totalVatValue}+' PLN'"></p></td>
@@ -28,6 +28,8 @@
         </tr>
         </tbody>
     </table>
+
+    <p>#####################################################################</p>
 
     <table>
         <thead class="table-head-custom">
