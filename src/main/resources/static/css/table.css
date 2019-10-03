@@ -10,11 +10,13 @@
 .table-head-custom {
     color: white;
     text-align: center;
-    background-color: #343a40;
+    font-weight: 300;
+    background-color: slategrey;
 }
 
 .table-body-custom {
     text-align: center;
+    font-weight: 200;
 }
 
 table tbody tr:hover {

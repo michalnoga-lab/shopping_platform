@@ -20,6 +20,5 @@ public class ProductDTO {
     private String description;
     private Integer quantity;
     private BigDecimal nettPrice;
-    private Cart cart;
     private Company company;
 }

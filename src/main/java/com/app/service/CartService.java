@@ -36,6 +36,7 @@ public class CartService {
         Cart cart = CartMapper.fromDto(cartDTO);
 
         Set<Product> productsInCart = cart.getProducts();
+
         Optional<Product> productOptional = productRepository
                 .findAll()
                 .stream()

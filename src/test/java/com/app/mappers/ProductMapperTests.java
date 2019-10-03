@@ -11,6 +11,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 public class ProductMapperTests {
@@ -24,7 +26,7 @@ public class ProductMapperTests {
                 .quantity(1)
                 .nettPrice(BigDecimal.ONE)
                 .name("Example name")
-                .cart(Cart.builder().id(2L).build())
+                .carts(new HashSet<>(List.of(Cart.builder().id(2L).build())))
                 .company(Company.builder().id(3L).build())
                 .description("Description")
                 .build();
@@ -34,7 +36,6 @@ public class ProductMapperTests {
                 .quantity(1)
                 .nettPrice(BigDecimal.ONE)
                 .name("Example name")
-                .cart(Cart.builder().id(2L).build())
                 .company(Company.builder().id(3L).build())
                 .description("Description")
                 .build();
@@ -53,7 +54,6 @@ public class ProductMapperTests {
                 .quantity(1)
                 .nettPrice(BigDecimal.ONE)
                 .name("Example name")
-                .cart(Cart.builder().id(2L).build())
                 .company(Company.builder().id(3L).build())
                 .description("Description")
                 .build();
@@ -63,7 +63,7 @@ public class ProductMapperTests {
                 .quantity(1)
                 .nettPrice(BigDecimal.ONE)
                 .name("Example name")
-                .cart(Cart.builder().id(2L).build())
+                .carts(new HashSet<>(List.of(Cart.builder().id(2L).build())))
                 .company(Company.builder().id(3L).build())
                 .description("Description")
                 .build();

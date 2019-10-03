@@ -4,10 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,9 +29,12 @@ public class Product {
     private Integer quantity;
     private BigDecimal nettPrice;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "cart_id") // TODO: 2019-09-18 many to many ???
-    private Cart cart;
+    private Cart cart;*/
+
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "products")
+    private Set<Cart> carts ;
 
     @ManyToOne
     @JoinColumn(name = "company_id")
@@ -48,7 +54,7 @@ public class Product {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, quantity, nettPrice, cart, company);
+        return Objects.hash(id, name, description, quantity, nettPrice, company);
     }
 
     @Override
@@ -59,7 +65,6 @@ public class Product {
                 ", description='" + description + '\'' +
                 ", quantity=" + quantity +
                 ", nettPrice=" + nettPrice +
-                ", cart=" + cart +
                 ", company=" + company +
                 '}';
     }

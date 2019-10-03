@@ -2,8 +2,10 @@ package com.app.service;
 
 import com.app.dto.CartDTO;
 import com.app.mappers.CartMapper;
+import com.app.mappers.ProductMapper;
 import com.app.mappers.UserMapper;
 import com.app.model.Cart;
+import com.app.model.Product;
 import com.app.model.User;
 import com.app.repository.CartRepository;
 import com.app.repository.ProductRepository;
@@ -12,6 +14,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -234,5 +237,31 @@ public class CartServiceTests {
         CartDTO actualCart = cartService.getOneCart(6L);
 
         Assertions.assertEquals(expectedCart, actualCart);
+    }
+
+    @Test
+    @DisplayName("addProductToCart - empty cart")
+    void test9() {
+
+        User user = User.builder().id(4L).login("User A").build();
+        Product product = Product.builder().id(7L).description("Product 1").quantity(11).build();
+        Cart cart = Cart.builder().id(6L).cartClosed(false).build();
+        cart.setUser(user);
+
+        Mockito
+                .when(userRepository.findAll())
+                .thenReturn(List.of(user));
+
+        Mockito
+                .when(cartRepository.findAll())
+                .thenReturn(List.of(cart));
+
+        Mockito
+                .when(productRepository.findAll())
+                .thenReturn(List.of(product));
+
+        cartService.addProductToCart(ProductMapper.toDto(product), UserMapper.toDto(user));
+
+    // TODO: 2019-10-03
     }
 }

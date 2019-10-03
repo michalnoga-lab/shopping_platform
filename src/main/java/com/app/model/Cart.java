@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -27,14 +28,23 @@ public class Cart {
     private BigDecimal totalGrossValue;
     private Boolean cartClosed;
 
-    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "cart")
-    private Set<Product> products;
+  /*  @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "cart")
+    private Set<Product> products;*/ // TODO: 2019-10-03
 
     @ManyToOne
-    @JoinColumn(name = "cart_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "join_cart_product",
+            joinColumns = {@JoinColumn(name = "cart_id")},
+            inverseJoinColumns = {@JoinColumn(name = "product_id")}
+    )
+    private Set<Product> products;
+
     @Override
+
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

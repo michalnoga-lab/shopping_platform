@@ -66,14 +66,4 @@ public class ProductControllerTests {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }
-
-    @Test
-    @DisplayName("buy")
-    void test5() throws Exception {
-
-        mockMvc
-                .perform(MockMvcRequestBuilders.get("/products/added").contentType(MediaType.TEXT_HTML))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
-    }
 }
