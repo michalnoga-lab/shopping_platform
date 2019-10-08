@@ -10,17 +10,26 @@
 
 <div class="container">
 
-    <div class="jumbotron-custom">
-        <p>Produkt został dodany do koszyka</p>
+    <header class="masthead bg-primary text-white text-center">
+        <div class="container d-flex align-items-center flex-column">
 
-        <!--todo
-        podsumowanie koszyka
-        kontunuj zakupy
-        adres zamówienia
-        przkaż do realzliacji
-           -->
+            <h1 class="masthead-heading text-uppercase mb-0">produkt dodany do koszka</h1>
 
-    </div>
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="divider-custom-line"></div>
+            </div>
+
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger text-black-50 masthead-subheading font-weight-bold mb-0"
+               href="/products/all">Kupuję dalej</a>
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger text-black-50 masthead-subheading font-weight-bolder mb-0"
+               href="/products/all">Przesyłam zamówienie do realizacji</a>
+
+        </div>
+    </header>
 
     <div th:replace="/fragments/footer">FOOTER</div>
 </div>
