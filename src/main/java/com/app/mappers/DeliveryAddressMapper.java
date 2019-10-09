@@ -8,7 +8,7 @@ public interface DeliveryAddressMapper {
     static DeliveryAddressDTO toDto(DeliveryAddress deliveryAddress) {
         return deliveryAddress == null ? null : DeliveryAddressDTO.builder()
                 .id(deliveryAddress.getId())
-                .address(deliveryAddress.getAddress())
+                .street(deliveryAddress.getStreet())
                 .phone(deliveryAddress.getPhone())
                 .user(deliveryAddress.getUser())
                 .build();
@@ -17,7 +17,7 @@ public interface DeliveryAddressMapper {
     static DeliveryAddress fromDto(DeliveryAddressDTO deliveryAddressDTO) {
         return deliveryAddressDTO == null ? null : DeliveryAddress.builder()
                 .id(deliveryAddressDTO.getId())
-                .address(deliveryAddressDTO.getAddress())
+                .street(deliveryAddressDTO.getStreet())
                 .phone(deliveryAddressDTO.getPhone())
                 .user(deliveryAddressDTO.getUser())
                 .build();

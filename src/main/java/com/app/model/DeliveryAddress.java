@@ -20,7 +20,7 @@ public class DeliveryAddress {
     @GeneratedValue
     private Long id;
 
-    private String address;
+    private String street;
     private String phone;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -33,20 +33,19 @@ public class DeliveryAddress {
         if (o == null || getClass() != o.getClass()) return false;
         DeliveryAddress that = (DeliveryAddress) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(address, that.address);
+                Objects.equals(phone, that.phone);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, address, user);
+        return Objects.hash(id, phone);
     }
 
     @Override
     public String toString() {
         return "DeliveryAddress{" +
                 "id=" + id +
-                ", address='" + address + '\'' +
-                ", user=" + user +
+                ", phone='" + phone + '\'' +
                 '}';
     }
 }

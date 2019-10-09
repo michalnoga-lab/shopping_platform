@@ -1,12 +1,11 @@
 .jumbotron-custom {
-    color: black;
-    text-align: center;
-    font-size: 2.5rem;
-    font-style: italic;
-    font-weight: 300;
-    background-color: #343a40;
-    padding: 3rem;
-    margin-bottom: 1rem;
+    /* color: black;
+     text-align: center;
+     font-size: 2.5rem;
+     font-style: italic;
+     font-weight: 300;
+     background-color: #343a40;
+     padding: 3rem;
+     margin-bottom: 1rem;*/ /** todo remove */
     margin-top: 5rem;
-
 }

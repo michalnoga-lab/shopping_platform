@@ -30,7 +30,7 @@ public class CartMapperTests {
                 .products(new HashSet<>(List.of(Product.builder().build())))
                 .user(User.builder().id(2L).build())
                 .cartClosed(false)
-                .deliveryAddress(DeliveryAddress.builder().address("Address 1").build())
+                .deliveryAddress(DeliveryAddress.builder().street("Address 1").build())
                 .build();
 
         CartDTO expectedCart = CartDTO.builder()
@@ -39,7 +39,7 @@ public class CartMapperTests {
                 .totalGrossValue(BigDecimal.valueOf(123))
                 .totalNetValue(BigDecimal.valueOf(100))
                 .user(User.builder().id(2L).build())
-                .deliveryAddressDTO(DeliveryAddressDTO.builder().address("Address 1").build())
+                .deliveryAddressDTO(DeliveryAddressDTO.builder().street("Address 1").build())
                 .cartClosed(false)
                 .build();
 
@@ -57,7 +57,7 @@ public class CartMapperTests {
                 .totalGrossValue(BigDecimal.valueOf(123))
                 .totalNetValue(BigDecimal.valueOf(100))
                 .user(User.builder().id(2L).build())
-                .deliveryAddressDTO(DeliveryAddressDTO.builder().address("Address 1").build())
+                .deliveryAddressDTO(DeliveryAddressDTO.builder().street("Address 1").build())
                 .cartClosed(false)
                 .build();
 
@@ -68,7 +68,7 @@ public class CartMapperTests {
                 .totalNetValue(BigDecimal.valueOf(100))
                 .products(new HashSet<>())
                 .user(User.builder().id(2L).build())
-                .deliveryAddress(DeliveryAddress.builder().address("Address 1").build())
+                .deliveryAddress(DeliveryAddress.builder().street("Address 1").build())
                 .cartClosed(false)
                 .build();
 

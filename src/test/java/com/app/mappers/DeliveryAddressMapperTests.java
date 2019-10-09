@@ -18,14 +18,14 @@ public class DeliveryAddressMapperTests {
 
         DeliveryAddress deliveryAddress = DeliveryAddress.builder()
                 .id(1L)
-                .address("Example address")
+                .street("Example address")
                 .phone("123456")
                 .user(User.builder().id(2L).build())
                 .build();
 
         DeliveryAddressDTO expectedResult = DeliveryAddressDTO.builder()
                 .id(1L)
-                .address("Example address")
+                .street("Example address")
                 .phone("123456")
                 .user(User.builder().id(2L).build())
                 .build();
@@ -40,14 +40,14 @@ public class DeliveryAddressMapperTests {
 
         DeliveryAddressDTO deliveryAddressDTO = DeliveryAddressDTO.builder()
                 .id(1L)
-                .address("Example address")
+                .street("Example address")
                 .phone("123456")
                 .user(User.builder().id(2L).build())
                 .build();
 
         DeliveryAddress expectedResult = DeliveryAddress.builder()
                 .id(1L)
-                .address("Example address")
+                .street("Example address")
                 .phone("123456")
                 .user(User.builder().id(2L).build())
                 .build();

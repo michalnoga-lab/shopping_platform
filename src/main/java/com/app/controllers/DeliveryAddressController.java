@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -32,8 +33,15 @@ public class DeliveryAddressController {
     }
 
     @GetMapping("/add")
-    public String add(Model model) {
-        model.addAttribute("addresses", new DeliveryAddressDTO());
+    public String addGET(Model model) {
+        model.addAttribute("deliveryAddress", new DeliveryAddressDTO());
         return "/deliveryAddress/add";
+    }
+
+    @PostMapping("/add")
+    public String addPOST(@ModelAttribute DeliveryAddressDTO deliveryAddressDTO, Model model) {
+        model.addAttribute("address", new DeliveryAddressDTO());
+        deliveryAddressService.add(deliveryAddressDTO, securityService.getLoggedInUser());
+        return "/deliveryAddress/all";
     }
 }
