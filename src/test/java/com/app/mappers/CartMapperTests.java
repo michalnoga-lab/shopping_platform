@@ -1,7 +1,9 @@
 package com.app.mappers;
 
 import com.app.dto.CartDTO;
+import com.app.dto.DeliveryAddressDTO;
 import com.app.model.Cart;
+import com.app.model.DeliveryAddress;
 import com.app.model.User;
 import com.app.model.Product;
 import org.junit.jupiter.api.Assertions;
@@ -28,6 +30,7 @@ public class CartMapperTests {
                 .products(new HashSet<>(List.of(Product.builder().build())))
                 .user(User.builder().id(2L).build())
                 .cartClosed(false)
+                .deliveryAddress(DeliveryAddress.builder().address("Address 1").build())
                 .build();
 
         CartDTO expectedCart = CartDTO.builder()
@@ -36,6 +39,7 @@ public class CartMapperTests {
                 .totalGrossValue(BigDecimal.valueOf(123))
                 .totalNetValue(BigDecimal.valueOf(100))
                 .user(User.builder().id(2L).build())
+                .deliveryAddressDTO(DeliveryAddressDTO.builder().address("Address 1").build())
                 .cartClosed(false)
                 .build();
 
@@ -53,8 +57,10 @@ public class CartMapperTests {
                 .totalGrossValue(BigDecimal.valueOf(123))
                 .totalNetValue(BigDecimal.valueOf(100))
                 .user(User.builder().id(2L).build())
+                .deliveryAddressDTO(DeliveryAddressDTO.builder().address("Address 1").build())
                 .cartClosed(false)
                 .build();
+
         Cart expectedCart = Cart.builder()
                 .id(1L)
                 .totalVatValue(BigDecimal.valueOf(23))
@@ -62,6 +68,7 @@ public class CartMapperTests {
                 .totalNetValue(BigDecimal.valueOf(100))
                 .products(new HashSet<>())
                 .user(User.builder().id(2L).build())
+                .deliveryAddress(DeliveryAddress.builder().address("Address 1").build())
                 .cartClosed(false)
                 .build();
 

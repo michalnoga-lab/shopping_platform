@@ -9,6 +9,7 @@ public interface DeliveryAddressMapper {
         return deliveryAddress == null ? null : DeliveryAddressDTO.builder()
                 .id(deliveryAddress.getId())
                 .address(deliveryAddress.getAddress())
+                .phone(deliveryAddress.getPhone())
                 .user(deliveryAddress.getUser())
                 .build();
     }
@@ -17,6 +18,7 @@ public interface DeliveryAddressMapper {
         return deliveryAddressDTO == null ? null : DeliveryAddress.builder()
                 .id(deliveryAddressDTO.getId())
                 .address(deliveryAddressDTO.getAddress())
+                .phone(deliveryAddressDTO.getPhone())
                 .user(deliveryAddressDTO.getUser())
                 .build();
     }

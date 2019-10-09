@@ -24,7 +24,7 @@ public class ProductService {
 
     public List<ProductDTO> getProductsOfCompany(CompanyDTO companyDTO) {
         if (companyDTO == null) {
-            throw new AppException(ExceptionCodes.SERVICE, "getProductsOfCompany - company is null");
+            throw new AppException(ExceptionCodes.SERVICE_PRODUCT, "getProductsOfCompany - company is null");
         }
 
         return productRepository
@@ -37,23 +37,23 @@ public class ProductService {
 
     public ProductDTO getOneProduct(Long id) {
         if (id == null) {
-            throw new AppException(ExceptionCodes.SERVICE, "getOneProduct - id is null");
+            throw new AppException(ExceptionCodes.SERVICE_PRODUCT, "getOneProduct - id is null");
         }
         if (id < 0) {
-            throw new AppException(ExceptionCodes.SERVICE, "getOneProduct - id less than zero");
+            throw new AppException(ExceptionCodes.SERVICE_PRODUCT, "getOneProduct - id less than zero");
         }
         return productRepository
                 .findById(id)
                 .map(ProductMapper::toDto)
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE, "getOneProduct - no product with ID: " + id));
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_PRODUCT, "getOneProduct - no product with ID: " + id));
     }
 
     public List<ProductDTO> getProductsOfCart(Long cartId) {
         if (cartId == null) {
-            throw new AppException(ExceptionCodes.SERVICE, "getProductsOfCart - cartId is null");
+            throw new AppException(ExceptionCodes.SERVICE_PRODUCT, "getProductsOfCart - cartId is null");
         }
         if (cartId < 0) {
-            throw new AppException(ExceptionCodes.SERVICE, "getProductsOfCart - cartId less than zero");
+            throw new AppException(ExceptionCodes.SERVICE_PRODUCT, "getProductsOfCart - cartId less than zero");
         }
         return cartRepository
                 .findAll()

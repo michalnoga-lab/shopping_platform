@@ -30,7 +30,7 @@ public class CartService {
 
     public CartDTO addProductToCart(ProductDTO productDTO, UserDTO userDTO) {
         if (productDTO == null) {
-            throw new AppException(ExceptionCodes.SERVICE, "addProductToCart - product is null");
+            throw new AppException(ExceptionCodes.SERVICE_CART, "addProductToCart - product is null");
         }
         CartDTO cartDTO = getUsersActiveCart(userDTO);
         Cart cart = CartMapper.fromDto(cartDTO);
@@ -49,7 +49,7 @@ public class CartService {
                         .stream()
                         .filter(p -> p.getId().equals(productOptional.get().getId()))
                         .findFirst()
-                        .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE,
+                        .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART,
                                 "addProductToCart - no product in cart with ID: " + productOptional.get().getId()));
                 product.setQuantity(product.getQuantity() + productDTO.getQuantity());
                 productsInCart.add(product);
@@ -67,7 +67,7 @@ public class CartService {
 
     public List<CartDTO> getAllUsersCarts(UserDTO userDTO) {
         if (userDTO == null) {
-            throw new AppException(ExceptionCodes.SERVICE, "getAllUsersCarts - login is null");
+            throw new AppException(ExceptionCodes.SERVICE_CART, "getAllUsersCarts - login is null");
         }
 
         return cartRepository
@@ -80,10 +80,10 @@ public class CartService {
 
     public CartDTO getOneCart(Long id) {
         if (id == null) {
-            throw new AppException(ExceptionCodes.SERVICE, "getOneProduct - id is null");
+            throw new AppException(ExceptionCodes.SERVICE_CART, "getOneProduct - id is null");
         }
         if (id < 0) {
-            throw new AppException(ExceptionCodes.SERVICE, "getOneProduct - id less than zero");
+            throw new AppException(ExceptionCodes.SERVICE_CART, "getOneProduct - id less than zero");
         }
         return cartRepository
                 .findAll()
@@ -91,12 +91,12 @@ public class CartService {
                 .filter(cart -> cart.getId().equals(id))
                 .map(CartMapper::toDto)
                 .findFirst()
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE, "getOneCart - no cart with ID: " + id));
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART, "getOneCart - no cart with ID: " + id));
     }
 
     public CartDTO getUsersActiveCart(UserDTO userDTO) {
         if (userDTO == null) {
-            throw new AppException(ExceptionCodes.SERVICE, "getUsersActiveCart - login is null");
+            throw new AppException(ExceptionCodes.SERVICE_CART, "getUsersActiveCart - login is null");
         }
 
         Optional<Cart> cartOptional = cartRepository

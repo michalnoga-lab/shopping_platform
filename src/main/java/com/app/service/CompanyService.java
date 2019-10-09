@@ -23,7 +23,7 @@ public class CompanyService {
 
     public CompanyDTO getCompanyOfUser(UserDTO userDTO) {
         if (userDTO == null) {
-            throw new AppException(ExceptionCodes.SERVICE, "getCompanyOfUser - user is null");
+            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "getCompanyOfUser - user is null");
         }
 
         Company company = companyRepository
@@ -38,7 +38,7 @@ public class CompanyService {
                     return userOptional.isPresent();
                 })
                 .findFirst()
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE, "getCompanyOfUser - no company related with user: " + userDTO.getLogin()));
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_COMPANY, "getCompanyOfUser - no company related with user: " + userDTO.getLogin()));
         return CompanyMapper.toDto(company);
     }
 }

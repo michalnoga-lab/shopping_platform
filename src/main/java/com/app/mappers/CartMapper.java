@@ -15,6 +15,8 @@ public interface CartMapper {
                 .totalGrossValue(cart.getTotalGrossValue())
                 .totalNetValue(cart.getTotalNetValue())
                 .totalVatValue(cart.getTotalVatValue())
+                .deliveryAddressDTO(cart.getDeliveryAddress() == null ?
+                        null : DeliveryAddressMapper.toDto(cart.getDeliveryAddress()))
                 .build();
     }
 
@@ -27,6 +29,8 @@ public interface CartMapper {
                 .totalGrossValue(cartDTO.getTotalGrossValue())
                 .totalNetValue(cartDTO.getTotalNetValue())
                 .totalVatValue(cartDTO.getTotalVatValue())
+                .deliveryAddress(cartDTO.getDeliveryAddressDTO() == null ?
+                        null : DeliveryAddressMapper.fromDto(cartDTO.getDeliveryAddressDTO()))
                 .build();
     }
 }

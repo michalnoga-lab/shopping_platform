@@ -13,12 +13,16 @@
     <table class="table">
         <thead class="table-head-custom">
         <tr>
-
+            <td>ADRES</td>
+            <td>TELEFON</td>
+            <td>DOSTAWA</td>
         </tr>
         </thead>
-        <tbody class="table-body-custom">
+        <tbody class="table-body-custom" th:each="a:${addresses}">
         <tr>
-
+            <td><p th:text="${a.address}"></p></td>
+            <td><p th:text="${a.phone}"></p></td>
+            <td><a th:href="@{/delivery/one/{id}(id=${a.id})}">NA TEN ADRES</a></td>
         </tr>
         </tbody>
     </table>

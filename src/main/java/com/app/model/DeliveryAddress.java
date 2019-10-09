@@ -21,6 +21,7 @@ public class DeliveryAddress {
     private Long id;
 
     private String address;
+    private String phone;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id")

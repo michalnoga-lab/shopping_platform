@@ -31,6 +31,9 @@ public class Cart {
   /*  @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "cart")
     private Set<Product> products;*/ // TODO: 2019-10-03
 
+    @OneToOne
+    private DeliveryAddress deliveryAddress;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

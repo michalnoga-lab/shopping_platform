@@ -20,5 +20,5 @@ public class ProductDTO {
     private String description;
     private Integer quantity;
     private BigDecimal nettPrice;
-    private Company company;
+    private Company company; // TODO: 2019-10-09 ma być DTO
 }

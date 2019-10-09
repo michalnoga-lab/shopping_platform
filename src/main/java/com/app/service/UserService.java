@@ -16,7 +16,7 @@ public class UserService {
 
     public UserDTO findUserByLogin(String login) {
         if (login == null || login.length() == 0) {
-            throw new AppException(ExceptionCodes.SERVICE, "findUserByLogin - login is null");
+            throw new AppException(ExceptionCodes.SERVICE_USER, "findUserByLogin - login is null");
         }
 
         return userRepository
@@ -25,6 +25,6 @@ public class UserService {
                 .filter(user -> user.getLogin().equals(login))
                 .map(UserMapper::toDto)
                 .findFirst()
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE, "findUserByLogin - no user with login:" + login));
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_USER, "findUserByLogin - no user with login:" + login));
     }
 }
