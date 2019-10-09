@@ -1,7 +1,6 @@
 package com.app.controllers;
 
 import com.app.dto.DeliveryAddressDTO;
-import com.app.model.DeliveryAddress;
 import com.app.service.DeliveryAddressService;
 import com.app.service.SecurityService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +14,7 @@ import java.util.List;
 
 @Controller()
 @RequiredArgsConstructor
-@RequestMapping("/delivery")
+@RequestMapping("/deliveryAddress")
 public class DeliveryAddressController {
 
     private final DeliveryAddressService deliveryAddressService;
@@ -26,9 +25,15 @@ public class DeliveryAddressController {
         List<DeliveryAddressDTO> addresses = deliveryAddressService.getAll(securityService.getLoggedInUser());
 
         if (addresses.size() == 0) {
-            return "/delivery/add";
+            return "/deliveryAddress/add";
         }
         model.addAttribute("addresses", addresses);
-        return "/delivery/all";
+        return "/deliveryAddress/all";
+    }
+
+    @GetMapping("/add")
+    public String add(Model model) {
+        model.addAttribute("addresses", new DeliveryAddressDTO());
+        return "/deliveryAddress/add";
     }
 }
