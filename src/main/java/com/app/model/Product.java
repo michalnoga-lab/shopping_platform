@@ -29,10 +29,6 @@ public class Product {
     private Integer quantity;
     private BigDecimal nettPrice;
 
-    /*@ManyToOne
-    @JoinColumn(name = "cart_id") // TODO: 2019-09-18 many to many ???
-    private Cart cart;*/
-
     @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "products")
     private Set<Cart> carts ;
 

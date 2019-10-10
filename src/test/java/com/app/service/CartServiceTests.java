@@ -71,7 +71,7 @@ public class CartServiceTests {
                 .when(cartRepository.findAll())
                 .thenReturn(List.of());
 
-        CartDTO expectedCart = CartDTO.builder().user(user).build();
+        CartDTO expectedCart = CartDTO.builder().userDTO(UserMapper.toDto(user)).build();
         CartDTO actualCart = cartService.getUsersActiveCart(UserMapper.toDto(user));
 
         Assertions.assertEquals(expectedCart, actualCart);
@@ -92,7 +92,7 @@ public class CartServiceTests {
                 .when(cartRepository.findAll())
                 .thenReturn(List.of(cart));
 
-        CartDTO expectedCart = CartDTO.builder().cartClosed(false).user(user).build();
+        CartDTO expectedCart = CartDTO.builder().cartClosed(false).userDTO(UserMapper.toDto(user)).build();
         CartDTO actualCart = cartService.getUsersActiveCart(UserMapper.toDto(user));
 
         Assertions.assertEquals(expectedCart, actualCart);
@@ -233,7 +233,7 @@ public class CartServiceTests {
                 .when(cartRepository.findAll())
                 .thenReturn(List.of(cart));
 
-        CartDTO expectedCart = CartDTO.builder().id(6L).cartClosed(false).user(user).build();
+        CartDTO expectedCart = CartDTO.builder().id(6L).cartClosed(false).userDTO(UserMapper.toDto(user)).build();
         CartDTO actualCart = cartService.getOneCart(6L);
 
         Assertions.assertEquals(expectedCart, actualCart);
@@ -262,6 +262,6 @@ public class CartServiceTests {
 
         cartService.addProductToCart(ProductMapper.toDto(product), UserMapper.toDto(user));
 
-    // TODO: 2019-10-03
+        // TODO: 2019-10-03
     }
 }

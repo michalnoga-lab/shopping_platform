@@ -2,6 +2,7 @@ package com.app.mappers;
 
 import com.app.dto.CartDTO;
 import com.app.dto.DeliveryAddressDTO;
+import com.app.dto.UserDTO;
 import com.app.model.Cart;
 import com.app.model.DeliveryAddress;
 import com.app.model.User;
@@ -38,7 +39,7 @@ public class CartMapperTests {
                 .totalVatValue(BigDecimal.valueOf(23))
                 .totalGrossValue(BigDecimal.valueOf(123))
                 .totalNetValue(BigDecimal.valueOf(100))
-                .user(User.builder().id(2L).build())
+                .userDTO(UserDTO.builder().id(2L).build())
                 .deliveryAddressDTO(DeliveryAddressDTO.builder().street("Address 1").build())
                 .cartClosed(false)
                 .build();
@@ -56,7 +57,7 @@ public class CartMapperTests {
                 .totalVatValue(BigDecimal.valueOf(23))
                 .totalGrossValue(BigDecimal.valueOf(123))
                 .totalNetValue(BigDecimal.valueOf(100))
-                .user(User.builder().id(2L).build())
+                .userDTO(UserDTO.builder().id(2L).build())
                 .deliveryAddressDTO(DeliveryAddressDTO.builder().street("Address 1").build())
                 .cartClosed(false)
                 .build();

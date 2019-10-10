@@ -28,9 +28,6 @@ public class Cart {
     private BigDecimal totalGrossValue;
     private Boolean cartClosed;
 
-  /*  @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "cart")
-    private Set<Product> products;*/ // TODO: 2019-10-03
-
     @OneToOne
     private DeliveryAddress deliveryAddress;
 
@@ -47,7 +44,6 @@ public class Cart {
     private Set<Product> products;
 
     @Override
-
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -57,12 +53,12 @@ public class Cart {
                 Objects.equals(totalVatValue, cart.totalVatValue) &&
                 Objects.equals(totalGrossValue, cart.totalGrossValue) &&
                 Objects.equals(cartClosed, cart.cartClosed) &&
-                Objects.equals(products, cart.products);
+                Objects.equals(deliveryAddress, cart.deliveryAddress);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, totalNetValue, totalVatValue, totalGrossValue, cartClosed, products, user);
+        return Objects.hash(id, totalNetValue, totalVatValue, totalGrossValue, cartClosed, deliveryAddress);
     }
 
     @Override
@@ -73,8 +69,7 @@ public class Cart {
                 ", totalVatValue=" + totalVatValue +
                 ", totalGrossValue=" + totalGrossValue +
                 ", cartClosed=" + cartClosed +
-                ", products=" + products +
-                ", user=" + user +
+                ", deliveryAddress=" + deliveryAddress +
                 '}';
     }
 }

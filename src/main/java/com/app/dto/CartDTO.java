@@ -20,5 +20,5 @@ public class CartDTO {
     private BigDecimal totalGrossValue;
     private Boolean cartClosed;
     private DeliveryAddressDTO deliveryAddressDTO;
-    private User user; // TODO: 2019-10-09 ma być DTO
+    private UserDTO userDTO;
 }
