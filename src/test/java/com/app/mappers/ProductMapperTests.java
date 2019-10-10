@@ -1,5 +1,6 @@
 package com.app.mappers;
 
+import com.app.dto.CompanyDTO;
 import com.app.dto.ProductDTO;
 import com.app.model.Cart;
 import com.app.model.Company;
@@ -36,7 +37,7 @@ public class ProductMapperTests {
                 .quantity(1)
                 .nettPrice(BigDecimal.ONE)
                 .name("Example name")
-                .company(Company.builder().id(3L).build())
+                .companyDTO(CompanyDTO.builder().id(3L).build())
                 .description("Description")
                 .build();
 
@@ -54,7 +55,7 @@ public class ProductMapperTests {
                 .quantity(1)
                 .nettPrice(BigDecimal.ONE)
                 .name("Example name")
-                .company(Company.builder().id(3L).build())
+                .companyDTO(CompanyDTO.builder().id(3L).build())
                 .description("Description")
                 .build();
 
