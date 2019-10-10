@@ -1,6 +1,7 @@
 package com.app.mappers;
 
 import com.app.dto.DeliveryAddressDTO;
+import com.app.dto.UserDTO;
 import com.app.model.User;
 import com.app.model.DeliveryAddress;
 import org.junit.jupiter.api.Assertions;
@@ -27,7 +28,7 @@ public class DeliveryAddressMapperTests {
                 .id(1L)
                 .street("Example address")
                 .phone("123456")
-                .user(User.builder().id(2L).build())
+                .userDTO(UserDTO.builder().id(2L).build())
                 .build();
         DeliveryAddressDTO actualResult = DeliveryAddressMapper.toDto(deliveryAddress);
 
@@ -42,7 +43,7 @@ public class DeliveryAddressMapperTests {
                 .id(1L)
                 .street("Example address")
                 .phone("123456")
-                .user(User.builder().id(2L).build())
+                .userDTO(UserDTO.builder().id(2L).build())
                 .build();
 
         DeliveryAddress expectedResult = DeliveryAddress.builder()

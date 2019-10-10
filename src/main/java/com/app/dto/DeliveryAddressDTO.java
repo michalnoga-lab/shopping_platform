@@ -15,5 +15,5 @@ public class DeliveryAddressDTO {
     private Long id;
     private String street;
     private String phone;
-    private User user;
+    private UserDTO userDTO;
 }

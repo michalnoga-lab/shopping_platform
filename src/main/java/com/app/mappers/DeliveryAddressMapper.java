@@ -10,7 +10,7 @@ public interface DeliveryAddressMapper {
                 .id(deliveryAddress.getId())
                 .street(deliveryAddress.getStreet())
                 .phone(deliveryAddress.getPhone())
-                .user(deliveryAddress.getUser())
+                .userDTO(deliveryAddress.getUser()==null?null:UserMapper.toDto(deliveryAddress.getUser()))
                 .build();
     }
 
@@ -19,7 +19,7 @@ public interface DeliveryAddressMapper {
                 .id(deliveryAddressDTO.getId())
                 .street(deliveryAddressDTO.getStreet())
                 .phone(deliveryAddressDTO.getPhone())
-                .user(deliveryAddressDTO.getUser())
+                .user(deliveryAddressDTO.getUserDTO()==null?null:UserMapper.fromDto(deliveryAddressDTO.getUserDTO()))
                 .build();
     }
 }
