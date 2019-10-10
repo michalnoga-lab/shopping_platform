@@ -32,17 +32,27 @@ public class DeliveryAddressControllerTests {
     void test1() throws Exception {
 
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/deliveryAddress/all"))
+                .perform(MockMvcRequestBuilders.get("/deliveryAddress/all").contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }
 
     @Test
-    @DisplayName("add")
+    @DisplayName("add - GET")
     void test2() throws Exception {
 
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/deliveryAddress/add"))
+                .perform(MockMvcRequestBuilders.get("/deliveryAddress/add").contentType(MediaType.TEXT_HTML))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
+    }
+
+    @Test
+    @DisplayName("add - POST")
+    void test3() throws Exception {
+
+        mockMvc
+                .perform(MockMvcRequestBuilders.post("/deliveryAddress/add").contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }

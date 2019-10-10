@@ -38,16 +38,16 @@ public class ProductControllerTests {
     }
 
     @Test
-    @DisplayName("added")
+    @DisplayName("buy")
     void test2() throws Exception {
 
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/products/added").contentType(MediaType.TEXT_HTML))
+                .perform(MockMvcRequestBuilders.get("/products/buy").contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }
 
-    @Test
+   /* @Test
     @DisplayName("one")
     void test3() throws Exception {
 
@@ -55,14 +55,14 @@ public class ProductControllerTests {
                 .perform(MockMvcRequestBuilders.get("/products/one").contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
-    } // TODO: 2019-09-25
+    }*/ // TODO: 2019-09-25
 
     @Test
     @DisplayName("buy")
     void test4() throws Exception {
 
         mockMvc
-                .perform(MockMvcRequestBuilders.post("/products/added").contentType(MediaType.TEXT_HTML))
+                .perform(MockMvcRequestBuilders.post("/products/buy").contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }

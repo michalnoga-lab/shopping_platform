@@ -37,7 +37,7 @@ public class CartControllerTests {
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }
 
-    @Test
+   /* @Test
     @DisplayName("one")
     void test2() throws Exception {
 
@@ -46,5 +46,5 @@ public class CartControllerTests {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
         // TODO: 2019-10-09
-    }
+    }*/
 }
