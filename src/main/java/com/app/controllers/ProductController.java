@@ -5,10 +5,19 @@ import com.app.service.CartService;
 import com.app.service.CompanyService;
 import com.app.service.ProductService;
 import com.app.service.SecurityService;
+import com.app.validators.ProductDtoValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -20,6 +29,13 @@ public class ProductController {
     private final CompanyService companyService;
     private final CartService cartService;
 
+    private final ProductDtoValidator productDtoValidator;
+
+    @InitBinder
+    public void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.setValidator(productDtoValidator);
+    }
+
     @GetMapping("/all")
     public String all(Model model) {
         model.addAttribute("products", productService.getProductsOfCompany(
@@ -30,26 +46,28 @@ public class ProductController {
     @GetMapping("/one/{id}")
     public String one(@PathVariable Long id, Model model) {
         model.addAttribute("product", productService.getOneProduct(id));
+        model.addAttribute("errors", new HashMap<>());
         return "/products/one";
-    }
-
-/*    @PostMapping("/one/{id}")
-    public String buy(@ModelAttribute ProductDTO productDTO, Model model){
-        model.addAttribute("product", new ProductDTO());
-        cartService.addProductToCart(productDTO, securityService.getLoggedInUser());
-        return "/products/added";
-    }*/
-
-    @PostMapping("/buy")
-    public String buyPOST(@ModelAttribute ProductDTO productDTO, Model model) {
-        model.addAttribute("product", new ProductDTO());
-        cartService.addProductToCart(productDTO, securityService.getLoggedInUser());
-        return "/products/added";
     }
 
     @GetMapping("/buy")
     public String buyGET(Model model) {
         model.addAttribute("product", new ProductDTO());
+        model.addAttribute("errors", new HashMap<>());
+        return "/products/added";
+    }
+
+    @PostMapping("/buy")
+    public String buyPOST(@Valid @ModelAttribute ProductDTO productDTO, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = bindingResult.getFieldErrors()
+                    .stream()
+                    .collect(Collectors.toMap(FieldError::getField, FieldError::getCode));
+            model.addAttribute("product", new ProductDTO());
+            model.addAttribute("errors", errors);
+            return "/products/buy";
+        }
+        cartService.addProductToCart(productDTO, securityService.getLoggedInUser());
         return "/products/added";
     }
 }

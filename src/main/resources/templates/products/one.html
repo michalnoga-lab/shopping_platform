@@ -37,6 +37,7 @@
             <label class="text-secondary" for="quantity">ILOSC</label>
             <input id="quantity" type="text" class="form-control" th:field="*{quantity}"/>
         </div>
+        <p class="text text-danger" th:if="${errors.containsKey('quantity')}" th:text="${errors.get('quantity')}"></p>
         <div class="form-group">
             <button class="btn btn-secondary btn-block" type="submit">DODAJ DO KOSZYKA</button>
         </div>

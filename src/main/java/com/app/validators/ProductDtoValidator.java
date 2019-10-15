@@ -18,13 +18,10 @@ public class ProductDtoValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         ProductDTO productDTO = (ProductDTO) o;
+        final String QUANTITY_REGEX = "[\\d]*";
 
         try {
-
-            if (productDTO.getQuantity() <= 0) {
-                errors.rejectValue("quantity", "NIEPRAWIDŁOWA ILOŚĆ");
-            }
-            if (productDTO.getQuantity() > 100000) {
+            if (productDTO.getQuantity() <= 0 || !productDTO.getQuantity().toString().matches(QUANTITY_REGEX)) {
                 errors.rejectValue("quantity", "NIEPRAWIDŁOWA ILOŚĆ");
             }
 
