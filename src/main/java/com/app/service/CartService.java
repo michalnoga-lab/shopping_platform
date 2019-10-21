@@ -35,7 +35,30 @@ public class CartService {
         CartDTO cartDTO = getUsersActiveCart(userDTO);
         Cart cart = CartMapper.fromDto(cartDTO);
 
+        // TODO: 2019-10-15
+        System.out.println("*********************************************");
+        System.out.println(cart);
+
+
+        Set<Product> productsAlreadyInCart = productRepository
+                .findAll()
+                .stream()
+                .filter(product -> {
+                    Optional<Cart> cartOptional = product.getCarts()
+                            .stream()
+                            .filter(c -> c.getId().equals(cart.getId()))
+                            .findFirst();
+                    return cartOptional.isPresent();
+                })
+                .collect(Collectors.toSet());
+
+        System.out.println("ALREADY IN: " + productsAlreadyInCart);
+
         Set<Product> productsInCart = cart.getProducts();
+
+        // TODO: 2019-10-15
+        System.out.println(productsInCart);
+        System.out.println(cart);
 
         Optional<Product> productOptional = productRepository
                 .findAll()
@@ -58,9 +81,14 @@ public class CartService {
             }
         }
 
-        cart.setCartClosed(false);
+        if (cart.getCartClosed() == null) {
+            cart.setCartClosed(false);
+        }
         cart.setProducts(productsInCart);
         cartRepository.saveAndFlush(cart);
+
+        // TODO: 2019-10-15
+        System.out.println(cart);
 
         return CartMapper.toDto(cart);
     }

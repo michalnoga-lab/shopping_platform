@@ -26,22 +26,23 @@ public class DeliveryAddressController {
         List<DeliveryAddressDTO> addresses = deliveryAddressService.getAll(securityService.getLoggedInUser());
 
         if (addresses.size() == 0) {
-            return "/deliveryAddress/add";
+            model.addAttribute("address", new DeliveryAddressDTO());
+            return "deliveryAddress/add";
         }
         model.addAttribute("addresses", addresses);
-        return "/deliveryAddress/all";
+        return "deliveryAddress/all";
     }
 
     @GetMapping("/add")
     public String addGET(Model model) {
-        model.addAttribute("deliveryAddress", new DeliveryAddressDTO());
-        return "/deliveryAddress/add";
+        model.addAttribute("address", new DeliveryAddressDTO());
+        return "deliveryAddress/add";
     }
 
     @PostMapping("/add")
     public String addPOST(@ModelAttribute DeliveryAddressDTO deliveryAddressDTO, Model model) {
         model.addAttribute("address", new DeliveryAddressDTO());
         deliveryAddressService.add(deliveryAddressDTO, securityService.getLoggedInUser());
-        return "/deliveryAddress/all";
+        return "redirect:/deliveryAddress/all";
     }
 }

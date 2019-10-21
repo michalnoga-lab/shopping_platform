@@ -10,20 +10,22 @@
 
 <div class="container">
 
-    <form method="post" th:action="@{/deliveryAddress/add}" th:object="${deliveryAddress}">
-        enctype="multipart/form-data">
-        <div class="form-group">
-            <label class="text-secondary" for="street">ADRES DOSTAWY</label>
-            <input id="street" type="text" class="form-control" th:field="*{streetOrBuilding}"/>
-        </div>
-        <div class="form-group">
-            <label class="text-secondary" for="phone">TELEFON KONTAKTOWY</label>
-            <input id="phone" type="text" class="form-control" th:field="*{phone}"/>
-        </div>
-        <div class="form-group">
-            <button class="btn btn-secondary btn-block" type="submit">ZAPISZ ADRES</button>
-        </div>
-    </form>
+    <table class="table">
+        <form method="post" th:action="@{/deliveryAddress/add}" th:object="${address}">
+            enctype="multipart/form-data">
+            <div class="form-group">
+                <label class="text-secondary" for="street">ADRES DOSTAWY</label>
+                <input id="street" type="text" class="form-control" th:field="*{street}"/>
+            </div>
+            <div class="form-group">
+                <label class="text-secondary" for="phone">TELEFON KONTAKTOWY</label>
+                <input id="phone" type="text" class="form-control" th:field="*{phone}"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-secondary btn-block" type="submit">ZAPISZ ADRES</button>
+            </div>
+        </form>
+    </table>
 
     <div th:replace="/fragments/footer">FOOTER</div>
 
