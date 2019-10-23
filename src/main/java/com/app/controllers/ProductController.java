@@ -46,6 +46,12 @@ public class ProductController {
     @GetMapping("/one/{id}")
     public String one(@PathVariable Long id, Model model) {
         model.addAttribute("product", productService.getOneProduct(id));
+
+        // TODO: 2019-10-23
+        System.out.println("------------ 6 ---------------");
+        System.out.println(productService.getOneProduct(id));
+
+
         model.addAttribute("errors", new HashMap<>());
         return "/products/one";
     }
@@ -58,16 +64,22 @@ public class ProductController {
     }
 
     @PostMapping("/buy")
-    public String buyPOST(@Valid @ModelAttribute ProductDTO productDTO, BindingResult bindingResult, Model model) {
+    public String buyPOST(@Valid @ModelAttribute ProductDTO productDTO,
+                          BindingResult bindingResult, Model model) {
+
+        // TODO: 2019-10-23
+        System.out.println("------------------ 7 -------------------");
+        System.out.println(productDTO);
+
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = bindingResult.getFieldErrors()
                     .stream()
                     .collect(Collectors.toMap(FieldError::getField, FieldError::getCode));
-            model.addAttribute("product", new ProductDTO());
+            model.addAttribute("product", productDTO);
             model.addAttribute("errors", errors);
             return "/products/buy";
         }
         cartService.addProductToCart(productDTO, securityService.getLoggedInUser());
-        return "/products/added";
+        return "redirect:/products/added"; // TODO: 2019-10-23 czy z redirect czy bez ???
     }
 }

@@ -262,6 +262,36 @@ public class CartServiceTests {
 
         cartService.addProductToCart(ProductMapper.toDto(product), UserMapper.toDto(user));
 
-        // TODO: 2019-10-03
+        Assertions.assertEquals(1, cartRepository.findAll().size());
+    }
+
+    @Test
+    @DisplayName("addProductToCart - user has got cart")
+    void test10() {
+
+        // TODO: 2019-10-23 dodawanie do nowego koszyka jak poprzedni jest zamknięty
+
+        /*User user = User.builder().id(4L).login("User A").build();
+        Product product = Product.builder().id(7L).description("Product 1").quantity(11).build();
+        Cart cart1 = Cart.builder().id(6L).cartClosed(true).build();
+        Cart cart2 = Cart.builder().id(7L).cartClosed(false).build();
+        cart1.setUser(user);
+        cart2.setUser(user);
+
+        Mockito
+                .when(userRepository.findAll())
+                .thenReturn(List.of(user));
+
+        Mockito
+                .when(cartRepository.findAll())
+                .thenReturn(List.of(cart1, cart2));
+
+        Mockito
+                .when(productRepository.findAll())
+                .thenReturn(List.of(product));
+
+        cartService.addProductToCart(ProductMapper.toDto(product), UserMapper.toDto(user));
+
+        Assertions.assertEquals(2, cartRepository.findAll().size());*/
     }
 }

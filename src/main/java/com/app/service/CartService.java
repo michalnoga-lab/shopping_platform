@@ -35,20 +35,9 @@ public class CartService {
         if (productDTO == null) {
             throw new AppException(ExceptionCodes.SERVICE_CART, "addProductToCart - product is null");
         }
-
-
-        // TODO: 2019-10-23
-        System.out.println("------------- 1 ---------------------");
-        System.out.println(productDTO);
-        System.out.println(userDTO);
-
-
         CartDTO cartDTO = getUsersActiveCart(userDTO);
         Cart cart = CartMapper.fromDto(cartDTO);
         Product productToCart = ProductMapper.fromDto(productDTO);
-
-
-        System.out.println("--------------- 2 ------------------");
 
         Product product = productRepository.findAll()
                 .stream()
@@ -62,61 +51,6 @@ public class CartService {
 
         cartRepository.saveAndFlush(cart);
 
-     /*   // TODO: 2019-10-15
-        System.out.println("*********************************************");
-        System.out.println(cart);
-
-
-        Set<Product> productsAlreadyInCart = productRepository
-                .findAll()
-                .stream()
-                .filter(product -> {
-                    Optional<Cart> cartOptional = product.getCarts()
-                            .stream()
-                            .filter(c -> c.getId().equals(cart.getId()))
-                            .findFirst();
-                    return cartOptional.isPresent();
-                })
-                .collect(Collectors.toSet());
-
-        System.out.println("ALREADY IN: " + productsAlreadyInCart);
-
-        Set<Product> productsInCart = cart.getProducts();
-
-        // TODO: 2019-10-15
-        System.out.println(productsInCart);
-        System.out.println(cart);
-
-        Optional<Product> productOptional = productRepository
-                .findAll()
-                .stream()
-                .filter(product -> product.getId().equals(productDTO.getId()))
-                .findFirst();
-
-        if (productOptional.isPresent()) {
-            if (productsInCart.contains(productOptional.get())) {
-                Product product = productsInCart
-                        .stream()
-                        .filter(p -> p.getId().equals(productOptional.get().getId()))
-                        .findFirst()
-                        .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART,
-                                "addProductToCart - no product in cart with ID: " + productOptional.get().getId()));
-                product.setQuantity(product.getQuantity() + productDTO.getQuantity());
-                productsInCart.add(product);
-            } else {
-                productsInCart.add(productOptional.get());
-            }
-        }
-
-        if (cart.getCartClosed() == null) {
-            cart.setCartClosed(false);
-        }
-        cart.setProducts(productsInCart);
-        cartRepository.saveAndFlush(cart);
-
-        // TODO: 2019-10-15
-        System.out.println(cart);
-*/
         return CartMapper.toDto(cart);
     }
 

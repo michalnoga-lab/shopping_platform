@@ -14,6 +14,7 @@ public class PrimaPlatformaApplication {
     // TODO: 2019-10-09  XML transforming
     // TODO: 2019-10-09 export / email orders
     // TODO: 2019-10-15 product quantity validation
+    // TODO: 2019-10-23 thymeleaf poprawić
 
     /**
      *
