@@ -75,7 +75,7 @@ public class ProductController {
             Map<String, String> errors = bindingResult.getFieldErrors()
                     .stream()
                     .collect(Collectors.toMap(FieldError::getField, FieldError::getCode));
-            model.addAttribute("product", productDTO);
+            model.addAttribute("product", new ProductDTO());
             model.addAttribute("errors", errors);
             return "/products/buy";
         }
