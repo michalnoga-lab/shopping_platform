@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -31,14 +32,14 @@ public class User {
     private String passwordConfirmation;
 
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "user")
-    private Set<DeliveryAddress> deliveryAddresses;
+    private Set<DeliveryAddress> deliveryAddresses = new HashSet<>(); // TODO: 2019-10-22 remove all hash set ???
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "company_id")
     private Company company;
 
-    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "user")
-    private Set<Cart> carts;
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
+    private Set<Cart> carts = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
@@ -49,12 +50,14 @@ public class User {
                 Objects.equals(login, user.login) &&
                 Objects.equals(name, user.name) &&
                 Objects.equals(surname, user.surname) &&
-                Objects.equals(password, user.password);
+                Objects.equals(password, user.password) &&
+                Objects.equals(enabled, user.enabled) &&
+                role == user.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, login, name, surname, password, enabled, role, passwordConfirmation);
+        return Objects.hash(id, login, name, surname, password, enabled, role);
     }
 
     @Override
@@ -67,7 +70,6 @@ public class User {
                 ", password='" + password + '\'' +
                 ", enabled=" + enabled +
                 ", role=" + role +
-                ", passwordConfirmation='" + passwordConfirmation +
                 '}';
     }
 }

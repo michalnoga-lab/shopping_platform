@@ -6,6 +6,8 @@ import com.app.dto.UserDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.CartMapper;
+import com.app.mappers.ProductMapper;
+import com.app.mappers.UserMapper;
 import com.app.model.Cart;
 import com.app.model.Product;
 import com.app.model.User;
@@ -15,6 +17,7 @@ import com.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -32,10 +35,34 @@ public class CartService {
         if (productDTO == null) {
             throw new AppException(ExceptionCodes.SERVICE_CART, "addProductToCart - product is null");
         }
+
+
+        // TODO: 2019-10-23
+        System.out.println("------------- 1 ---------------------");
+        System.out.println(productDTO);
+        System.out.println(userDTO);
+
+
         CartDTO cartDTO = getUsersActiveCart(userDTO);
         Cart cart = CartMapper.fromDto(cartDTO);
+        Product productToCart = ProductMapper.fromDto(productDTO);
 
-        // TODO: 2019-10-15
+
+        System.out.println("--------------- 2 ------------------");
+
+        Product product = productRepository.findAll()
+                .stream()
+                .filter(p -> p.getId().equals(productToCart.getId()))
+                .findFirst()
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART,
+                        "addProductToCart - no product with ID: " + productToCart.getId()));
+
+        cart.setProduct(product);
+        cart.setUser(UserMapper.fromDto(userDTO));
+
+        cartRepository.saveAndFlush(cart);
+
+     /*   // TODO: 2019-10-15
         System.out.println("*********************************************");
         System.out.println(cart);
 
@@ -89,7 +116,7 @@ public class CartService {
 
         // TODO: 2019-10-15
         System.out.println(cart);
-
+*/
         return CartMapper.toDto(cart);
     }
 
@@ -124,7 +151,7 @@ public class CartService {
 
     public CartDTO getUsersActiveCart(UserDTO userDTO) {
         if (userDTO == null) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "getUsersActiveCart - login is null");
+            throw new AppException(ExceptionCodes.SERVICE_CART, "getUsersActiveCart - user is null");
         }
 
         Optional<Cart> cartOptional = cartRepository
@@ -139,7 +166,7 @@ public class CartService {
                     .findAll()
                     .stream()
                     .filter(user -> user.getLogin().equals(userDTO.getLogin()))
-                    .findFirst();
+                    .findFirst(); // TODO: 2019-10-22 może wyszukiwanie po ID nie loginie ???
 
             if (userOptional.isPresent()) {
                 Cart cart = Cart.builder().build();

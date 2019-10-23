@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,6 +20,8 @@ public class CartDTO {
     private BigDecimal totalVatValue;
     private BigDecimal totalGrossValue;
     private Boolean cartClosed;
+    private LocalDateTime purchaseTime;
     private DeliveryAddressDTO deliveryAddressDTO;
     private UserDTO userDTO;
+    private ProductDTO productDTO;
 }

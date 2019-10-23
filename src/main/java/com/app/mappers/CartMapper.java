@@ -2,8 +2,7 @@ package com.app.mappers;
 
 import com.app.dto.CartDTO;
 import com.app.model.Cart;
-
-import java.util.HashSet;
+import com.app.model.Product;
 
 public interface CartMapper {
 
@@ -17,6 +16,8 @@ public interface CartMapper {
                 .totalVatValue(cart.getTotalVatValue())
                 .deliveryAddressDTO(cart.getDeliveryAddress() == null ?
                         null : DeliveryAddressMapper.toDto(cart.getDeliveryAddress()))
+                .purchaseTime(cart.getPurchaseTime())
+                .productDTO(cart.getProduct() == null ? null : ProductMapper.toDto(cart.getProduct()))
                 .build();
     }
 
@@ -25,12 +26,13 @@ public interface CartMapper {
                 .id(cartDTO.getId())
                 .cartClosed(cartDTO.getCartClosed())
                 .user(cartDTO.getUserDTO() == null ? null : UserMapper.fromDto(cartDTO.getUserDTO()))
-                .products(new HashSet<>())
                 .totalGrossValue(cartDTO.getTotalGrossValue())
                 .totalNetValue(cartDTO.getTotalNetValue())
                 .totalVatValue(cartDTO.getTotalVatValue())
                 .deliveryAddress(cartDTO.getDeliveryAddressDTO() == null ?
                         null : DeliveryAddressMapper.fromDto(cartDTO.getDeliveryAddressDTO()))
+                .product(new Product())
+                .purchaseTime(cartDTO.getPurchaseTime())
                 .build();
     }
 }

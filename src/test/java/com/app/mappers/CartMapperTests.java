@@ -2,6 +2,7 @@ package com.app.mappers;
 
 import com.app.dto.CartDTO;
 import com.app.dto.DeliveryAddressDTO;
+import com.app.dto.ProductDTO;
 import com.app.dto.UserDTO;
 import com.app.model.Cart;
 import com.app.model.DeliveryAddress;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 
@@ -28,10 +30,11 @@ public class CartMapperTests {
                 .totalVatValue(BigDecimal.valueOf(23))
                 .totalGrossValue(BigDecimal.valueOf(123))
                 .totalNetValue(BigDecimal.valueOf(100))
-                .products(new HashSet<>(List.of(Product.builder().build())))
                 .user(User.builder().id(2L).build())
                 .cartClosed(false)
                 .deliveryAddress(DeliveryAddress.builder().street("Address 1").build())
+                .purchaseTime(LocalDateTime.of(2019, 10, 22, 0, 0, 0))
+                .product(Product.builder().id(10L).build())
                 .build();
 
         CartDTO expectedCart = CartDTO.builder()
@@ -42,6 +45,8 @@ public class CartMapperTests {
                 .userDTO(UserDTO.builder().id(2L).build())
                 .deliveryAddressDTO(DeliveryAddressDTO.builder().street("Address 1").build())
                 .cartClosed(false)
+                .purchaseTime(LocalDateTime.of(2019, 10, 22, 0, 0, 0))
+                .productDTO(ProductDTO.builder().id(10L).build())
                 .build();
 
         CartDTO actualCart = CartMapper.toDto(cart);
@@ -60,6 +65,8 @@ public class CartMapperTests {
                 .userDTO(UserDTO.builder().id(2L).build())
                 .deliveryAddressDTO(DeliveryAddressDTO.builder().street("Address 1").build())
                 .cartClosed(false)
+                .purchaseTime(LocalDateTime.of(2019, 10, 22, 0, 0, 0))
+                .productDTO(ProductDTO.builder().id(10L).build())
                 .build();
 
         Cart expectedCart = Cart.builder()
@@ -67,10 +74,11 @@ public class CartMapperTests {
                 .totalVatValue(BigDecimal.valueOf(23))
                 .totalGrossValue(BigDecimal.valueOf(123))
                 .totalNetValue(BigDecimal.valueOf(100))
-                .products(new HashSet<>())
-                .user(User.builder().id(2L).build())
-                .deliveryAddress(DeliveryAddress.builder().street("Address 1").build())
+                .user(User.builder().id(2L).carts(new HashSet<>()).build())
                 .cartClosed(false)
+                .deliveryAddress(DeliveryAddress.builder().street("Address 1").build())
+                .purchaseTime(LocalDateTime.of(2019, 10, 22, 0, 0, 0))
+                .product(Product.builder().id(10L).carts(new HashSet<>()).build())
                 .build();
 
         Cart actualCart = CartMapper.fromDto(cartDTO);

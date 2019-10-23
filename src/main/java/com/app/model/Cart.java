@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -27,21 +28,18 @@ public class Cart {
     private BigDecimal totalVatValue;
     private BigDecimal totalGrossValue;
     private Boolean cartClosed;
+    private LocalDateTime purchaseTime;
 
     @OneToOne
     private DeliveryAddress deliveryAddress;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(
-            name = "join_cart_product",
-            joinColumns = {@JoinColumn(name = "cart_id")},
-            inverseJoinColumns = {@JoinColumn(name = "product_id")}
-    )
-    private Set<Product> products;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     @Override
     public boolean equals(Object o) {
@@ -53,12 +51,13 @@ public class Cart {
                 Objects.equals(totalVatValue, cart.totalVatValue) &&
                 Objects.equals(totalGrossValue, cart.totalGrossValue) &&
                 Objects.equals(cartClosed, cart.cartClosed) &&
+                Objects.equals(purchaseTime, cart.purchaseTime) &&
                 Objects.equals(deliveryAddress, cart.deliveryAddress);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, totalNetValue, totalVatValue, totalGrossValue, cartClosed, deliveryAddress);
+        return Objects.hash(id, totalNetValue, totalVatValue, totalGrossValue, cartClosed, purchaseTime, deliveryAddress);
     }
 
     @Override
@@ -69,6 +68,7 @@ public class Cart {
                 ", totalVatValue=" + totalVatValue +
                 ", totalGrossValue=" + totalGrossValue +
                 ", cartClosed=" + cartClosed +
+                ", purchaseTime=" + purchaseTime +
                 ", deliveryAddress=" + deliveryAddress +
                 '}';
     }

@@ -33,18 +33,20 @@ public class DeliveryAddress {
         if (o == null || getClass() != o.getClass()) return false;
         DeliveryAddress that = (DeliveryAddress) o;
         return Objects.equals(id, that.id) &&
+                Objects.equals(street, that.street) &&
                 Objects.equals(phone, that.phone);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, phone);
+        return Objects.hash(id, street, phone);
     }
 
     @Override
     public String toString() {
         return "DeliveryAddress{" +
                 "id=" + id +
+                ", street='" + street + '\'' +
                 ", phone='" + phone + '\'' +
                 '}';
     }

@@ -103,7 +103,7 @@ public class ProductServiceTests {
                 .thenReturn(products);
 
         Cart cart = Cart.builder().id(2L).build();
-        cart.setProducts(new HashSet<>(products));
+        //cart.setProducts(new HashSet<>(products));// TODO: 2019-10-22
 
         Mockito
                 .when(cartRepository.findAll())

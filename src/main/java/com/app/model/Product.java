@@ -29,12 +29,12 @@ public class Product {
     private Integer quantity;
     private BigDecimal nettPrice;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "products")
-    private Set<Cart> carts ;
-
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
+
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "product")
+    private Set<Cart> carts = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
@@ -50,7 +50,7 @@ public class Product {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, quantity, nettPrice, company);
+        return Objects.hash(id, name, description, quantity, nettPrice);
     }
 
     @Override
@@ -61,7 +61,6 @@ public class Product {
                 ", description='" + description + '\'' +
                 ", quantity=" + quantity +
                 ", nettPrice=" + nettPrice +
-                ", company=" + company +
                 '}';
     }
 }

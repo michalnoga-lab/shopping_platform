@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -30,10 +31,10 @@ public class Company {
     private Boolean active;
 
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "company")
-    private Set<User> users;
+    private Set<User> users = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "company")
-    private Set<Product> products;
+    private Set<Product> products = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
@@ -66,8 +67,6 @@ public class Company {
                 ", city='" + city + '\'' +
                 ", postCode='" + postCode + '\'' +
                 ", active=" + active +
-                ", users=" + users +
-                ", products=" + products +
                 '}';
     }
 }
