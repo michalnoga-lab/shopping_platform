@@ -7,7 +7,9 @@ import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.DeliveryAddressMapper;
 import com.app.mappers.UserMapper;
 import com.app.model.DeliveryAddress;
+import com.app.model.User;
 import com.app.repository.DeliveryAddressRepository;
+import com.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 public class DeliveryAddressService {
 
     private final DeliveryAddressRepository deliveryAddressRepository;
+    private final UserRepository userRepository;
 
     public List<DeliveryAddressDTO> getAll(UserDTO userDTO) {
         if (userDTO == null) {
@@ -41,8 +44,19 @@ public class DeliveryAddressService {
             throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "add - user is null");
         }
 
+        /*DeliveryAddress deliveryAddress = deliveryAddressRepository.findAll()
+                .stream()
+                .filter(address -> address.getId().equals(deliveryAddressDTO.getId()))
+                .findFirst()
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_DELIVERY, "add - no delivery address with ID:" + deliveryAddressDTO.getId()));*/
         DeliveryAddress deliveryAddress = DeliveryAddressMapper.fromDto(deliveryAddressDTO);
-        deliveryAddress.setUser(UserMapper.fromDto(userDTO));
+        User user = userRepository.findAll()
+                .stream()
+                .filter(u -> u.getId().equals(userDTO.getId()))
+                .findFirst()
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_DELIVERY, "add - no user with ID: " + userDTO.getId()));
+
+        deliveryAddress.setUser(user);
         deliveryAddressRepository.save(deliveryAddress);
         return DeliveryAddressMapper.toDto(deliveryAddress);
     }

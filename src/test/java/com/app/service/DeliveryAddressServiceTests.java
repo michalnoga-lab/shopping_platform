@@ -6,6 +6,7 @@ import com.app.mappers.UserMapper;
 import com.app.model.DeliveryAddress;
 import com.app.model.User;
 import com.app.repository.DeliveryAddressRepository;
+import com.app.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,15 +29,21 @@ public class DeliveryAddressServiceTests {
     @Autowired
     private DeliveryAddressService deliveryAddressService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @TestConfiguration
     public static class TestConfigurationApp {
 
         @MockBean
         private DeliveryAddressRepository deliveryAddressRepository;
 
+        @MockBean
+        private UserRepository userRepository;
+
         @Bean
         public DeliveryAddressService deliveryAddressService() {
-            return new DeliveryAddressService(deliveryAddressRepository);
+            return new DeliveryAddressService(deliveryAddressRepository, userRepository);
         }
     }
 
