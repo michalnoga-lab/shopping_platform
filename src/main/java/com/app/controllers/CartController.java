@@ -27,13 +27,13 @@ public class CartController {
     @GetMapping("/all")
     public String all(Model model) {
         model.addAttribute("carts", cartService.getAllUsersCarts(securityService.getLoggedInUser()));
-        return "/carts/all";
+        return "carts/all";
     }
 
     @GetMapping("/one/{id}")
     public String one(@PathVariable Long id, Model model) {
         model.addAttribute("cart", cartService.getOneCart(id));
         model.addAttribute("products", productService.getProductsOfCart(id));
-        return "/carts/one";
+        return "carts/one";
     }
 }

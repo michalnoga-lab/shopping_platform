@@ -40,7 +40,7 @@ public class ProductController {
     public String all(Model model) {
         model.addAttribute("products", productService.getProductsOfCompany(
                 companyService.getCompanyOfUser(securityService.getLoggedInUser())));
-        return "/products/all";
+        return "products/all";
     }
 
     @GetMapping("/one/{id}")
@@ -53,14 +53,14 @@ public class ProductController {
 
 
         model.addAttribute("errors", new HashMap<>());
-        return "/products/one";
+        return "products/one";
     }
 
     @GetMapping("/buy")
     public String buyGET(Model model) {
         model.addAttribute("product", new ProductDTO());
         model.addAttribute("errors", new HashMap<>());
-        return "/products/added";
+        return "products/added";
     }
 
     @PostMapping("/buy")
@@ -77,9 +77,9 @@ public class ProductController {
                     .collect(Collectors.toMap(FieldError::getField, FieldError::getCode));
             model.addAttribute("product", new ProductDTO());
             model.addAttribute("errors", errors);
-            return "/products/buy";
+            return "products/buy";
         }
         cartService.addProductToCart(productDTO, securityService.getLoggedInUser());
-        return "redirect:/products/added"; // TODO: 2019-10-23 czy z redirect czy bez ???
+        return "redirect:/products/added";
     }
 }
