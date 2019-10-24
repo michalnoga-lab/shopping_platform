@@ -55,7 +55,7 @@ public class ProductControllerTests {
                 .perform(MockMvcRequestBuilders.get("/products/one").contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
-    }*/ // TODO: 2019-09-25
+    }*/ // TODO: 2019-09-25 test one product
 
     @Test
     @DisplayName("buy")

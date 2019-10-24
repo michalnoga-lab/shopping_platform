@@ -53,7 +53,7 @@ public class DeliveryAddressControllerTests {
 
         mockMvc
                 .perform(MockMvcRequestBuilders.post("/deliveryAddress/add").contentType(MediaType.TEXT_HTML))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
-    }
+    } // TODO: 2019-10-24 nie działa test w metodzie POST, w GET działa
 }
