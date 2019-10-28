@@ -22,7 +22,7 @@ public class ProductDtoValidator implements Validator {
 
         try {
             if (productDTO.getQuantity() <= 0 || !productDTO.getQuantity().toString().matches(QUANTITY_REGEX)) {
-                errors.rejectValue("quantity", "NIEPRAWIDŁOWA ILOŚĆ");
+                errors.rejectValue("quantity", "NIEPRAWIDŁOWA ILOŚĆ. DOZWOLONE SĄ TYLKO CYFRY.");
             }
 
         } catch (Exception e) {

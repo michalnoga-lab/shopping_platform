@@ -10,9 +10,7 @@
 
 <div class="container">
 
-    <table class="table">
-        <form method="post" th:action="@{/deliveryAddress/add}" th:object="${address}">
-            enctype="multipart/form-data">
+        <form method="post" th:action="@{/deliveryAddress/add}" th:object="${address}" enctype="multipart/form-data">
             <div class="form-group">
                 <label class="text-secondary" for="street">ADRES DOSTAWY</label>
                 <input id="street" type="text" class="form-control" th:field="*{street}"/>
@@ -27,7 +25,6 @@
                 <button class="btn btn-secondary btn-block" type="submit">ZAPISZ ADRES</button>
             </div>
         </form>
-    </table>
 
     <div th:replace="/fragments/footer">FOOTER</div>
 
