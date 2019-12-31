@@ -14,7 +14,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class dataInitialization implements CommandLineRunner { // TODO: 2019-09-23 enable for test only!
+public class dataInitialization implements CommandLineRunner { // TODO: 2019-09-23 enable for tests only!
 
     private final CompanyRepository companyRepository;
     private final UserRepository userRepository;

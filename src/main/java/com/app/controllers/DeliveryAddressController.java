@@ -39,6 +39,7 @@ public class DeliveryAddressController {
 
         if (addresses.size() == 0) {
             model.addAttribute("address", new DeliveryAddressDTO());
+            model.addAttribute("errors", new HashMap<>());
             return "deliveryAddress/add";
         }
         model.addAttribute("addresses", addresses);

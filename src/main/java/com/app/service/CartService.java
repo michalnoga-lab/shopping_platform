@@ -33,23 +33,43 @@ public class CartService {
         if (productDTO == null) {
             throw new AppException(ExceptionCodes.SERVICE_CART, "addProductToCart - product is null");
         }
-        CartDTO cartDTO = getUsersActiveCart(userDTO);
+
+        // 1. pobrac usera po przekazanym id
+        // 2. pobrac koszyk po id usera
+        // 3. pobrac produkt po id produktu
+        // 4. ustawic w koszyku produkt oraz usera (? tylko po co ustawiac usera skoro przed chwila koszyk pobrale na rzecz usera)
+        // 5. ustawic inne dane dla zamowienia np ilosc
+        // 6. za pomoca save zapisac koszyk z danymi
+
+
+
+
+
+        /*CartDTO cartDTO = getUsersActiveCart(userDTO);
         Cart cart = CartMapper.fromDto(cartDTO);
         Product productToCart = ProductMapper.fromDto(productDTO);
 
+        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxx");
+        System.out.println(productToCart);
+
         Product product = productRepository.findAll()
                 .stream()
+                .peek(pr -> {
+                    System.out.println("**************************");
+                    System.out.println(pr);
+                })
                 .filter(p -> p.getId().equals(productToCart.getId()))
                 .findFirst()
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART,
-                        "addProductToCart - no product with ID: " + productToCart.getId()));
+                *//*.orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART,
+                        "addProductToCart - no product with ID: " + productToCart.getId()));*//*
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART, "...."));
 
         cart.setProduct(product);
         cart.setUser(UserMapper.fromDto(userDTO));
 
-        cartRepository.saveAndFlush(cart);
+        cartRepository.save(cart);
 
-        return CartMapper.toDto(cart);
+        return CartMapper.toDto(cart);*/
     }
 
     public List<CartDTO> getAllUsersCarts(UserDTO userDTO) {
