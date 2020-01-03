@@ -37,9 +37,8 @@ public class Cart {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "product_id")
-    private Product product;
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "cart")
+    private Set<Product> products= new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

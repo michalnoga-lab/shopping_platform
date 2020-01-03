@@ -20,9 +20,9 @@ import java.util.HashSet;
 import java.util.List;
 
 @ExtendWith(SpringExtension.class)
-public class CartMapperTests {
+public class CartMapperTests { // TODO: 31.12.2019 all tests
 
-    @Test
+    /*@Test
     @DisplayName("toDto")
     void test1() {
         Cart cart = Cart.builder()
@@ -84,5 +84,5 @@ public class CartMapperTests {
         Cart actualCart = CartMapper.fromDto(cartDTO);
 
         Assertions.assertEquals(expectedCart, actualCart);
-    }
+    }*/
 }

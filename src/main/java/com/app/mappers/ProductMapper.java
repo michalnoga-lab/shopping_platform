@@ -1,6 +1,7 @@
 package com.app.mappers;
 
 import com.app.dto.ProductDTO;
+import com.app.model.Cart;
 import com.app.model.Company;
 import com.app.model.Product;
 
@@ -22,7 +23,7 @@ public interface ProductMapper {
     static Product fromDto(ProductDTO productDTO) {
         return productDTO == null ? null : Product.builder()
                 .id(productDTO.getId())
-                .carts(new HashSet<>())
+                .cart(new Cart())
                 .company(productDTO.getCompanyDTO() == null ? null : CompanyMapper.fromDto(productDTO.getCompanyDTO()))
                 .description(productDTO.getDescription())
                 .name(productDTO.getName())

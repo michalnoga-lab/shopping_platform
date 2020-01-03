@@ -46,22 +46,21 @@ public class ProductController {
     @GetMapping("/one/{id}")
     public String one(@PathVariable Long id, Model model) {
         model.addAttribute("product", productService.getOneProduct(id));
-
-        // TODO: 2019-10-23
-        System.out.println("------------ 6 ---------------");
-        System.out.println(productService.getOneProduct(id));
-
-
         model.addAttribute("errors", new HashMap<>());
         return "products/one";
     }
 
-    @GetMapping("/buy")
-    public String buyGET(Model model) {
+    /*@GetMapping("/buy/{id}")
+    public String buyGET(@PathVariable Long id, Model model) {
+
+        System.out.println("--------------------- 8 -------------------");
+        System.out.println("czy ta metoda się ładuje ???");
+
+
         model.addAttribute("product", new ProductDTO());
         model.addAttribute("errors", new HashMap<>());
-        return "products/added";
-    }
+        return "products/buy";
+    }*/
 
     @PostMapping("/buy")
     public String buyPOST(@Valid @ModelAttribute ProductDTO productDTO,
@@ -69,17 +68,28 @@ public class ProductController {
 
         // TODO: 2019-10-23
         System.out.println("------------------ 7 -------------------");
+
+        //System.out.println("ID= " + id);
+
+        /*model.addAttribute("product", productDTO);*/
+
         System.out.println(productDTO);
 
+
         if (bindingResult.hasErrors()) {
+
+            System.out.println("------------------ 7 -------------------");
+            System.out.println("buy method has errors !!!");
+
             Map<String, String> errors = bindingResult.getFieldErrors()
                     .stream()
                     .collect(Collectors.toMap(FieldError::getField, FieldError::getCode));
             model.addAttribute("product", new ProductDTO());
             model.addAttribute("errors", errors);
-            return "products/buy";
+            return "blalalallala";
         }
-        cartService.addProductToCart(productDTO, securityService.getLoggedInUser());
-        return "redirect:/products/added";
+        cartService.addProductToCart(ProductDTO.builder().id(5L).name("NAME").build(), 3L); // TODO: 31.12.2019 remove
+        //return "redirect:/products/added"; // TODO: 02.01.2020 page product added to cart / display cart
+        return "products/added";
     }
 }

@@ -33,8 +33,9 @@ public class Product {
     @JoinColumn(name = "company_id")
     private Company company;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "product")
-    private Set<Cart> carts = new HashSet<>();
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
 
     @Override
     public boolean equals(Object o) {

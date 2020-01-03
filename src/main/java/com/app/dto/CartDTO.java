@@ -23,5 +23,4 @@ public class CartDTO {
     private LocalDateTime purchaseTime;
     private DeliveryAddressDTO deliveryAddressDTO;
     private UserDTO userDTO;
-    private ProductDTO productDTO;
 }
