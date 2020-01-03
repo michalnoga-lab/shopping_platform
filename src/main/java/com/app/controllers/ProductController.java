@@ -43,24 +43,16 @@ public class ProductController {
         return "products/all";
     }
 
-    @GetMapping("/one/{id}")
-    public String one(@PathVariable Long id, Model model) {
+    @GetMapping("/buy/{id}")
+    public String buyGET(@PathVariable Long id, Model model) {
         model.addAttribute("product", productService.getOneProduct(id));
         model.addAttribute("errors", new HashMap<>());
-        return "products/one";
-    }
-
-    /*@GetMapping("/buy/{id}")
-    public String buyGET(@PathVariable Long id, Model model) {
 
         System.out.println("--------------------- 8 -------------------");
-        System.out.println("czy ta metoda się ładuje ???");
+        System.out.println(productService.getOneProduct(id));
 
-
-        model.addAttribute("product", new ProductDTO());
-        model.addAttribute("errors", new HashMap<>());
         return "products/buy";
-    }*/
+    }
 
     @PostMapping("/buy")
     public String buyPOST(@Valid @ModelAttribute ProductDTO productDTO,
@@ -73,7 +65,7 @@ public class ProductController {
 
         /*model.addAttribute("product", productDTO);*/
 
-        System.out.println(productDTO);
+        System.out.println(productDTO); // TODO: 03.01.2020 id nie przechodzi 
 
 
         if (bindingResult.hasErrors()) {
@@ -86,10 +78,10 @@ public class ProductController {
                     .collect(Collectors.toMap(FieldError::getField, FieldError::getCode));
             model.addAttribute("product", new ProductDTO());
             model.addAttribute("errors", errors);
-            return "blalalallala";
+            return "products/buy";
         }
         cartService.addProductToCart(ProductDTO.builder().id(5L).name("NAME").build(), 3L); // TODO: 31.12.2019 remove
         //return "redirect:/products/added"; // TODO: 02.01.2020 page product added to cart / display cart
-        return "products/added";
+        return "redirect:/products/all"; // TODO: 03.01.2020 temporary
     }
 }
