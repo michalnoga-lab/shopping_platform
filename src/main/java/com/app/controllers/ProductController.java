@@ -55,7 +55,7 @@ public class ProductController {
     }
 
     @PostMapping("/buy")
-    public String buyPOST(@Valid @ModelAttribute ProductDTO productDTO,
+    public String buyPOST(@Valid @ModelAttribute ProductDTO productDTO, @PathVariable Long id,
                           BindingResult bindingResult, Model model) {
 
         // TODO: 2019-10-23
@@ -64,8 +64,6 @@ public class ProductController {
         //System.out.println("ID= " + id);
 
         /*model.addAttribute("product", productDTO);*/
-
-        System.out.println(productDTO); // TODO: 03.01.2020 id nie przechodzi 
 
 
         if (bindingResult.hasErrors()) {
@@ -80,6 +78,10 @@ public class ProductController {
             model.addAttribute("errors", errors);
             return "products/buy";
         }
+        model.addAttribute("product", productDTO);
+        System.out.println("przekazane ID: " + id);
+        System.out.println(productDTO); // TODO: 03.01.2020 id nie przechodzi
+
         cartService.addProductToCart(ProductDTO.builder().id(5L).name("NAME").build(), 3L); // TODO: 31.12.2019 remove
         //return "redirect:/products/added"; // TODO: 02.01.2020 page product added to cart / display cart
         return "redirect:/products/all"; // TODO: 03.01.2020 temporary
