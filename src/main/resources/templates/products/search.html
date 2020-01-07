@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Platform</title>
+</head>
+<body>
+<div th:replace="fragments/stylesheet">STYLESHEET</div>
+<div th:replace="fragments/top">TOP MENU</div>
+
+<div class="container">
+
+    <form method="post" th:action="@{/search/products}" th:object="${productSearch}" enctype="multipart/form-data">
+        <div class="form-group">
+            <label class="text-secondary" for="name">Wyszukaj w nazwie</label>
+            <input id="name" type="text" class="form-control" th:field="*{userNameInput}">
+        </div>
+        <!--<p class="text text-danger" th:if="${errors.containsKey('input')}" th:text="${errors.get('ibnput')}"></p>-->
+        <div class="form-group">
+            <label class="text-secondary" for="description">Wyszukaj w opisie</label>
+            <input id="description" type="text" class="form-control" th:field="*{userDescriptionInput}">
+        </div>
+        <!--<p class="text text-danger" th:if="${errors.containsKey('input')}" th:text="${errors.get('input')}"></p>-->
+        <div class="form-group">
+            <button class="btn btn-secondary btn-block" type="submit">WYSZUKAJ</button>
+        </div>
+    </form>
+
+    <div th:replace="/fragments/footer">FOOTER</div>
+</div>
+
+</body>
+</html>
