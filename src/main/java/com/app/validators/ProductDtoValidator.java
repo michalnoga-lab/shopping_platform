@@ -24,9 +24,11 @@ public class ProductDtoValidator implements Validator {
             if (productDTO.getQuantity() <= 0 || !productDTO.getQuantity().toString().matches(QUANTITY_REGEX)) {
                 errors.rejectValue("quantity", "NIEPRAWIDŁOWA ILOŚĆ. DOZWOLONE SĄ TYLKO CYFRY.");
             }
-
+            if (productDTO.getQuantity().toString().length() > 8) {
+                errors.rejectValue("quantity", "NIEPRAWIDŁOWA WARTOŚĆ. WPROWADZONY TEKST JEST ZA DŁUGI.");
+            }
         } catch (Exception e) {
-            throw new AppException(ExceptionCodes.VALIDATION, "ProductDTO validation");
+            throw new AppException(ExceptionCodes.VALIDATION, "ProductDTO - validation");
         }
     }
 }

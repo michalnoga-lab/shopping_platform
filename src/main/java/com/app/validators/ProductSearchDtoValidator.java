@@ -18,20 +18,14 @@ public class ProductSearchDtoValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         ProductSearchDTO productSearchDTO = (ProductSearchDTO) o;
-        final String USER_INPUT_REGEX = "[\\w\\s]+";
+        final String USER_INPUT_REGEX = "[a-zA-z\\s]+";
 
         try {
-            if (!productSearchDTO.getUserNameInput().matches(USER_INPUT_REGEX)) {
-                errors.rejectValue("nameInput", "NIEPRAWIDŁOWA WARTOŚĆ. DOZWOLONE SĄ TYLKO LITERY.");
+            if (!productSearchDTO.getUserInput().matches(USER_INPUT_REGEX)) {
+                errors.rejectValue("userInput", "NIEPRAWIDŁOWA WARTOŚĆ. DOZWOLONE SĄ TYLKO LITERY.");
             }
-            if (!productSearchDTO.getUserDescriptionInput().matches(USER_INPUT_REGEX)) {
-                errors.rejectValue("descriptionInput", "NIEPRAWIDŁOWA WARTOŚĆ. DOZWOLONE SĄ TYLKO LITERY.");
-            }
-            if (productSearchDTO.getUserNameInput().length() > 50) {
-                errors.rejectValue("nameInput", "NIEPRAWIDŁOWA WARTOŚĆ. WPROWADZONY TEKST JEST ZA DŁUGI.");
-            }
-            if (productSearchDTO.getUserDescriptionInput().length() > 50) {
-                errors.rejectValue("descriptionInput", "NIEPRAWIDŁOWA WARTOŚĆ. WPROWADZONY TEKST JEST ZA DŁUGI.");
+            if (productSearchDTO.getUserInput().length() > 20) {
+                errors.rejectValue("userInput", "NIEPRAWIDŁOWA WARTOŚĆ. WPROWADZONY TEKST JEST ZA DŁUGI.");
             }
         } catch (Exception e) {
             throw new AppException(ExceptionCodes.VALIDATION, "ProductSearchDto - validation");

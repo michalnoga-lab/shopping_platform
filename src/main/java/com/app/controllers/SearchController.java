@@ -31,7 +31,7 @@ public class SearchController {
     public String searchGET(Model model) {
         model.addAttribute("productSearch", new ProductSearchDTO());
         model.addAttribute("errors", new HashMap<>());
-        return "products/search";
+        return "search/products";
     }
 
     @PostMapping("/products")
@@ -42,7 +42,7 @@ public class SearchController {
                     .collect(Collectors.toMap(FieldError::getField, FieldError::getCode));
             model.addAttribute("productSearch", new ProductSearchDTO());
             model.addAttribute("errors", errors);
-            return "products/search";
+            return "search/products";
         }
         model.addAttribute("productSearch", productSearchDTO);
         return "redirect:/products/all";

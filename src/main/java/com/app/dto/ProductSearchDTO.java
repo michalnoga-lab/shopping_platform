@@ -11,6 +11,5 @@ import lombok.NoArgsConstructor;
 @Data
 public class ProductSearchDTO {
 
-    private String userNameInput;
-    private String userDescriptionInput;
+    private String userInput;
 }

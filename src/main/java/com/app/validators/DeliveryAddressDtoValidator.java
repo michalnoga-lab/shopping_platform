@@ -26,11 +26,17 @@ public class DeliveryAddressDtoValidator implements Validator {
             if (!deliveryAddressDTO.getStreet().matches(STREET_REGEX)) {
                 errors.rejectValue("street", "NIEPRAWIDŁOWY ADRES. DOZWOLNOE SĄ TYLKO LITERY I CYFRY.");
             }
+            if (deliveryAddressDTO.getStreet().length() > 100) {
+                errors.rejectValue("street", "NIEPRAWIDŁOWA WARTOŚĆ. WPROWADZONY TEKST JEST ZA DŁUGI.");
+            }
             if (!deliveryAddressDTO.getPhone().matches(PHONE_REGEX)) {
                 errors.rejectValue("phone", "NIEPRAWIDŁOWY TELEFON. DOZWOLONE SĄ TYLKO CYFRY.");
             }
+            if (deliveryAddressDTO.getPhone().length() > 50) {
+                errors.rejectValue("phone", "NIEPRAWIDŁOWA WARTOŚĆ. WPROWADZONY TEKST JEST ZA DŁUGI.");
+            }
         } catch (Exception e) {
-            throw new AppException(ExceptionCodes.VALIDATION, "DeliveryAddressDto validation");
+            throw new AppException(ExceptionCodes.VALIDATION, "DeliveryAddressDto - validation");
         }
     }
 }
