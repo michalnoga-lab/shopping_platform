@@ -15,12 +15,13 @@
             <label class="text-secondary" for="name">Wyszukaj w nazwie</label>
             <input id="name" type="text" class="form-control" th:field="*{userNameInput}">
         </div>
-        <!--<p class="text text-danger" th:if="${errors.containsKey('input')}" th:text="${errors.get('ibnput')}"></p>-->
+        <p class="text text-danger" th:if="${errors.containsKey('nameInput')}" th:text="${errors.get('nameInput')}"></p>
         <div class="form-group">
             <label class="text-secondary" for="description">Wyszukaj w opisie</label>
             <input id="description" type="text" class="form-control" th:field="*{userDescriptionInput}">
         </div>
-        <!--<p class="text text-danger" th:if="${errors.containsKey('input')}" th:text="${errors.get('input')}"></p>-->
+        <p class="text text-danger" th:if="${errors.containsKey('descriptionInput')}"
+           th:text="${errors.get('descriptionInput')}"></p>
         <div class="form-group">
             <button class="btn btn-secondary btn-block" type="submit">WYSZUKAJ</button>
         </div>
