@@ -17,9 +17,8 @@ public class SecurityService {
 
     private final UserRepository userRepository;
 
-    public UserDTO getLoggedInUser() {
+    public Long getLoggedInUser() {
 
-        // TODO: 2019-09-23
         String login = "log";
 
         Optional<User> userOptional = userRepository
@@ -32,6 +31,6 @@ public class SecurityService {
 
         //System.out.println(userOptional);
 
-        return userOptional.isPresent() ? UserMapper.toDto(userOptional.get()) : UserDTO.builder().login("BLA").build();
+        return 3L; // TODO: 09.01.2020  return real ID
     }
 }

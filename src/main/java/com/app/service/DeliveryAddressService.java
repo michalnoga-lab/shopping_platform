@@ -23,38 +23,32 @@ public class DeliveryAddressService {
     private final DeliveryAddressRepository deliveryAddressRepository;
     private final UserRepository userRepository;
 
-    public List<DeliveryAddressDTO> getAll(UserDTO userDTO) {
-        if (userDTO == null) {
-            throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "getAll - user is null");
+    public List<DeliveryAddressDTO> getAll(Long userId) {
+        if (userId == null) {
+            throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "getAll - no user with ID: " + userId);
         }
 
         return deliveryAddressRepository
                 .findAll()
                 .stream()
-                .filter(address -> address.getUser().getId().equals(userDTO.getId()))
+                .filter(address -> address.getUser().getId().equals(userId))
                 .map(DeliveryAddressMapper::toDto)
                 .collect(Collectors.toList());
     }
 
-    public DeliveryAddressDTO add(DeliveryAddressDTO deliveryAddressDTO, UserDTO userDTO) {
+    public DeliveryAddressDTO add(DeliveryAddressDTO deliveryAddressDTO, Long userId) {
         if (deliveryAddressDTO == null) {
             throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "add - delivery address is null");
         }
-        if (userDTO == null) {
-            throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "add - user is null");
+        if (userId == null) {
+            throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "add - user ID is null");
         }
-
-        /*DeliveryAddress deliveryAddress = deliveryAddressRepository.findAll()
-                .stream()
-                .filter(address -> address.getId().equals(deliveryAddressDTO.getId()))
-                .findFirst()
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_DELIVERY, "add - no delivery address with ID:" + deliveryAddressDTO.getId()));*/
         DeliveryAddress deliveryAddress = DeliveryAddressMapper.fromDto(deliveryAddressDTO);
         User user = userRepository.findAll()
                 .stream()
-                .filter(u -> u.getId().equals(userDTO.getId()))
+                .filter(u -> u.getId().equals(userId))
                 .findFirst()
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_DELIVERY, "add - no user with ID: " + userDTO.getId()));
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_DELIVERY, "add - no user with ID: " + userId));
 
         deliveryAddress.setUser(user);
         deliveryAddressRepository.save(deliveryAddress);

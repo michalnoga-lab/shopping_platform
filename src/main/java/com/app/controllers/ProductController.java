@@ -47,20 +47,12 @@ public class ProductController {
     public String buyGET(@PathVariable Long id, Model model) {
         model.addAttribute("product", productService.getOneProduct(id));
         model.addAttribute("errors", new HashMap<>());
-
-        System.out.println("--------------------- 8 -------------------");
-        System.out.println(productService.getOneProduct(id));
-
         return "products/buy";
     }
 
     @PostMapping("/buy")
     public String buyPOST(@Valid @ModelAttribute ProductDTO productDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-
-            System.out.println("------------------ 7 -------------------");
-            System.out.println("buy method has errors !!!");
-
             Map<String, String> errors = bindingResult.getFieldErrors()
                     .stream()
                     .collect(Collectors.toMap(FieldError::getField, FieldError::getCode));
@@ -70,7 +62,7 @@ public class ProductController {
         }
         model.addAttribute("product", productDTO);
 
-        cartService.addProductToCart(ProductDTO.builder().id(5L).name("NAME").build(), 3L); // TODO: 31.12.2019 remove
+        cartService.addProductToCart(productDTO, securityService.getLoggedInUser());
         //return "redirect:/products/added"; // TODO: 02.01.2020 page product added to cart / display cart
         return "redirect:/products/all"; // TODO: 03.01.2020 temporary
     }

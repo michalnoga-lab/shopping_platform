@@ -33,10 +33,11 @@
         </tbody>
     </table>
     <form method="post" th:action="@{/products/buy}" th:object="${product}" enctype="multipart/form-data">
-        <!-- todo th:value="${product.id}" -->
         <div class="form-group">
             <label class="text-secondary" for="quantity">ILOSC</label>
             <input id="quantity" type="text" class="form-control" th:field="*{quantity}"/>
+            <input id="id" type="text" class="form-control" th:field="${product.id}" hidden="hidden"
+                   readonly="readonly">
         </div>
         <p class="text text-danger" th:if="${errors.containsKey('quantity')}" th:text="${errors.get('quantity')}"></p>
         <div class="form-group">
