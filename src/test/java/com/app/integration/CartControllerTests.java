@@ -37,14 +37,13 @@ public class CartControllerTests {
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }
 
-   /* @Test
+    @Test
     @DisplayName("one")
-    void test2() throws Exception {
+    void test2() throws Exception { // TODO: 2020-01-10 not passing
 
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/carts/one"))
+                .perform(MockMvcRequestBuilders.get("/carts/one/").param("id", "1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
-        // TODO: 2019-10-09 one cart
-    }*/
+    }
 }

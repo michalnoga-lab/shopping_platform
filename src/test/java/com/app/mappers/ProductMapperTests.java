@@ -16,9 +16,9 @@ import java.util.HashSet;
 import java.util.List;
 
 @ExtendWith(SpringExtension.class)
-public class ProductMapperTests { // TODO: 31.12.2019 all tests
+public class ProductMapperTests {
 
-    /*@Test
+    @Test
     @DisplayName("toDto")
     void test1() {
 
@@ -72,5 +72,5 @@ public class ProductMapperTests { // TODO: 31.12.2019 all tests
         Product actualProduct = ProductMapper.fromDto(productDTO);
 
         Assertions.assertEquals(expectedProduct, actualProduct);
-    }*/
+    }
 }

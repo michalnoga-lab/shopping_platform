@@ -39,30 +39,20 @@ public class ProductControllerTests {
 
     @Test
     @DisplayName("buy")
-    void test2() throws Exception {
+    void test2() throws Exception { // TODO: 2020-01-10 add ID filed
 
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/products/buy").contentType(MediaType.TEXT_HTML))
+                .perform(MockMvcRequestBuilders.get("/products/buy"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }
 
-   /* @Test
-    @DisplayName("one")
-    void test3() throws Exception {
-
-        mockMvc
-                .perform(MockMvcRequestBuilders.get("/products/one").contentType(MediaType.TEXT_HTML))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
-    }*/ // TODO: 2019-09-25 test one product
-
     @Test
     @DisplayName("buy")
-    void test4() throws Exception {
+    void test3() throws Exception { // TODO: 2020-01-10 product dto validation all fields are null
 
         mockMvc
-                .perform(MockMvcRequestBuilders.post("/products/buy").contentType(MediaType.TEXT_HTML))
+                .perform(MockMvcRequestBuilders.post("/products/buy"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }

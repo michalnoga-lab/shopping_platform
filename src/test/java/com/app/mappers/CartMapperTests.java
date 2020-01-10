@@ -18,11 +18,12 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @ExtendWith(SpringExtension.class)
-public class CartMapperTests { // TODO: 31.12.2019 all tests
+public class CartMapperTests {
 
-    /*@Test
+    @Test
     @DisplayName("toDto")
     void test1() {
         Cart cart = Cart.builder()
@@ -34,7 +35,7 @@ public class CartMapperTests { // TODO: 31.12.2019 all tests
                 .cartClosed(false)
                 .deliveryAddress(DeliveryAddress.builder().street("Address 1").build())
                 .purchaseTime(LocalDateTime.of(2019, 10, 22, 0, 0, 0))
-                .product(Product.builder().id(10L).build())
+                .products(Set.of(Product.builder().id(10L).build()))
                 .build();
 
         CartDTO expectedCart = CartDTO.builder()
@@ -46,7 +47,6 @@ public class CartMapperTests { // TODO: 31.12.2019 all tests
                 .deliveryAddressDTO(DeliveryAddressDTO.builder().street("Address 1").build())
                 .cartClosed(false)
                 .purchaseTime(LocalDateTime.of(2019, 10, 22, 0, 0, 0))
-                .productDTO(ProductDTO.builder().id(10L).build())
                 .build();
 
         CartDTO actualCart = CartMapper.toDto(cart);
@@ -66,7 +66,6 @@ public class CartMapperTests { // TODO: 31.12.2019 all tests
                 .deliveryAddressDTO(DeliveryAddressDTO.builder().street("Address 1").build())
                 .cartClosed(false)
                 .purchaseTime(LocalDateTime.of(2019, 10, 22, 0, 0, 0))
-                .productDTO(ProductDTO.builder().id(10L).build())
                 .build();
 
         Cart expectedCart = Cart.builder()
@@ -78,11 +77,11 @@ public class CartMapperTests { // TODO: 31.12.2019 all tests
                 .cartClosed(false)
                 .deliveryAddress(DeliveryAddress.builder().street("Address 1").build())
                 .purchaseTime(LocalDateTime.of(2019, 10, 22, 0, 0, 0))
-                .product(Product.builder().id(10L).carts(new HashSet<>()).build())
+                .products(Set.of(Product.builder().id(10L).build()))
                 .build();
 
         Cart actualCart = CartMapper.fromDto(cartDTO);
 
         Assertions.assertEquals(expectedCart, actualCart);
-    }*/
+    }
 }

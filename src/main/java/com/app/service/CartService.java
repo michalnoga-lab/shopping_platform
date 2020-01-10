@@ -17,6 +17,7 @@ import com.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -67,19 +68,22 @@ public class CartService {
         if (userId == null) {
             throw new AppException(ExceptionCodes.SERVICE_CART, "getAllUsersCarts - ID is null");
         }
+        List<CartDTO> usersCarts = new ArrayList<>();
 
-        return cartRepository.findAllByUserId(userId)
+        cartRepository.findAllByUserId(userId)
                 .stream()
                 .map(CartMapper::toDto)
-                .collect(Collectors.toList());
+                .forEach(usersCarts::add);
+
+        return usersCarts;
     }
 
     public CartDTO getActiveCart(Long userId) {
         if (userId == null) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "getOneCart - id is null");
+            throw new AppException(ExceptionCodes.SERVICE_CART, "getActiveCart - id is null");
         }
         if (userId < 0) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "getOneCart - id less than zero");
+            throw new AppException(ExceptionCodes.SERVICE_CART, "getActiveCart - id less than zero");
         }
 
         List<CartDTO> allUserCarts = getAllUsersCarts(userId);
@@ -97,5 +101,20 @@ public class CartService {
 
         User user = userRepository.getOne(userId);
         return CartMapper.toDto(Cart.builder().user(user).build());
+    }
+
+    public CartDTO getCart(Long cartId) {
+        if (cartId == null) {
+            throw new AppException(ExceptionCodes.SERVICE_CART, "getCart - id is null");
+        }
+        if (cartId < 0) {
+            throw new AppException(ExceptionCodes.SERVICE_CART, "getcart - id less than zero");
+        }
+
+        return cartRepository.findById(cartId)
+                .stream()
+                .map(CartMapper::toDto)
+                .findFirst()
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART, "getCart - no cart with ID:" + cartId));
     }
 }

@@ -56,17 +56,11 @@ public class ProductService {
         if (cartId < 0) {
             throw new AppException(ExceptionCodes.SERVICE_PRODUCT, "getProductsOfCart - cartId less than zero");
         }
-     /*   return cartRepository
-                .findAll()
+        Cart cartFromDb = cartRepository.getOne(cartId);
+
+        return cartFromDb.getProducts()
                 .stream()
-                .filter(cart -> cart.getId().equals(cartId))
-                .map(Cart::getProducts)
-                .flatMap(Collection::stream)
                 .map(ProductMapper::toDto)
-                .collect(Collectors.toList());*/
-
-        // TODO: 2019-10-22
-
-        return new ArrayList<ProductDTO>();
+                .collect(Collectors.toList());
     }
 }

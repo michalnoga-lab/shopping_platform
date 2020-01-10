@@ -44,7 +44,6 @@ public class UserMapperTests {
                 .surname("Example surname")
                 .build();
 
-
         UserDTO actualUser = UserMapper.toDto(user);
 
         Assertions.assertEquals(expectedUser, actualUser);

@@ -21,13 +21,13 @@ public class CartController {
 
     @GetMapping("/all")
     public String all(Model model) {
-        /*model.addAttribute("carts", cartService.getAllUsersCarts(securityService.getLoggedInUser()));*/ // TODO: 31.12.2019
+        model.addAttribute("carts", cartService.getAllUsersCarts(securityService.getLoggedInUserId()));
         return "carts/all";
     }
 
     @GetMapping("/one/{id}")
     public String one(@PathVariable Long id, Model model) {
-        model.addAttribute("cart", cartService.getActiveCart(id));
+        model.addAttribute("cart", cartService.getCart(id));
         model.addAttribute("products", productService.getProductsOfCart(id));
         return "carts/one";
     }

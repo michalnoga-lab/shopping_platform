@@ -37,8 +37,17 @@ public class Cart {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "cart")
-    private Set<Product> products= new HashSet<>();
+    /*@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "cart")
+    private Set<Product> products= new HashSet<>();*/ // TODO: 2020-01-10 remove
+
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "cart_product",
+            joinColumns = {@JoinColumn(name = "cart_id")},
+            inverseJoinColumns = {@JoinColumn(name = "product_id")}
+    )
+    private Set<Product> products;
 
     @Override
     public boolean equals(Object o) {

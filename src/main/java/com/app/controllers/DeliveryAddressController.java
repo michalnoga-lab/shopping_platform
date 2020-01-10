@@ -35,7 +35,7 @@ public class DeliveryAddressController {
 
     @GetMapping("/all")
     public String all(@ModelAttribute DeliveryAddressDTO deliveryAddressDTO, Model model) {
-        List<DeliveryAddressDTO> addresses = deliveryAddressService.getAll(securityService.getLoggedInUser());
+        List<DeliveryAddressDTO> addresses = deliveryAddressService.getAll(securityService.getLoggedInUserId());
 
         if (addresses.size() == 0) {
             model.addAttribute("address", new DeliveryAddressDTO());
@@ -65,7 +65,7 @@ public class DeliveryAddressController {
             return "deliveryAddress/add";
         }
         model.addAttribute("address", deliveryAddressDTO);
-        deliveryAddressService.add(deliveryAddressDTO, securityService.getLoggedInUser());
+        deliveryAddressService.add(deliveryAddressDTO, securityService.getLoggedInUserId());
         return "redirect:/deliveryAddress/all";
     }
 }

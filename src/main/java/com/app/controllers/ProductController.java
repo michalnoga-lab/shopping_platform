@@ -39,7 +39,7 @@ public class ProductController {
     @GetMapping("/all")
     public String all(Model model) {
         model.addAttribute("products", productService.getProductsOfCompany(
-                companyService.getCompanyOfUser(securityService.getLoggedInUser())));
+                companyService.getCompanyOfUser(securityService.getLoggedInUserId())));
         return "products/all";
     }
 
@@ -62,7 +62,7 @@ public class ProductController {
         }
         model.addAttribute("product", productDTO);
 
-        cartService.addProductToCart(productDTO, securityService.getLoggedInUser());
+        cartService.addProductToCart(productDTO, securityService.getLoggedInUserId());
         //return "redirect:/products/added"; // TODO: 02.01.2020 page product added to cart / display cart
         return "redirect:/products/all"; // TODO: 03.01.2020 temporary
     }

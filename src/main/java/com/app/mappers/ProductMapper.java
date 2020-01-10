@@ -23,12 +23,12 @@ public interface ProductMapper {
     static Product fromDto(ProductDTO productDTO) {
         return productDTO == null ? null : Product.builder()
                 .id(productDTO.getId())
-                .cart(new Cart())
                 .company(productDTO.getCompanyDTO() == null ? null : CompanyMapper.fromDto(productDTO.getCompanyDTO()))
                 .description(productDTO.getDescription())
                 .name(productDTO.getName())
                 .nettPrice(productDTO.getNettPrice())
                 .quantity(productDTO.getQuantity())
+                .carts(new HashSet<>())
                 .build();
     }
 }

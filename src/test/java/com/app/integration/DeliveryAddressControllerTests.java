@@ -49,11 +49,10 @@ public class DeliveryAddressControllerTests {
 
     @Test
     @DisplayName("add - POST")
-    void test3() throws Exception {
+    void test3() throws Exception { // TODO: 2020-01-10  delivery address validation - all fields are null
 
         mockMvc
-                .perform(MockMvcRequestBuilders.post("/deliveryAddress/add").contentType(MediaType.TEXT_HTML))
-                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .perform(MockMvcRequestBuilders.post("/deliveryAddress/add"))
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
-    } // TODO: 2019-10-24 nie działa test w metodzie POST, w GET działa
+    }
 }

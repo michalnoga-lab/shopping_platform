@@ -21,5 +21,4 @@ public class ProductDTO {
     private Integer quantity;
     private BigDecimal nettPrice;
     private CompanyDTO companyDTO;
-    private CartDTO cartDTO;
 }

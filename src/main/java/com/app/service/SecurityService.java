@@ -17,7 +17,7 @@ public class SecurityService {
 
     private final UserRepository userRepository;
 
-    public Long getLoggedInUser() {
+    public Long getLoggedInUserId() {
 
         String login = "log";
 
