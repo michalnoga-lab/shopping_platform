@@ -11,9 +11,9 @@ public class PrimaPlatformaApplication {
     }
 
 
-    // TODO: 2019-10-09  XML transforming
-    // TODO: 2019-10-09 export / email orders
-    // TODO: 09.01.2020 passwords hashing
+    // TODO: 2020-01-12 export orders to XML
+    // TODO: 2020-01-12 import products from XLS
+    // TODO: 2020-01-12 passwords hassing
 
     /**
      *

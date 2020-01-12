@@ -76,6 +76,13 @@ public class CartServiceTests { // TODO: 31.12.2019 all tests
         Assertions.assertEquals(expectedCart, CartMapper.toDto(cart));
     }
 
+    @Test
+    @DisplayName("getUsersActiveCart - user has no cart")
+    void test2() {
+
+
+    }
+
     /*@Test
     @DisplayName("getUsersActiveCart - user has no cart")
     void test1() {
