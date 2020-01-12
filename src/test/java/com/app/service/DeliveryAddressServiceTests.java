@@ -51,12 +51,12 @@ public class DeliveryAddressServiceTests {
     @DisplayName("getAll - user has no addresses")
     void test1() {
 
-       /* DeliveryAddress deliveryAddress1 = DeliveryAddress.builder().street("Address 1").build();
+        DeliveryAddress deliveryAddress1 = DeliveryAddress.builder().street("Address 1").build();
         DeliveryAddress deliveryAddress2 = DeliveryAddress.builder().street("Address 2").build();
         DeliveryAddress deliveryAddress3 = DeliveryAddress.builder().street("Address 3").build();
 
-        User user1 = User.builder().id(5L).build();
-        User user2 = User.builder().id(6L).build();
+        User user1 = User.builder().id(1L).build();
+        User user2 = User.builder().id(2L).build();
 
         deliveryAddress1.setUser(user2);
         deliveryAddress2.setUser(user2);
@@ -68,21 +68,21 @@ public class DeliveryAddressServiceTests {
                 .when(deliveryAddressRepository.findAll())
                 .thenReturn(addresses);
 
-        List<DeliveryAddressDTO> actualResult = deliveryAddressService.getAll(UserMapper.toDto(user1));
+        List<DeliveryAddressDTO> actualResult = deliveryAddressService.getAll(1L);
 
-        Assertions.assertEquals(0, actualResult.size());*/ // TODO: 09.01.2020  
+        Assertions.assertEquals(0, actualResult.size());
     }
 
     @Test
     @DisplayName("getAll - user has one address")
     void test2() {
 
-        /*DeliveryAddress deliveryAddress1 = DeliveryAddress.builder().street("Address 1").build();
+        DeliveryAddress deliveryAddress1 = DeliveryAddress.builder().street("Address 1").build();
         DeliveryAddress deliveryAddress2 = DeliveryAddress.builder().street("Address 2").build();
         DeliveryAddress deliveryAddress3 = DeliveryAddress.builder().street("Address 3").build();
 
-        User user1 = User.builder().id(5L).build();
-        User user2 = User.builder().id(6L).build();
+        User user1 = User.builder().id(1L).build();
+        User user2 = User.builder().id(2L).build();
 
         deliveryAddress1.setUser(user1);
         deliveryAddress2.setUser(user2);
@@ -95,22 +95,22 @@ public class DeliveryAddressServiceTests {
                 .thenReturn(addresses);
 
         List<DeliveryAddressDTO> expectedResult = List.of(DeliveryAddressMapper.toDto(deliveryAddress1));
-        List<DeliveryAddressDTO> actualResult = deliveryAddressService.getAll(UserMapper.toDto(user1));
+        List<DeliveryAddressDTO> actualResult = deliveryAddressService.getAll(1L);
 
         Assertions.assertEquals(1, actualResult.size());
-        Assertions.assertEquals(expectedResult, actualResult);*/ // TODO: 09.01.2020  
+        Assertions.assertEquals(expectedResult, actualResult);
     }
 
     @Test
     @DisplayName("getAll - user has many addresses")
     void test3() {
 
-        /*DeliveryAddress deliveryAddress1 = DeliveryAddress.builder().street("Address 1").build();
+        DeliveryAddress deliveryAddress1 = DeliveryAddress.builder().street("Address 1").build();
         DeliveryAddress deliveryAddress2 = DeliveryAddress.builder().street("Address 2").build();
         DeliveryAddress deliveryAddress3 = DeliveryAddress.builder().street("Address 3").build();
 
-        User user1 = User.builder().id(5L).build();
-        User user2 = User.builder().id(6L).build();
+        User user1 = User.builder().id(1L).build();
+        User user2 = User.builder().id(2L).build();
 
         deliveryAddress1.setUser(user1);
         deliveryAddress2.setUser(user1);
@@ -124,9 +124,9 @@ public class DeliveryAddressServiceTests {
 
         List<DeliveryAddressDTO> expectedResult = List.of(DeliveryAddressMapper.toDto(deliveryAddress1),
                 DeliveryAddressMapper.toDto(deliveryAddress2));
-        List<DeliveryAddressDTO> actualResult = deliveryAddressService.getAll(UserMapper.toDto(user1));
+        List<DeliveryAddressDTO> actualResult = deliveryAddressService.getAll(1L);
 
         Assertions.assertEquals(2, actualResult.size());
-        Assertions.assertEquals(expectedResult, actualResult);*/ // TODO: 09.01.2020
+        Assertions.assertEquals(expectedResult, actualResult);
     }
 }

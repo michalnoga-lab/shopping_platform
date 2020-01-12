@@ -2,7 +2,6 @@ package com.app.service;
 
 import com.app.dto.CompanyDTO;
 import com.app.mappers.CompanyMapper;
-import com.app.mappers.UserMapper;
 import com.app.model.Company;
 import com.app.model.User;
 import com.app.repository.CompanyRepository;
@@ -49,24 +48,68 @@ public class CompanyServiceTests {
     }
 
     @Test
-    @DisplayName("getCompanyOfUser")
+    @DisplayName("getCompanyOfUser - one user, one company")
     void test1() {
 
-        /*User userA = User.builder().login("login A").build();
-        User userB = User.builder().login("login B").build();
-        User userC = User.builder().login("login C").build();
-        User userD = User.builder().login("login D").build();
-        User userE = User.builder().login("login E").build();
-        User userF = User.builder().login("login F").build();
+        User user1 = User.builder().id(1L).build();
 
         Company company1 = Company.builder()
-                .users(new HashSet<>(List.of(userA, userB, userC))).build();
+                .users(new HashSet<>(List.of(user1))).build();
+
+        List<Company> companies = List.of(company1);
+
+        Mockito
+                .when(companyRepository.findAll()).thenReturn(companies);
+
+        CompanyDTO expectedCompany1 = CompanyMapper.toDto(company1);
+        CompanyDTO actualCompany1 = companyService.getCompanyOfUser(1L);
+
+        Assertions.assertEquals(expectedCompany1, actualCompany1);
+    }
+
+    @Test
+    @DisplayName("getCompanyOfUser - one user, many companies")
+    void test2() {
+
+        User user1 = User.builder().id(1L).build();
+
+        Company company1 = Company.builder()
+                .users(new HashSet<>(List.of(user1))).build();
+        Company company2 = Company.builder()
+                .users(new HashSet<>(List.of())).build();
+        Company company3 = Company.builder()
+                .users(new HashSet<>(List.of())).build();
+
+        List<Company> companies = List.of(company1, company2, company3);
+
+        Mockito
+                .when(companyRepository.findAll()).thenReturn(companies);
+
+        CompanyDTO expectedCompany1 = CompanyMapper.toDto(company1);
+        CompanyDTO actualCompany1 = companyService.getCompanyOfUser(1L);
+
+        Assertions.assertEquals(expectedCompany1, actualCompany1);
+    }
+
+    @Test
+    @DisplayName("getCompanyOfUser - many users, many companies")
+    void test3() {
+
+        User user1 = User.builder().id(1L).build();
+        User user2 = User.builder().id(2L).build();
+        User user3 = User.builder().id(3L).build();
+        User user4 = User.builder().id(4L).build();
+        User user5 = User.builder().id(5L).build();
+        User user6 = User.builder().id(6L).build();
+
+        Company company1 = Company.builder()
+                .users(new HashSet<>(List.of(user1, user2, user3))).build();
 
         Company company2 = Company.builder()
-                .users(new HashSet<>(List.of(userD, userE))).build();
+                .users(new HashSet<>(List.of(user4, user5))).build();
 
         Company company3 = Company.builder()
-                .users(new HashSet<>(List.of(userF))).build();
+                .users(new HashSet<>(List.of(user6))).build();
 
         List<Company> companies = List.of(company1, company2, company3);
 
@@ -77,18 +120,18 @@ public class CompanyServiceTests {
         CompanyDTO expectedCompany2 = CompanyMapper.toDto(company2);
         CompanyDTO expectedCompany3 = CompanyMapper.toDto(company3);
 
-        CompanyDTO actualCompany1 = companyService.getCompanyOfUser(UserMapper.toDto(userA));
-        CompanyDTO actualCompany2 = companyService.getCompanyOfUser(UserMapper.toDto(userB));
-        CompanyDTO actualCompany3 = companyService.getCompanyOfUser(UserMapper.toDto(userC));
-        CompanyDTO actualCompany4 = companyService.getCompanyOfUser(UserMapper.toDto(userD));
-        CompanyDTO actualCompany5 = companyService.getCompanyOfUser(UserMapper.toDto(userE));
-        CompanyDTO actualCompany6 = companyService.getCompanyOfUser(UserMapper.toDto(userF));
+        CompanyDTO actualCompany1 = companyService.getCompanyOfUser(1L);
+        CompanyDTO actualCompany2 = companyService.getCompanyOfUser(2L);
+        CompanyDTO actualCompany3 = companyService.getCompanyOfUser(3L);
+        CompanyDTO actualCompany4 = companyService.getCompanyOfUser(4L);
+        CompanyDTO actualCompany5 = companyService.getCompanyOfUser(5L);
+        CompanyDTO actualCompany6 = companyService.getCompanyOfUser(6L);
 
         Assertions.assertEquals(expectedCompany1, actualCompany1);
         Assertions.assertEquals(expectedCompany1, actualCompany2);
         Assertions.assertEquals(expectedCompany1, actualCompany3);
         Assertions.assertEquals(expectedCompany2, actualCompany4);
         Assertions.assertEquals(expectedCompany3, actualCompany5);
-        Assertions.assertEquals(expectedCompany3, actualCompany6);*/
-    } // TODO: 09.01.2020
+        Assertions.assertEquals(expectedCompany3, actualCompany6);
+    }
 }

@@ -21,9 +21,9 @@ public class CompanyService {
     private final CompanyRepository companyRepository;
     private final UserRepository userRepository;
 
-    public CompanyDTO getCompanyOfUser(Long id) {
-        if (id == null) {
-            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "getCompanyOfUser - no user with ID: " + id);
+    public CompanyDTO getCompanyOfUser(Long userId) {
+        if (userId == null) {
+            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "getCompanyOfUser - no user with ID: " + userId);
         }
 
         Company company = companyRepository
@@ -33,12 +33,12 @@ public class CompanyService {
                     Optional<User> userOptional = cmp
                             .getUsers()
                             .stream()
-                            .filter(usr -> usr.getId().equals(id))
+                            .filter(usr -> usr.getId().equals(userId))
                             .findFirst();
                     return userOptional.isPresent();
                 })
                 .findFirst()
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_COMPANY, "getCompanyOfUser - no company related with user with ID: " + id));
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_COMPANY, "getCompanyOfUser - no company related with user with ID: " + userId));
         return CompanyMapper.toDto(company);
     }
 }

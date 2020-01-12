@@ -9,25 +9,19 @@
 <div th:replace="fragments/top">TOP MENU</div>
 
 <div class="container">
-
     <table class="table">
         <thead class="table-head-custom">
         <tr>
-            <td>ADRES</td>
-            <td>TELEFON</td>
-            <td>DOSTAWA</td>
+            <td>NAZWA</td>
+            <td>CENA NETTO</td>
+            <td>DODAJ DO KOSZKA</td>
         </tr>
         </thead>
-        <tbody class="table-body-custom" th:each="a:${addresses}">
+        <tbody class="table-body-custom" th:each="p:${products}">
         <tr>
-            <td><p th:text="${a.street}"></p></td>
-            <td><p th:text="${a.phone}"></p></td>
-            <td>
-                <form method="post" action="/deliveryAddress/remove">
-                    <input hidden="hidden" readonly="readonly" name="id" th:value="${a.id}">
-                    <button class="btn btn-danger" type="submit">KASUJ</button>
-                </form>
-            </td>
+            <td><p th:text="${p.name}"></p></td>
+            <td><p th:text="${p.nettPrice}+' PLN'"></td>
+            <td><p><a th:href="@{/products/buy/{id}(id=${p.id})}">DODAJ</a></p></td>
         </tr>
         </tbody>
     </table>

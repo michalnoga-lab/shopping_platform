@@ -40,14 +40,14 @@ public class ProductController {
     public String all(Model model) {
         model.addAttribute("products", productService.getProductsOfCompany(
                 companyService.getCompanyOfUser(securityService.getLoggedInUserId())));
-        return "products/all";
+        return "/products/all";
     }
 
     @GetMapping("/buy/{id}")
     public String buyGET(@PathVariable Long id, Model model) {
         model.addAttribute("product", productService.getOneProduct(id));
         model.addAttribute("errors", new HashMap<>());
-        return "products/buy";
+        return "/products/buy";
     }
 
     @PostMapping("/buy")
@@ -58,12 +58,11 @@ public class ProductController {
                     .collect(Collectors.toMap(FieldError::getField, FieldError::getCode));
             model.addAttribute("product", new ProductDTO());
             model.addAttribute("errors", errors);
-            return "products/buy";
+            return "/products/buy";
         }
         model.addAttribute("product", productDTO);
 
         cartService.addProductToCart(productDTO, securityService.getLoggedInUserId());
-        //return "redirect:/products/added"; // TODO: 02.01.2020 page product added to cart / display cart
-        return "redirect:/products/all"; // TODO: 03.01.2020 temporary
+        return "redirect:/products/all";
     }
 }

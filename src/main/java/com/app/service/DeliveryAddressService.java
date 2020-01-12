@@ -27,6 +27,9 @@ public class DeliveryAddressService {
         if (userId == null) {
             throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "getAll - no user with ID: " + userId);
         }
+        if (userId <= 0) {
+            throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "getAll - ID less than zero: " + userId);
+        }
 
         return deliveryAddressRepository
                 .findAll()
@@ -41,7 +44,10 @@ public class DeliveryAddressService {
             throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "add - delivery address is null");
         }
         if (userId == null) {
-            throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "add - user ID is null");
+            throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "add - user ID is null: ");
+        }
+        if (userId <= 0) {
+            throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "add - user ID less than zero: " + userId);
         }
         DeliveryAddress deliveryAddress = DeliveryAddressMapper.fromDto(deliveryAddressDTO);
         User user = userRepository.findAll()
@@ -53,5 +59,15 @@ public class DeliveryAddressService {
         deliveryAddress.setUser(user);
         deliveryAddressRepository.save(deliveryAddress);
         return DeliveryAddressMapper.toDto(deliveryAddress);
+    }
+
+    public void remove(Long addressId) {
+        if (addressId == null) {
+            throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "remove - ID is null");
+        }
+        if (addressId <= 0) {
+            throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "remove - no address with ID: " + addressId);
+        }
+        deliveryAddressRepository.deleteById(addressId);
     }
 }

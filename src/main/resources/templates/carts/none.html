@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Platform</title>
+</head>
+<body>
+<div th:replace="fragments/stylesheet">STYLESHEET</div>
+<div th:replace="fragments/top">TOP MENU</div>
+
+<div class="container">
+    <section class="container my-5">
+        <h5 class="border-bottom border-gray pb-2 mb-0">WYNIKI WYSZUKIWANIA</h5>
+        <div class="p-3 bg-white rounded box-shadow">
+            <div class="media text-muted pt-3">
+                <p class="media-body mb-0 small lh-125 border-bottom border-gray">
+                    <strong class="d-block text-gray-dark">@koszyki</strong>
+                    nie masz jeszcze żadnych koszyków
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div th:replace="/fragments/footer">FOOTER</div>
+</div>
+
+</body>
+</html>

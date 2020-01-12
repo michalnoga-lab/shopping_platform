@@ -43,14 +43,14 @@ public class DeliveryAddressController {
             return "deliveryAddress/add";
         }
         model.addAttribute("addresses", addresses);
-        return "deliveryAddress/all";
+        return "/deliveryAddress/all";
     }
 
     @GetMapping("/add")
     public String addGET(Model model) {
         model.addAttribute("address", new DeliveryAddressDTO());
         model.addAttribute("errors", new HashMap<>());
-        return "deliveryAddress/add";
+        return "/deliveryAddress/add";
     }
 
     @PostMapping("/add")
@@ -66,6 +66,12 @@ public class DeliveryAddressController {
         }
         model.addAttribute("address", deliveryAddressDTO);
         deliveryAddressService.add(deliveryAddressDTO, securityService.getLoggedInUserId());
+        return "redirect:/deliveryAddress/all";
+    }
+
+    @PostMapping("/remove")
+    public String remove(@RequestParam Long id) {
+        deliveryAddressService.remove(id);
         return "redirect:/deliveryAddress/all";
     }
 }

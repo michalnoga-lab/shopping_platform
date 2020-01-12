@@ -2,12 +2,9 @@ package com.app.service;
 
 import com.app.dto.CartDTO;
 import com.app.dto.ProductDTO;
-import com.app.dto.UserDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.CartMapper;
-import com.app.mappers.ProductMapper;
-import com.app.mappers.UserMapper;
 import com.app.model.Cart;
 import com.app.model.Product;
 import com.app.model.User;
@@ -37,7 +34,17 @@ public class CartService {
         }
 
         User user = userRepository.getOne(userId);
+        //CartDTO cartDTO = getActiveCart(userId);
+        /*Optional<CartDTO> cartDTO = getActiveCart(userId);*/
+
+//        cartDTO.orElseGet(() -> CartDTO.builder().build());
+
         CartDTO cartDTO = getActiveCart(userId);
+
+        if (cartDTO == null) {
+            cartDTO = CartDTO.builder().build();
+        }
+
         Product product = productRepository.getOne(productDTO.getId());
         product.setQuantity(productDTO.getQuantity());
         Cart cart = CartMapper.fromDto(cartDTO);
@@ -99,8 +106,9 @@ public class CartService {
             }
         }
 
-        User user = userRepository.getOne(userId);
-        return CartMapper.toDto(Cart.builder().user(user).build());
+        return null;
+        /*User user = userRepository.getOne(userId);
+        return CartMapper.toDto(Cart.builder().cartClosed(false).user(user).build());*/
     }
 
     public CartDTO getCart(Long cartId) {
@@ -108,13 +116,13 @@ public class CartService {
             throw new AppException(ExceptionCodes.SERVICE_CART, "getCart - id is null");
         }
         if (cartId < 0) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "getcart - id less than zero");
+            throw new AppException(ExceptionCodes.SERVICE_CART, "getCart - id less than zero");
         }
 
         return cartRepository.findById(cartId)
                 .stream()
                 .map(CartMapper::toDto)
                 .findFirst()
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART, "getCart - no cart with ID:" + cartId));
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART, "getCart - no cart with ID: " + cartId));
     }
 }

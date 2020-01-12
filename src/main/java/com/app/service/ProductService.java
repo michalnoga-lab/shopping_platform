@@ -2,8 +2,10 @@ package com.app.service;
 
 import com.app.dto.CompanyDTO;
 import com.app.dto.ProductDTO;
+import com.app.dto.ProductSearchDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
+import com.app.mappers.CartMapper;
 import com.app.mappers.ProductMapper;
 import com.app.model.Cart;
 import com.app.repository.CartRepository;
@@ -11,9 +13,7 @@ import com.app.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -49,17 +49,36 @@ public class ProductService {
                 .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_PRODUCT, "getOneProduct - no product with ID: " + id));
     }
 
-    public List<ProductDTO> getProductsOfCart(Long cartId) {
+    public Set<ProductDTO> getProductsOfCart(Long cartId) {
         if (cartId == null) {
             throw new AppException(ExceptionCodes.SERVICE_PRODUCT, "getProductsOfCart - cartId is null");
         }
         if (cartId < 0) {
             throw new AppException(ExceptionCodes.SERVICE_PRODUCT, "getProductsOfCart - cartId less than zero");
         }
-        Cart cartFromDb = cartRepository.getOne(cartId);
 
-        return cartFromDb.getProducts()
+        Optional<Cart> cartFromDb = cartRepository.findById(cartId);
+
+        if (cartFromDb.isPresent()) {
+            return cartFromDb.get().getProducts()
+                    .stream()
+                    .map(ProductMapper::toDto)
+                    .collect(Collectors.toSet());
+        } else {
+            throw new AppException(ExceptionCodes.SERVICE_PRODUCT, "getOneProduct - no product with ID: " + cartId);
+        }
+    }
+
+    public List<ProductDTO> search(ProductSearchDTO productSearchDTO) {
+        if (productSearchDTO == null) {
+            throw new AppException(ExceptionCodes.CONTROLLERS, "search - search is null");
+        }
+
+        return productRepository
+                .findAll()
                 .stream()
+                .filter(product ->
+                        product.getName().toLowerCase().contains(productSearchDTO.getUserInput().toLowerCase()))
                 .map(ProductMapper::toDto)
                 .collect(Collectors.toList());
     }

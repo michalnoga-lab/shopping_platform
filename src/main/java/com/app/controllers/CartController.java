@@ -1,5 +1,6 @@
 package com.app.controllers;
 
+import com.app.dto.CartDTO;
 import com.app.service.CartService;
 import com.app.service.ProductService;
 import com.app.service.SecurityService;
@@ -9,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,14 +24,28 @@ public class CartController {
 
     @GetMapping("/all")
     public String all(Model model) {
-        model.addAttribute("carts", cartService.getAllUsersCarts(securityService.getLoggedInUserId()));
-        return "carts/all";
+        List<CartDTO> carts = cartService.getAllUsersCarts(securityService.getLoggedInUserId());
+        if (carts.size() == 0) {
+            return "/carts/none";
+        }
+        model.addAttribute("carts", carts);
+        return "/carts/all";
     }
 
     @GetMapping("/one/{id}")
     public String one(@PathVariable Long id, Model model) {
         model.addAttribute("cart", cartService.getCart(id));
         model.addAttribute("products", productService.getProductsOfCart(id));
-        return "carts/one";
+        return "/carts/one";
+    }
+
+    @GetMapping("/one")
+    public String activeOne(Model model) {
+        CartDTO cartDTO = cartService.getActiveCart(securityService.getLoggedInUserId());/*
+        if (cartDTO.getTotalNetValue() == null) {
+            return "/carts/noneActive";
+        }*/
+        model.addAttribute("cart", cartDTO);
+        return "/carts/one";
     }
 }

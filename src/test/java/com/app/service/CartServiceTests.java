@@ -1,6 +1,8 @@
 package com.app.service;
 
 import com.app.dto.CartDTO;
+import com.app.exceptions.AppException;
+import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.CartMapper;
 import com.app.mappers.ProductMapper;
 import com.app.mappers.UserMapper;
@@ -21,7 +23,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @ExtendWith(SpringExtension.class)
 public class CartServiceTests { // TODO: 31.12.2019 all tests
@@ -54,6 +58,22 @@ public class CartServiceTests { // TODO: 31.12.2019 all tests
         public CartService cartService() {
             return new CartService(cartRepository, userRepository, productRepository);
         }
+    }
+
+    @Test
+    @DisplayName("getCart - one cart in DB")
+    void test1() { // TODO: 2020-01-11
+
+        Cart cart = Cart.builder().id(1L).build();
+        List<Cart> carts = List.of(cart);
+
+        Mockito
+                .when(cartRepository.findAll())
+                .thenReturn(carts);
+
+        CartDTO expectedCart = cartService.getCart(1L);
+
+        Assertions.assertEquals(expectedCart, CartMapper.toDto(cart));
     }
 
     /*@Test

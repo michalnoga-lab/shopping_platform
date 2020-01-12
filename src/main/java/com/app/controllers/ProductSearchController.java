@@ -1,6 +1,8 @@
 package com.app.controllers;
 
+import com.app.dto.ProductDTO;
 import com.app.dto.ProductSearchDTO;
+import com.app.service.ProductService;
 import com.app.validators.ProductSearchDtoValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -12,13 +14,16 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/search")
-public class SearchController {
+public class ProductSearchController {
+
+    private final ProductService productService;
 
     private final ProductSearchDtoValidator productSearchDtoValidator;
 
@@ -31,7 +36,7 @@ public class SearchController {
     public String searchGET(Model model) {
         model.addAttribute("productSearch", new ProductSearchDTO());
         model.addAttribute("errors", new HashMap<>());
-        return "search/products";
+        return "/search/products";
     }
 
     @PostMapping("/products")
@@ -42,9 +47,13 @@ public class SearchController {
                     .collect(Collectors.toMap(FieldError::getField, FieldError::getCode));
             model.addAttribute("productSearch", new ProductSearchDTO());
             model.addAttribute("errors", errors);
-            return "search/products";
+            return "/search/products";
         }
-        model.addAttribute("productSearch", productSearchDTO);
-        return "redirect:/products/all";
+        List<ProductDTO> foundedProducts = productService.search(productSearchDTO);
+        if (foundedProducts.size() == 0) {
+            return "/products/none";
+        }
+        model.addAttribute("products", foundedProducts);
+        return "/products/founded";
     }
 }
