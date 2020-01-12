@@ -29,8 +29,6 @@ public class SecurityService {
                 /*.map(UserMapper::toDto)
                 .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE, "getLoggedInUser - no user with login: " + login));*/
 
-        //System.out.println(userOptional);
-
         return 3L; // TODO: 09.01.2020  return real ID
     }
 }

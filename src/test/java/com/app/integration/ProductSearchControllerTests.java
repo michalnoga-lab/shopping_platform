@@ -14,6 +14,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import javax.print.attribute.standard.Media;
+
 @ExtendWith(SpringExtension.class)
 
 @SpringBootTest(
@@ -22,37 +24,27 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 )
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application.tests.properties")
-public class CartControllerTests {
+public class ProductSearchControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    @DisplayName("all")
+    @DisplayName("products")
     void test1() throws Exception {
 
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/carts/all").contentType(MediaType.TEXT_HTML))
+                .perform(MockMvcRequestBuilders.get("/search/products").contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }
 
     @Test
-    @DisplayName("/one/{id}")
-    void test2() throws Exception { // TODO: 2020-01-12
+    @DisplayName("products")
+    void test2() throws Exception { // TODO: 2020-01-12 validation error
 
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/carts/one/").param("id", "1"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
-    }
-
-    @Test
-    @DisplayName("one")
-    void test3() throws Exception {
-
-        mockMvc
-                .perform(MockMvcRequestBuilders.get("/carts/one/"))
+                .perform(MockMvcRequestBuilders.post("/search/products").contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }

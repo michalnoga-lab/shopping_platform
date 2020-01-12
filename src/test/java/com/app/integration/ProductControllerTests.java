@@ -38,7 +38,7 @@ public class ProductControllerTests {
     }
 
     @Test
-    @DisplayName("buy")
+    @DisplayName("buy/{id}")
     void test2() throws Exception { // TODO: 2020-01-10 add ID filed
 
         mockMvc
