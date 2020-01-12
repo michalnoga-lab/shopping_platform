@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -41,11 +42,13 @@ public class CartController {
 
     @GetMapping("/one")
     public String activeOne(Model model) {
-        CartDTO cartDTO = cartService.getActiveCart(securityService.getLoggedInUserId());/*
-        if (cartDTO.getTotalNetValue() == null) {
+        Optional<CartDTO> cartDTOOptional = cartService.getActiveCart(securityService.getLoggedInUserId());
+
+        if (cartDTOOptional.isEmpty()) {
             return "/carts/noneActive";
-        }*/
-        model.addAttribute("cart", cartDTO);
+        }
+        model.addAttribute("cart", cartDTOOptional.get());
+        model.addAttribute("products", productService.getProductsOfCart(cartDTOOptional.get().getId()));
         return "/carts/one";
     }
 }

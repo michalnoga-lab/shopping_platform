@@ -32,22 +32,12 @@ public class CartService {
         if (productDTO == null) {
             throw new AppException(ExceptionCodes.SERVICE_CART, "addProductToCart - product is null");
         }
-
         User user = userRepository.getOne(userId);
-        //CartDTO cartDTO = getActiveCart(userId);
-        /*Optional<CartDTO> cartDTO = getActiveCart(userId);*/
-
-//        cartDTO.orElseGet(() -> CartDTO.builder().build());
-
-        CartDTO cartDTO = getActiveCart(userId);
-
-        if (cartDTO == null) {
-            cartDTO = CartDTO.builder().build();
-        }
+        Optional<CartDTO> cartDTO = getActiveCart(userId);
 
         Product product = productRepository.getOne(productDTO.getId());
         product.setQuantity(productDTO.getQuantity());
-        Cart cart = CartMapper.fromDto(cartDTO);
+        Cart cart = CartMapper.fromDto(cartDTO.orElseGet(() -> CartDTO.builder().cartClosed(false).build()));
         Set<Product> productsInCart = cart.getProducts();
 
         if (productsInCart.contains(product)) {
@@ -85,14 +75,13 @@ public class CartService {
         return usersCarts;
     }
 
-    public CartDTO getActiveCart(Long userId) {
+    public Optional<CartDTO> getActiveCart(Long userId) {
         if (userId == null) {
             throw new AppException(ExceptionCodes.SERVICE_CART, "getActiveCart - id is null");
         }
         if (userId < 0) {
             throw new AppException(ExceptionCodes.SERVICE_CART, "getActiveCart - id less than zero");
         }
-
         List<CartDTO> allUserCarts = getAllUsersCarts(userId);
 
         if (allUserCarts.size() > 0) {
@@ -102,13 +91,10 @@ public class CartService {
                     .collect(Collectors.toList());
 
             if (notClosedCarts.size() > 0) {
-                return notClosedCarts.get(0);
+                return Optional.of(notClosedCarts.get(0));
             }
         }
-
-        return null;
-        /*User user = userRepository.getOne(userId);
-        return CartMapper.toDto(Cart.builder().cartClosed(false).user(user).build());*/
+        return Optional.empty();
     }
 
     public CartDTO getCart(Long cartId) {
