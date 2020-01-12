@@ -28,7 +28,7 @@ public class ProductDtoValidator implements Validator {
                 errors.rejectValue("quantity", "NIEPRAWIDŁOWA WARTOŚĆ. WPROWADZONY TEKST JEST ZA DŁUGI.");
             }
         } catch (Exception e) {
-            throw new AppException(ExceptionCodes.VALIDATION, "ProductDTO - validation");
+            throw new AppException(ExceptionCodes.VALIDATION, "ProductDTO");
         }
     }
 }

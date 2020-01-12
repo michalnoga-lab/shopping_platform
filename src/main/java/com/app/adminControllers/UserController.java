@@ -2,16 +2,16 @@ package com.app.adminControllers;
 
 import com.app.dto.UserDTO;
 import com.app.service.UserService;
+import com.app.validators.UserValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -23,6 +23,13 @@ public class UserController {
 
     private final UserService userService;
 
+    private final UserValidator userValidator;
+
+    @InitBinder
+    private void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.setValidator(userValidator);
+    }
+
     @GetMapping("/add")
     public String addGET(Model model) {
         model.addAttribute("user", new UserDTO());
@@ -31,7 +38,7 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public String addPOST(@ModelAttribute UserDTO userDTO, BindingResult bindingResult, Model model) {
+    public String addPOST(@Valid @ModelAttribute UserDTO userDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = bindingResult
                     .getFieldErrors()
@@ -41,8 +48,7 @@ public class UserController {
             model.addAttribute("errors", errors);
             return "/admin/users/add";
         }
-
         userService.addUser(userDTO);
-        return "/admin/users/added"; // TODO: 2020-01-12 redirect ???
+        return "/admin/users/added";
     }
 }

@@ -4,6 +4,7 @@ import com.app.dto.UserDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.UserMapper;
+import com.app.model.Role;
 import com.app.model.User;
 import com.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +36,8 @@ public class UserService {
             throw new AppException(ExceptionCodes.SERVICE_USER, "addUser - user is null");
         }
         User user = UserMapper.fromDto(userDTO);
+        user.setEnabled(true);
+        user.setRole(Role.USER);
         userRepository.save(user);
     }
 }

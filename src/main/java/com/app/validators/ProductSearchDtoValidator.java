@@ -28,7 +28,7 @@ public class ProductSearchDtoValidator implements Validator {
                 errors.rejectValue("userInput", "NIEPRAWIDŁOWA WARTOŚĆ. WPROWADZONY TEKST JEST ZA DŁUGI.");
             }
         } catch (Exception e) {
-            throw new AppException(ExceptionCodes.VALIDATION, "ProductSearchDto - validation");
+            throw new AppException(ExceptionCodes.VALIDATION, "ProductSearchDto");
         }
     }
 }

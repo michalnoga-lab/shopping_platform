@@ -24,6 +24,7 @@ public class User {
     private String login;
     private String name;
     private String surname;
+    private String email;
     private String password;
     private Boolean enabled;
     private Role role;
@@ -50,26 +51,15 @@ public class User {
                 Objects.equals(login, user.login) &&
                 Objects.equals(name, user.name) &&
                 Objects.equals(surname, user.surname) &&
+                Objects.equals(email, user.email) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(enabled, user.enabled) &&
-                role == user.role;
+                role == user.role &&
+                Objects.equals(passwordConfirmation, user.passwordConfirmation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, login, name, surname, password, enabled, role);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", password='" + password + '\'' +
-                ", enabled=" + enabled +
-                ", role=" + role +
-                '}';
+        return Objects.hash(id, login, name, surname, email, password, enabled, role, passwordConfirmation);
     }
 }

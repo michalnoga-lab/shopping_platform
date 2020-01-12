@@ -13,6 +13,7 @@ public interface UserMapper {
                 .companyDTO(user.getCompany() == null ? null : CompanyMapper.toDto(user.getCompany()))
                 .login(user.getLogin())
                 .name(user.getName())
+                .email(user.getEmail())
                 .surname(user.getSurname())
                 .password(user.getPassword())
                 .passwordConfirmation(user.getPasswordConfirmation())
@@ -21,17 +22,18 @@ public interface UserMapper {
                 .build();
     }
 
-    static User fromDto(UserDTO customerDTO) {
-        return customerDTO == null ? null : User.builder()
-                .id(customerDTO.getId())
-                .company(customerDTO.getCompanyDTO() == null ? null : CompanyMapper.fromDto(customerDTO.getCompanyDTO()))
-                .login(customerDTO.getLogin())
-                .name(customerDTO.getName())
-                .surname(customerDTO.getSurname())
-                .password(customerDTO.getPassword())
-                .passwordConfirmation(customerDTO.getPasswordConfirmation())
-                .enabled(customerDTO.getEnabled())
-                .role(customerDTO.getRole())
+    static User fromDto(UserDTO userDTO) {
+        return userDTO == null ? null : User.builder()
+                .id(userDTO.getId())
+                .company(userDTO.getCompanyDTO() == null ? null : CompanyMapper.fromDto(userDTO.getCompanyDTO()))
+                .login(userDTO.getLogin())
+                .name(userDTO.getName())
+                .surname(userDTO.getSurname())
+                .email(userDTO.getEmail())
+                .password(userDTO.getPassword())
+                .passwordConfirmation(userDTO.getPasswordConfirmation())
+                .enabled(userDTO.getEnabled())
+                .role(userDTO.getRole())
                 .carts(new HashSet<>())
                 .deliveryAddresses(new HashSet<>())
                 .build();
