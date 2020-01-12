@@ -1,0 +1,14 @@
+.top-page-text {
+    border-bottom-color: gray;
+    border-bottom-style: groove;
+}
+
+.top-page-text-details {
+    padding: 1.5rem;
+    background: white;
+    box-shadow: whitesmoke;
+    font-size: small;
+    border-bottom: 1px dotted;
+    border-bottom-color: grey;
+    opacity: 0.5;
+}
