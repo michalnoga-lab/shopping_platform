@@ -29,4 +29,12 @@ public class UserService {
                 .findFirst()
                 .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_USER, "findUserByLogin - no user with login:" + login));
     }
+
+    public void addUser(UserDTO userDTO) {
+        if (userDTO == null) {
+            throw new AppException(ExceptionCodes.SERVICE_USER, "addUser - user is null");
+        }
+        User user = UserMapper.fromDto(userDTO);
+        userRepository.save(user);
+    }
 }

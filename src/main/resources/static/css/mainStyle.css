@@ -1,10 +1,11 @@
 .top-page-text {
+    margin: 3rem;
     border-bottom-color: gray;
     border-bottom-style: groove;
 }
 
 .top-page-text-details {
-    padding: 1.5rem;
+    padding: 1rem;
     background: white;
     box-shadow: whitesmoke;
     font-size: small;
