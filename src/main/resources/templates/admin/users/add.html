@@ -16,6 +16,7 @@
             <label class="text-secondary" for="login">LOGIN</label>
             <input id="login" type="text" class="form-control" th:field="*{login}"/>
         </div>
+        <p class="text text-danger" th:if="${errors.containsKey('login')}" th:text="${errors.get('login')}"></p>
         <div class="form-group">
             <label class="text-secondary" for="name">IMIĘ</label>
             <input id="name" type="text" class="form-control" th:field="*{name}"/>
@@ -25,18 +26,23 @@
             <label class="text-secondary" for="surname">NAZWISKO</label>
             <input id="surname" type="text" class="form-control" th:field="*{surname}"/>
         </div>
+        <p class="text text-danger" th:if="${errors.containsKey('surname')}" th:text="${errors.get('surname')}"></p>
         <div class="form-group">
             <label class="text-secondary" for="email">EMAIL</label>
             <input id="email" type="email" class="form-control" th:field="*{email}"/>
         </div>
+        <p class="text text-danger" th:if="${errors.containsKey('email')}" th:text="${errors.get('email')}"></p>
         <div class="form-group">
             <label class="text-secondary" for="password">HASŁO</label>
             <input id="password" type="password" class="form-control" th:field="*{password}"/>
         </div>
+        <p class="text text-danger" th:if="${errors.containsKey('password')}" th:text="${errors.get('password')}"></p>
         <div class="form-group">
             <label class="text-secondary" for="passwordConfirmation">POWTIERDŹ HASŁO</label>
             <input id="passwordConfirmation" type="password" class="form-control" th:field="*{passwordConfirmation}"/>
         </div>
+        <p class="text text-danger" th:if="${errors.containsKey('passwordConfirmation')}"
+           th:text="${errors.get('passwordConfirmation')}"></p>
         <div class="form-group">
             <button class="btn btn-secondary btn-block" type="submit">DODAJ UŻYTKOWNIKA</button>
             <button class="btn btn-secondary btn-block" type="reset">WYCZYŚĆ FORMULARZ</button>
