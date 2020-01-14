@@ -33,6 +33,7 @@ public class ProductMapperTests {
                 .numberInAuction("1a")
                 .vat(23)
                 .grossPrice(BigDecimal.ONE)
+                .auctionIndex("1aa")
                 .build();
 
         ProductDTO expectedProduct = ProductDTO.builder()
@@ -45,6 +46,7 @@ public class ProductMapperTests {
                 .numberInAuction("1a")
                 .vat(23)
                 .grossPrice(BigDecimal.ONE)
+                .auctionIndex("1aa")
                 .build();
 
         ProductDTO actualProduct = ProductMapper.toDto(product);
@@ -66,6 +68,7 @@ public class ProductMapperTests {
                 .numberInAuction("1a")
                 .vat(23)
                 .grossPrice(BigDecimal.ONE)
+                .auctionIndex("1aa")
                 .build();
 
         Product expectedProduct = Product.builder()
@@ -79,6 +82,7 @@ public class ProductMapperTests {
                 .numberInAuction("1a")
                 .vat(23)
                 .grossPrice(BigDecimal.ONE)
+                .auctionIndex("1aa")
                 .build();
 
         Product actualProduct = ProductMapper.fromDto(productDTO);

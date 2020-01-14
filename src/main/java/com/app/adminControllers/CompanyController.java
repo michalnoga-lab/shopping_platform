@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/admin/companies")
+@RequestMapping("admin/companies")
 public class CompanyController {
 
     @GetMapping("companies/add")
     public String adminAddCompany() {
-        return "/admin/companies/add";
+        return "admin/companies/add";
     }
 
 

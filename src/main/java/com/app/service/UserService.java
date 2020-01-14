@@ -10,7 +10,10 @@ import com.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -39,5 +42,31 @@ public class UserService {
         user.setEnabled(true);
         user.setRole(Role.USER);
         userRepository.save(user);
+    }
+
+    public List<UserDTO> findAll() {
+        List<User> users = new ArrayList<>(userRepository.findAll());
+
+        return users
+                .stream()
+                .map(UserMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public UserDTO findById(Long id) {
+        if (id == null) {
+            throw new AppException(ExceptionCodes.SERVICE_USER, "findById - ID is null");
+        }
+        if (id < 0) {
+            throw new AppException(ExceptionCodes.SERVICE_USER, "findById - ID less than zero");
+        }
+
+        // TODO: 2020-01-14 czy tu nie będzie null na maperze ???
+        return userRepository
+                .findById(id)
+                .stream()
+                .map(UserMapper::toDto)
+                .findFirst()
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_USER, "findById - no user with ID: " + id));
     }
 }

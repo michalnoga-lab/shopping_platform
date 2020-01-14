@@ -26,6 +26,7 @@ public class Product {
 
     private String name;
     private String numberInAuction;
+    private String auctionIndex;
     private String description;
     private Integer quantity;
     private BigDecimal nettPrice;

@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/admin/users")
+@RequestMapping("admin/users")
 public class UserController {
 
     private final UserService userService;
@@ -30,14 +30,14 @@ public class UserController {
         webDataBinder.setValidator(userValidator);
     }
 
-    @GetMapping("/add")
+    @GetMapping("add")
     public String addGET(Model model) {
         model.addAttribute("user", new UserDTO());
         model.addAttribute("errors", new HashMap<>());
-        return "/admin/users/add";
+        return "admin/users/add";
     }
 
-    @PostMapping("/add")
+    @PostMapping("add")
     public String addPOST(@Valid @ModelAttribute UserDTO userDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = bindingResult
@@ -46,11 +46,23 @@ public class UserController {
                     .collect(Collectors.toMap(FieldError::getField, FieldError::getCode));
             model.addAttribute("user", userDTO);
             model.addAttribute("errors", errors);
-            return "/admin/users/add";
+            return "admin/users/add";
         }
         userService.addUser(userDTO);
-        return "/admin/users/added";
+        return "admin/users/added";
     }
 
-    // TODO: 14.01.2020 edit delete delete all
+    @GetMapping("all")
+    public String getAll(Model model) {
+        model.addAttribute("users", userService.findAll());
+        return "admin/users/all";
+    }
+
+    @GetMapping("{id}")
+    public String one(@PathVariable Long id, Model model) {
+        model.addAttribute("user", userService.findById(id));
+        return "/admin/users/one";
+    }
+
+    // TODO: 14.01.2020 edit delete delete all disable
 }

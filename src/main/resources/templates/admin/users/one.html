@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Platform</title>
+</head>
+<body>
+<div th:replace="fragments/stylesheet">STYLESHEET</div>
+<div th:replace="fragments/top">TOP MENU</div>
+<div th:replace="fragments/topbanner">TOP BANNER</div>
+
+<div class="container">
+    <h5 class="top-page-text">SZCZEGÓŁY UŻYTKOWNIKA</h5>
+    <table class="table">
+        <thead class="table-head-custom">
+        <tr>
+            <td>LOGIN</td>
+            <td>IMIĘ</td>
+            <td>NAZWISKO</td>
+            <td>EMAIL</td>
+            <td>FIRMA</td>
+            <td>STATUS</td>
+            <td>AKCJE</td>
+        </tr>
+        </thead>
+        <tbody class="table-body-custom" th:object="${user}">
+        <tr>
+            <td><p th:text="${user.login}"></p></td>
+            <td><p th:text="${user.name}"></p></td>
+            <td><p th:text="${user.surname}"></p></td>
+            <td><p th:text="${user.email}"></p></td>
+            <td><p th:text="${user.companyDTO.name}"></p></td>
+            <td><p th:text="${user.enabled} ? 'AKTYWNY':'ZABLOKOWANY'"></p></td>
+            <td><a th:href="@{/admin/users/delete}" class="btn btn-outline-dark btm-small">USUN</a>
+                <a th:href="@{/admin/users/edit/{id}(id=${user.id})}" class="btn btn-outline-dark btn-small">EDYTUJ</a>
+                <a th:href="@{/admin/users/disable/{id}(id=${user.id})}"
+                   class="btn btn-outline-dark btn-small">ZABLOKUJ</a>
+                <a th:href="@{/admin/users/enable/{id}(id=${user.id})}"
+                   class="btn btn-outline-dark btn-small">ODBLOKUJ</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div th:replace="/fragments/footer">FOOTER</div>
+</body>
+</html>
