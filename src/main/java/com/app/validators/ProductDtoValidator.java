@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import java.util.regex.Pattern;
+
 @Component
 public class ProductDtoValidator implements Validator {
 
@@ -18,14 +20,17 @@ public class ProductDtoValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         ProductDTO productDTO = (ProductDTO) o;
-        final String QUANTITY_REGEX = "\\d+";
+        Pattern pattern = Pattern.compile("\\d+"); // TODO: 2020-01-14 validation - com.app.exceptions.AppException: null
 
         try {
-            if (productDTO.getQuantity() <= 0 || !productDTO.getQuantity().toString().matches(QUANTITY_REGEX)) {
-                errors.rejectValue("quantity", "NIEPRAWIDŁOWA ILOŚĆ. DOZWOLONE SĄ TYLKO CYFRY.");
+            if (productDTO.getQuantity() <= 0) {
+                errors.rejectValue("quantity", "ILOŚĆ MUSI BYĆ WIEKSZ OD ZERA.");
             }
             if (productDTO.getQuantity().toString().length() > 8) {
-                errors.rejectValue("quantity", "NIEPRAWIDŁOWA WARTOŚĆ. WPROWADZONY TEKST JEST ZA DŁUGI.");
+                errors.rejectValue("quantity", "NIEPRAWIDŁOWA WARTOŚĆ. WPROWADZONA WARTOŚĆ JEST ZA DŁUGA.");
+            }
+            if (!pattern.matcher(productDTO.getQuantity().toString()).matches()) {
+                errors.rejectValue("quantity", "DOZWOLONE SĄ TYLKO CYFRY.");
             }
         } catch (Exception e) {
             throw new AppException(ExceptionCodes.VALIDATION, "ProductDTO");

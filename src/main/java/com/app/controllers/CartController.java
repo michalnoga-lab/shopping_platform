@@ -23,32 +23,40 @@ public class CartController {
     private final CartService cartService;
     private final ProductService productService;
 
-    @GetMapping("/all")
+    @GetMapping("all")
     public String all(Model model) {
         List<CartDTO> carts = cartService.getAllUsersCarts(securityService.getLoggedInUserId());
         if (carts.size() == 0) {
             return "/carts/none";
         }
         model.addAttribute("carts", carts);
-        return "/carts/all";
+        return "carts/all";
     }
 
-    @GetMapping("/one/{id}")
+    @GetMapping("one/{id}")
     public String one(@PathVariable Long id, Model model) {
         model.addAttribute("cart", cartService.getCart(id));
         model.addAttribute("products", productService.getProductsOfCart(id));
-        return "/carts/one";
+        return "carts/one";
     }
 
-    @GetMapping("/one")
+    @GetMapping("one")
     public String activeOne(Model model) {
         Optional<CartDTO> cartDTOOptional = cartService.getActiveCart(securityService.getLoggedInUserId());
 
         if (cartDTOOptional.isEmpty()) {
-            return "/carts/noneActive";
+            return "carts/noneActive";
         }
         model.addAttribute("cart", cartDTOOptional.get());
         model.addAttribute("products", productService.getProductsOfCart(cartDTOOptional.get().getId()));
-        return "/carts/one";
+        return "carts/one";
+    }
+
+    @GetMapping("closed")
+    public String closeActiveCart() {
+
+        // TODO: 2020-01-14 przesłanie zamówienia do realizacji
+
+        return "carts/closed";
     }
 }

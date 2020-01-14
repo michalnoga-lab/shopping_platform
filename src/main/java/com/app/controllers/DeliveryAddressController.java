@@ -1,6 +1,7 @@
 package com.app.controllers;
 
 import com.app.dto.DeliveryAddressDTO;
+import com.app.service.CartService;
 import com.app.service.DeliveryAddressService;
 import com.app.service.SecurityService;
 import com.app.validators.DeliveryAddressDtoValidator;
@@ -25,6 +26,7 @@ public class DeliveryAddressController {
 
     private final DeliveryAddressService deliveryAddressService;
     private final SecurityService securityService;
+    private final CartService cartService;
 
     private final DeliveryAddressDtoValidator deliveryAddressDtoValidator;
 
@@ -73,5 +75,13 @@ public class DeliveryAddressController {
     public String remove(@RequestParam Long id) {
         deliveryAddressService.remove(id);
         return "redirect:/deliveryAddress/all";
+    }
+
+    @PostMapping("pick/{id}")
+    public String pickPOST(@PathVariable Long id) {
+
+        // TODO: 2020-01-14 set address to basket
+
+        return "/deliveryAddress/picked";
     }
 }

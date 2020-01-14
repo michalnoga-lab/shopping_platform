@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Platform</title>
+</head>
+<body>
+<div th:replace="fragments/stylesheet">STYLESHEET</div>
+<div th:replace="fragments/top">TOP MENU</div>
+<div th:replace="fragments/topbanner">TOP BANNER</div>
+
+<div class="container">
+    <h5 class="top-page-text">PODSUMOWANIE</h5>
+    <p class="top-page-text-details">
+        <strong class="d-block text-gray-dark">@produkty</strong>
+        produkty zostały zapisane w koszyku
+    </p>
+    <p class="top-page-text-details">
+        <strong class="d-block text-gray-dark">@stan zamówienia</strong>
+        zamówienie przekazane do realizacji
+    </p>
+    <p class="top-page-text-details">
+        <strong class="d-block text-gray-dark">@dostawa</strong>
+        dostawa zgodnie z warunkami przetargu
+    </p>
+    <p class="top-page-text-details">
+        <strong class="d-block text-gray-dark">@kontakt</strong>
+        (12) 411 25 09, (12) 411 67 54, biuro@primakrakow.pl
+    </p>
+
+</div>
+
+<div th:replace="/fragments/footer">FOOTER</div>
+</body>
+</html>

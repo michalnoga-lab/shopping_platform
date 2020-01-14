@@ -9,13 +9,15 @@
 <div th:replace="fragments/top">TOP MENU</div>
 
 <div class="container">
+    <h5 class="top-page-text">MOJE ADRESY</h5>
 
     <table class="table">
         <thead class="table-head-custom">
         <tr>
             <td>ADRES</td>
             <td>TELEFON</td>
-            <td>DOSTAWA</td>
+            <td></td>
+            <td></td>
         </tr>
         </thead>
         <tbody class="table-body-custom" th:each="a:${addresses}">
@@ -23,10 +25,20 @@
             <td><p th:text="${a.street}"></p></td>
             <td><p th:text="${a.phone}"></p></td>
             <td>
-                <form method="post" action="/deliveryAddress/remove">
-                    <input hidden="hidden" readonly="readonly" name="id" th:value="${a.id}">
-                    <button class="btn btn-danger" type="submit">KASUJ</button>
+                <form method="post" th:action="@{/deliveryAddress/pick/{id}(id=${a.id})}">
+                    <label>
+                        <input type="hidden" readonly="readonly" name="id" th:value="${a.id}">
+                    </label>
+                    <button class="btn btn-outline-dark btn-small" type="submit">DOSTAWA POD TEN ADRES</button>
                 </form>
+            <td>
+                <form method="post" action="/deliveryAddress/remove">
+                    <label>
+                        <input hidden="hidden" readonly="readonly" name="id" th:value="${a.id}">
+                    </label>
+                    <button class="btn btn-outline-dark btn-small" type="submit">KASUJ ADRES</button>
+                </form>
+            </td>
             </td>
         </tr>
         </tbody>
