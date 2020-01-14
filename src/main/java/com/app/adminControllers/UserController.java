@@ -51,4 +51,6 @@ public class UserController {
         userService.addUser(userDTO);
         return "/admin/users/added";
     }
+
+    // TODO: 14.01.2020 edit delete delete all
 }

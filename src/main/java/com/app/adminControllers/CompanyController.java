@@ -1,12 +1,18 @@
 package com.app.adminControllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/admin/companies")
 public class CompanyController {
 
-    // TODO: 2020-01-12
+    @GetMapping("companies/add")
+    public String adminAddCompany() {
+        return "/admin/companies/add";
+    }
 
+
+    // TODO: 14.01.2020 edit delete
 }

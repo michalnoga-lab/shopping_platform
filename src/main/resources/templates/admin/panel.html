@@ -10,11 +10,12 @@
 <div th:replace="fragments/topbanner">TOP BANNER</div>
 
 <div class="container">
-    <h5 class="top-page-text">DODAWANIE DO BAZY DANYCH</h5>
-    <p class="top-page-text-details">
-        <strong class="d-block text-gray-dark">@użytkownicy</strong>
-        uzytkownik został poprawnie dodany do bazy danych
-    </p>
+
+    <h5 class="top-page-text">PANEL ADMINISTRATORA</h5>
+    <a href="/admin/companies/add" class="btn btn-outline-dark btn-lg btn-block" role="button">DODAJ FIRMĘ</a>
+    <a href="/admin/users/add" class="btn btn-outline-dark btn-lg btn-block" role="button">DODAJ UŻYTKOWNIKA</a>
+    <a href="/admin/products/add" class="btn btn-outline-dark btn-lg btn-block" role="button">WCZYTAJ PRODUKTY Z
+        PLIKU</a>
 
 </div>
 
