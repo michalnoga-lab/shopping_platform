@@ -25,9 +25,12 @@ public class Product {
     private Long id;
 
     private String name;
+    private String numberInAuction;
     private String description;
     private Integer quantity;
     private BigDecimal nettPrice;
+    private Integer vat;
+    private BigDecimal grossPrice;
 
     @ManyToOne
     @JoinColumn(name = "company_id")
@@ -43,24 +46,16 @@ public class Product {
         Product product = (Product) o;
         return Objects.equals(id, product.id) &&
                 Objects.equals(name, product.name) &&
+                Objects.equals(numberInAuction, product.numberInAuction) &&
                 Objects.equals(description, product.description) &&
                 Objects.equals(quantity, product.quantity) &&
-                Objects.equals(nettPrice, product.nettPrice);
+                Objects.equals(nettPrice, product.nettPrice) &&
+                Objects.equals(vat, product.vat) &&
+                Objects.equals(grossPrice, product.grossPrice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, quantity, nettPrice);
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", quantity=" + quantity +
-                ", nettPrice=" + nettPrice +
-                '}';
+        return Objects.hash(id, name, numberInAuction, description, quantity, nettPrice, vat, grossPrice);
     }
 }

@@ -30,6 +30,9 @@ public class ProductMapperTests {
                 .carts(new HashSet<>(List.of(Cart.builder().id(2L).build())))
                 .company(Company.builder().id(3L).build())
                 .description("Description")
+                .numberInAuction("1a")
+                .vat(23)
+                .grossPrice(BigDecimal.ONE)
                 .build();
 
         ProductDTO expectedProduct = ProductDTO.builder()
@@ -39,6 +42,9 @@ public class ProductMapperTests {
                 .name("Example name")
                 .companyDTO(CompanyDTO.builder().id(3L).build())
                 .description("Description")
+                .numberInAuction("1a")
+                .vat(23)
+                .grossPrice(BigDecimal.ONE)
                 .build();
 
         ProductDTO actualProduct = ProductMapper.toDto(product);
@@ -57,6 +63,9 @@ public class ProductMapperTests {
                 .name("Example name")
                 .companyDTO(CompanyDTO.builder().id(3L).build())
                 .description("Description")
+                .numberInAuction("1a")
+                .vat(23)
+                .grossPrice(BigDecimal.ONE)
                 .build();
 
         Product expectedProduct = Product.builder()
@@ -67,6 +76,9 @@ public class ProductMapperTests {
                 .carts(new HashSet<>(List.of(Cart.builder().id(2L).build())))
                 .company(Company.builder().id(3L).build())
                 .description("Description")
+                .numberInAuction("1a")
+                .vat(23)
+                .grossPrice(BigDecimal.ONE)
                 .build();
 
         Product actualProduct = ProductMapper.fromDto(productDTO);

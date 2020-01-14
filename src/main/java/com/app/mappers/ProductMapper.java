@@ -17,6 +17,9 @@ public interface ProductMapper {
                 .name(product.getName())
                 .nettPrice(product.getNettPrice())
                 .quantity(product.getQuantity())
+                .numberInAuction(product.getNumberInAuction())
+                .grossPrice(product.getGrossPrice())
+                .vat(product.getVat())
                 .build();
     }
 
@@ -29,6 +32,9 @@ public interface ProductMapper {
                 .nettPrice(productDTO.getNettPrice())
                 .quantity(productDTO.getQuantity())
                 .carts(new HashSet<>())
+                .grossPrice(productDTO.getGrossPrice())
+                .numberInAuction(productDTO.getNumberInAuction())
+                .vat(productDTO.getVat())
                 .build();
     }
 }
