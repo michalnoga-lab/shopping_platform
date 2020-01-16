@@ -18,7 +18,8 @@ public class ProductSearchDtoValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         ProductSearchDTO productSearchDTO = (ProductSearchDTO) o;
-        final String USER_INPUT_REGEX = "[a-zA-z\\s]+";
+        //final String USER_INPUT_REGEX = "[a-zA-z\\s]+"; // TODO: 16.01.2020 was previous
+        final String USER_INPUT_REGEX = "[a-zA-z\\s-ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+";
 
         try {
             if (!productSearchDTO.getUserInput().matches(USER_INPUT_REGEX)) {
