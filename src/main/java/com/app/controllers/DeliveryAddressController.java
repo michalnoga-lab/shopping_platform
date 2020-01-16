@@ -1,6 +1,7 @@
 package com.app.controllers;
 
 import com.app.dto.DeliveryAddressDTO;
+import com.app.dto.UserDTO;
 import com.app.service.CartService;
 import com.app.service.DeliveryAddressService;
 import com.app.service.SecurityService;
@@ -79,9 +80,7 @@ public class DeliveryAddressController {
 
     @PostMapping("pick/{id}")
     public String pickPOST(@PathVariable Long id) {
-
-        // TODO: 2020-01-14 set address to basket
-
+        cartService.setAddressToCart(id, securityService.getLoggedInUserId());
         return "/deliveryAddress/picked";
     }
 }

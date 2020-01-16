@@ -10,6 +10,7 @@ import com.app.model.Cart;
 import com.app.model.Product;
 import com.app.model.User;
 import com.app.repository.CartRepository;
+import com.app.repository.DeliveryAddressRepository;
 import com.app.repository.ProductRepository;
 import com.app.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
@@ -40,6 +41,9 @@ public class CartServiceTests { // TODO: 31.12.2019 all tests
     private ProductRepository productRepository;
 
     @Autowired
+    private DeliveryAddressRepository deliveryAddressRepository;
+
+    @Autowired
     private CartService cartService;
 
     @TestConfiguration
@@ -52,11 +56,14 @@ public class CartServiceTests { // TODO: 31.12.2019 all tests
         private UserRepository userRepository;
 
         @MockBean
-        ProductRepository productRepository;
+        private ProductRepository productRepository;
+
+        @MockBean
+        private DeliveryAddressRepository deliveryAddressRepository;
 
         @Bean
         public CartService cartService() {
-            return new CartService(cartRepository, userRepository, productRepository);
+            return new CartService(cartRepository, userRepository, productRepository, deliveryAddressRepository);
         }
     }
 

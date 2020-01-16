@@ -6,14 +6,17 @@ import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.CartMapper;
 import com.app.model.Cart;
+import com.app.model.DeliveryAddress;
 import com.app.model.Product;
 import com.app.model.User;
 import com.app.repository.CartRepository;
+import com.app.repository.DeliveryAddressRepository;
 import com.app.repository.ProductRepository;
 import com.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +30,7 @@ public class CartService {
     private final CartRepository cartRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
+    private final DeliveryAddressRepository deliveryAddressRepository;
 
     public CartDTO addProductToCart(ProductDTO productDTO, Long userId) {
         if (productDTO == null) {
@@ -77,10 +81,10 @@ public class CartService {
 
     public Optional<CartDTO> getActiveCart(Long userId) {
         if (userId == null) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "getActiveCart - id is null");
+            throw new AppException(ExceptionCodes.SERVICE_CART, "getActiveCart - ID is null");
         }
-        if (userId < 0) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "getActiveCart - id less than zero");
+        if (userId <= 0) {
+            throw new AppException(ExceptionCodes.SERVICE_CART, "getActiveCart - ID less than zero");
         }
         List<CartDTO> allUserCarts = getAllUsersCarts(userId);
 
@@ -99,10 +103,10 @@ public class CartService {
 
     public CartDTO getCart(Long cartId) {
         if (cartId == null) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "getCart - id is null");
+            throw new AppException(ExceptionCodes.SERVICE_CART, "getCart - ID is null");
         }
-        if (cartId < 0) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "getCart - id less than zero");
+        if (cartId <= 0) {
+            throw new AppException(ExceptionCodes.SERVICE_CART, "getCart - ID less than zero");
         }
 
         return cartRepository.findById(cartId)
@@ -110,5 +114,41 @@ public class CartService {
                 .map(CartMapper::toDto)
                 .findFirst()
                 .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART, "getCart - no cart with ID: " + cartId));
+    }
+
+    public CartDTO setAddressToCart(Long addressId, Long userId) {
+        if (addressId == null) {
+            throw new AppException(ExceptionCodes.SERVICE_CART, "setAddressToCart - ID is null");
+        }
+        if (addressId <= 0) {
+            throw new AppException(ExceptionCodes.SERVICE_CART, "setAddressToCart - ID less than zero");
+        }
+        Optional<CartDTO> optionalCartDTO = getActiveCart(userId);
+        CartDTO cartDTO = optionalCartDTO.orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART, "setAddressToCart - cart Id is null"));
+        Cart cart = cartRepository.getOne(cartDTO.getId());
+        DeliveryAddress deliveryAddress = deliveryAddressRepository.getOne(addressId);
+        cart.setDeliveryAddress(deliveryAddress);
+        cartRepository.save(cart);
+        return CartMapper.toDto(cart);
+    }
+
+    public CartDTO closeCart(Long userId) {
+        if (userId == null) {
+            throw new AppException(ExceptionCodes.SERVICE_CART, "closeCart - cart ID is null");
+        }
+        if (userId <= 0) {
+            throw new AppException(ExceptionCodes.SERVICE_CART, "closeCart - cart ID less than zero");
+        }
+        User user = userRepository.getOne(userId);
+        Optional<CartDTO> cartDTOOptional = getActiveCart(userId);
+        CartDTO cartDTO = cartDTOOptional.orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART, "closeCart - no cart for user with ID: " + userId));
+        Cart cart = cartRepository.getOne(cartDTO.getId());
+        cart.setCartClosed(true);
+        cart.setPurchaseTime(LocalDateTime.now());
+
+        // TODO: 16.01.2020 send order to XML
+
+        cartRepository.save(cart);
+        return CartMapper.toDto(cart);
     }
 }

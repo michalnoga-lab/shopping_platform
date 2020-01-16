@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -54,9 +55,7 @@ public class CartController {
 
     @GetMapping("closed")
     public String closeActiveCart() {
-
-        // TODO: 2020-01-14 przesłanie zamówienia do realizacji
-
+        cartService.closeCart(securityService.getLoggedInUserId());
         return "carts/closed";
     }
 }

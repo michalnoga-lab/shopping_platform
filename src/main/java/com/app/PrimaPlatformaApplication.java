@@ -13,8 +13,9 @@ public class PrimaPlatformaApplication {
 
     // TODO: 2020-01-12 export orders to XML
     // TODO: 2020-01-12 import products from XLS
-    // TODO: 2020-01-12 passwords hassing
+    // TODO: 2020-01-12 passwords bcrypt + save hash only
     // TODO: 2020-01-12 backups
+    // TODO: 16.01.2020 nett and gross cart value
 
     /**
      *

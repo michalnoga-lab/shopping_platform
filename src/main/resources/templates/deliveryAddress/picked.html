@@ -13,7 +13,7 @@
     <h5 class="top-page-text">PODSUMOWANIE</h5>
     <p class="top-page-text-details">
         <strong class="d-block text-gray-dark">@produkty</strong>
-        produkty w koszyku
+        produkty znajdują się w koszyku
     </p>
     <p class="top-page-text-details">
         <strong class="d-block text-gray-dark">@adres</strong>
@@ -23,9 +23,13 @@
         <strong class="d-block text-gray-dark">@stan zamówienia</strong>
         zamówienie jest przygotowane do realizacji
     </p>
-    <a href="/carts/closed" class="btn btn-outline-dark btn-lg btn-block" role="button">PRZEŚLIJ ZAMÓWIENIE DO
-        REALIZACJI</a>
-
+    <form method="get" th:action="@{/carts/closed}">
+        <!--<a href="/carts/closed" class="btn btn-outline-dark btn-lg btn-block" role="button">PRZEŚLIJ ZAMÓWIENIE DO
+            REALIZACJI</a>-->
+        <button class="btn btn-outline-dark btn-lg btn-block" type="submit">PRZEŚLIJ ZAMÓWIENIE DO
+            REALIZACJI
+        </button>
+    </form>
 </div>
 
 <div th:replace="/fragments/footer">FOOTER</div>
