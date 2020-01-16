@@ -41,4 +41,14 @@ public class CompanyService {
                 .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_COMPANY, "getCompanyOfUser - no company related with user with ID: " + userId));
         return CompanyMapper.toDto(company);
     }
+
+    public CompanyDTO add(CompanyDTO companyDTO) {
+        if (companyDTO == null) {
+            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "add - company dto is null");
+        }
+        Company company = CompanyMapper.fromDto(companyDTO);
+        company.setActive(true);
+        companyRepository.save(company);
+        return CompanyMapper.toDto(company);
+    }
 }
