@@ -16,6 +16,7 @@ public class PrimaPlatformaApplication {
     // TODO: 2020-01-12 passwords bcrypt + save hash only
     // TODO: 2020-01-12 backups
     // TODO: 16.01.2020 nett and gross cart value
+    // TODO: 2020-01-18 prices calculation as nett and gross
 
     /**
      *

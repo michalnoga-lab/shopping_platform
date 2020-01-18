@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ManyToAny;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -27,7 +28,11 @@ public class Product {
     private String name;
     private String numberInAuction;
     private String auctionIndex;
+
+    @Column(length = 5000)
+    @Length(max = 5000)
     private String description;
+
     private Integer quantity;
     private BigDecimal nettPrice;
     private Integer vat;
