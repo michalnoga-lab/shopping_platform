@@ -17,12 +17,32 @@
     <a href="/admin/companies/all" class="btn btn-outline-dark btn-lg btn-block" role="button">POKAŻ WSZYSTKIE FIRMY</a>
     <a href="/admin/users/all" class="btn btn-outline-dark btn-lg btn-block" role="button">POKAŻ WSZYSKICH
         UŻYTKOWNIKÓW</a>
-    <form method="post" th:action="@{/admin/products/add}" enctype="multipart/form-data">
+
+    <form method="post" enctype="multipart/form-data" action="/admin/products/add" class="form-group">
         <div class="form-group">
-            <label class="text-secondary" for="photo">WCZYTAJ PRODUKTY Z PLIKU</label>
-            <input id="photo" type="file" class="form-control">
+            <label for="file">WYBIERZ PLIK DO WYCZTANIA PRODUKTÓW</label>
+            <input type="file" class="form-control" id="file">
+
+
+            <!-- <table class="align-middle">
+                 <tr>
+                     <td><input type="file" name="file">
+                     </td>
+                 </tr>
+                 <tr>
+                     <td><input type="submit" value="WCZYTAJ PRODUKTY Z PLIKU"></td>
+                 </tr>
+             </table>-->
         </div>
+        <button type="submit" class="btn btn-outline-dark btn-lg btn-block">WCZYTAJ</button>
     </form>
+
+    <!--  <form method="post" th:action="@{/admin/products/add}" enctype="multipart/form-data">
+          <div class="form-group">
+              <label class="text-secondary" for="photo">WCZYTAJ PRODUKTY Z PLIKU</label>
+              <input id="photo" type="file" class="form-control">
+          </div>
+      </form>-->
     <!--<a href="/admin/products/add" class="btn btn-outline-dark btn-lg btn-block" role="button">WCZYTAJ PRODUKTY Z
         PLIKU</a> todo -->
 

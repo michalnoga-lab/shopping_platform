@@ -8,6 +8,7 @@ import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.CartMapper;
 import com.app.mappers.ProductMapper;
 import com.app.model.Cart;
+import com.app.model.Product;
 import com.app.repository.CartRepository;
 import com.app.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -73,7 +74,6 @@ public class ProductService {
         if (productSearchDTO == null) {
             throw new AppException(ExceptionCodes.CONTROLLERS, "search - search is null");
         }
-
         return productRepository
                 .findAll()
                 .stream()
@@ -81,5 +81,20 @@ public class ProductService {
                         product.getName().toLowerCase().contains(productSearchDTO.getUserInput().toLowerCase()))
                 .map(ProductMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    public void addProducts(List<ProductDTO> productDTOS) {
+        if (productDTOS == null) {
+            throw new AppException(ExceptionCodes.SERVICE_PRODUCT, "addProducts - products list is null");
+        }
+        if (productDTOS.size() == 0) {
+            throw new AppException(ExceptionCodes.SERVICE_USER, "addProducts - no products to add");
+        }
+        List<Product> products =
+                productDTOS
+                        .stream()
+                        .map(ProductMapper::fromDto)
+                        .collect(Collectors.toList());
+        productRepository.saveAll(products);
     }
 }
