@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Platform</title>
+</head>
+<body>
+<div th:replace="fragments/stylesheet">STYLESHEET</div>
+<div th:replace="fragments/top">TOP MENU</div>
+<div th:replace="fragments/topbanner">TOP BANNER</div>
+
+<div class="container">
+    <h5 class="top-page-text">WSZYSCY FIRMY</h5>
+    <table class="table">
+        <thead class="table-head-custom">
+        <tr>
+            <td>NAZWA</td>
+            <td>STATUS</td>
+            <td>AKCJA</td>
+        </tr>
+        </thead>
+        <tbody class="table-body-custom" th:each="c:${companies}">
+        <tr>
+            <td><p th:text="${c.name}"></td>
+            <td><p th:text="${c.active}"></p></td>
+            <td><p th:href="@{/admin/companies/one/{id}(id=${c.id})}">PODGLĄD</p></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div th:replace="/fragments/footer">FOOTER</div>
+</body>
+</html>

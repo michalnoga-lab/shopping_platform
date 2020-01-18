@@ -14,9 +14,17 @@
     <h5 class="top-page-text">PANEL ADMINISTRATORA</h5>
     <a href="/admin/companies/add" class="btn btn-outline-dark btn-lg btn-block" role="button">DODAJ FIRMĘ</a>
     <a href="/admin/users/add" class="btn btn-outline-dark btn-lg btn-block" role="button">DODAJ UŻYTKOWNIKA</a>
-    <a href="/admin/users/all" class="btn btn-outline-dark btn-lg btn-block" role="button">POKAŻ WSZYSKICH UŻYTKONIWKÓW</a>
-    <a href="/admin/products/add" class="btn btn-outline-dark btn-lg btn-block" role="button">WCZYTAJ PRODUKTY Z
-        PLIKU</a>
+    <a href="/admin/companies/all" class="btn btn-outline-dark btn-lg btn-block" role="button">POKAŻ WSZYSTKIE FIRMY</a>
+    <a href="/admin/users/all" class="btn btn-outline-dark btn-lg btn-block" role="button">POKAŻ WSZYSKICH
+        UŻYTKOWNIKÓW</a>
+    <form method="post" th:action="@{/admin/products/add}" enctype="multipart/form-data">
+        <div class="form-group">
+            <label class="text-secondary" for="photo">WCZYTAJ PRODUKTY Z PLIKU</label>
+            <input id="photo" type="file" class="form-control">
+        </div>
+    </form>
+    <!--<a href="/admin/products/add" class="btn btn-outline-dark btn-lg btn-block" role="button">WCZYTAJ PRODUKTY Z
+        PLIKU</a> todo -->
 
 </div>
 

@@ -44,5 +44,11 @@ public class CompanyController {
         return "admin/companies/added";
     }
 
+    @GetMapping("all")
+    public String adminAll(Model model) {
+        model.addAttribute("companies", companyService.findAll());
+        return "admin/companies/all";
+    }
+
     // TODO: 14.01.2020 edit delete
 }
