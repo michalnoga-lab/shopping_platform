@@ -20,7 +20,7 @@ public class ProductDTO {
     private String description;
     private Integer quantity;
     private BigDecimal nettPrice;
-    private Integer vat;
+    private Double vat;
     private BigDecimal grossPrice;
     private CompanyDTO companyDTO;
 }

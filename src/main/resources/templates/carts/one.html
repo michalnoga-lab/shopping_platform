@@ -21,9 +21,10 @@
         </tr>
         </thead>
         <tbody class="table-body-custom">
-        <tr>
-            <a href="/deliveryAddress/all" class="btn btn-outline-dark btn-lg btn-block">ZAPISZ KOSZYK I USTAW MIEJSCE
-                DOSTAWY</a></tr>
+        <tr id="button_row">
+            <a href="/deliveryAddress/all" class="btn btn-outline-dark btn-lg btn-block">ZAPISZ
+                KOSZYK I USTAW MIEJSCE DOSTAWY</a> <!-- todo if cart is closed don't display it-->
+        </tr>
         <tr>
             <td><p th:text="${cart.totalNetValue}+' PLN'"></p></td>
             <td><p th:text="${cart.totalVatValue}+' PLN'"></p></td>

@@ -10,10 +10,11 @@
 <div th:replace="fragments/topbanner">TOP BANNER</div>
 
 <div class="container">
-    <h5 class="top-page-text">WSZYSCY FIRMY</h5>
+    <h5 class="top-page-text">WSZYSTKIE FIRMY</h5>
     <table class="table">
         <thead class="table-head-custom">
         <tr>
+            <td>ID</td>
             <td>NAZWA</td>
             <td>STATUS</td>
             <td>AKCJA</td>
@@ -21,9 +22,10 @@
         </thead>
         <tbody class="table-body-custom" th:each="c:${companies}">
         <tr>
+            <td><p th:text="${c.id}"></p></td>
             <td><p th:text="${c.name}"></td>
             <td><p th:text="${c.active}"></p></td>
-            <td><p th:href="@{/admin/companies/one/{id}(id=${c.id})}">PODGLĄD</p></td>
+            <td><p th:href="@{/admin/companies/one/{id}(id=${c.id})}">PODGLĄD</p></td> <!-- todo -->
         </tr>
         </tbody>
     </table>

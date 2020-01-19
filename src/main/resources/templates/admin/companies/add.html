@@ -12,7 +12,7 @@
 <div class="container">
     <h5 class="top-page-text">DODAJ FIRMĘ</h5>
     <form method="post" th:action="@{/admin/companies/add}" th:object="${company}" enctype="multipart/form-data">
-        <div class="form-group">
+        <div class="form-group"> <!-- todo validation -->
             <label class="text-secondary" for="name">NAZWA FIRMY </label>
             <input id="name" type="text" class="form-control" th:field="*{name}"/>
         </div>

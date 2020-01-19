@@ -38,25 +38,32 @@ public class FileService {
             Arrays.stream(stringBuilder.toString().split("(])"))
                     .forEach(line -> {
                         try {
-                            String linePured = line.replaceAll("[\n<>'\"]+", "");
+                            String linePured = line
+                                    .replaceAll("\n", "")
+                                    .replaceAll("\r", "")
+                                    .replaceAll("\"", "")
+                                    .replaceAll("'", "");
+
                             String[] lineSplit = linePured.split("(})");
-
-
-                            System.out.println("--------------------------");
-                            System.out.println(linePured);
 
                             productDTOS.add(ProductMapper.toDto(Product.builder()
                                     .name(lineSplit[0])
                                     .numberInAuction(lineSplit[1])
                                     .auctionIndex(lineSplit[2])
-                                    .description(lineSplit[3]).build()));
-                            //.nettPrice()
-                            //.vat(Integer.parseInt(lineSplit[5].replaceAll("[a-zA-Z\\s]", "")))
-                            //.grossPrice(BigDecimal.valueOf();
+                                    .description(lineSplit[3])
+                                    .nettPrice(BigDecimal.valueOf(Double.parseDouble(lineSplit[4]
+                                            .replaceAll("[złl\\s]+", "")
+                                            .replaceAll(",", "\\."))))
+                                    .vat(Double.parseDouble(lineSplit[5]
+                                            .replaceAll("[złl\\s]", "")
+                                            .replaceAll(",", "\\.")))
+                                    .grossPrice(BigDecimal.valueOf(Double.parseDouble(lineSplit[6]
+                                            .replaceAll("[złl\\s]", "")
+                                            .replaceAll(",", "\\."))))
+                                    .build()));
+
                         } catch (Exception e) {
-                            System.out.println("--------------------------------------------------");
-                            System.out.println("error:" + line);
-                            System.out.println(e.toString());
+                            // TODO: 2020-01-18 exception to logs - line not added
                         }
                     });
 

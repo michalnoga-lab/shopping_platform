@@ -35,7 +35,7 @@ public class Product {
 
     private Integer quantity;
     private BigDecimal nettPrice;
-    private Integer vat;
+    private Double vat;
     private BigDecimal grossPrice;
 
     @ManyToOne
@@ -53,15 +53,15 @@ public class Product {
         return Objects.equals(id, product.id) &&
                 Objects.equals(name, product.name) &&
                 Objects.equals(numberInAuction, product.numberInAuction) &&
+                Objects.equals(auctionIndex, product.auctionIndex) &&
                 Objects.equals(description, product.description) &&
                 Objects.equals(quantity, product.quantity) &&
                 Objects.equals(nettPrice, product.nettPrice) &&
-                Objects.equals(vat, product.vat) &&
-                Objects.equals(grossPrice, product.grossPrice);
+                Objects.equals(vat, product.vat);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, numberInAuction, description, quantity, nettPrice, vat, grossPrice);
+        return Objects.hash(id, name, numberInAuction, auctionIndex, description, quantity, nettPrice, vat);
     }
 }

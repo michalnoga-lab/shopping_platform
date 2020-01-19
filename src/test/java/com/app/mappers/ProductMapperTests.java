@@ -31,7 +31,7 @@ public class ProductMapperTests {
                 .company(Company.builder().id(3L).build())
                 .description("Description")
                 .numberInAuction("1a")
-                .vat(23)
+                .vat(23.0)
                 .grossPrice(BigDecimal.ONE)
                 .auctionIndex("1aa")
                 .build();
@@ -44,7 +44,7 @@ public class ProductMapperTests {
                 .companyDTO(CompanyDTO.builder().id(3L).build())
                 .description("Description")
                 .numberInAuction("1a")
-                .vat(23)
+                .vat(23.0)
                 .grossPrice(BigDecimal.ONE)
                 .auctionIndex("1aa")
                 .build();
@@ -66,7 +66,7 @@ public class ProductMapperTests {
                 .companyDTO(CompanyDTO.builder().id(3L).build())
                 .description("Description")
                 .numberInAuction("1a")
-                .vat(23)
+                .vat(23.0)
                 .grossPrice(BigDecimal.ONE)
                 .auctionIndex("1aa")
                 .build();
@@ -80,7 +80,7 @@ public class ProductMapperTests {
                 .company(Company.builder().id(3L).build())
                 .description("Description")
                 .numberInAuction("1a")
-                .vat(23)
+                .vat(23.0)
                 .grossPrice(BigDecimal.ONE)
                 .auctionIndex("1aa")
                 .build();
