@@ -4,7 +4,10 @@ import com.app.dto.ProductDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.ProductMapper;
+import com.app.model.Company;
 import com.app.model.Product;
+import com.app.repository.CompanyRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,15 +17,26 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class FileService {
 
-    public List<ProductDTO> getProductsFromFile(MultipartFile file) {
+    private final CompanyRepository companyRepository;
+
+    public List<ProductDTO> getProductsFromFile(MultipartFile file, Long companyId) {
         try {
             if (file == null || file.getBytes().length == 0) {
                 throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - file is not correct");
             }
+            if (companyId == null) {
+                throw new AppException(ExceptionCodes.SERVICE_FILES, "getProductsFromFile - company id is null");
+            }
+            if (companyId <= 0) {
+                throw new AppException(ExceptionCodes.SERVICE_FILES, "getProductsFromFile - company ID less than zero");
+            }
+
             List<ProductDTO> productDTOS = new ArrayList<>();
             InputStream inputStream = new ByteArrayInputStream(file.getBytes());
 
@@ -45,6 +59,9 @@ public class FileService {
                                     .replaceAll("'", "");
 
                             String[] lineSplit = linePured.split("(})");
+                            Optional<Company> companyOptional = companyRepository.findById(companyId);
+                            companyOptional.orElseThrow(() -> new AppException(
+                                    ExceptionCodes.SERVICE_FILES, "getProductsFromFile - no company with ID: " + companyId));
 
                             productDTOS.add(ProductMapper.toDto(Product.builder()
                                     .name(lineSplit[0])
@@ -60,6 +77,7 @@ public class FileService {
                                     .grossPrice(BigDecimal.valueOf(Double.parseDouble(lineSplit[6]
                                             .replaceAll("[złl\\s]", "")
                                             .replaceAll(",", "\\."))))
+                                    .company(companyOptional.get())
                                     .build()));
 
                         } catch (Exception e) {

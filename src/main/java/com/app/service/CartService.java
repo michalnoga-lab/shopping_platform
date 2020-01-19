@@ -13,14 +13,12 @@ import com.app.repository.CartRepository;
 import com.app.repository.DeliveryAddressRepository;
 import com.app.repository.ProductRepository;
 import com.app.repository.UserRepository;
+import com.sun.tools.jconsole.JConsoleContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,12 +35,57 @@ public class CartService {
             throw new AppException(ExceptionCodes.SERVICE_CART, "addProductToCart - product is null");
         }
         User user = userRepository.getOne(userId);
-        Optional<CartDTO> cartDTO = getActiveCart(userId);
+        Optional<CartDTO> cartDTOOptional = getActiveCart(userId);
 
         Product product = productRepository.getOne(productDTO.getId());
         product.setQuantity(productDTO.getQuantity());
-        Cart cart = CartMapper.fromDto(cartDTO.orElseGet(() -> CartDTO.builder().cartClosed(false).build()));
-        Set<Product> productsInCart = cart.getProducts();
+        Cart cart;
+        Optional<Cart> cartOptional = Optional.empty();
+
+        System.out.println("-------------- 0 -------------");
+        System.out.println(product);
+
+        if (cartDTOOptional.isPresent()) {
+            cartOptional = cartRepository.findById(cartDTOOptional.get().getId());
+        }
+
+        cart = cartOptional.orElseGet(() -> Cart.builder().cartClosed(false).build());
+
+
+        System.out.println("-------------- 1 -------------");
+        System.out.println(cart);
+
+        Set<Product> productsInCart = new HashSet<>();
+
+        if (cart.getProducts() != null) {
+            productsInCart = cart.getProducts();
+        }
+
+
+       /* CartDTO cartDTO = cartDTOOptional.orElseGet(() -> CartDTO.builder().cartClosed(false).build());
+        Optional<Cart> cartOptional = cartDTO.getId() == null ? Optional.empty() : cartRepository.findById(cartDTO.getId());
+        Cart cart = cartOptional.orElseGet(() -> Cart.builder().cartClosed(false).build());
+        Set<Product> productsInCart = new HashSet<>();*/
+
+
+        //System.out.println(cartOptional);
+
+
+        /*Cart cart = CartMapper.fromDto(cartDTO.orElseGet(() -> CartDTO.builder().cartClosed(false).build()));
+        Set<Product> productsInCart = cart.getProducts();*/
+
+        //art cart = cartDTO.isPresent()?cartRepository.findById(cartDTO.get().getId()):
+
+        /*Optional<Cart> cartOptional = cartDTO.map(dto -> cartRepository.findById(dto.getId())).orElseGet(() ->
+                Optional.of(CartMapper.fromDto(cartDTO.orElseGet(() -> CartDTO.builder().build()))));
+        Set<Product> productsInCart = cartOptional.get().getProducts().size()==0?cartOptional.get()*/
+
+
+        //Cart cartOptional = CartMapper.fromDto(cartDTO.orElseGet(() -> CartDTO.builder().build()));
+
+        System.out.println("-------------- 2 -------------");
+        System.out.println(productsInCart);
+
 
         if (productsInCart.contains(product)) {
 
