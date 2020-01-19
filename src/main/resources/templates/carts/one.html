@@ -41,6 +41,7 @@
             <td>PRODUKT</td>
             <td>ILOŚĆ</td>
             <td>CENA NETTO</td>
+            <td>AKCJA</td>
         </tr>
         </thead>
         <tbody class="table-body-custom" th:each="p:${products}">
@@ -48,6 +49,15 @@
             <td><p th:text="${p.name}"></p></td>
             <td><p th:text="${p.quantity}"></p></td>
             <td><p th:text="${p.nettPrice}+' PLN'"></p></td>
+            <td>
+                <form method="post" th:action="@{/products/remove/{id}(id=${p.id})}">
+                    <label>
+                        <input hidden="hidden" readonly="readonly" name="product.id" th:value="${p.id}"/>
+                        <input hidden="hidden" readonly="readonly" name="cart.id" th:value="${cart.id}"/>
+                    </label>
+                    <button class="btn btn-outline-dark btn-small">USUŃ</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>

@@ -40,14 +40,20 @@ public class ProductController {
     public String all(Model model) {
         model.addAttribute("products", productService.getProductsOfCompany(
                 companyService.getCompanyOfUser(securityService.getLoggedInUserId())));
-        return "/products/all";
+        return "products/all";
     }
 
     @GetMapping("/buy/{id}")
     public String buyGET(@PathVariable Long id, Model model) {
         model.addAttribute("product", productService.getOneProduct(id));
         model.addAttribute("errors", new HashMap<>());
-        return "/products/buy";
+        return "products/buy";
+    }
+
+    @PostMapping("remove/{id}")
+    public String remove(@PathVariable Long id) {
+        productService.removeFromCart(id, securityService.getLoggedInUserId());
+        return "carts/one";
     }
 
     @PostMapping("/buy")

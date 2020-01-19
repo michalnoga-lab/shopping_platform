@@ -9,6 +9,7 @@ import com.app.mappers.CartMapper;
 import com.app.mappers.ProductMapper;
 import com.app.model.Cart;
 import com.app.model.Product;
+import com.app.model.User;
 import com.app.repository.CartRepository;
 import com.app.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -96,5 +97,17 @@ public class ProductService {
                         .map(ProductMapper::fromDto)
                         .collect(Collectors.toList());
         productRepository.saveAll(products);
+    }
+
+    public void removeFromCart(Long productId, Long userId) {
+
+        Optional<Cart> cartOptional = cartRepository.findByUserId(userId);
+        Cart cart = cartOptional.orElseThrow(() ->
+                new AppException(ExceptionCodes.SERVICE_PRODUCT, "removeFromCart - no cart with user ID: " + userId));
+        Set<Product> products = cart.getProducts();
+        Product product = productRepository.findById(productId).orElseThrow(() ->
+                new AppException(ExceptionCodes.SERVICE_PRODUCT, "removeFromCart - no product with ID: " + productId));
+        products.remove(product);
+        cartRepository.save(cart);
     }
 }
