@@ -19,13 +19,13 @@ public class ProductSearchDtoValidator implements Validator {
     public void validate(Object o, Errors errors) {
         ProductSearchDTO productSearchDTO = (ProductSearchDTO) o;
         //final String USER_INPUT_REGEX = "[a-zA-z\\s]+"; // TODO: 16.01.2020 was previous
-        final String USER_INPUT_REGEX = "[a-zA-z\\s-ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+";
+        final String USER_INPUT_REGEX = "[a-zA-z\\s-ąćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9]+";
 
         try {
             if (!productSearchDTO.getUserInput().matches(USER_INPUT_REGEX)) {
                 errors.rejectValue("userInput", "NIEPRAWIDŁOWA WARTOŚĆ. DOZWOLONE SĄ TYLKO LITERY.");
             }
-            if (productSearchDTO.getUserInput().length() > 20) {
+            if (productSearchDTO.getUserInput().length() > 50) {
                 errors.rejectValue("userInput", "NIEPRAWIDŁOWA WARTOŚĆ. WPROWADZONY TEKST JEST ZA DŁUGI.");
             }
         } catch (Exception e) {

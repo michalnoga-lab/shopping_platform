@@ -42,50 +42,17 @@ public class CartService {
         Cart cart;
         Optional<Cart> cartOptional = Optional.empty();
 
-        System.out.println("-------------- 0 -------------");
-        System.out.println(product);
-
         if (cartDTOOptional.isPresent()) {
             cartOptional = cartRepository.findById(cartDTOOptional.get().getId());
         }
 
         cart = cartOptional.orElseGet(() -> Cart.builder().cartClosed(false).build());
 
-
-        System.out.println("-------------- 1 -------------");
-        System.out.println(cart);
-
         Set<Product> productsInCart = new HashSet<>();
 
         if (cart.getProducts() != null) {
             productsInCart = cart.getProducts();
         }
-
-
-       /* CartDTO cartDTO = cartDTOOptional.orElseGet(() -> CartDTO.builder().cartClosed(false).build());
-        Optional<Cart> cartOptional = cartDTO.getId() == null ? Optional.empty() : cartRepository.findById(cartDTO.getId());
-        Cart cart = cartOptional.orElseGet(() -> Cart.builder().cartClosed(false).build());
-        Set<Product> productsInCart = new HashSet<>();*/
-
-
-        //System.out.println(cartOptional);
-
-
-        /*Cart cart = CartMapper.fromDto(cartDTO.orElseGet(() -> CartDTO.builder().cartClosed(false).build()));
-        Set<Product> productsInCart = cart.getProducts();*/
-
-        //art cart = cartDTO.isPresent()?cartRepository.findById(cartDTO.get().getId()):
-
-        /*Optional<Cart> cartOptional = cartDTO.map(dto -> cartRepository.findById(dto.getId())).orElseGet(() ->
-                Optional.of(CartMapper.fromDto(cartDTO.orElseGet(() -> CartDTO.builder().build()))));
-        Set<Product> productsInCart = cartOptional.get().getProducts().size()==0?cartOptional.get()*/
-
-
-        //Cart cartOptional = CartMapper.fromDto(cartDTO.orElseGet(() -> CartDTO.builder().build()));
-
-        System.out.println("-------------- 2 -------------");
-        System.out.println(productsInCart);
-
 
         if (productsInCart.contains(product)) {
 
