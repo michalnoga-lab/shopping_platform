@@ -1,5 +1,6 @@
 package com.app.dto;
 
+import com.app.model.Price;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,4 +20,5 @@ public class CompanyDTO {
     private String city;
     private String postCode;
     private Boolean active;
+    private Price defaultPrice;
 }

@@ -30,6 +30,9 @@ public class Company {
     private String postCode;
     private Boolean active;
 
+    @Enumerated(EnumType.STRING)
+    private Price defaultPrice;
+
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "company")
     private Set<User> users = new HashSet<>();
 
@@ -48,25 +51,12 @@ public class Company {
                 Objects.equals(streetNumber, company.streetNumber) &&
                 Objects.equals(city, company.city) &&
                 Objects.equals(postCode, company.postCode) &&
-                Objects.equals(active, company.active);
+                Objects.equals(active, company.active) &&
+                defaultPrice == company.defaultPrice;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, nip, street, streetNumber, city, postCode, active);
-    }
-
-    @Override
-    public String toString() {
-        return "Company{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", nip='" + nip + '\'' +
-                ", street='" + street + '\'' +
-                ", streetNumber='" + streetNumber + '\'' +
-                ", city='" + city + '\'' +
-                ", postCode='" + postCode + '\'' +
-                ", active=" + active +
-                '}';
+        return Objects.hash(id, name, nip, street, streetNumber, city, postCode, active, defaultPrice);
     }
 }

@@ -61,7 +61,6 @@ public class UserService {
             throw new AppException(ExceptionCodes.SERVICE_USER, "findById - ID less than zero");
         }
 
-        // TODO: 2020-01-14 czy tu nie będzie null na maperze ???
         return userRepository
                 .findById(id)
                 .stream()

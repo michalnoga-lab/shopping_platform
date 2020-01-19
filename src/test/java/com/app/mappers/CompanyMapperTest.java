@@ -2,6 +2,7 @@ package com.app.mappers;
 
 import com.app.dto.CompanyDTO;
 import com.app.model.Company;
+import com.app.model.Price;
 import com.app.model.User;
 import com.app.model.Product;
 import org.junit.jupiter.api.Assertions;
@@ -30,6 +31,7 @@ public class CompanyMapperTest {
                 .street("Example street")
                 .streetNumber("12A")
                 .active(true)
+                .defaultPrice(Price.NET)
                 .build();
 
         CompanyDTO expectedCompany = CompanyDTO.builder()
@@ -41,6 +43,7 @@ public class CompanyMapperTest {
                 .street("Example street")
                 .streetNumber("12A")
                 .active(true)
+                .defaultPrice(Price.NET)
                 .build();
 
         CompanyDTO actualCompany = CompanyMapper.toDto(company);
@@ -60,6 +63,7 @@ public class CompanyMapperTest {
                 .street("Example street")
                 .streetNumber("12A")
                 .active(false)
+                .defaultPrice(Price.NET)
                 .build();
 
         Company expectedCompany = Company.builder()
@@ -73,6 +77,7 @@ public class CompanyMapperTest {
                 .products(new HashSet<>())
                 .users(new HashSet<>())
                 .active(false)
+                .defaultPrice(Price.NET)
                 .build();
 
         Company actualCompany = CompanyMapper.fromDto(companyDTO);

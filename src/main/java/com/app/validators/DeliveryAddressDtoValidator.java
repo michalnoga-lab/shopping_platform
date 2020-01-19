@@ -17,7 +17,6 @@ public class DeliveryAddressDtoValidator implements Validator {
 
     @Override
     public void validate(Object o, Errors errors) {
-        //final String STREET_REGEX = "[\\w\\s]+"; // TODO: 16.01.2020 was previous
         final String STREET_REGEX = "[a-zA-z\\s-ąćęłńóśźżĄĆĘŁŃÓŚŹŻ\\d]+";
         final String PHONE_REGEX = "[\\d\\s]+";
 

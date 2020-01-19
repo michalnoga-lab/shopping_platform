@@ -2,6 +2,7 @@ package com.app.mappers;
 
 import com.app.dto.CompanyDTO;
 import com.app.model.Company;
+import com.app.model.Price;
 
 import java.util.HashSet;
 
@@ -17,6 +18,7 @@ public interface CompanyMapper {
                 .street(company.getStreet())
                 .streetNumber(company.getStreetNumber())
                 .active(company.getActive())
+                .defaultPrice(company.getDefaultPrice())
                 .build();
     }
 
@@ -32,6 +34,7 @@ public interface CompanyMapper {
                 .users(new HashSet<>())
                 .products(new HashSet<>())
                 .active(companyDTO.getActive())
+                .defaultPrice(companyDTO.getDefaultPrice())
                 .build();
     }
 }
