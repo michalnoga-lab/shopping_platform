@@ -16,7 +16,8 @@
         <tr>
             <td>ADRES</td>
             <td>TELEFON</td>
-            <td>AKCJA</td>
+            <td></td>
+            <td></td>
         </tr>
         </thead>
         <tbody class="table-body-custom" th:each="a:${addresses}">
@@ -24,13 +25,21 @@
             <td><p th:text="${a.street}"></p></td>
             <td><p th:text="${a.phone}"></p></td>
             <td>
+                <form method="post" th:action="@{/deliveryAddress/pick/{id}(id=${a.id})}">
+                    <label>
+                        <input type="hidden" readonly="readonly" name="id" th:value="${a.id}">
+                    </label>
+                    <button class="btn btn-outline-dark btn-small" type="submit">DOSTAWA POD TEN ADRES</button>
+                </form>
+            <td>
                 <form method="post" action="/deliveryAddress/remove">
                     <label>
                         <input hidden="hidden" readonly="readonly" name="id" th:value="${a.id}">
                     </label>
                     <button class="btn btn-outline-dark btn-small" type="submit">KASUJ ADRES</button>
-                    <!-- todo kasowanie adresów -->
+                    <!-- todo kasowanie adresów-->
                 </form>
+            </td>
             </td>
         </tr>
         </tbody>
