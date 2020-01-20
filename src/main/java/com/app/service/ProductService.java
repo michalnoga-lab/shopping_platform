@@ -144,4 +144,17 @@ public class ProductService {
             throw new AppException(ExceptionCodes.SERVICE_PRODUCT, "setCode - no optima code in enum: " + userInput);
         }
     }
+
+    public void removeCode(Long productId) {
+        if (productId == null) {
+            throw new AppException(ExceptionCodes.SERVICE_PRODUCT, "removeCode - product it null");
+        }
+        if (productId <= 0) {
+            throw new AppException(ExceptionCodes.SERVICE_PRODUCT, "removeCode- product Id less than zero");
+        }
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_PRODUCT, "removeCode - no product with ID: " + productId));
+        product.setOptimaCode(null);
+        productRepository.save(product);
+    }
 }

@@ -41,8 +41,8 @@ public class AdminProductController {
     }
 
     @PostMapping("/addCode/{id}")
-    public String addCodePOST(@PathVariable Long id, @Valid @ModelAttribute GeneralUserInputDTO generalUserInputDTO,
-                              BindingResult bindingResult, Model model) {
+    public String addCode(@PathVariable Long id, @Valid @ModelAttribute GeneralUserInputDTO generalUserInputDTO,
+                          BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = bindingResult.getFieldErrors()
                     .stream()
@@ -53,6 +53,12 @@ public class AdminProductController {
             return "admin/products/all";
         }
         productService.setCode(id, generalUserInputDTO.getUserInput());
+        return "redirect:/admin/products/all";
+    }
+
+    @PostMapping("removeCode/{id}")
+    public String removeCode(@PathVariable Long id) {
+        productService.removeCode(id);
         return "redirect:/admin/products/all";
     }
 }

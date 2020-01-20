@@ -24,7 +24,17 @@
         <tr>
             <td><p th:text="${p.name}"></p></td>
             <td><p th:text="${p.companyDTO.name}+' PLN'"></td>
-            <td><p th:text="${p.optimaCode}"></p></td> <!-- todo display string of enum + if null display none -->
+            <td><p th:text="${p.optimaCode}"></p>
+                <form method="post" th:action="@{/admin/products/removeCode/{id}(id=${p.id})}"
+                      enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>
+                            <input type="hidden" readonly="readonly" name="id" th:value="${p.id}"/>
+                        </label>
+                        <button class="btn btn-outline-dark btn-small" type="submit">USUŃ KOD</button>
+                    </div>
+                </form>
+            </td> <!-- todo display string of enum + if null display none -->
             <td>
                 <form method="post" th:action="@{/admin/products/addCode/{id}(id=${p.id})}"
                       th:object="${generalUserInput}"
@@ -35,7 +45,7 @@
                     </div>
                     <p class="text text-danger" th:if="${errors.containsKey('userInput')}"
                        th:text="${errors.get('userInput')}"></p>
-                    <button type="submit" class="btn btn-outline-dark">ZAPISZ</button>
+                    <button type="submit" class="btn btn-outline-dark btn-small">ZAPISZ</button>
                 </form>
             </td>
         </tr>
