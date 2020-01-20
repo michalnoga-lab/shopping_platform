@@ -21,6 +21,7 @@ public interface ProductMapper {
                 .grossPrice(product.getGrossPrice())
                 .vat(product.getVat())
                 .auctionIndex(product.getAuctionIndex())
+                .optimaCode(product.getOptimaCode())
                 .build();
     }
 
@@ -37,6 +38,7 @@ public interface ProductMapper {
                 .numberInAuction(productDTO.getNumberInAuction())
                 .vat(productDTO.getVat())
                 .auctionIndex(productDTO.getAuctionIndex())
+                .optimaCode(productDTO.getOptimaCode())
                 .build();
     }
 }

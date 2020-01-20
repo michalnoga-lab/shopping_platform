@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Platform</title>
+</head>
+<body>
+<div th:replace="fragments/stylesheet">STYLESHEET</div>
+<div th:replace="fragments/top">TOP MENU</div>
+
+<div class="container">
+    <h5 class="top-page-text">ŁĄCZENIE PRODUKTU Z KODEM OPTIMA</h5>
+
+    <table class="table">
+        <thead class="table-head-custom">
+        <tr>
+            <td>NAZWA</td>
+            <td>FIRMA</td>
+            <td>KOD</td>
+            <td>AKCJA</td>
+        </tr>
+        </thead>
+        <tbody class="table-body-custom" th:each="p:${products}">
+        <tr>
+            <td><p th:text="${p.name}"></p></td>
+            <td><p th:text="${p.companyDTO.name}+' PLN'"></td>
+            <td><p th:text="${p.optimaCode.name()}"></p></td> <!-- todo if null display none -->
+            <td>
+                <form method="post" th:action="@{/admin/products/addCode/{id}(id=${p.id})}" th:object="${productSearch}"
+                      enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="text-secondary" for="optimaCode">PODAJ KOD Z OPTIMY</label>
+                        <input id="optimaCode" type="text" class="form-control" th:field="*{userInput}"/>
+                    </div>
+                    <button type="submit" class="btn btn-outline-dark">ZAPISZ</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:replace="/fragments/footer">FOOTER</div>
+</div>
+
+</body>
+</html>

@@ -4,6 +4,7 @@ import com.app.dto.CompanyDTO;
 import com.app.dto.ProductDTO;
 import com.app.model.Cart;
 import com.app.model.Company;
+import com.app.model.OptimaCode;
 import com.app.model.Product;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

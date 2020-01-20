@@ -23,7 +23,11 @@
         <tbody class="table-body-custom">
         <tr id="button_row">
             <a href="/deliveryAddress/allWithBuying" class="btn btn-outline-dark btn-lg btn-block">ZAPISZ
-                KOSZYK I USTAW MIEJSCE DOSTAWY</a> <!-- todo if cart is closed don't display it-->
+                KOSZYK I USTAW MIEJSCE DOSTAWY</a>
+
+            <!-- todo if cart is closed don't display it-->
+            <!--todo lub JS <span th:if="${cart.cartClosed==false}"> -->
+
         </tr>
         <tr>
             <td><p th:text="${cart.totalNetValue}+' PLN'"></p></td>
@@ -56,6 +60,7 @@
                         <input hidden="hidden" readonly="readonly" name="cart.id" th:value="${cart.id}"/>
                     </label>
                     <button class="btn btn-outline-dark btn-small">USUŃ</button>
+                    <!-- todo on/off cart disabled/enabled-->
                 </form>
             </td>
         </tr>

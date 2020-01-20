@@ -8,6 +8,7 @@ import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.CartMapper;
 import com.app.mappers.ProductMapper;
 import com.app.model.Cart;
+import com.app.model.OptimaCode;
 import com.app.model.Product;
 import com.app.model.User;
 import com.app.repository.CartRepository;
@@ -24,6 +25,15 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final CartRepository cartRepository;
+
+    public List<ProductDTO> findAll() {
+        List<Product> products = productRepository.findAll();
+
+        return products
+                .stream()
+                .map(ProductMapper::toDto)
+                .collect(Collectors.toList());
+    }
 
     public List<ProductDTO> getProductsOfCompany(CompanyDTO companyDTO) {
         if (companyDTO == null) {
@@ -109,5 +119,29 @@ public class ProductService {
                 new AppException(ExceptionCodes.SERVICE_PRODUCT, "removeFromCart - no product with ID: " + productId));
         products.remove(product);
         cartRepository.save(cart);
+    }
+
+    public void setCode(Long productId, String userInput) {
+        if (productId == null) {
+            throw new AppException(ExceptionCodes.SERVICE_PRODUCT, "setCode - product it null");
+        }
+        if (productId <= 0) {
+            throw new AppException(ExceptionCodes.SERVICE_PRODUCT, "setCode - product Id less than zero");
+        }
+        if (userInput == null || userInput.length() == 0) {
+            throw new AppException(ExceptionCodes.SERVICE_PRODUCT, "setCode - user input is null");
+        }
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_PRODUCT, "setCode - no product with ID: " + productId));
+        try {
+            OptimaCode optimaCode = Arrays.stream(OptimaCode.values())
+                    .filter(code -> code.getDescription().equals(userInput))
+                    .findFirst()
+                    .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_PRODUCT, "setCode - no optima code for enum"));
+            product.setOptimaCode(optimaCode);
+            productRepository.save(product);
+        } catch (Exception e) {
+            throw new AppException(ExceptionCodes.SERVICE_PRODUCT, "setCode - no optima code in enum: " + userInput);
+        }
     }
 }

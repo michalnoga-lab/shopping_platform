@@ -65,7 +65,7 @@ public class DeliveryAddressController {
     public String addGET(Model model) {
         model.addAttribute("address", new DeliveryAddressDTO());
         model.addAttribute("errors", new HashMap<>());
-        return "/deliveryAddress/add";
+        return "deliveryAddress/add";
     }
 
     @PostMapping("/add")
@@ -93,6 +93,6 @@ public class DeliveryAddressController {
     @PostMapping("pick/{id}")
     public String pickPOST(@PathVariable Long id) {
         cartService.setAddressToCart(id, securityService.getLoggedInUserId());
-        return "/deliveryAddress/picked";
+        return "deliveryAddress/picked";
     }
 }

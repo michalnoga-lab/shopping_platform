@@ -50,12 +50,6 @@ public class ProductController {
         return "products/buy";
     }
 
-    @PostMapping("remove/{id}")
-    public String remove(@PathVariable Long id) {
-        productService.removeFromCart(id, securityService.getLoggedInUserId());
-        return "carts/one";
-    }
-
     @PostMapping("/buy")
     public String buyPOST(@Valid @ModelAttribute ProductDTO productDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -70,5 +64,11 @@ public class ProductController {
 
         cartService.addProductToCart(productDTO, securityService.getLoggedInUserId());
         return "redirect:/products/all";
+    }
+
+    @PostMapping("remove/{id}")
+    public String remove(@PathVariable Long id) {
+        productService.removeFromCart(id, securityService.getLoggedInUserId());
+        return "carts/one";
     }
 }

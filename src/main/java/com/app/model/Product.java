@@ -38,6 +38,9 @@ public class Product {
     private Double vat;
     private BigDecimal grossPrice;
 
+    @Enumerated(EnumType.STRING)
+    private OptimaCode optimaCode;
+
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;

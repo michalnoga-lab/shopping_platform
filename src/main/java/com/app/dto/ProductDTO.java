@@ -1,5 +1,6 @@
 package com.app.dto;
 
+import com.app.model.OptimaCode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,5 +23,6 @@ public class ProductDTO {
     private BigDecimal nettPrice;
     private Double vat;
     private BigDecimal grossPrice;
+    private OptimaCode optimaCode;
     private CompanyDTO companyDTO;
 }
