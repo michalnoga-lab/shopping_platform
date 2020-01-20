@@ -24,14 +24,17 @@
         <tr>
             <td><p th:text="${p.name}"></p></td>
             <td><p th:text="${p.companyDTO.name}+' PLN'"></td>
-            <td><p th:text="${p.optimaCode.name()}"></p></td> <!-- todo if null display none -->
+            <td><p th:text="${p.optimaCode}"></p></td> <!-- todo display string of enum + if null display none -->
             <td>
-                <form method="post" th:action="@{/admin/products/addCode/{id}(id=${p.id})}" th:object="${productSearch}"
+                <form method="post" th:action="@{/admin/products/addCode/{id}(id=${p.id})}"
+                      th:object="${generalUserInput}"
                       enctype="multipart/form-data">
                     <div class="form-group">
                         <label class="text-secondary" for="optimaCode">PODAJ KOD Z OPTIMY</label>
                         <input id="optimaCode" type="text" class="form-control" th:field="*{userInput}"/>
                     </div>
+                    <p class="text text-danger" th:if="${errors.containsKey('userInput')}"
+                       th:text="${errors.get('userInput')}"></p>
                     <button type="submit" class="btn btn-outline-dark">ZAPISZ</button>
                 </form>
             </td>
