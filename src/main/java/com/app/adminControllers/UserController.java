@@ -58,7 +58,7 @@ public class UserController {
         return "admin/users/all";
     }
 
-    @GetMapping("{id}")
+    @PostMapping("one/{id}")
     public String one(@PathVariable Long id, Model model) {
         model.addAttribute("user", userService.findById(id));
         return "/admin/users/one";

@@ -7,10 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,6 +46,15 @@ public class CompanyController {
     public String adminAll(Model model) {
         model.addAttribute("companies", companyService.findAll());
         return "admin/companies/all";
+    }
+
+    @PostMapping("one/{id}")
+    public String one(@PathVariable Long id) {
+
+        
+        // TODO: 21.01.2020 body
+
+        return "admin/companies/one";
     }
 
     // TODO: 14.01.2020 edit delete

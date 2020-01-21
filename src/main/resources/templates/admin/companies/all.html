@@ -25,7 +25,14 @@
             <td><p th:text="${c.id}"></p></td>
             <td><p th:text="${c.name}"></td>
             <td><p th:text="${c.active}"></p></td>
-            <td><p th:href="@{/admin/companies/one/{id}(id=${c.id})}">PODGLĄD</p></td> <!-- todo -->
+            <td>
+                <form method="post" th:action="@{/admin/companies/one/{id}(id=${c.id})}">
+                    <label>
+                        <input hidden="hidden" readonly="readonly" name="id" th:value="${c.id}">
+                    </label>
+                    <button class="btn btn-outline-dark btn-small" type="submit">PODGLĄD</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>

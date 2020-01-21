@@ -25,11 +25,17 @@
             <td><p th:text="${u.name}"></p></td>
             <td><p th:text="${u.surname}"></p></td>
             <td><p th:text="${u.enabled} ? 'AKTYWNY':'ZABLOKOWANY'"></p></td>
-            <td><p><a th:href="@{/admin/users/{id}(id=${u.id})}">PODGLĄD</a></p></td>
+            <td>
+                <form method="post" th:action="@{/admin/users/one/{id}(id=${u.id})}">
+                    <label>
+                        <input type="hidden" readonly="readonly" name="id" th:value="${u.id}">
+                    </label>
+                    <button class="btn btn-outline-dark btn-small" type="submit">PODGLĄD</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>
-
 </div>
 
 <div th:replace="/fragments/footer">FOOTER</div>
