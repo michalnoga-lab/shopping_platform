@@ -12,7 +12,7 @@
     <h5 class="top-page-text">MÓJ KOSZYK</h5>
 
     <div th:if="${cart.cartClosed}==false">
-        <a href="/deliveryAddress/allWithBuying" class="btn btn-outline-dark btn-lg btn-block">ZAPISZ
+        <a href="/deliveryAddress/all" class="btn btn-outline-dark btn-lg btn-block">ZAPISZ
             KOSZYK I USTAW MIEJSCE DOSTAWY</a>
     </div>
     <table class="table">
@@ -60,8 +60,6 @@
                     <span th:if="${cart.cartClosed}==true">
                         <button class="btn btn-outline-dark btn-small" disabled>USUŃ</button>
                     </span>
-
-                    <!-- todo on/off if cart disabled/enabled-->
                 </form>
             </td>
         </tr>

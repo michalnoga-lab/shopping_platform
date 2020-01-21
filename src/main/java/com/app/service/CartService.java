@@ -161,4 +161,14 @@ public class CartService {
         cartRepository.save(cart);
         return CartMapper.toDto(cart);
     }
+
+    public boolean userHasOpenCart(Long userId) {
+        if (userId == null) {
+            throw new AppException(ExceptionCodes.SERVICE_CART, "userHasOpenCart - cart ID is null");
+        }
+        if (userId <= 0) {
+            throw new AppException(ExceptionCodes.SERVICE_CART, "userHasOpenCart - cart ID less than zero");
+        }
+        return getActiveCart(userId).isPresent();
+    }
 }

@@ -11,11 +11,12 @@
 <div class="container">
     <h5 class="top-page-text">MOJE ADRESY</h5>
 
-    <table class="table">
+    <table class="table" th:object="${openCart}">
         <thead class="table-head-custom">
         <tr>
             <td>ADRES</td>
             <td>TELEFON</td>
+            <td>AKCJA</td>
             <td>AKCJA</td>
         </tr>
         </thead>
@@ -23,6 +24,24 @@
         <tr>
             <td><p th:text="${a.street}"></p></td>
             <td><p th:text="${a.phone}"></p></td>
+            <td>
+                <span th:if="${openCart}==true">
+                <form method="post" th:action="@{/deliveryAddress/pick/{id}(id=${a.id})}">
+                    <label>
+                        <input type="hidden" readonly="readonly" name="id" th:value="${a.id}">
+                    </label>
+                    <button class="btn btn-outline-dark btn-small" type="submit">DOSTAWA POD TEN ADRES</button>
+                </form>
+                </span>
+                <span th:if="${openCart}==false">
+                <form method="post" th:action="@{/deliveryAddress/pick/{id}(id=${a.id})}">
+                    <label>
+                        <input type="hidden" readonly="readonly" name="id" th:value="${a.id}">
+                    </label>
+                    <button class="btn btn-outline-dark btn-small" type="submit" disabled>DOSTAWA POD TEN ADRES</button>
+                </form>
+                </span>
+            </td>
             <td>
                 <form method="post" action="/deliveryAddress/remove">
                     <label>
@@ -33,6 +52,8 @@
                 </form>
             </td>
         </tr>
+
+
         </tbody>
     </table>
 

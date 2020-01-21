@@ -44,21 +44,9 @@ public class DeliveryAddressController {
             model.addAttribute("errors", new HashMap<>());
             return "deliveryAddress/add";
         }
+        model.addAttribute("openCart", cartService.userHasOpenCart(securityService.getLoggedInUserId()));
         model.addAttribute("addresses", addresses);
         return "deliveryAddress/all";
-    }
-
-    @GetMapping("/allWithBuying")
-    public String allWithBuying(@ModelAttribute DeliveryAddressDTO deliveryAddressDTO, Model model) {
-        List<DeliveryAddressDTO> addresses = deliveryAddressService.getAll(securityService.getLoggedInUserId());
-
-        if (addresses.size() == 0) {
-            model.addAttribute("address", new DeliveryAddressDTO());
-            model.addAttribute("errors", new HashMap<>());
-            return "deliveryAddress/add";
-        }
-        model.addAttribute("addresses", addresses);
-        return "deliveryAddress/allWithBuying";
     }
 
     @GetMapping("/add")
@@ -91,7 +79,7 @@ public class DeliveryAddressController {
     }
 
     @PostMapping("pick/{id}")
-    public String pickPOST(@PathVariable Long id) {
+    public String pickPOST(@PathVariable Long id, Model model) {
         cartService.setAddressToCart(id, securityService.getLoggedInUserId());
         return "deliveryAddress/picked";
     }
