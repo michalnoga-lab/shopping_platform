@@ -24,7 +24,7 @@
         <tr>
             <td><p th:text="${c.id}"></p></td>
             <td><p th:text="${c.name}"></td>
-            <td><p th:text="${c.active}"></p></td>
+            <td><p th:text="${c.active} ? 'AKTYWNA':'ZABLOKOWANA'"></p></td>
             <td>
                 <form method="post" th:action="@{/admin/companies/one/{id}(id=${c.id})}">
                     <label>

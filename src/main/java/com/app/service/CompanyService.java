@@ -1,7 +1,6 @@
 package com.app.service;
 
 import com.app.dto.CompanyDTO;
-import com.app.dto.UserDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.CompanyMapper;
@@ -61,5 +60,32 @@ public class CompanyService {
                 .stream()
                 .map(CompanyMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    public CompanyDTO findById(Long companyId) {
+        if (companyId == null) {
+            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "findById - company ID is null");
+        }
+        if (companyId <= 0) {
+            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "findById - company ID less than zero");
+        }
+        return companyRepository.findAll()
+                .stream()
+                .map(CompanyMapper::toDto)
+                .findFirst()
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_COMPANY, "findById - no company with ID: " + companyId));
+    }
+
+    public void disableEnable(Long companyId, Boolean enabled) {
+        if (companyId == null) {
+            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "enable - company ID is null");
+        }
+        if (companyId <= 0) {
+            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "enable - company ID less than zero");
+        }
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_COMPANY, "enable - no company with ID: " + companyId));
+        company.setActive(enabled);
+        companyRepository.save(company);
     }
 }

@@ -49,13 +49,25 @@ public class CompanyController {
     }
 
     @PostMapping("one/{id}")
-    public String one(@PathVariable Long id) {
-
-        
-        // TODO: 21.01.2020 body
-
+    public String one(@PathVariable Long id, Model model) {
+        model.addAttribute("company", companyService.findById(id));
         return "admin/companies/one";
     }
 
-    // TODO: 14.01.2020 edit delete
+    @PostMapping("edit/{id}")
+    public String edit(@PathVariable Long id) {
+        return ""; // TODO: 21.01.2020 edit
+    }
+
+    @PostMapping("enable/{id}")
+    public String enable(@PathVariable Long id) {
+        companyService.disableEnable(id, true);
+        return "redirect:/admin/companies/all"; // TODO: 21.01.2020 jak przekazać ID powrotu do strony ???
+    }
+
+    @PostMapping("disable/{id}")
+    public String disable(@PathVariable Long id) {
+        companyService.disableEnable(id, false);
+        return "redirect:/admin/companies/all";
+    }
 }

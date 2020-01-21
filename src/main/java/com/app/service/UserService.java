@@ -60,7 +60,6 @@ public class UserService {
         if (id < 0) {
             throw new AppException(ExceptionCodes.SERVICE_USER, "findById - ID less than zero");
         }
-
         return userRepository
                 .findById(id)
                 .stream()

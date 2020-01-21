@@ -20,7 +20,7 @@
             <td>EMAIL</td>
             <td>FIRMA</td>
             <td>STATUS</td>
-            <td>AKCJE</td>
+            <td>AKCJA</td>
         </tr>
         </thead>
         <tbody class="table-body-custom" th:object="${user}">
@@ -31,8 +31,7 @@
             <td><p th:text="${user.email}"></p></td>
             <td><p th:text="${user.companyDTO.name}"></p></td>
             <td><p th:text="${user.enabled} ? 'AKTYWNY':'ZABLOKOWANY'"></p></td>
-            <td><a th:href="@{/admin/users/delete}" class="btn btn-outline-dark btm-small">USUN</a>
-                <a th:href="@{/admin/users/edit/{id}(id=${user.id})}" class="btn btn-outline-dark btn-small">EDYTUJ</a>
+            <td><a th:href="@{/admin/users/edit/{id}(id=${user.id})}" class="btn btn-outline-dark btn-small">EDYTUJ</a>
                 <a th:href="@{/admin/users/disable/{id}(id=${user.id})}"
                    class="btn btn-outline-dark btn-small">ZABLOKUJ</a>
                 <a th:href="@{/admin/users/enable/{id}(id=${user.id})}"
