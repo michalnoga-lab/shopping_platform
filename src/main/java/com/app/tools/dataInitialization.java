@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Component
@@ -38,7 +39,7 @@ public class dataInitialization implements CommandLineRunner { // TODO: 2019-09-
             .name("name 2")
             .build();
 
-    Product product1 = Product.builder().name("Prod1").build();
+    Product product1 = Product.builder().name("Prod1").nettPrice(BigDecimal.valueOf(2.44)).build();
     Product product2 = Product.builder().name("Prod2").build();
     Product product3 = Product.builder().name("Prod3").build();
 
