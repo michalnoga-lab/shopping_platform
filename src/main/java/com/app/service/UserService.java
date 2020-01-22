@@ -67,4 +67,17 @@ public class UserService {
                 .findFirst()
                 .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_USER, "findById - no user with ID: " + id));
     }
+
+    public void disableEnable(Long userId, Boolean enabled) {
+        if (userId == null) {
+            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "disableEnable - user ID is null");
+        }
+        if (userId <= 0) {
+            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "disableEnable - user ID less than zero");
+        }
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_USER, "disableEnable - no user with ID: " + userId));
+        user.setEnabled(enabled);
+        userRepository.save(user);
+    }
 }

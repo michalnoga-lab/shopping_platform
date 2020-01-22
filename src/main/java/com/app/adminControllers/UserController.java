@@ -64,5 +64,17 @@ public class UserController {
         return "/admin/users/one";
     }
 
-    // TODO: 14.01.2020 edit delete delete all disable
+    @PostMapping("disable/{id}")
+    public String disable(@PathVariable Long id) {
+        userService.disableEnable(id, false);
+        return "redirect:/admin/users/all";
+    }
+
+    @PostMapping("enable/{id}")
+    public String enable(@PathVariable Long id) {
+        userService.disableEnable(id, true);
+        return "redirect:/admin/users/all";
+    }
+
+    // TODO: 14.01.2020 edit
 }

@@ -78,13 +78,13 @@ public class CompanyService {
 
     public void disableEnable(Long companyId, Boolean enabled) {
         if (companyId == null) {
-            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "enable - company ID is null");
+            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "disableEnable - company ID is null");
         }
         if (companyId <= 0) {
-            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "enable - company ID less than zero");
+            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "disableEnable - company ID less than zero");
         }
         Company company = companyRepository.findById(companyId)
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_COMPANY, "enable - no company with ID: " + companyId));
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_COMPANY, "disableEnable - no company with ID: " + companyId));
         company.setActive(enabled);
         companyRepository.save(company);
     }

@@ -28,7 +28,7 @@
             <td><p th:text="${company.nip}"></p></td>
             <td><p th:text="${company.street}+' '+${company.streetNumber}"></p></td>
             <td><p th:text="${company.city}"></p></td>
-            <td><p th:text="${company.active}"></p></td>
+            <td><p th:text="${company.active}?'AKTYWNA':'ZABLOKOWANA'"></p></td>
             <td>
                 <div class="btn-group" role="group">
                     <form method="post" th:action="@{/admin/companies/edit/{id}(id=${company.id})}"

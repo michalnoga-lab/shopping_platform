@@ -31,11 +31,30 @@
             <td><p th:text="${user.email}"></p></td>
             <td><p th:text="${user.companyDTO.name}"></p></td>
             <td><p th:text="${user.enabled} ? 'AKTYWNY':'ZABLOKOWANY'"></p></td>
-            <td><a th:href="@{/admin/users/edit/{id}(id=${user.id})}" class="btn btn-outline-dark btn-small">EDYTUJ</a>
-                <a th:href="@{/admin/users/disable/{id}(id=${user.id})}"
-                   class="btn btn-outline-dark btn-small">ZABLOKUJ</a>
-                <a th:href="@{/admin/users/enable/{id}(id=${user.id})}"
-                   class="btn btn-outline-dark btn-small">ODBLOKUJ</a>
+            <td>
+                <div class="btn-group" role="group">
+                    <form method="post" th:action="@{/admin/users/edit/{id}(id=${user.id})}"
+                          enctype="multipart/form-data">
+                        <label>
+                            <input hidden="hidden" readonly="readonly" th:value="${user.id}">
+                        </label>
+                        <button class="btn btn-outline-dark btn-small" type="submit">EDYTUJ</button>
+                    </form>
+                    <form method="post" th:action="@{/admin/users/enable/{id}(id=${user.id})}"
+                          enctype="multipart/form-data">
+                        <label>
+                            <input readonly="readonly" hidden="hidden" th:value="${user.id}">
+                        </label>
+                        <button class="btn btn-outline-dark btn-small" type="submit">ODBLOKUJ</button>
+                    </form>
+                    <form method="post" th:action="@{/admin/users/disable/{id}(id=${user.id})}"
+                          enctype="multipart/form-data">
+                        <label>
+                            <input hidden="hidden" readonly="readonly" th:value="${user.id}">
+                        </label>
+                        <button class="btn btn-outline-dark btn-small" type="submit">ZABLOKUJ</button>
+                    </form>
+                </div>
             </td>
         </tr>
         </tbody>
