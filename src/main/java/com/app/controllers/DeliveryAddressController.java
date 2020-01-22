@@ -37,7 +37,7 @@ public class DeliveryAddressController {
 
     @GetMapping("/all")
     public String all(@ModelAttribute DeliveryAddressDTO deliveryAddressDTO, Model model) {
-        List<DeliveryAddressDTO> addresses = deliveryAddressService.getAll(securityService.getLoggedInUserId());
+        List<DeliveryAddressDTO> addresses = deliveryAddressService.findAll(securityService.getLoggedInUserId());
 
         if (addresses.size() == 0) {
             model.addAttribute("address", new DeliveryAddressDTO());
@@ -72,14 +72,14 @@ public class DeliveryAddressController {
         return "redirect:/deliveryAddress/all";
     }
 
-    @PostMapping("/remove")
-    public String remove(@RequestParam Long id) {
-        deliveryAddressService.remove(id);
+    @PostMapping("/remove/{id}")
+    public String remove(@PathVariable Long id) {
+        deliveryAddressService.hide(id);
         return "redirect:/deliveryAddress/all";
     }
 
     @PostMapping("pick/{id}")
-    public String pickPOST(@PathVariable Long id, Model model) {
+    public String pickPOST(@PathVariable Long id) {
         cartService.setAddressToCart(id, securityService.getLoggedInUserId());
         return "deliveryAddress/picked";
     }

@@ -2,7 +2,6 @@ package com.app.service;
 
 import com.app.dto.DeliveryAddressDTO;
 import com.app.mappers.DeliveryAddressMapper;
-import com.app.mappers.UserMapper;
 import com.app.model.DeliveryAddress;
 import com.app.model.User;
 import com.app.repository.DeliveryAddressRepository;
@@ -68,7 +67,7 @@ public class DeliveryAddressServiceTests {
                 .when(deliveryAddressRepository.findAll())
                 .thenReturn(addresses);
 
-        List<DeliveryAddressDTO> actualResult = deliveryAddressService.getAll(1L);
+        List<DeliveryAddressDTO> actualResult = deliveryAddressService.findAll(1L);
 
         Assertions.assertEquals(0, actualResult.size());
     }
@@ -95,7 +94,7 @@ public class DeliveryAddressServiceTests {
                 .thenReturn(addresses);
 
         List<DeliveryAddressDTO> expectedResult = List.of(DeliveryAddressMapper.toDto(deliveryAddress1));
-        List<DeliveryAddressDTO> actualResult = deliveryAddressService.getAll(1L);
+        List<DeliveryAddressDTO> actualResult = deliveryAddressService.findAll(1L);
 
         Assertions.assertEquals(1, actualResult.size());
         Assertions.assertEquals(expectedResult, actualResult);
@@ -124,7 +123,7 @@ public class DeliveryAddressServiceTests {
 
         List<DeliveryAddressDTO> expectedResult = List.of(DeliveryAddressMapper.toDto(deliveryAddress1),
                 DeliveryAddressMapper.toDto(deliveryAddress2));
-        List<DeliveryAddressDTO> actualResult = deliveryAddressService.getAll(1L);
+        List<DeliveryAddressDTO> actualResult = deliveryAddressService.findAll(1L);
 
         Assertions.assertEquals(2, actualResult.size());
         Assertions.assertEquals(expectedResult, actualResult);

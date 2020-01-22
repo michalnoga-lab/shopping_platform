@@ -43,7 +43,7 @@
                 </span>
             </td>
             <td>
-                <form method="post" action="/deliveryAddress/remove">
+                <form method="post" th:action="@{/deliveryAddress/remove/{id}(id=${a.id})}">
                     <label>
                         <input hidden="hidden" readonly="readonly" name="id" th:value="${a.id}">
                     </label>

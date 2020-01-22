@@ -16,4 +16,5 @@ public class DeliveryAddressDTO {
     private String street;
     private String phone;
     private UserDTO userDTO;
+    private Boolean hidden;
 }

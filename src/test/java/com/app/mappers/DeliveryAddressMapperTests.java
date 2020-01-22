@@ -22,6 +22,7 @@ public class DeliveryAddressMapperTests {
                 .street("Example address")
                 .phone("123456")
                 .user(User.builder().id(2L).build())
+                .hidden(false)
                 .build();
 
         DeliveryAddressDTO expectedResult = DeliveryAddressDTO.builder()
@@ -29,6 +30,7 @@ public class DeliveryAddressMapperTests {
                 .street("Example address")
                 .phone("123456")
                 .userDTO(UserDTO.builder().id(2L).build())
+                .hidden(false)
                 .build();
         DeliveryAddressDTO actualResult = DeliveryAddressMapper.toDto(deliveryAddress);
 
@@ -44,6 +46,7 @@ public class DeliveryAddressMapperTests {
                 .street("Example address")
                 .phone("123456")
                 .userDTO(UserDTO.builder().id(2L).build())
+                .hidden(false)
                 .build();
 
         DeliveryAddress expectedResult = DeliveryAddress.builder()
@@ -51,6 +54,7 @@ public class DeliveryAddressMapperTests {
                 .street("Example address")
                 .phone("123456")
                 .user(User.builder().id(2L).build())
+                .hidden(false)
                 .build();
 
         DeliveryAddress actualResult = DeliveryAddressMapper.fromDto(deliveryAddressDTO);

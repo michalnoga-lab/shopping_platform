@@ -13,6 +13,7 @@ import com.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,17 +24,17 @@ public class DeliveryAddressService {
     private final DeliveryAddressRepository deliveryAddressRepository;
     private final UserRepository userRepository;
 
-    public List<DeliveryAddressDTO> getAll(Long userId) {
+    public List<DeliveryAddressDTO> findAll(Long userId) {
         if (userId == null) {
-            throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "getAll - no user with ID: " + userId);
+            throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "findAll - no user with ID: " + userId);
         }
         if (userId <= 0) {
-            throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "getAll - ID less than zero: " + userId);
+            throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "findAll - ID less than zero: " + userId);
         }
-
         return deliveryAddressRepository
                 .findAll()
                 .stream()
+                .filter(address -> address.getHidden().equals(false))
                 .filter(address -> address.getUser().getId().equals(userId))
                 .map(DeliveryAddressMapper::toDto)
                 .collect(Collectors.toList());
@@ -57,17 +58,21 @@ public class DeliveryAddressService {
                 .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_DELIVERY, "add - no user with ID: " + userId));
 
         deliveryAddress.setUser(user);
+        deliveryAddress.setHidden(false);
         deliveryAddressRepository.save(deliveryAddress);
         return DeliveryAddressMapper.toDto(deliveryAddress);
     }
 
-    public void remove(Long addressId) {
+    public void hide(Long addressId) {
         if (addressId == null) {
-            throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "remove - ID is null");
+            throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "hide - ID is null");
         }
         if (addressId <= 0) {
-            throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "remove - no address with ID: " + addressId);
+            throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "hide - id less than zero");
         }
-        deliveryAddressRepository.deleteById(addressId);
+        DeliveryAddress deliveryAddress = deliveryAddressRepository.findById(addressId)
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_DELIVERY, "hide - no address with ID: " + addressId));
+        deliveryAddress.setHidden(true);
+        deliveryAddressRepository.save(deliveryAddress);
     }
 }

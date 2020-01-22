@@ -27,6 +27,8 @@ public class DeliveryAddress {
     @JoinColumn(name = "user_id")
     private User user;
 
+    private Boolean hidden;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,14 +42,5 @@ public class DeliveryAddress {
     @Override
     public int hashCode() {
         return Objects.hash(id, street, phone);
-    }
-
-    @Override
-    public String toString() {
-        return "DeliveryAddress{" +
-                "id=" + id +
-                ", street='" + street + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
     }
 }
