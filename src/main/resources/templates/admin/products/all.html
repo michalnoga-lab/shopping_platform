@@ -23,7 +23,7 @@
         <tbody class="table-body-custom" th:each="p:${products}">
         <tr>
             <td><p th:text="${p.name}"></p></td>
-            <td><p th:text="${p.companyDTO.name}+' PLN'"></td>
+            <td><p th:text="${p.companyDTO.name}"></td>
             <td><p th:text="${p.optimaCode}"></p>
                 <form method="post" th:action="@{/admin/products/removeCode/{id}(id=${p.id})}"
                       enctype="multipart/form-data">

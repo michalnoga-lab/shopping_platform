@@ -18,7 +18,7 @@ public class PrimaPlatformaApplication {
     // TODO: 2020-01-18 prices calculation as nett and gross
     // TODO: 2020-01-19 if product description is null than XML recives optima product description
     // TODO: 2020-01-19 company default price 
-    // TODO: 21.01.2020 jedno wyświetlanie adresów z ukrywaniem przycisku
+    // TODO: 22.01.2020 contact form - ideas
 
     /**
      *
