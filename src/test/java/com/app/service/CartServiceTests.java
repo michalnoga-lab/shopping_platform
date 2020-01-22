@@ -9,10 +9,7 @@ import com.app.mappers.UserMapper;
 import com.app.model.Cart;
 import com.app.model.Product;
 import com.app.model.User;
-import com.app.repository.CartRepository;
-import com.app.repository.DeliveryAddressRepository;
-import com.app.repository.ProductRepository;
-import com.app.repository.UserRepository;
+import com.app.repository.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,6 +41,9 @@ public class CartServiceTests { // TODO: 31.12.2019 all tests
     private DeliveryAddressRepository deliveryAddressRepository;
 
     @Autowired
+    private CompanyRepository companyRepository;
+
+    @Autowired
     private CartService cartService;
 
     @TestConfiguration
@@ -59,11 +59,14 @@ public class CartServiceTests { // TODO: 31.12.2019 all tests
         private ProductRepository productRepository;
 
         @MockBean
+        private CompanyRepository companyRepository;
+
+        @MockBean
         private DeliveryAddressRepository deliveryAddressRepository;
 
         @Bean
         public CartService cartService() {
-            return new CartService(cartRepository, userRepository, productRepository, deliveryAddressRepository);
+            return new CartService(cartRepository, userRepository, productRepository, companyRepository, deliveryAddressRepository);
         }
     }
 

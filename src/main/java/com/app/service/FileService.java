@@ -63,6 +63,8 @@ public class FileService {
                             companyOptional.orElseThrow(() -> new AppException(
                                     ExceptionCodes.SERVICE_FILES, "getProductsFromFile - no company with ID: " + companyId));
 
+                            // TODO: 22.01.2020 only default price, other null
+
                             productDTOS.add(ProductMapper.toDto(Product.builder()
                                     .name(lineSplit[0])
                                     .numberInAuction(lineSplit[1])
@@ -82,6 +84,7 @@ public class FileService {
 
                         } catch (Exception e) {
                             // TODO: 2020-01-18 exception to logs - line not added
+
                         }
                     });
 

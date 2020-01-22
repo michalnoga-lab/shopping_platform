@@ -55,25 +55,11 @@ public class Cart {
                 Objects.equals(totalVatValue, cart.totalVatValue) &&
                 Objects.equals(totalGrossValue, cart.totalGrossValue) &&
                 Objects.equals(cartClosed, cart.cartClosed) &&
-                Objects.equals(purchaseTime, cart.purchaseTime) &&
-                Objects.equals(deliveryAddress, cart.deliveryAddress);
+                Objects.equals(purchaseTime, cart.purchaseTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, totalNetValue, totalVatValue, totalGrossValue, cartClosed, purchaseTime, deliveryAddress);
-    }
-
-    @Override
-    public String toString() {
-        return "Cart{" +
-                "id=" + id +
-                ", totalNetValue=" + totalNetValue +
-                ", totalVatValue=" + totalVatValue +
-                ", totalGrossValue=" + totalGrossValue +
-                ", cartClosed=" + cartClosed +
-                ", purchaseTime=" + purchaseTime +
-                ", deliveryAddress=" + deliveryAddress +
-                '}';
+        return Objects.hash(id, totalNetValue, totalVatValue, totalGrossValue, cartClosed, purchaseTime);
     }
 }

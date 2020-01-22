@@ -23,7 +23,14 @@
         <tbody class="table-body-custom" th:each="c:${carts}">
         <tr>
             <td><p th:text="${c.cartClosed} ? 'ZAMKNIĘTY':'OTWARTY'"></p></td>
-            <td><p th:text="${c.totalGrossValue}+' PLN'"></p></td>
+            <td>
+                <div th:if="${c.totalNetValue}==null">
+                    <p th:text="${c.totalGrossValue}+' PLN'"></p>
+                </div>
+                <div th:if="${c.totalGrossValue}==null">
+                    <p th:text="${c.totalNetValue}+' PLN'"></p>
+                </div>
+            </td>
             <td><p th:text="${#temporals.format(c.purchaseTime, 'yyyy-MM-dd : HH:mm')}"></p></td>
             <td>
                 <form method="get" th:action="@{/carts/one/{id}(id=${c.id})}">

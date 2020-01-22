@@ -51,12 +51,11 @@ public class Company {
                 Objects.equals(streetNumber, company.streetNumber) &&
                 Objects.equals(city, company.city) &&
                 Objects.equals(postCode, company.postCode) &&
-                Objects.equals(active, company.active) &&
-                defaultPrice == company.defaultPrice;
+                Objects.equals(active, company.active);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, nip, street, streetNumber, city, postCode, active, defaultPrice);
+        return Objects.hash(id, name, nip, street, streetNumber, city, postCode, active);
     }
 }

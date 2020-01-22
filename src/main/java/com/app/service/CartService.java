@@ -5,18 +5,13 @@ import com.app.dto.ProductDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.CartMapper;
-import com.app.model.Cart;
-import com.app.model.DeliveryAddress;
-import com.app.model.Product;
-import com.app.model.User;
-import com.app.repository.CartRepository;
-import com.app.repository.DeliveryAddressRepository;
-import com.app.repository.ProductRepository;
-import com.app.repository.UserRepository;
+import com.app.model.*;
+import com.app.repository.*;
 import com.sun.tools.jconsole.JConsoleContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,6 +23,7 @@ public class CartService {
     private final CartRepository cartRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
+    private final CompanyRepository companyRepository;
     private final DeliveryAddressRepository deliveryAddressRepository;
 
     public CartDTO addProductToCart(ProductDTO productDTO, Long userId) {
@@ -60,7 +56,7 @@ public class CartService {
                     .stream()
                     .filter(prod -> prod.getId().equals(product.getId()))
                     .findFirst()
-                    .orElseThrow(() -> new IllegalArgumentException("No product in cart with ID: " + product.getId()));
+                    .orElseThrow(() -> new IllegalArgumentException("addProductToCart - no product in cart with ID: " + product.getId()));
 
             productAlreadyInCart.setQuantity(productAlreadyInCart.getQuantity() + product.getQuantity());
 
@@ -68,11 +64,63 @@ public class CartService {
             productsInCart.add(product);
         }
 
+        // TODO: 22.01.2020 jak to zoptymalizować ???
+        /**
+         * java.lang.StackOverflowError: null
+         * 	at java.base/java.util.HashMap$KeyIterator.<init>(HashMap.java:1516) ~[na:na]
+         * 	at java.base/java.util.HashMap$KeySet.iterator(HashMap.java:917) ~[na:na]
+         * 	at java.base/java.util.HashSet.iterator(HashSet.java:173) ~[na:na]
+         * 	at java.base/java.util.AbstractCollection.toString(AbstractCollection.java:449) ~[na:na]
+         * 	at org.hibernate.collection.internal.PersistentSet.toString(PersistentSet.java:328) ~[hibernate-core-5.3.11.Final.jar:5.3.11.Final]
+         * 	at java.base/java.lang.StringConcatHelper.stringOf(StringConcatHelper.java:439) ~[na:na]
+         * 	at com.app.model.Company.toString(Company.java:16) ~[classes/:na]
+         * 	at java.base/java.lang.StringConcatHelper.stringOf(StringConcatHelper.java:439) ~[na:na]
+         * 	at com.app.model.User.toString(User.java:16) ~[classes/:na]
+         */
+        /*Company company = companyRepository.findAll()
+                .stream()
+                .filter(cmp -> {
+                    Optional<User> userOptional = cmp.getUsers()
+                            .stream()
+                            .filter(u -> u.getCompany().getId().equals(cmp.getId()))
+                            .findFirst();
+                    return userOptional.isPresent();
+                })
+                .findFirst()
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART, "addProductToCart - no company for user with ID: " + userId));
+
+        System.out.println("----------------------------------------------------");
+        System.out.println(company);*/
+
+        if (productsInCart.iterator().next().getNettPrice() == null) {
+            cart.setTotalGrossValue(calculateCartValue(productsInCart));
+        } else {
+            cart.setTotalNetValue(calculateCartValue(productsInCart));
+        }
+
         cart.setProducts(productsInCart);
         cart.setUser(user);
         cartRepository.save(cart);
 
         return CartMapper.toDto(cart);
+    }
+
+    public BigDecimal calculateCartValue(Set<Product> productsInCart) {
+        if (productsInCart == null) {
+            throw new AppException(ExceptionCodes.SERVICE_CART, "calculateCartValue - products set is null");
+        }
+
+        if (productsInCart.iterator().next().getNettPrice() == null) {
+            return productsInCart
+                    .stream()
+                    .map(product -> product.getGrossPrice().multiply(BigDecimal.valueOf(product.getQuantity())))
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+        } else {
+            return productsInCart
+                    .stream()
+                    .map(product -> product.getNettPrice().multiply(BigDecimal.valueOf(product.getQuantity())))
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+        }
     }
 
     public List<CartDTO> getAllUsersCarts(Long userId) {

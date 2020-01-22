@@ -18,17 +18,20 @@
     <table class="table">
         <thead class="table-head-custom">
         <tr>
-            <td>WARTOŚĆ NETTO</td>
-            <td>WARTOŚĆ VAT</td>
-            <td>WARTOŚĆ BRUTTO</td>
+            <td>WARTOŚĆ KOSZYKA</td>
             <td>STATUS</td>
         </tr>
         </thead>
         <tbody class="table-body-custom">
         <tr>
-            <td><p th:text="${cart.totalNetValue}+' PLN'"></p></td>
-            <td><p th:text="${cart.totalVatValue}+' PLN'"></p></td>
-            <td><p th:text="${cart.totalGrossValue}+' PLN'"></p></td>
+            <td>
+                <div th:if="${cart.totalNetValue}==null">
+                    <p th:text="${cart.totalGrossValue}+' PLN' PLN'"></p>
+                </div>
+                <div th:if="${cart.totalGrossValue}==null">
+                    <p th:text="${cart.totalNetValue}+' PLN'"></p>
+                </div>
+            </td>
             <td><p th:text="${cart.cartClosed} ? 'ZAMKNIĘTY':'OTWARTY'"></p></td>
         </tr>
         </tbody>
