@@ -14,10 +14,7 @@ public class PrimaPlatformaApplication {
     // TODO: 2020-01-12 export orders to XML
     // TODO: 2020-01-12 passwords bcrypt + save hash only
     // TODO: 2020-01-12 backups
-    // TODO: 16.01.2020 nett and gross cart value
-    // TODO: 2020-01-18 prices calculation as nett and gross
     // TODO: 2020-01-19 if product description is null than XML recives optima product description
-    // TODO: 2020-01-19 company default price 
     // TODO: 22.01.2020 contact form - ideas
 
     /**

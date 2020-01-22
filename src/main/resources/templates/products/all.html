@@ -24,7 +24,7 @@
             <td><p th:text="${p.name}"></p></td>
             <td>
                 <span th:if="${p.grossPrice}==null" th:text="${p.nettPrice}+' PLN'"></span>
-                <span th:if="${p.nettPrice}==null" th:text="${p.grossPrice} + 'PLN'"></span>
+                <span th:if="${p.nettPrice}==null" th:text="${p.grossPrice} + ' PLN'"></span>
             </td>
             <td>
                 <form method="get" th:action="@{/products/buy/{id}(id=${p.id})}">
