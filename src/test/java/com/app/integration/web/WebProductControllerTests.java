@@ -1,4 +1,4 @@
-package com.app.integration;
+package com.app.integration.web;
 
 import com.app.PrimaPlatformaApplication;
 import org.junit.jupiter.api.DisplayName;
@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 )
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application.tests.properties")
-public class AdminProductControllerTests {
+public class WebProductControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -39,7 +39,7 @@ public class AdminProductControllerTests {
 
     @Test
     @DisplayName("buy/{id}")
-    void test2() throws Exception { // TODO: 2020-01-10 add ID filed
+    void test2() throws Exception { // TODO: 2020-01-15 ID filed
 
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/products/buy"))
@@ -49,7 +49,10 @@ public class AdminProductControllerTests {
 
     @Test
     @DisplayName("buy")
-    void test3() throws Exception { // TODO: 2020-01-10 product dto validation all fields are null
+    void test3() throws Exception {
+
+        // TODO: 2020-01-15 org.springframework.web.util.NestedServletException:
+        //  Request processing failed; nested exception is AppException{id=null, exceptionCode=VALIDATION, description='ProductDTO'}
 
         mockMvc
                 .perform(MockMvcRequestBuilders.post("/products/buy"))

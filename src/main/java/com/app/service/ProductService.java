@@ -1,5 +1,6 @@
 package com.app.service;
 
+import com.app.dto.CartDTO;
 import com.app.dto.CompanyDTO;
 import com.app.dto.ProductDTO;
 import com.app.dto.ProductSearchDTO;
@@ -109,9 +110,9 @@ public class ProductService {
         productRepository.saveAll(products);
     }
 
-    public void removeFromCart(Long productId, Long userId) {
+    public CartDTO removeFromCart(Long productId, Long userId) {
 
-        Optional<Cart> cartOptional = cartRepository.findByUserId(userId);
+        Optional<Cart> cartOptional = cartRepository.findByUserId(userId); // TODO: 2020-01-22 find by cart ID
         Cart cart = cartOptional.orElseThrow(() ->
                 new AppException(ExceptionCodes.SERVICE_PRODUCT, "removeFromCart - no cart with user ID: " + userId));
         Set<Product> products = cart.getProducts();
@@ -119,6 +120,7 @@ public class ProductService {
                 new AppException(ExceptionCodes.SERVICE_PRODUCT, "removeFromCart - no product with ID: " + productId));
         products.remove(product);
         cartRepository.save(cart);
+        return CartMapper.toDto(cart);
     }
 
     public void setCode(Long productId, String userInput) {
