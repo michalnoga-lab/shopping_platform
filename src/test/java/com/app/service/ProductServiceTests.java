@@ -100,8 +100,8 @@ public class ProductServiceTests {
         List<Product> products = List.of(product1, product2, product3, product4, product5);
 
         Mockito
-                .when(productRepository.findAll())
-                .thenReturn(products);
+                .when(productRepository.findById(1L))
+                .thenReturn(Optional.of(product1));
 
         ProductDTO expectedProduct = productService.getOneProduct(1L);
 

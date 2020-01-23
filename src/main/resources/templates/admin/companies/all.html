@@ -22,13 +22,14 @@
         </thead>
         <tbody class="table-body-custom" th:each="c:${companies}">
         <tr>
+
             <td><p th:text="${c.id}"></p></td>
-            <td><p th:text="${c.name}"></td>
+            <td><p th:text="${c.name}"></p></td>
             <td><p th:text="${c.active} ? 'AKTYWNA':'ZABLOKOWANA'"></p></td>
             <td>
-                <form method="post" th:action="@{/admin/companies/one/{id}(id=${c.id})}">
+                <form method="post" th:action="@{/admin/companies/one/{id}(id=${c.id})}" enctype="multipart/form-data">
                     <label>
-                        <input hidden="hidden" readonly="readonly" name="id" th:value="${c.id}">
+                        <input hidden="hidden" readonly="readonly" th:value="${c.id}">
                     </label>
                     <button class="btn btn-outline-dark btn-small" type="submit">PODGLĄD</button>
                 </form>

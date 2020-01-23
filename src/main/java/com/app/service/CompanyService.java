@@ -69,7 +69,7 @@ public class CompanyService {
         if (companyId <= 0) {
             throw new AppException(ExceptionCodes.SERVICE_COMPANY, "findById - company ID less than zero");
         }
-        return companyRepository.findAll()
+        return companyRepository.findById(companyId)
                 .stream()
                 .map(CompanyMapper::toDto)
                 .findFirst()

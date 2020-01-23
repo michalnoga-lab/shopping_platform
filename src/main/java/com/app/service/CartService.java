@@ -75,7 +75,6 @@ public class CartService {
         cart.setProducts(productsInCart);
         cart.setUser(user);
         cartRepository.save(cart);
-
         return CartMapper.toDto(cart);
     }
 

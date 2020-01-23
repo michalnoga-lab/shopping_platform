@@ -67,4 +67,19 @@ public class Product {
     public int hashCode() {
         return Objects.hash(id, name, numberInAuction, auctionIndex, description, quantity, nettPrice, vat);
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", numberInAuction='" + numberInAuction + '\'' +
+                ", auctionIndex='" + auctionIndex + '\'' +
+                ", description='" + description + '\'' +
+                ", quantity=" + quantity +
+                ", nettPrice=" + nettPrice +
+                ", vat=" + vat +
+                ", grossPrice=" + grossPrice +
+                '}';
+    }
 }
