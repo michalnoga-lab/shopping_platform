@@ -5,6 +5,7 @@ import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.ProductMapper;
 import com.app.model.Company;
+import com.app.model.Price;
 import com.app.model.Product;
 import com.app.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,10 +32,13 @@ public class FileService {
                 throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - file is not correct");
             }
             if (companyId == null) {
-                throw new AppException(ExceptionCodes.SERVICE_FILES, "getProductsFromFile - company id is null");
+                throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - company id is null");
             }
             if (companyId <= 0) {
-                throw new AppException(ExceptionCodes.SERVICE_FILES, "getProductsFromFile - company ID less than zero");
+                throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - company ID less than zero");
+            }
+            if (!file.getName().equals("upload.csv")) {
+                throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - incorrect file extension");
             }
 
             List<ProductDTO> productDTOS = new ArrayList<>();
@@ -60,10 +64,12 @@ public class FileService {
 
                             String[] lineSplit = linePured.split("(})");
                             Optional<Company> companyOptional = companyRepository.findById(companyId);
-                            companyOptional.orElseThrow(() -> new AppException(
+                            Company company = companyOptional.orElseThrow(() -> new AppException(
                                     ExceptionCodes.SERVICE_FILES, "getProductsFromFile - no company with ID: " + companyId));
 
                             // TODO: 22.01.2020 only default price, other null
+
+                            Price defaultPrice = company.getDefaultPrice(); // TODO: 23.01.2020
 
                             productDTOS.add(ProductMapper.toDto(Product.builder()
                                     .name(lineSplit[0])
@@ -79,7 +85,7 @@ public class FileService {
                                     .grossPrice(BigDecimal.valueOf(Double.parseDouble(lineSplit[6]
                                             .replaceAll("[złl\\s]", "")
                                             .replaceAll(",", "\\."))))
-                                    .company(companyOptional.get())
+                                    .company(company)
                                     .build()));
 
                         } catch (Exception e) {

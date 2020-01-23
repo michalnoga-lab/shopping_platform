@@ -5,15 +5,13 @@ import com.app.dto.ProductDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.CartMapper;
-import com.app.model.Cart;
-import com.app.model.DeliveryAddress;
-import com.app.model.Product;
-import com.app.model.User;
+import com.app.model.*;
 import com.app.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -66,34 +64,61 @@ public class CartService {
             productsInCart.add(product);
         }
 
-        if (productsInCart.iterator().next().getNettPrice() == null) {
-            cart.setTotalGrossValue(calculateCartValue(productsInCart));
-        } else {
-            cart.setTotalNetValue(calculateCartValue(productsInCart));
-        }
-
         cart.setProducts(productsInCart);
+
+        CartDTO cartValues = calculateCartValue(productsInCart, user.getCompany().getDefaultPrice());
+        cart.setTotalNetValue(cartValues.getTotalNetValue());
+        cart.setTotalVatValue(cartValues.getTotalVatValue());
+        cart.setTotalGrossValue(cartValues.getTotalGrossValue());
+
+
+        System.out.println("-------------------- 1 ---------------------");
+        System.out.println(user.getCompany().getDefaultPrice());
+
         cart.setUser(user);
         cartRepository.save(cart);
         return CartMapper.toDto(cart);
     }
 
-    public BigDecimal calculateCartValue(Set<Product> productsInCart) {
+    public CartDTO calculateCartValue(Set<Product> productsInCart, Price priceType) {
         if (productsInCart == null) {
             throw new AppException(ExceptionCodes.SERVICE_CART, "calculateCartValue - products set is null");
         }
+        CartDTO cartDTO = new CartDTO();
+        BigDecimal totalNetValue = BigDecimal.ZERO;
+        BigDecimal totalVatValue = BigDecimal.ZERO;
+        BigDecimal totalGrossValue = BigDecimal.ZERO;
 
-        if (productsInCart.iterator().next().getNettPrice() == null) {
-            return productsInCart
-                    .stream()
-                    .map(product -> product.getGrossPrice().multiply(BigDecimal.valueOf(product.getQuantity())))
-                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+        System.out.println("-------------- 2 ---------------");
+        System.out.println(priceType);
+
+
+        if (priceType.equals(Price.NET)) {
+            for (Product product : productsInCart) {
+                BigDecimal currentNetValue = product.getNettPrice().multiply(BigDecimal.valueOf(product.getQuantity()));
+                BigDecimal currentVatValue = currentNetValue.multiply(BigDecimal.valueOf(product.getVat()));
+                BigDecimal currentGrossValue = currentNetValue.add(currentVatValue);
+
+                totalNetValue = totalNetValue.add(currentGrossValue);
+                totalVatValue = totalVatValue.add(currentVatValue);
+                totalGrossValue = totalGrossValue.add(currentGrossValue);
+            }
         } else {
-            return productsInCart
-                    .stream()
-                    .map(product -> product.getNettPrice().multiply(BigDecimal.valueOf(product.getQuantity())))
-                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+            for (Product product : productsInCart) {
+                BigDecimal currentGrossValue = product.getGrossPrice().multiply(BigDecimal.valueOf(product.getQuantity()));
+                BigDecimal currentVatValue = currentGrossValue.divide(currentGrossValue, RoundingMode.HALF_DOWN);
+                BigDecimal currentNetValue = currentGrossValue.subtract(currentVatValue);
+
+                totalGrossValue = totalGrossValue.add(currentGrossValue);
+                totalVatValue = totalVatValue.add(currentVatValue);
+                totalNetValue = totalNetValue.add(currentNetValue);
+            }
         }
+
+        cartDTO.setTotalNetValue(totalNetValue);
+        cartDTO.setTotalVatValue(totalVatValue);
+        cartDTO.setTotalGrossValue(totalGrossValue);
+        return cartDTO;
     }
 
     public List<CartDTO> getAllUsersCarts(Long userId) {
