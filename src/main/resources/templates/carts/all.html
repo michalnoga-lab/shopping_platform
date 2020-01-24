@@ -15,7 +15,8 @@
         <thead class="table-head-custom">
         <tr>
             <td>STATUS</td>
-            <td>WARTOŚĆ</td>
+            <td>WARTOŚĆ NETTO</td>
+            <td>WARTOŚĆ BRUTTO</td>
             <td>Z DNIA</td>
             <td>AKCJA</td>
         </tr>
@@ -23,10 +24,9 @@
         <tbody class="table-body-custom" th:each="c:${carts}">
         <tr>
             <td><p th:text="${c.cartClosed} ? 'ZAMKNIĘTY':'OTWARTY'"></p></td>
-            <td><span th:if="${c.totalNetValue}==null" th:text="${c.totalGrossValue}+' PLN'"></span>
-                <span th:if="${c.totalGrossValue}==null" th:text="${c.totalNetValue}+' PLN'"></span>
-            </td>
-            <td><p th:text="${#temporals.format(c.purchaseTime, 'yyyy-MM-dd : HH:mm')}"></p></td>
+            <td><p th:text="${c.totalGrossValue}+' PLN'"></p>
+            <td><p th:text="${c.totalNetValue}+' PLN'"></p></td>
+            <td><p th:text="${#temporals.format(c.purchaseTime, 'yyyy-MM-dd HH:mm:ss')}"></p></td>
             <td>
                 <form method="get" th:action="@{/carts/one/{id}(id=${c.id})}">
                     <label>

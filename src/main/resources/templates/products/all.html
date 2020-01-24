@@ -15,17 +15,16 @@
         <thead class="table-head-custom">
         <tr>
             <td>NAZWA</td>
-            <td>CENA</td>
+            <td>CENA NETTO</td>
+            <td>CENA BRUTTO</td>
             <td>AKCJA</td>
         </tr>
         </thead>
         <tbody class="table-body-custom" th:each="p:${products}">
         <tr>
             <td><p th:text="${p.name}"></p></td>
-            <td>
-                <span th:if="${p.grossPrice}==null" th:text="${p.nettPrice}+' PLN'"></span> <!-- todo both prices-->
-                <span th:if="${p.nettPrice}==null" th:text="${p.grossPrice} + ' PLN'"></span>
-            </td>
+            <td><p th:text="${p.nettPrice}+' PLN'"></p></td>
+            <td><p th:text="${p.grossPrice}+' PLN'"></p></td>
             <td>
                 <form method="get" th:action="@{/products/buy/{id}(id=${p.id})}">
                     <label>
