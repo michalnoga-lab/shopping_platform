@@ -22,16 +22,15 @@
     <table class="table">
         <thead class="table-head-custom">
         <tr>
-            <td>WARTOŚĆ KOSZYKA</td>
+            <td>WARTOŚĆ NETTO</td>
+            <td>WARTOŚĆ BRUTTO</td>
             <td>STATUS</td>
         </tr>
         </thead>
         <tbody class="table-body-custom">
         <tr>
-            <td>
-                <span th:if="${cart.totalNetValue}==null" th:text="${cart.totalGrossValue}+' PLN' PLN'"></span>
-                <span th:if="${cart.totalGrossValue}==null" th:text="${cart.totalNetValue}+' PLN'"></span>
-            </td>
+            <td><p th:text="${cart.totalNetValue}+' PLN'"></p></td>
+            <td><p th:text="${cart.totalGrossValue}+ ' PLN'"></p></td>
             <td><p th:text="${cart.cartClosed} ? 'ZAMKNIĘTY':'OTWARTY'"></p></td>
         </tr>
         </tbody>
