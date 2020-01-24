@@ -23,12 +23,28 @@
             <td><p th:text="${product.name}"></td>
         </tr>
         <tr>
+            <td>NUMER W KALKULACJI</td>
+            <td><p th:text="${product.numberInAuction}"></p></td>
+        </tr>
+        <tr>
+            <td>INDEKS</td>
+            <td><p th:if="${product.auctionIndex}==null ? 'NIE PODANO':${product.auctionIndex}"></p></td>
+        </tr>
+        <tr>
             <td>OPIS</td>
             <td><p th:text="${product.description}"></p></td>
         </tr>
         <tr>
             <td>CENA NETTO</td>
             <td><p th:text="${product.nettPrice}+' PLN'"></p></td>
+        </tr>
+        <tr>
+            <td>STAWKA VAT</td>
+            <td><p th:text="${product.vat}+' %'"></p></td>
+        </tr>
+        <tr>
+            <td>CENA BRUTTO</td>
+            <td><p th:text="${product.grossPrice}+' PLN'"></p></td>
         </tr>
         </tbody>
     </table>

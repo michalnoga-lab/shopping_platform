@@ -1,6 +1,7 @@
 package com.app.tools;
 
 import com.app.model.Company;
+import com.app.model.Price;
 import com.app.model.Product;
 import com.app.model.User;
 import com.app.repository.CompanyRepository;
@@ -24,6 +25,7 @@ public class dataInitialization implements CommandLineRunner { // TODO: 2019-09-
     Company company1 = Company.builder()
             .name("company 1")
             .nip("123456")
+            .defaultPrice(Price.NET)
             .build();
     Company company2 = Company.builder()
             .name("company 2")
@@ -39,7 +41,11 @@ public class dataInitialization implements CommandLineRunner { // TODO: 2019-09-
             .name("name 2")
             .build();
 
-    Product product1 = Product.builder().name("Prod1").nettPrice(BigDecimal.valueOf(2.44)).build();
+    Product product1 = Product.builder().name("Prod1")
+            .nettPrice(BigDecimal.valueOf(2.44))
+            .vat(23.0)
+            .grossPrice(BigDecimal.valueOf(15))
+            .build();
     Product product2 = Product.builder().name("Prod2").build();
     Product product3 = Product.builder().name("Prod3").build();
 

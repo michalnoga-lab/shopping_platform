@@ -23,7 +23,7 @@
         <tr>
             <td><p th:text="${p.name}"></p></td>
             <td>
-                <span th:if="${p.grossPrice}==null" th:text="${p.nettPrice}+' PLN'"></span>
+                <span th:if="${p.grossPrice}==null" th:text="${p.nettPrice}+' PLN'"></span> <!-- todo both prices-->
                 <span th:if="${p.nettPrice}==null" th:text="${p.grossPrice} + ' PLN'"></span>
             </td>
             <td>

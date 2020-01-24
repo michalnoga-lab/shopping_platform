@@ -114,7 +114,6 @@ public class CartService {
                 totalNetValue = totalNetValue.add(currentNetValue);
             }
         }
-
         cartDTO.setTotalNetValue(totalNetValue);
         cartDTO.setTotalVatValue(totalVatValue);
         cartDTO.setTotalGrossValue(totalGrossValue);
