@@ -71,10 +71,6 @@ public class CartService {
         cart.setTotalVatValue(cartValues.getTotalVatValue());
         cart.setTotalGrossValue(cartValues.getTotalGrossValue());
 
-
-        System.out.println("-------------------- 1 ---------------------");
-        System.out.println(user.getCompany().getDefaultPrice());
-
         cart.setUser(user);
         cartRepository.save(cart);
         return CartMapper.toDto(cart);
@@ -89,17 +85,13 @@ public class CartService {
         BigDecimal totalVatValue = BigDecimal.ZERO;
         BigDecimal totalGrossValue = BigDecimal.ZERO;
 
-        System.out.println("-------------- 2 ---------------");
-        System.out.println(priceType);
-
-
         if (priceType.equals(Price.NET)) {
             for (Product product : productsInCart) {
                 BigDecimal currentNetValue = product.getNettPrice().multiply(BigDecimal.valueOf(product.getQuantity()));
                 BigDecimal currentVatValue = currentNetValue.multiply(BigDecimal.valueOf(product.getVat()));
                 BigDecimal currentGrossValue = currentNetValue.add(currentVatValue);
 
-                totalNetValue = totalNetValue.add(currentGrossValue);
+                totalNetValue = totalNetValue.add(currentNetValue);
                 totalVatValue = totalVatValue.add(currentVatValue);
                 totalGrossValue = totalGrossValue.add(currentGrossValue);
             }

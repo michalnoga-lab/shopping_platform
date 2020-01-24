@@ -67,10 +67,6 @@ public class FileService {
                             Company company = companyOptional.orElseThrow(() -> new AppException(
                                     ExceptionCodes.SERVICE_FILES, "getProductsFromFile - no company with ID: " + companyId));
 
-                            // TODO: 22.01.2020 only default price, other null
-
-                            Price defaultPrice = company.getDefaultPrice(); // TODO: 23.01.2020
-
                             productDTOS.add(ProductMapper.toDto(Product.builder()
                                     .name(lineSplit[0])
                                     .numberInAuction(lineSplit[1])
