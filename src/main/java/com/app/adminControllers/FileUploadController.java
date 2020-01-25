@@ -1,8 +1,6 @@
 package com.app.adminControllers;
 
-import com.app.dto.CompanyDTO;
 import com.app.dto.CompanySearchDTO;
-import com.app.dto.ProductSearchDTO;
 import com.app.service.FileService;
 import com.app.service.ProductService;
 import com.app.validators.CompanySearchDtoValidator;
@@ -50,7 +48,7 @@ public class FileUploadController {
                     .stream()
                     .collect(Collectors.toMap(FieldError::getField, FieldError::getCode));
             model.addAttribute("productSearch", new CompanySearchDTO());
-            model.addAttribute("errors", new HashMap<>());
+            model.addAttribute("errors", errors);
             return "admin/products/add";
         }
 
