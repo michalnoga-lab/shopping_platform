@@ -44,6 +44,5 @@ public class UserValidator implements Validator {
         } catch (Exception e) {
             throw new AppException(ExceptionCodes.VALIDATION, "UserDto");
         }
-
     }
 }

@@ -34,7 +34,7 @@ public class UserService {
                 .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_USER, "findUserByLogin - no user with login:" + login));
     }
 
-    public void addUser(UserDTO userDTO) {
+    public UserDTO addUser(UserDTO userDTO) {
         if (userDTO == null) {
             throw new AppException(ExceptionCodes.SERVICE_USER, "addUser - user is null");
         }
@@ -42,6 +42,7 @@ public class UserService {
         user.setEnabled(true);
         user.setRole(Role.USER);
         userRepository.save(user);
+        return UserMapper.toDto(user);
     }
 
     public List<UserDTO> findAll() {

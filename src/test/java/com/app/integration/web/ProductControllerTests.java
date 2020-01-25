@@ -95,4 +95,16 @@ public class ProductControllerTests {
     private static String toJson(ProductDTO productDTO) throws JsonProcessingException {
         return new ObjectMapper().writeValueAsString(productDTO);
     }
+
+    @Test
+    @DisplayName("remove/{id}")
+    void test4() throws Exception {
+
+        mockMvc
+                .perform(MockMvcRequestBuilders.post("/products/remove/{id}", 1L)
+                        .contentType(MediaType.TEXT_HTML))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+        // TODO: 2020-01-25 org.thymeleaf.exceptions.TemplateProcessingException:
+        //  Exception evaluating SpringEL expression: "cart.cartClosed==false" (template: "carts/one" - line 14, col 10)
+    }
 }

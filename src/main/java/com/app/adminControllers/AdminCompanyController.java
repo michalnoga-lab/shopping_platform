@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("admin/companies")
-public class CompanyController {
+public class AdminCompanyController {
 
     private final CompanyService companyService;
 

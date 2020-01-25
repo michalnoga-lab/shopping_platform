@@ -1,9 +1,10 @@
 package com.app.integration.admin;
 
 import com.app.PrimaPlatformaApplication;
-import com.app.dto.CompanyDTO;
-import com.app.model.Company;
-import com.app.service.CompanyService;
+import com.app.dto.UserDTO;
+import com.app.model.User;
+import com.app.service.UserService;
+import com.app.validators.UserValidator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,20 +28,20 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 )
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application.tests.properties")
-public class AdminCompanyControllerTests {
+public class AdminUserControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private CompanyService companyService;
+    private UserService userService;
 
     @Test
     @DisplayName("add - GET")
     void test1() throws Exception {
 
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/admin/companies/add")
+                .perform(MockMvcRequestBuilders.get("/admin/users/add")
                         .contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
@@ -50,18 +51,20 @@ public class AdminCompanyControllerTests {
     @DisplayName("add - POST")
     void test2() throws Exception {
 
-        CompanyDTO inputCompany = CompanyDTO.builder().id(1L).build();
-        CompanyDTO companyDTO = CompanyDTO.builder().id(1L).build();
+        UserDTO inputUser = UserDTO.builder().id(1L).build();
+        UserDTO userDTO = UserDTO.builder().id(1L).build();
 
         Mockito
-                .when(companyService.add(inputCompany))
-                .thenReturn(companyDTO);
+                .when(userService.addUser(inputUser))
+                .thenReturn(userDTO);
 
         mockMvc
-                .perform(MockMvcRequestBuilders.post("/admin/companies/add")
+                .perform(MockMvcRequestBuilders.post("/admin/users/add")
                         .contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
+        // TODO: 2020-01-25 org.springframework.web.util.NestedServletException: Request processing failed;
+        //  nested exception is AppException{id=null, exceptionCode=VALIDATION, description='UserDto'}
     }
 
     @Test
@@ -69,62 +72,50 @@ public class AdminCompanyControllerTests {
     void test3() throws Exception {
 
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/admin/companies/all")
+                .perform(MockMvcRequestBuilders.get("/admin/users/all")
                         .contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }
 
     @Test
-    @DisplayName(("one/{id}"))
+    @DisplayName("one/{id}")
     void test4() throws Exception {
 
-        Company company = Company.builder().id(1L).build();
-        CompanyDTO companyDTO = CompanyDTO.builder().id(1L).build();
+        UserDTO userDTO = UserDTO.builder().id(1L).build();
 
         Mockito
-                .when(companyService.findById(company.getId()))
-                .thenReturn(companyDTO);
+                .when(userService.findById(userDTO.getId()))
+                .thenReturn(userDTO);
 
         mockMvc
-                .perform(MockMvcRequestBuilders.post("/admin/companies/one/{id}", 1L)
+                .perform(MockMvcRequestBuilders.post("/admin/users/one/{id}", 1L)
                         .contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
+        // TODO: 2020-01-25 org.thymeleaf.exceptions.TemplateProcessingException: Exception evaluating SpringEL expression:
+        //  "user.companyDTO.name" (template: "/admin/users/one" - line 32, col 20)
     }
 
     @Test
-    @DisplayName("edit/{id}")
+    @DisplayName("disable")
     void test5() throws Exception {
 
-        Company company = Company.builder().id(1L).build();
-        CompanyDTO companyDTO = CompanyDTO.builder().id(1L).build();
-
-        Mockito
-                .when(companyService.edit(company.getId()))
-                .thenReturn(companyDTO);
-
         mockMvc
-                .perform(MockMvcRequestBuilders.post("/admin/companies/edit/{id}", 1L)
+                .perform(MockMvcRequestBuilders.post("/admin/users/disable/{id}", 1L)
                         .contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
     }
 
     @Test
-    @DisplayName("enable/{id}")
+    @DisplayName("enable")
     void test6() throws Exception {
 
         mockMvc
-                .perform(MockMvcRequestBuilders.post("/admin/companies/enable/{id}", 1L))
+                .perform(MockMvcRequestBuilders.post("/admin/users/enable/{id}", 1L)
+                        .contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
     }
 
-    @Test
-    @DisplayName("disable/{id}")
-    void test7() throws Exception {
-
-        mockMvc
-                .perform(MockMvcRequestBuilders.post("/admin/companies/disable/{id}", 1L))
-                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
-    }
+    // TODO: 2020-01-25 edit test
 }

@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 )
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application.tests.properties")
-public class PanelControllerTests {
+public class AdminPanelControllerTests {
 
     @Autowired
     private MockMvc mockMvc;

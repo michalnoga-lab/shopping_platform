@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("admin/users")
-public class UserController {
+public class AdminUserController {
 
     private final UserService userService;
 
