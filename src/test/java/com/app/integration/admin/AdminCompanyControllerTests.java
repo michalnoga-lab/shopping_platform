@@ -19,8 +19,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import javax.print.attribute.standard.Media;
-
 @ExtendWith(SpringExtension.class)
 
 @SpringBootTest(
@@ -38,7 +36,7 @@ public class AdminCompanyControllerTests {
     private CompanyService companyService;
 
     @Test
-    @DisplayName("add")
+    @DisplayName("add - GET")
     void test1() throws Exception {
 
         mockMvc
@@ -49,7 +47,7 @@ public class AdminCompanyControllerTests {
     }
 
     @Test
-    @DisplayName("add")
+    @DisplayName("add - POST")
     void test2() throws Exception {
 
         CompanyDTO inputCompany = CompanyDTO.builder().id(1L).build();
@@ -77,5 +75,56 @@ public class AdminCompanyControllerTests {
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }
 
+    @Test
+    @DisplayName(("one/{id}"))
+    void test4() throws Exception {
 
+        Company company = Company.builder().id(1L).build();
+        CompanyDTO companyDTO = CompanyDTO.builder().id(1L).build();
+
+        Mockito
+                .when(companyService.findById(company.getId()))
+                .thenReturn(companyDTO);
+
+        mockMvc
+                .perform(MockMvcRequestBuilders.post("/admin/companies/one/{id}", 1L)
+                        .contentType(MediaType.TEXT_HTML))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
+    }
+
+    @Test
+    @DisplayName("edit/{id}")
+    void test5() throws Exception {
+
+        Company company = Company.builder().id(1L).build();
+        CompanyDTO companyDTO = CompanyDTO.builder().id(1L).build();
+
+        Mockito
+                .when(companyService.edit(company.getId()))
+                .thenReturn(companyDTO);
+
+        mockMvc
+                .perform(MockMvcRequestBuilders.post("/admin/companies/edit/{id}", 1L)
+                        .contentType(MediaType.TEXT_HTML))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+    }
+
+    @Test
+    @DisplayName("enable/{id}")
+    void test6() throws Exception {
+
+        mockMvc
+                .perform(MockMvcRequestBuilders.post("/admin/companies/enable/{id}", 1L))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+    }
+
+    @Test
+    @DisplayName("disable/{id}")
+    void test7() throws Exception {
+
+        mockMvc
+                .perform(MockMvcRequestBuilders.post("/admin/companies/disable/{id}", 1L))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+    }
 }

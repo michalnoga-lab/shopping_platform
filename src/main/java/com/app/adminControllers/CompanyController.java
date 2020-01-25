@@ -55,8 +55,9 @@ public class CompanyController {
     }
 
     @PostMapping("edit/{id}")
-    public String edit(@PathVariable Long id) {
-        return ""; // TODO: 21.01.2020 edit
+    public String edit(@PathVariable Long id, Model model) {
+        model.addAttribute("company", companyService.edit(id));
+        return "redirect:/admin/companies/all"; // TODO: 2020-01-25 TODO: jak przekazać ID powrotu do strony ???
     }
 
     @PostMapping("enable/{id}")

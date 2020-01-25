@@ -88,4 +88,17 @@ public class CompanyService {
         company.setActive(enabled);
         companyRepository.save(company);
     }
+
+    public CompanyDTO edit(Long companyId) {
+        if (companyId == null) {
+            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "edit - company ID is null");
+        }
+        if (companyId <= 0) {
+            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "edit - company ID less than zero");
+        }
+
+        // TODO: 2020-01-25 edit company
+
+        return CompanyDTO.builder().id(1L).build();
+    }
 }
