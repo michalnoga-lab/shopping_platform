@@ -6,6 +6,7 @@ import com.app.dto.ProductSearchDTO;
 import com.app.service.ProductService;
 import com.app.validators.GeneralUserInputDtoValidator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,7 +33,7 @@ public class AdminProductController {
         webDataBinder.setValidator(generalUserInputDtoValidator);
     }
 
-    @GetMapping("/all")
+    @GetMapping("all")
     public String all(Model model) {
         model.addAttribute("products", productService.findAll());
         model.addAttribute("generalUserInput", new GeneralUserInputDTO());
@@ -40,7 +41,7 @@ public class AdminProductController {
         return "admin/products/all";
     }
 
-    @PostMapping("/addCode/{id}")
+    @PostMapping("addCode/{id}")
     public String addCode(@PathVariable Long id, @Valid @ModelAttribute GeneralUserInputDTO generalUserInputDTO,
                           BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -56,7 +57,7 @@ public class AdminProductController {
         return "redirect:/admin/products/all";
     }
 
-    @PostMapping("removeCode/{id}")
+    @PostMapping(value = "removeCode/{id}")
     public String removeCode(@PathVariable Long id) {
         productService.removeCode(id);
         return "redirect:/admin/products/all";

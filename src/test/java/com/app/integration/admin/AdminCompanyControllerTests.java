@@ -1,12 +1,13 @@
 package com.app.integration.admin;
 
 import com.app.PrimaPlatformaApplication;
-import com.app.dto.GeneralUserInputDTO;
-import com.app.service.ProductService;
-import com.app.validators.GeneralUserInputDtoValidator;
+import com.app.dto.CompanyDTO;
+import com.app.model.Company;
+import com.app.service.CompanyService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +19,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import javax.print.attribute.standard.Media;
+
 @ExtendWith(SpringExtension.class)
 
 @SpringBootTest(
@@ -26,57 +29,53 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 )
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application.tests.properties")
-public class AdminProductControllerTests {
+public class AdminCompanyControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private ProductService productService;
-
-    @MockBean
-    private GeneralUserInputDTO generalUserInputDTO;
-
-    @MockBean
-    private GeneralUserInputDtoValidator generalUserInputDtoValidator;
+    private CompanyService companyService;
 
     @Test
-    @DisplayName("all")
+    @DisplayName("add")
     void test1() throws Exception {
 
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/admin/products/all").contentType(MediaType.TEXT_HTML))
+                .perform(MockMvcRequestBuilders.get("/admin/companies/add")
+                        .contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }
 
     @Test
-    @DisplayName("addCode/{id}")
+    @DisplayName("add")
     void test2() throws Exception {
 
-        // TODO: 2020-01-25 org.springframework.web.util.NestedServletException:
-        //  Request processing failed; nested exception is java.lang.IllegalStateException:
-        //  Invalid target for Validator [generalUserInputDtoValidator bean]: GeneralUserInputDTO(userInput=null)
+        CompanyDTO inputCompany = CompanyDTO.builder().id(1L).build();
+        CompanyDTO companyDTO = CompanyDTO.builder().id(1L).build();
+
+        Mockito
+                .when(companyService.add(inputCompany))
+                .thenReturn(companyDTO);
 
         mockMvc
-                .perform(MockMvcRequestBuilders.post("/admin/products/addCode/{id}", 1L)
+                .perform(MockMvcRequestBuilders.post("/admin/companies/add")
                         .contentType(MediaType.TEXT_HTML))
-                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }
 
     @Test
-    @DisplayName("removeCode/{id}")
+    @DisplayName("all")
     void test3() throws Exception {
 
         mockMvc
-                .perform(MockMvcRequestBuilders.post("/admin/products/removeCode/{id}", 1L)
+                .perform(MockMvcRequestBuilders.get("/admin/companies/all")
                         .contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-
-                // TODO: 2020-01-25 java.lang.AssertionError: Status expected:<200> but was:<302>
-                // TODO: 2020-01-25 po zmianie na 302 - java.lang.AssertionError: Content type not set
-
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }
+
+
 }
