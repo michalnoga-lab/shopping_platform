@@ -15,8 +15,9 @@
         <div class="form-group">
             <label class="text-secondary" for="street">ADRES DOSTAWY</label>
             <input id="street" type="text" class="form-control" th:field="*{street}"/>
+            <p id="streetFeedback"></p>
         </div>
-        <p class="text text-danger" th:if="${errors.containsKey('street')}" th:text="${errors.get('street')}"></p>
+        <!--<p class="text text-danger" th:if="${errors.containsKey('street')}" th:text="${errors.get('street')}"></p> todo -->
         <div class="form-group">
             <label class="text-secondary" for="phone">TELEFON KONTAKTOWY</label>
             <input id="phone" type="text" class="form-control" th:field="*{phone}"/>
@@ -27,8 +28,8 @@
         </div>
     </form>
 
+    <script src="/js/deliveryAddress.js"></script>
     <div th:replace="/fragments/footer">FOOTER</div>
-
 </div>
 
 </body>

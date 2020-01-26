@@ -26,3 +26,16 @@
     background: white;
     margin-top: 0;
 }
+
+/*todo*/
+input:invalid {
+    border: 2px brown;
+}
+
+input:invalid:required {
+    border: 2px blueviolet;
+}
+
+input:valid {
+    border: 2px solid limegreen;
+}

@@ -1,1 +1,1 @@
-console.log('HELLO FROM KM');
+console.log('HELLO');
