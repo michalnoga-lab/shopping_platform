@@ -10,11 +10,11 @@
 
 <div class="container">
     <h5 class="top-page-text">WYSZUKIWARKA</h5>
-    <p class="top-page-text-details">
-        <strong class="d-block text-gray-dark">@wyszukiwanie produktów</strong>
-        zostaną przeszukane wszystkie nazwy produktów, jeżeli którakolwiek zawiera szukany tekst to taki produkt
-        zostanie wyświetlony produkt
-    </p>
+    <div class="top-page-text-details">
+        <p class="top-page-text-details-at">@wyszukiwanie produktów</p>
+        <p class="top-page-text-details-text">zostaną przeszukane wszystkie nazwy produktów, jeżeli którakolwiek zawiera
+            szukany tekst to taki produkt zostanie wyświetlony</p>
+    </div>
 
     <form method="post" th:action="@{/search/products}" th:object="${productSearch}" enctype="multipart/form-data">
         <div class="form-group">

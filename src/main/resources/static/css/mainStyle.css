@@ -5,11 +5,24 @@
 }
 
 .top-page-text-details {
-    padding: 1rem;
+    font-size: small;
+    font-weight: bolder;
+    color: dimgrey;
+
     background: white;
     box-shadow: whitesmoke;
-    font-size: small;
     border-bottom: 1px dotted;
-    border-bottom-color: grey;
-    opacity: 0.5;
+    border-bottom-color: dimgrey;
+    margin-top: 1rem;
+}
+
+.top-page-text-details-at {
+    margin-bottom: 0;
+}
+
+.top-page-text-details-text {
+    font-weight: normal;
+    color: grey;
+    background: white;
+    margin-top: 0;
 }

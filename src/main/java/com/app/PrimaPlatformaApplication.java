@@ -16,6 +16,8 @@ public class PrimaPlatformaApplication {
     // TODO: 2020-01-12 backups
     // TODO: 2020-01-19 if product description is null than XML recives optima product description
     // TODO: 22.01.2020 contact form - ideas
+    // TODO: 2020-01-25 invalid login counter
+    // TODO: 2020-01-25 http only and secure flags 
 
     /**
      *

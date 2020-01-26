@@ -11,21 +11,19 @@
 
 <div class="container">
     <h5 class="top-page-text">PODSUMOWANIE</h5>
-    <p class="top-page-text-details">
-        <strong class="d-block text-gray-dark">@produkty</strong>
-        produkty znajdują się w koszyku
-    </p>
-    <p class="top-page-text-details">
-        <strong class="d-block text-gray-dark">@adres</strong>
-        adres dostawy został ustawiony
-    </p>
-    <p class="top-page-text-details">
-        <strong class="d-block text-gray-dark">@stan zamówienia</strong>
-        zamówienie jest przygotowane do realizacji
-    </p>
+    <div class="top-page-text-details">
+        <p class="top-page-text-details-at">@produkty</p>
+        <p class="top-page-text-details-text">produkty znajdują się w koszyku</p>
+    </div>
+    <div class="top-page-text-details">
+        <p class="top-page-text-details-at">@adres</p>
+        <p class="top-page-text-details-text">adres dostawy został ustawiony</p>
+    </div>
+    <div class="top-page-text-details">
+        <p class="top-page-text-details-at">@stan zamówienia</p>
+        <p class="top-page-text-details-text">zamówienie jest przygotowane do realizacji</p>
+    </div>
     <form method="get" th:action="@{/carts/closed}">
-        <!--<a href="/carts/closed" class="btn btn-outline-dark btn-lg btn-block" role="button">PRZEŚLIJ ZAMÓWIENIE DO
-            REALIZACJI</a>-->
         <button class="btn btn-outline-dark btn-lg btn-block" type="submit">PRZEŚLIJ ZAMÓWIENIE DO
             REALIZACJI
         </button>
