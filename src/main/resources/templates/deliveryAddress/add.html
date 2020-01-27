@@ -17,7 +17,7 @@
             <input id="street" type="text" class="form-control" th:field="*{street}"/>
             <p id="streetFeedback"></p>
         </div>
-        <!--<p class="text text-danger" th:if="${errors.containsKey('street')}" th:text="${errors.get('street')}"></p> todo -->
+        <p class="text text-danger" th:if="${errors.containsKey('street')}" th:text="${errors.get('street')}"></p>
         <div class="form-group">
             <label class="text-secondary" for="phone">TELEFON KONTAKTOWY</label>
             <input id="phone" type="text" class="form-control" th:field="*{phone}"/>

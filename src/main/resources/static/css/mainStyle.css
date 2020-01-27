@@ -27,15 +27,14 @@
     margin-top: 0;
 }
 
-/*todo*/
-input:invalid {
-    border: 2px brown;
-}
+/*input:valid:focus {   todo
+    outline: 0;
+    border: none;
+    box-shadow: 0 0 3px 6px lawngreen;
+}*/
 
-input:invalid:required {
-    border: 2px blueviolet;
-}
-
-input:valid {
-    border: 2px solid limegreen;
+input:invalid:focus {
+    outline: 0;
+    border: none;
+    box-shadow: 0 0 3px 6px red;
 }
