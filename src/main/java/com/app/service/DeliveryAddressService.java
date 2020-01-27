@@ -63,7 +63,7 @@ public class DeliveryAddressService {
         return DeliveryAddressMapper.toDto(deliveryAddress);
     }
 
-    public void hide(Long addressId) {
+    public DeliveryAddressDTO hide(Long addressId) {
         if (addressId == null) {
             throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "hide - ID is null");
         }
@@ -74,5 +74,6 @@ public class DeliveryAddressService {
                 .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_DELIVERY, "hide - no address with ID: " + addressId));
         deliveryAddress.setHidden(true);
         deliveryAddressRepository.save(deliveryAddress);
+        return DeliveryAddressMapper.toDto(deliveryAddress);
     }
 }

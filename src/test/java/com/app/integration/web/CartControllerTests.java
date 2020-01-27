@@ -1,4 +1,4 @@
-package com.app.integration;
+package com.app.integration.web;
 
 import com.app.PrimaPlatformaApplication;
 import com.app.controllers.CartController;
