@@ -32,6 +32,7 @@ public class DeliveryAddressMapperTests {
                 .userDTO(UserDTO.builder().id(2L).build())
                 .hidden(false)
                 .build();
+
         DeliveryAddressDTO actualResult = DeliveryAddressMapper.toDto(deliveryAddress);
 
         Assertions.assertEquals(expectedResult, actualResult);
