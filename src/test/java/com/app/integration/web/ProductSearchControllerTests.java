@@ -1,29 +1,31 @@
 package com.app.integration.web;
 
 import com.app.PrimaPlatformaApplication;
-import com.app.controllers.CartController;
-import com.app.dto.CartDTO;
-import com.app.mappers.CartMapper;
-import com.app.model.Cart;
-import com.app.repository.CartRepository;
-import com.app.service.CartService;
+import com.app.dto.ProductSearchDTO;
+import com.app.mappers.ProductMapper;
+import com.app.model.Product;
+import com.app.repository.ProductRepository;
+import com.app.service.ProductService;
+import com.app.validators.ProductSearchDtoValidator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
-import java.util.Optional;
+import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 
@@ -32,63 +34,48 @@ import java.util.Optional;
         classes = PrimaPlatformaApplication.class
 )
 @AutoConfigureMockMvc
+@ContextConfiguration(classes = {ProductSearchDtoValidator.class, ProductSearchDTO.class}) // TODO: 28.01.2020
 @TestPropertySource(locations = "classpath:application.tests.properties")
-public class CartControllerTests {
+public class ProductSearchControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private CartRepository cartRepository;
+    private ProductRepository productRepository;
 
     @MockBean
-    private CartService cartService;
+    private ProductService productService;
 
     @Test
-    @DisplayName("all")
+    @DisplayName("products - GET")
     void test1() throws Exception {
 
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/carts/all").contentType(MediaType.TEXT_HTML))
+                .perform(MockMvcRequestBuilders.get("/search/products").contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }
 
     @Test
-    @DisplayName("/one/{id}")
-    void test2() throws Exception {
+    @DisplayName("products - POST")
+    void test2() throws Exception { // TODO: 2020-01-12 validation error
+        // TODO: 28.01.2020 org.springframework.web.util.NestedServletException: Request processing failed;
+        //  nested exception is AppException{id=null, exceptionCode=VALIDATION, description='ProductSearchDto'}
 
-        CartDTO cart = CartDTO.builder().id(1L).build();
+        Product product = Product.builder().id(1L).build();
+        ProductSearchDTO productSearchDTO = ProductSearchDTO.builder().build();
+
         Mockito
-                .when(cartService.getCart(1L))
-                .thenReturn(cart);
+                .when(productRepository.findAll())
+                .thenReturn(List.of(product));
 
         Mockito
-                .when(cartRepository.findById(1L))
-                .thenReturn(Optional.of(CartMapper.fromDto(cart)));
+                .when(productService.search(productSearchDTO))
+                .thenReturn(List.of(ProductMapper.toDto(product)));
 
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/carts/one/{id}", 1L))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
-    }
-
-    @Test
-    @DisplayName("one")
-    void test3() throws Exception {
-
-        mockMvc
-                .perform(MockMvcRequestBuilders.get("/carts/one/"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
-    }
-
-    @Test
-    @DisplayName("closed")
-    void test4() throws Exception {
-
-        mockMvc
-                .perform(MockMvcRequestBuilders.get("/carts/closed").contentType(MediaType.TEXT_HTML))
+                .perform(MockMvcRequestBuilders.post("/search/products").contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }

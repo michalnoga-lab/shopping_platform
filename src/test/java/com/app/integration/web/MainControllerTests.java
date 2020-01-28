@@ -1,4 +1,4 @@
-package com.app.integration;
+package com.app.integration.web;
 
 import com.app.PrimaPlatformaApplication;
 import org.junit.jupiter.api.DisplayName;
@@ -14,8 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import javax.print.attribute.standard.Media;
-
 @ExtendWith(SpringExtension.class)
 
 @SpringBootTest(
@@ -24,27 +22,17 @@ import javax.print.attribute.standard.Media;
 )
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application.tests.properties")
-public class ProductSearchControllerTests {
+public class MainControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    @DisplayName("products")
+    @DisplayName("welcome")
     void test1() throws Exception {
 
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/search/products").contentType(MediaType.TEXT_HTML))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
-    }
-
-    @Test
-    @DisplayName("products")
-    void test2() throws Exception { // TODO: 2020-01-12 validation error
-
-        mockMvc
-                .perform(MockMvcRequestBuilders.post("/search/products").contentType(MediaType.TEXT_HTML))
+                .perform(MockMvcRequestBuilders.get("/").contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }

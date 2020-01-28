@@ -1,4 +1,4 @@
-package com.app.integration;
+package com.app.integration.web;
 
 import com.app.PrimaPlatformaApplication;
 import com.app.dto.CartDTO;
@@ -11,7 +11,6 @@ import com.app.repository.DeliveryAddressRepository;
 import com.app.service.CartService;
 import com.app.service.DeliveryAddressService;
 import com.app.service.SecurityService;
-import com.app.validators.DeliveryAddressDtoValidator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;

@@ -8,7 +8,7 @@ const checkStreet = () => {
         streetFeedback.textContent = "KROTKI !!!!";
     }
 
-    console.log('---------------------');
+    console.log('---------------------'); // todo cały czas value=""
     console.log(street.innerText);
     console.log(street);
     console.log(street.innerHTML);
@@ -23,6 +23,7 @@ const checkStreet = () => {
         streetFeedback.textContent = '';
     }
 };
+
 street.addEventListener('blur', checkStreet);
 street.addEventListener('change', checkStreet);
 street.addEventListener('input', checkStreet);
