@@ -31,6 +31,10 @@ public class AppException extends RuntimeException {
         this.time = LocalDateTime.now();
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

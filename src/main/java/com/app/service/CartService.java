@@ -26,6 +26,21 @@ public class CartService {
     private final CompanyRepository companyRepository;
     private final DeliveryAddressRepository deliveryAddressRepository;
 
+    public CartDTO getCart(Long cartId) {
+        if (cartId == null) {
+            throw new AppException(ExceptionCodes.SERVICE_CART, "getCart - cart ID is null");
+        }
+        if (cartId <= 0) {
+            throw new AppException(ExceptionCodes.SERVICE_CART, "getCart - cart ID less than zero");
+        }
+
+        return cartRepository.findById(cartId)
+                .stream()
+                .map(CartMapper::toDto)
+                .findFirst()
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART, "getCart - no cart with ID: " + cartId));
+    }
+
     public CartDTO addProductToCart(ProductDTO productDTO, Long userId) {
         if (productDTO == null) {
             throw new AppException(ExceptionCodes.SERVICE_CART, "addProductToCart - product is null");
@@ -146,21 +161,6 @@ public class CartService {
             }
         }
         return Optional.empty();
-    }
-
-    public CartDTO getCart(Long cartId) {
-        if (cartId == null) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "getCart - ID is null");
-        }
-        if (cartId <= 0) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "getCart - ID less than zero");
-        }
-
-        return cartRepository.findById(cartId)
-                .stream()
-                .map(CartMapper::toDto)
-                .findFirst()
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART, "getCart - no cart with ID: " + cartId));
     }
 
     public CartDTO setAddressToCart(Long addressId, Long userId) {
