@@ -113,17 +113,19 @@ public class CartService {
         } else {
             for (Product product : productsInCart) {
                 BigDecimal currentGrossValue = product.getGrossPrice().multiply(BigDecimal.valueOf(product.getQuantity()));
-                BigDecimal currentVatValue = currentGrossValue.divide(currentGrossValue, RoundingMode.HALF_DOWN);
-                BigDecimal currentNetValue = currentGrossValue.subtract(currentVatValue);
+                BigDecimal currentNetValue = currentGrossValue.divide(
+                        (BigDecimal.ONE.setScale(2, RoundingMode.HALF_UP).add(BigDecimal.valueOf(
+                                product.getVat()).setScale(2, RoundingMode.HALF_UP))));
+                BigDecimal currentVatValue = currentGrossValue.subtract(currentNetValue);
 
                 totalGrossValue = totalGrossValue.add(currentGrossValue);
                 totalVatValue = totalVatValue.add(currentVatValue);
                 totalNetValue = totalNetValue.add(currentNetValue);
             }
         }
-        cartDTO.setTotalNetValue(totalNetValue);
-        cartDTO.setTotalVatValue(totalVatValue);
-        cartDTO.setTotalGrossValue(totalGrossValue);
+        cartDTO.setTotalNetValue(totalNetValue.setScale(2, RoundingMode.HALF_UP));
+        cartDTO.setTotalVatValue(totalVatValue.setScale(2, RoundingMode.HALF_UP));
+        cartDTO.setTotalGrossValue(totalGrossValue.setScale(2, RoundingMode.HALF_UP));
         return cartDTO;
     }
 

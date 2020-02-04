@@ -1,9 +1,12 @@
 package com.app.service;
 
+import com.app.dto.CartDTO;
 import com.app.exceptions.AppException;
 import com.app.mappers.CartMapper;
 import com.app.model.Cart;
 import com.app.model.OptimaCode;
+import com.app.model.Price;
+import com.app.model.Product;
 import com.app.repository.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +20,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @ExtendWith(SpringExtension.class)
 public class CartServiceTests {
@@ -64,18 +71,16 @@ public class CartServiceTests {
         }
     }
 
-    // TODO: 28.01.2020
-
     @Test
     @DisplayName("getCart - no cart in DB with searching ID")
-    void test11() {
+    void test10() {
 
         // TODO: 28.01.2020
     }
 
     @Test
     @DisplayName("getCart - cart ID is null")
-    void test12() {
+    void test11() {
 
         AppException appException = Assertions.assertThrows(
                 AppException.class, () -> cartService.getCart(null));
@@ -85,7 +90,7 @@ public class CartServiceTests {
 
     @Test
     @DisplayName("getCart - cart ID equals or less than zero")
-    void test13() {
+    void test12() {
 
         AppException appException1 = Assertions.assertThrows(
                 AppException.class, () -> cartService.getCart(0L));
@@ -99,52 +104,252 @@ public class CartServiceTests {
 
     @Test
     @DisplayName("getCart - one cart in DB")
-    void test14() {
+    void test13() {
 
         Cart cart = Cart.builder().id(1L).build();
         Optional<Cart> cartOptional = Optional.of(cart);
 
-        OngoingStubbing<Optional<Cart>> aaa = Mockito
-                .when(cartRepository.findById(1L))
+        Mockito
+                .when(cartRepository.findById(cart.getId()))
                 .thenReturn(cartOptional);
 
-        System.out.println(aaa);
+        CartDTO actualCart = cartService.getCart(cart.getId());
 
+        Assertions.assertEquals(CartMapper.toDto(cart), actualCart);
+    }
+
+    @Test
+    @DisplayName("getCart - many carts in DB")
+    void test14() {
+
+        Cart cart1 = Cart.builder().id(1L).build();
+        Cart cart2 = Cart.builder().id(1L).build();
+        Cart cart3 = Cart.builder().id(1L).build();
+        Optional<Cart> cartOptional = Optional.of(cart1);
+        List<Cart> cartList = List.of(cart1, cart2, cart3);
 
         Mockito
-                .when(cartService.getCart(1L))
-                .thenReturn(CartMapper.toDto(cart));
+                .when(cartRepository.findAll())
+                .thenReturn(cartList);
 
-        Assertions.assertEquals(CartMapper.toDto(cart), cartService.getCart(1L));
-    }
+        Mockito
+                .when(cartRepository.findById(cart1.getId()))
+                .thenReturn(cartOptional);
 
-    /**
-     * @Test
-     * @DisplayName("test when add with null argument")
-     * public void test5() {
-     * <p>
-     * // GIVEN
-     * <p>
-     * Person p1 = Person.builder().name("A").age(18).build();
-     * Person p2 = Person.builder().name("B").age(17).build();
-     * <p>
-     * Mockito
-     * .doThrow(new IllegalArgumentException("xxx"))
-     * .when(personRepository.add(ArgumentMatchers.isNull()));
-     * <p>
-     * Assertions.assertThrows(IllegalArgumentException.class, () -> personService.add(null));
-     * }
-     */
+        CartDTO actualCart = cartService.getCart(cart1.getId());
 
-    @Test
-    @DisplayName("getCart - one cart in DB")
-    void test2() {
+        Assertions.assertEquals(CartMapper.toDto(cart1), actualCart);
     }
 
     @Test
-    @DisplayName("getUsersActiveCart - user has no cart")
-    void test3() {
+    @DisplayName("addProductToCart")
+    void test20() {
 
+    }
+
+    @Test
+    @DisplayName("calculateCartValue - nett price type - no products in cart")
+    void test30() {
+
+        CartDTO expectedCart = CartDTO.builder()
+                .totalNetValue(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP))
+                .totalVatValue(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP))
+                .totalGrossValue(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP))
+                .build();
+
+        Set<Product> products = Set.of();
+
+        CartDTO actualCart = cartService.calculateCartValue(products, Price.NET);
+
+        Assertions.assertEquals(expectedCart, actualCart);
+    }
+
+    @Test
+    @DisplayName("calculateCartValue - nett price type - one product")
+    void test31() {
+
+        Product product = Product.builder().id(1L)
+                .nettPrice(BigDecimal.valueOf(100))
+                .vat(0.23)
+                .grossPrice(BigDecimal.valueOf(123))
+                .quantity(10)
+                .build();
+
+        CartDTO expectedCart = CartDTO.builder()
+                .totalNetValue(BigDecimal.valueOf(1000).setScale(2, RoundingMode.HALF_UP))
+                .totalVatValue(BigDecimal.valueOf(230).setScale(2, RoundingMode.HALF_UP))
+                .totalGrossValue(BigDecimal.valueOf(1230).setScale(2, RoundingMode.HALF_UP))
+                .build();
+
+        Set<Product> products = Set.of(product);
+
+        CartDTO actualCart = cartService.calculateCartValue(products, Price.NET);
+
+        Assertions.assertEquals(expectedCart, actualCart);
+    }
+
+    @Test
+    @DisplayName("calculateCartValue - nett price type - many products")
+    void test32() {
+
+        Product product1 = Product.builder().id(1L)
+                .nettPrice(BigDecimal.valueOf(100))
+                .vat(0.23)
+                .grossPrice(BigDecimal.valueOf(100 + 23))
+                .quantity(5)
+                .build();
+
+        Product product2 = Product.builder().id(2L)
+                .nettPrice(BigDecimal.valueOf(27))
+                .vat(0.23)
+                .grossPrice(BigDecimal.valueOf(27 + 6.21))
+                .quantity(30)
+                .build();
+
+        Product product3 = Product.builder().id(3L)
+                .nettPrice(BigDecimal.valueOf(342))
+                .vat(0.08)
+                .grossPrice(BigDecimal.valueOf(342 + 27.36))
+                .quantity(60)
+                .build();
+
+        Product product4 = Product.builder().id(4L)
+                .nettPrice(BigDecimal.valueOf(5000))
+                .vat(0.23)
+                .grossPrice(BigDecimal.valueOf(5000 + 1150))
+                .quantity(600)
+                .build();
+
+        CartDTO expectedCart = CartDTO.builder()
+                .totalNetValue(BigDecimal.valueOf(100 * 5 + 30 * 27 + 60 * 342 + 600 * 5000)
+                        .setScale(2, RoundingMode.HALF_UP))
+                .totalVatValue(BigDecimal.valueOf(100 * 5 * 0.23 + 30 * 27 * 0.23 + 60 * 342 * 0.08 + 600 * 5000 * 0.23)
+                        .setScale(2, RoundingMode.HALF_UP))
+                .totalGrossValue(BigDecimal.valueOf(
+                        (100 * 5 * 0.23 + 100 * 5) + (30 * 27 * 0.23 + 30 * 27) +
+                                (60 * 342 * 0.08 + 60 * 342) + (600 * 5000 * 0.23 + 600 * 5000))
+                        .setScale(2, RoundingMode.HALF_UP))
+                .build();
+
+        Set<Product> products = Set.of(product1, product2, product3, product4);
+
+        CartDTO actualCart = cartService.calculateCartValue(products, Price.NET);
+
+        Assertions.assertEquals(expectedCart, actualCart);
+    }
+
+    @Test
+    @DisplayName("calculateCartValue - gross price type - no products in cart")
+    void test40() {
+
+        CartDTO expectedCart = CartDTO.builder()
+                .totalNetValue(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP))
+                .totalVatValue(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP))
+                .totalGrossValue(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP))
+                .build();
+
+        Set<Product> products = Set.of();
+
+        CartDTO actualCart = cartService.calculateCartValue(products, Price.GROSS);
+
+        Assertions.assertEquals(expectedCart, actualCart);
+    }
+
+    @Test
+    @DisplayName("calculateCartValue - gross price type - one product")
+    void test41() {
+
+        Product product = Product.builder().id(1L)
+                .nettPrice(BigDecimal.valueOf(100))
+                .vat(0.23)
+                .grossPrice(BigDecimal.valueOf(123))
+                .quantity(10)
+                .build();
+
+        CartDTO expectedCart = CartDTO.builder()
+                .totalNetValue(BigDecimal.valueOf(1000).setScale(2, RoundingMode.HALF_UP))
+                .totalVatValue(BigDecimal.valueOf(230).setScale(2, RoundingMode.HALF_UP))
+                .totalGrossValue(BigDecimal.valueOf(1230).setScale(2, RoundingMode.HALF_UP))
+                .build();
+
+        Set<Product> products = Set.of(product);
+
+        CartDTO actualCart = cartService.calculateCartValue(products, Price.GROSS);
+
+        Assertions.assertEquals(expectedCart, actualCart);
+    }
+
+    @Test
+    @DisplayName("calculateCartValue - nett price type - many products")
+    void test42() {
+
+        Product product1 = Product.builder().id(1L)
+                .nettPrice(BigDecimal.valueOf(100))
+                .vat(0.23)
+                .grossPrice(BigDecimal.valueOf(100 + 23))
+                .quantity(5)
+                .build();
+
+        Product product2 = Product.builder().id(2L)
+                .nettPrice(BigDecimal.valueOf(27))
+                .vat(0.23)
+                .grossPrice(BigDecimal.valueOf(27 + 6.21))
+                .quantity(30)
+                .build();
+
+        Product product3 = Product.builder().id(3L)
+                .nettPrice(BigDecimal.valueOf(342))
+                .vat(0.08)
+                .grossPrice(BigDecimal.valueOf(342 + 27.36))
+                .quantity(60)
+                .build();
+
+        Product product4 = Product.builder().id(4L)
+                .nettPrice(BigDecimal.valueOf(5000))
+                .vat(0.23)
+                .grossPrice(BigDecimal.valueOf(5000 + 1150))
+                .quantity(600)
+                .build();
+
+        CartDTO expectedCart = CartDTO.builder()
+                .totalNetValue(BigDecimal.valueOf(100 * 5 + 30 * 27 + 60 * 342 + 600 * 5000)
+                        .setScale(2, RoundingMode.HALF_UP))
+                .totalVatValue(BigDecimal.valueOf(100 * 5 * 0.23 + 30 * 27 * 0.23 + 60 * 342 * 0.08 + 600 * 5000 * 0.23)
+                        .setScale(2, RoundingMode.HALF_UP))
+                .totalGrossValue(BigDecimal.valueOf(
+                        (100 * 5 * 0.23 + 100 * 5) + (30 * 27 * 0.23 + 30 * 27) +
+                                (60 * 342 * 0.08 + 60 * 342) + (600 * 5000 * 0.23 + 600 * 5000))
+                        .setScale(2, RoundingMode.HALF_UP))
+                .build();
+
+        Set<Product> products = Set.of(product1, product2, product3, product4);
+
+        CartDTO actualCart = cartService.calculateCartValue(products, Price.GROSS);
+
+        Assertions.assertEquals(expectedCart, actualCart);
+    }
+
+    @Test
+    @DisplayName("getActiveCart")
+    void test50() {
+
+    }
+
+    @Test
+    @DisplayName("setAddressToCart")
+    void test60() {
+
+    }
+
+    @Test
+    @DisplayName("closeCart")
+    void test70() {
+
+    }
+
+    @Test
+    @DisplayName("userHasOpenCart")
+    void test80() {
 
     }
 }
