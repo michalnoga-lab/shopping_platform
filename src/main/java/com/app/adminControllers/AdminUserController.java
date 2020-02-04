@@ -2,7 +2,7 @@ package com.app.adminControllers;
 
 import com.app.dto.UserDTO;
 import com.app.service.UserService;
-import com.app.validators.UserValidator;
+import com.app.validators.UserDtoValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,11 +23,11 @@ public class AdminUserController {
 
     private final UserService userService;
 
-    private final UserValidator userValidator;
+    private final UserDtoValidator userDtoValidator;
 
     @InitBinder
     private void initBinder(WebDataBinder webDataBinder) {
-        webDataBinder.setValidator(userValidator);
+        webDataBinder.setValidator(userDtoValidator);
     }
 
     @GetMapping("add")
@@ -49,7 +49,7 @@ public class AdminUserController {
             return "admin/users/add";
         }
         userService.addUser(userDTO);
-        return "admin/users/added";
+        return "redirect:/admin/users/added";
     }
 
     @GetMapping("all")
@@ -76,5 +76,5 @@ public class AdminUserController {
         return "redirect:/admin/users/all";
     }
 
-    // TODO: 14.01.2020 edit
+    // TODO: 14.01.2020 edit method
 }

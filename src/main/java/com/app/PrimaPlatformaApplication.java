@@ -17,7 +17,10 @@ public class PrimaPlatformaApplication {
     // TODO: 2020-01-19 if product description is null than XML recives optima product description
     // TODO: 22.01.2020 contact form - ideas
     // TODO: 2020-01-25 invalid login counter
-    // TODO: 2020-01-25 http only and secure flags 
+    // TODO: 2020-01-25 http only and secure flags
+    // TODO: 28.01.2020 samodzielna rejestracja z kodem
+    // TODO: 04.02.2020 w bazie hash hasła a nie jego szyfrogram
+    // TODO: 04.02.2020 ukrywanie wszysktich produktów danej firmy
 
     /**
      *

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Shopping Platform</title>
@@ -11,7 +11,7 @@
 <div class="container">
     <h5 class="top-page-text">MÓJ KOSZYK</h5>
 
-    <div th:if="${cart.cartClosed}==false">
+    <div th:if="${cart.cartClosed}">
 
         <!-- org.thymeleaf.exceptions.TemplateProcessingException: todo
         todo Exception evaluating SpringEL expression: "cart.cartClosed" (template: "carts/one" - line 14, col 10)  todo -->

@@ -8,12 +8,9 @@ const checkStreet = () => {
         streetFeedback.textContent = "KROTKI !!!!";
     }
 
-    console.log('---------------------'); // todo cały czas value=""
-    console.log(street.innerText);
-    console.log(street);
-    console.log(street.innerHTML);
-    console.log(street.inputMode);
-    console.log(street.accessKey);
+    console.log('---------------------');   // todo cały czas value=""
+                                            //todo <input id="street" class="form-control" type="text" name="street" value="">
+    console.log(street.value);
 
     if (streetRegex.test(street.accessKey)) {
         const response = 'PODANY ADRES NIE JEST PRAWIDŁOWY 00000000000000000';

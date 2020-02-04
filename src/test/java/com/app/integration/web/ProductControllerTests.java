@@ -9,6 +9,7 @@ import com.app.service.CartService;
 import com.app.service.ProductService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,6 +23,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -106,5 +108,16 @@ public class ProductControllerTests {
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
         // TODO: 2020-01-25 org.thymeleaf.exceptions.TemplateProcessingException:
         //  Exception evaluating SpringEL expression: "cart.cartClosed==false" (template: "carts/one" - line 14, col 10)
+
+        /*MvcResult mvcResult
+                = mockMvc
+                .perform(MockMvcRequestBuilders.get("/products/{id}", 1L))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("products/one"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("product"))
+                .andExpect(MockMvcResultMatchers.model().attribute("product", Matchers.hasProperty("id", Matchers.is(1L))))
+                .andExpect(MockMvcResultMatchers.model().attribute("product", Matchers.hasProperty("name", Matchers.is("PRALKA"))))
+                .andExpect(MockMvcResultMatchers.model().attribute("product", Matchers.hasProperty("price", Matchers.is(BigDecimal.valueOf(200)))))
+                .andReturn();*/
     }
 }

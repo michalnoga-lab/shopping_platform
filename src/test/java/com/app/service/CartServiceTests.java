@@ -1,16 +1,23 @@
 package com.app.service;
 
 import com.app.exceptions.AppException;
+import com.app.mappers.CartMapper;
+import com.app.model.Cart;
+import com.app.model.OptimaCode;
 import com.app.repository.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.util.Optional;
 
 @ExtendWith(SpringExtension.class)
 public class CartServiceTests {
@@ -74,6 +81,41 @@ public class CartServiceTests {
                 AppException.class, () -> cartService.getCart(null));
 
         Assertions.assertEquals("getCart - cart ID is null", appException.getDescription());
+    }
+
+    @Test
+    @DisplayName("getCart - cart ID equals or less than zero")
+    void test13() {
+
+        AppException appException1 = Assertions.assertThrows(
+                AppException.class, () -> cartService.getCart(0L));
+
+        AppException appException2 = Assertions.assertThrows(
+                AppException.class, () -> cartService.getCart(-1L));
+
+        Assertions.assertEquals("getCart - cart ID less than zero", appException1.getDescription());
+        Assertions.assertEquals("getCart - cart ID less than zero", appException2.getDescription());
+    }
+
+    @Test
+    @DisplayName("getCart - one cart in DB")
+    void test14() {
+
+        Cart cart = Cart.builder().id(1L).build();
+        Optional<Cart> cartOptional = Optional.of(cart);
+
+        OngoingStubbing<Optional<Cart>> aaa = Mockito
+                .when(cartRepository.findById(1L))
+                .thenReturn(cartOptional);
+
+        System.out.println(aaa);
+
+
+        Mockito
+                .when(cartService.getCart(1L))
+                .thenReturn(CartMapper.toDto(cart));
+
+        Assertions.assertEquals(CartMapper.toDto(cart), cartService.getCart(1L));
     }
 
     /**

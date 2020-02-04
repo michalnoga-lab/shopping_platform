@@ -7,6 +7,7 @@ import com.app.validators.GeneralUserInputDtoValidator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -72,11 +73,6 @@ public class AdminProductControllerTests {
         mockMvc
                 .perform(MockMvcRequestBuilders.post("/admin/products/removeCode/{id}", 1L)
                         .contentType(MediaType.TEXT_HTML))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-
-                // TODO: 2020-01-25 java.lang.AssertionError: Status expected:<200> but was:<302>
-                // TODO: 2020-01-25 po zmianie na 302 - java.lang.AssertionError: Content type not set
-
-                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
     }
 }

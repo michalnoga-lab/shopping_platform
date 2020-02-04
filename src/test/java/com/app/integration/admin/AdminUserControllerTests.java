@@ -1,44 +1,42 @@
 package com.app.integration.admin;
 
-import com.app.PrimaPlatformaApplication;
+import com.app.adminControllers.AdminUserController;
+import com.app.dto.CompanyDTO;
 import com.app.dto.UserDTO;
-import com.app.model.User;
+import com.app.model.Role;
 import com.app.service.UserService;
-import com.app.validators.UserValidator;
+import com.app.validators.UserDtoValidator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @ExtendWith(SpringExtension.class)
-
-@SpringBootTest(
-        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        classes = PrimaPlatformaApplication.class
-)
-@AutoConfigureMockMvc
-@TestPropertySource(locations = "classpath:application.tests.properties")
+@WebMvcTest(AdminUserController.class)
 public class AdminUserControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
 
+    @SpyBean
+    private UserDtoValidator userDtoValidator;
+
     @MockBean
     private UserService userService;
 
+
     @Test
     @DisplayName("add - GET")
-    void test1() throws Exception {
+    void test10() throws Exception {
 
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/admin/users/add")
@@ -49,27 +47,54 @@ public class AdminUserControllerTests {
 
     @Test
     @DisplayName("add - POST")
-    void test2() throws Exception {
+    public void test20() throws Exception {
 
-        UserDTO inputUser = UserDTO.builder().id(1L).build();
-        UserDTO userDTO = UserDTO.builder().id(1L).build();
+        UserDTO inputUser = UserDTO.builder()
+                .email("aa@mm.com")
+                .role(Role.USER)
+                .password("pass")
+                .companyDTO(CompanyDTO.builder().build())
+                .login("login")
+                .enabled(true)
+                .name("name")
+                .passwordConfirmation("pass")
+                .surname("surname")
+                .build();
+        UserDTO userDTO = UserDTO.builder().id(1L)
+                .email("aa@mm.com")
+                .role(Role.USER)
+                .password("pass")
+                .companyDTO(CompanyDTO.builder().build())
+                .login("login")
+                .enabled(true)
+                .name("name")
+                .passwordConfirmation("pass")
+                .surname("surname")
+                .build();
 
         Mockito
                 .when(userService.addUser(inputUser))
                 .thenReturn(userDTO);
 
         mockMvc
-                .perform(MockMvcRequestBuilders.post("/admin/users/add")
-                        .contentType(MediaType.TEXT_HTML))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
-        // TODO: 2020-01-25 org.springframework.web.util.NestedServletException: Request processing failed;
-        //  nested exception is AppException{id=null, exceptionCode=VALIDATION, description='UserDto'}
+                .perform(
+                        MockMvcRequestBuilders.post("/admin/users/add")
+                                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                                .param("email", "aa@gmail.com")
+                                .param("password", "passpass")
+                                .param("login", "login")
+                                .param("name", "name")
+                                .param("passwordConfirmation", "passpass")
+                                .param("surname", "surname")
+                )
+                .andExpect(MockMvcResultMatchers.status().isFound())
+                .andExpect(MockMvcResultMatchers.view().name("redirect:/admin/users/added"))
+                .andReturn();
     }
 
     @Test
     @DisplayName("all")
-    void test3() throws Exception {
+    void test30() throws Exception {
 
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/admin/users/all")
@@ -80,7 +105,7 @@ public class AdminUserControllerTests {
 
     @Test
     @DisplayName("one/{id}")
-    void test4() throws Exception {
+    void test40() throws Exception {
 
         UserDTO userDTO = UserDTO.builder().id(1L).build();
 
@@ -99,7 +124,7 @@ public class AdminUserControllerTests {
 
     @Test
     @DisplayName("disable")
-    void test5() throws Exception {
+    void test50() throws Exception {
 
         mockMvc
                 .perform(MockMvcRequestBuilders.post("/admin/users/disable/{id}", 1L)
@@ -109,7 +134,7 @@ public class AdminUserControllerTests {
 
     @Test
     @DisplayName("enable")
-    void test6() throws Exception {
+    void test60() throws Exception {
 
         mockMvc
                 .perform(MockMvcRequestBuilders.post("/admin/users/enable/{id}", 1L)
