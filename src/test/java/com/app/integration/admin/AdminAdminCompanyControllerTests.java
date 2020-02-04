@@ -37,7 +37,7 @@ public class AdminAdminCompanyControllerTests {
 
     @Test
     @DisplayName("add - GET")
-    void test1() throws Exception {
+    void test10() throws Exception {
 
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/admin/companies/add")
@@ -48,7 +48,7 @@ public class AdminAdminCompanyControllerTests {
 
     @Test
     @DisplayName("add - POST")
-    void test2() throws Exception {
+    void test20() throws Exception {
 
         CompanyDTO inputCompany = CompanyDTO.builder().id(1L).build();
         CompanyDTO companyDTO = CompanyDTO.builder().id(1L).build();
@@ -66,7 +66,7 @@ public class AdminAdminCompanyControllerTests {
 
     @Test
     @DisplayName("all")
-    void test3() throws Exception {
+    void test30() throws Exception {
 
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/admin/companies/all")
@@ -77,7 +77,7 @@ public class AdminAdminCompanyControllerTests {
 
     @Test
     @DisplayName(("one/{id}"))
-    void test4() throws Exception {
+    void test40() throws Exception {
 
         Company company = Company.builder().id(1L).build();
         CompanyDTO companyDTO = CompanyDTO.builder().id(1L).build();
@@ -95,7 +95,7 @@ public class AdminAdminCompanyControllerTests {
 
     @Test
     @DisplayName("edit/{id}")
-    void test5() throws Exception {
+    void test50() throws Exception {
 
         Company company = Company.builder().id(1L).build();
         CompanyDTO companyDTO = CompanyDTO.builder().id(1L).build();
@@ -112,7 +112,7 @@ public class AdminAdminCompanyControllerTests {
 
     @Test
     @DisplayName("enable/{id}")
-    void test6() throws Exception {
+    void test60() throws Exception {
 
         mockMvc
                 .perform(MockMvcRequestBuilders.post("/admin/companies/enable/{id}", 1L))
@@ -121,7 +121,7 @@ public class AdminAdminCompanyControllerTests {
 
     @Test
     @DisplayName("disable/{id}")
-    void test7() throws Exception {
+    void test70() throws Exception {
 
         mockMvc
                 .perform(MockMvcRequestBuilders.post("/admin/companies/disable/{id}", 1L))

@@ -11,6 +11,7 @@ import com.app.repository.DeliveryAddressRepository;
 import com.app.service.CartService;
 import com.app.service.DeliveryAddressService;
 import com.app.service.SecurityService;
+import com.app.validators.DeliveryAddressDtoValidator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -53,9 +55,12 @@ public class DeliveryAddressControllerTests {
     @MockBean
     private SecurityService securityService;
 
+    @SpyBean
+    private DeliveryAddressDtoValidator deliveryAddressDtoValidator;
+
     @Test
     @DisplayName("all")
-    void test1() throws Exception {
+    void test10() throws Exception {
 
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/deliveryAddress/all").contentType(MediaType.TEXT_HTML))
@@ -65,7 +70,7 @@ public class DeliveryAddressControllerTests {
 
     @Test
     @DisplayName("add - GET")
-    void test2() throws Exception {
+    void test20() throws Exception {
 
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/deliveryAddress/add").contentType(MediaType.TEXT_HTML))
@@ -75,9 +80,7 @@ public class DeliveryAddressControllerTests {
 
     @Test
     @DisplayName("add - POST")
-    void test3() throws Exception {
-        // TODO: 2020-01-27 org.springframework.web.util.NestedServletException: Request processing failed;
-        //  nested exception is AppException{id=null, exceptionCode=VALIDATION, description='DeliveryAddressDto'}
+    void test30() throws Exception {
 
         User user = User.builder().id(2L).build();
 
@@ -98,13 +101,17 @@ public class DeliveryAddressControllerTests {
                 .thenReturn(deliveryAddressDTO);
 
         mockMvc
-                .perform(MockMvcRequestBuilders.post("/deliveryAddress/add"))
-                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
+                .perform(MockMvcRequestBuilders.post("/deliveryAddress/add")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("street", "street")
+                        .param("phone", "1234567890")
+                )
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
     }
 
     @Test
     @DisplayName("remove/{id}")
-    void test4() throws Exception {
+    void test40() throws Exception {
 
         Optional<DeliveryAddress> deliveryAddress = Optional.of(DeliveryAddress.builder().id(1L).build());
 
@@ -124,7 +131,7 @@ public class DeliveryAddressControllerTests {
 
     @Test
     @DisplayName("pick/{id}")
-    void test5() throws Exception {
+    void test50() throws Exception {
 
         DeliveryAddress deliveryAddress = DeliveryAddress.builder().id(1L).build();
         CartDTO cartDTO = CartDTO.builder().id(3L).build();

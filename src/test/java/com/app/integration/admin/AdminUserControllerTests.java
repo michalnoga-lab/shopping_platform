@@ -27,12 +27,11 @@ public class AdminUserControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
-    @SpyBean
-    private UserDtoValidator userDtoValidator;
-
     @MockBean
     private UserService userService;
 
+    @SpyBean
+    private UserDtoValidator userDtoValidator;
 
     @Test
     @DisplayName("add - GET")

@@ -29,7 +29,7 @@ public class AdminPanelControllerTests {
 
     @Test
     @DisplayName("panel")
-    void test1() throws Exception {
+    void test10() throws Exception {
 
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/admin/panel")
