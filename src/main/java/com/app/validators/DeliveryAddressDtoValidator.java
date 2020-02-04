@@ -1,5 +1,6 @@
 package com.app.validators;
 
+import com.app.Utilities.CustomRegex;
 import com.app.dto.DeliveryAddressDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
@@ -17,7 +18,7 @@ public class DeliveryAddressDtoValidator implements Validator {
 
     @Override
     public void validate(Object o, Errors errors) {
-        final String STREET_REGEX = "[a-zA-z\\s-ąćęłńóśźżĄĆĘŁŃÓŚŹŻ\\d]+";
+        final String STREET_REGEX = CustomRegex.TEXT_WITH_DIGITS_REGEX;
         final String PHONE_REGEX = "[\\d\\s]+";
 
         try {

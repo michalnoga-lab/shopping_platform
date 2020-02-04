@@ -1,5 +1,6 @@
 package com.app.validators;
 
+import com.app.Utilities.CustomRegex;
 import com.app.dto.UserDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
@@ -18,7 +19,7 @@ public class UserDtoValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         UserDTO userDTO = (UserDTO) o;
-        final String USER_NAME_SURNAME_REGEX = "[a-zA-z\\s-ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+";
+        final String USER_NAME_SURNAME_REGEX = CustomRegex.TEXT_ONLY_REGEX;
         final String PASSWORD_REGEX = "(.){8,50}";
 
         try {

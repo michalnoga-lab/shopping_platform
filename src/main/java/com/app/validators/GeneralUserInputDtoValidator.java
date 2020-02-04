@@ -1,5 +1,6 @@
 package com.app.validators;
 
+import com.app.Utilities.CustomRegex;
 import com.app.dto.GeneralUserInputDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
@@ -17,7 +18,7 @@ public class GeneralUserInputDtoValidator implements Validator {
 
     @Override
     public void validate(Object o, Errors errors) {
-        final String USER_INPUT_REGEX = "[a-zA-z\\s-ąćęłńóśźżĄĆĘŁŃÓŚŹŻ\\d]+";
+        final String USER_INPUT_REGEX = CustomRegex.TEXT_WITH_DIGITS_REGEX;
 
         try {
             GeneralUserInputDTO generalUserInputDTO = (GeneralUserInputDTO) o;

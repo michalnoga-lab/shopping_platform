@@ -1,5 +1,6 @@
 package com.app.validators;
 
+import com.app.Utilities.CustomRegex;
 import com.app.dto.ProductSearchDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
@@ -19,7 +20,7 @@ public class ProductSearchDtoValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         ProductSearchDTO productSearchDTO = (ProductSearchDTO) o;
-        final String USER_INPUT_REGEX = "[a-zA-z\\s-ąćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9]+";
+        final String USER_INPUT_REGEX = CustomRegex.TEXT_WITH_DIGITS_REGEX;
 
         try {
             if (!productSearchDTO.getUserInput().matches(USER_INPUT_REGEX)) {

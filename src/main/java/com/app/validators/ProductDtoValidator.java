@@ -20,7 +20,7 @@ public class ProductDtoValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         ProductDTO productDTO = (ProductDTO) o;
-        Pattern pattern = Pattern.compile("\\d+"); // TODO: 2020-01-14 validation - com.app.exceptions.AppException: null
+        Pattern pattern = Pattern.compile("\\d+");
 
         try {
             if (productDTO.getQuantity() <= 0) {

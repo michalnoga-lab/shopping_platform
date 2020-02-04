@@ -1,5 +1,6 @@
 package com.app.validators;
 
+import com.app.Utilities.CustomRegex;
 import com.app.dto.CompanyDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
@@ -18,7 +19,7 @@ public class CompanyValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         CompanyDTO companyDTO = (CompanyDTO) o;
-        final String USER_INPUT_REGEX = "[a-zA-z\\s-ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+";
+        final String USER_INPUT_REGEX = CustomRegex.TEXT_ONLY_REGEX;
         final String NIP_REGEX = "(\\d){10}";
         final String STREET_NUMBER_REGEX = "[a-zA-z\\s\\d]+";
         final String POST_CODE_REGEX = "(\\d){2}-(\\d){3}";
