@@ -47,8 +47,8 @@ public class DeliveryAddressServiceTests {
     }
 
     @Test
-    @DisplayName("getAll - user has no addresses")
-    void test1() {
+    @DisplayName("findAll - user has no addresses")
+    void test10() {
 
         DeliveryAddress deliveryAddress1 = DeliveryAddress.builder().street("Address 1").build();
         DeliveryAddress deliveryAddress2 = DeliveryAddress.builder().street("Address 2").build();
@@ -73,8 +73,8 @@ public class DeliveryAddressServiceTests {
     }
 
     @Test
-    @DisplayName("getAll - user has one address")
-    void test2() {
+    @DisplayName("findAll - user has one address")
+    void test11() {
 
         DeliveryAddress deliveryAddress1 = DeliveryAddress.builder().street("Address 1").build();
         DeliveryAddress deliveryAddress2 = DeliveryAddress.builder().street("Address 2").build();
@@ -101,8 +101,8 @@ public class DeliveryAddressServiceTests {
     }
 
     @Test
-    @DisplayName("getAll - user has many addresses")
-    void test3() {
+    @DisplayName("findAll - user has many addresses")
+    void test12() {
 
         DeliveryAddress deliveryAddress1 = DeliveryAddress.builder().street("Address 1").build();
         DeliveryAddress deliveryAddress2 = DeliveryAddress.builder().street("Address 2").build();
@@ -128,4 +128,17 @@ public class DeliveryAddressServiceTests {
         Assertions.assertEquals(2, actualResult.size());
         Assertions.assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    @DisplayName("add")
+    void test20() {
+        // TODO: 2020-02-05
+    }
+
+    @Test
+    @DisplayName("hide")
+    void test30() {
+        // TODO: 2020-02-05
+    }
+
 }

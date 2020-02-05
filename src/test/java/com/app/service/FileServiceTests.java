@@ -1,5 +1,6 @@
 package com.app.service;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,8 +19,8 @@ public class FileServiceTests {
     private FileService fileService;
 
     @Test
-    void test1() {
-
-        // TODO: 2020-01-18 tests
+    @DisplayName("getProductsFromFile")
+    void test10() {
+        // TODO: 2020-02-05
     }
 }

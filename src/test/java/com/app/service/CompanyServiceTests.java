@@ -49,7 +49,7 @@ public class CompanyServiceTests {
 
     @Test
     @DisplayName("getCompanyOfUser - one user, one company")
-    void test1() {
+    void test10() {
 
         User user1 = User.builder().id(1L).build();
 
@@ -69,7 +69,7 @@ public class CompanyServiceTests {
 
     @Test
     @DisplayName("getCompanyOfUser - one user, many companies")
-    void test2() {
+    void test11() {
 
         User user1 = User.builder().id(1L).build();
 
@@ -93,7 +93,7 @@ public class CompanyServiceTests {
 
     @Test
     @DisplayName("getCompanyOfUser - many users, many companies")
-    void test3() {
+    void test12() {
 
         User user1 = User.builder().id(1L).build();
         User user2 = User.builder().id(2L).build();
@@ -133,5 +133,35 @@ public class CompanyServiceTests {
         Assertions.assertEquals(expectedCompany2, actualCompany4);
         Assertions.assertEquals(expectedCompany3, actualCompany5);
         Assertions.assertEquals(expectedCompany3, actualCompany6);
+    }
+
+    @Test
+    @DisplayName("add")
+    void test20() {
+// TODO: 2020-02-05
+    }
+
+    @Test
+    @DisplayName("findAll")
+    void test30() {
+// TODO: 2020-02-05
+    }
+
+    @Test
+    @DisplayName("findById")
+    void test40() {
+// TODO: 2020-02-05
+    }
+
+    @Test
+    @DisplayName("disableEnable")
+    void test50() {
+// TODO: 2020-02-05
+    }
+
+    @Test
+    @DisplayName("edit")
+    void test60() {
+// TODO: 2020-02-05
     }
 }

@@ -52,8 +52,14 @@ public class ProductServiceTests {
     }
 
     @Test
+    @DisplayName("findAll")
+    void test10() {
+        // TODO: 2020-02-05
+    }
+
+    @Test
     @DisplayName("getProductsOfCompany")
-    void test1() {
+    void test20() {
 
         Product product1 = Product.builder().name("Product 1").build();
         Product product2 = Product.builder().name("Product 2").build();
@@ -88,7 +94,7 @@ public class ProductServiceTests {
 
     @Test
     @DisplayName("getOneProduct")
-    void test2() { // TODO: 2020-01-11
+    void test30() { // TODO: 2020-01-11
         //AppException{id=null, exceptionCode=SERVICE_PRODUCT, description='getOneProduct - no product with ID: 1'}
 
         Product product1 = Product.builder().id(1L).name("Product 1").build();
@@ -110,7 +116,7 @@ public class ProductServiceTests {
 
     @Test
     @DisplayName("getProductsOfCart")
-    void test3() { // TODO: 2020-01-11
+    void test40() { // TODO: 2020-01-11
 
         Product product1 = Product.builder().id(1L).name("Product 1").build();
         Product product2 = Product.builder().id(2L).name("Product 2").build();
@@ -147,7 +153,7 @@ public class ProductServiceTests {
 
     @Test
     @DisplayName("search - one product matches")
-    void test4() {
+    void test50() {
         Product product1 = Product.builder().id(1L).name("AAA").build();
         Product product2 = Product.builder().id(2L).name("BBB").build();
         Product product3 = Product.builder().id(3L).name("CCC").build();
@@ -174,7 +180,7 @@ public class ProductServiceTests {
 
     @Test
     @DisplayName("search - two products match")
-    void test5() {
+    void test51() {
         Product product1 = Product.builder().id(1L).name("AAA").build();
         Product product2 = Product.builder().id(2L).name("BBB").build();
         Product product3 = Product.builder().id(3L).name("CCC").build();
@@ -202,7 +208,7 @@ public class ProductServiceTests {
 
     @Test
     @DisplayName("search - none product matches")
-    void test6() {
+    void test52() {
         Product product1 = Product.builder().id(1L).name("AAA").build();
         Product product2 = Product.builder().id(2L).name("BBB").build();
         Product product3 = Product.builder().id(3L).name("CCC").build();
@@ -225,5 +231,29 @@ public class ProductServiceTests {
                 productService.search(ProductSearchDTO.builder().userInput("XX").build());
 
         Assertions.assertEquals(expectedProducts, actualProducts);
+    }
+
+    @Test
+    @DisplayName("addProducts")
+    void test60() {
+        // TODO: 2020-02-05
+    }
+
+    @Test
+    @DisplayName("removeFromCart")
+    void test70() {
+        // TODO: 2020-02-05
+    }
+
+    @Test
+    @DisplayName("setCode")
+    void test80() {
+        // TODO: 2020-02-05
+    }
+
+    @Test
+    @DisplayName("removeCode")
+    void test90() {
+        // TODO: 2020-02-05
     }
 }

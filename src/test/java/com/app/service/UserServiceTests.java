@@ -47,7 +47,7 @@ public class UserServiceTests {
 
     @Test
     @DisplayName("findUserByLogin")
-    void test1() {
+    void test10() {
 
         User user = User.builder().login("User A").build();
 
@@ -59,5 +59,29 @@ public class UserServiceTests {
         UserDTO actualUser = userService.findUserByLogin("User A");
 
         Assertions.assertEquals(expectedUser, actualUser);
+    }
+
+    @Test
+    @DisplayName("addUser")
+    void test20() {
+        // TODO: 2020-02-05
+    }
+
+    @Test
+    @DisplayName("findAll")
+    void test30() {
+        // TODO: 2020-02-05
+    }
+
+    @Test
+    @DisplayName("findbyId")
+    void test40() {
+        // TODO: 2020-02-05
+    }
+
+    @Test
+    @DisplayName("disableEnable")
+    void test50() {
+        // TODO: 2020-02-05
     }
 }
