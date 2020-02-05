@@ -3,10 +3,7 @@ package com.app.service;
 import com.app.dto.CartDTO;
 import com.app.exceptions.AppException;
 import com.app.mappers.CartMapper;
-import com.app.model.Cart;
-import com.app.model.OptimaCode;
-import com.app.model.Price;
-import com.app.model.Product;
+import com.app.model.*;
 import com.app.repository.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -280,7 +277,7 @@ public class CartServiceTests {
     }
 
     @Test
-    @DisplayName("calculateCartValue - nett price type - many products")
+    @DisplayName("calculateCartValue - gross price type - many products")
     void test42() {
 
         Product product1 = Product.builder().id(1L)
@@ -330,26 +327,118 @@ public class CartServiceTests {
     }
 
     @Test
-    @DisplayName("getActiveCart")
+    @DisplayName("getAllUsersCarts - user has no carts")
     void test50() {
 
+        Mockito
+                .when(cartRepository.findAll())
+                .thenReturn(List.of());
+
+        List<CartDTO> expectedCarts = List.of();
+
+        Assertions.assertEquals(expectedCarts, cartService.getAllUsersCarts(1L));
     }
 
     @Test
-    @DisplayName("setAddressToCart")
+    @DisplayName("getAllUsersCarts - user has one open cart")
+    void test51() {
+
+        User user = User.builder().id(1L).build();
+        Optional<User> userOptional = Optional.of(user);
+        Cart cart = Cart.builder().id(2L).cartClosed(false).build();
+        List<Cart> carts = List.of(cart);
+
+        Mockito
+                .when(userRepository.findById(1L))
+                .thenReturn(userOptional);
+
+        Mockito
+                .when(cartRepository.findAllByUserId(1L))
+                .thenReturn(carts);
+
+        List<CartDTO> expectedCarts = List.of(CartMapper.toDto(cart));
+
+        Assertions.assertEquals(expectedCarts, cartService.getAllUsersCarts(user.getId()));
+    }
+
+    @Test
+    @DisplayName("getAllUsersCarts - user has one closed cart")
+    void test52() {
+
+        User user = User.builder().id(1L).build();
+        Optional<User> userOptional = Optional.of(user);
+        Cart cart = Cart.builder().id(2L).cartClosed(true).build();
+        List<Cart> carts = List.of(cart);
+
+        Mockito
+                .when(userRepository.findById(1L))
+                .thenReturn(userOptional);
+
+        Mockito
+                .when(cartRepository.findAllByUserId(1L))
+                .thenReturn(carts);
+
+        List<CartDTO> expectedCarts = List.of(CartMapper.toDto(cart));
+
+        Assertions.assertEquals(expectedCarts, cartService.getAllUsersCarts(user.getId()));
+    }
+
+    @Test
+    @DisplayName("getAllUsersCarts - user has many open and closed carts")
+    void test53() {
+
+        User user = User.builder().id(1L).build();
+        Optional<User> userOptional = Optional.of(user);
+
+        Cart cart2 = Cart.builder().id(2L).cartClosed(true).build();
+        Cart cart3 = Cart.builder().id(3L).cartClosed(false).build();
+        Cart cart4 = Cart.builder().id(4L).cartClosed(false).build();
+        Cart cart5 = Cart.builder().id(5L).cartClosed(false).build();
+        Cart cart6 = Cart.builder().id(6L).cartClosed(true).build();
+        Cart cart7 = Cart.builder().id(7L).cartClosed(true).build();
+
+        List<Cart> carts = List.of(cart2, cart3, cart4, cart5, cart6, cart7);
+
+        Mockito
+                .when(userRepository.findById(1L))
+                .thenReturn(userOptional);
+
+        Mockito
+                .when(cartRepository.findAllByUserId(1L))
+                .thenReturn(carts);
+
+        List<CartDTO> expectedCarts = List.of(
+                CartMapper.toDto(cart2),
+                CartMapper.toDto(cart3),
+                CartMapper.toDto(cart4),
+                CartMapper.toDto(cart5),
+                CartMapper.toDto(cart6),
+                CartMapper.toDto(cart7));
+
+        Assertions.assertEquals(expectedCarts, cartService.getAllUsersCarts(user.getId()));
+    }
+
+    @Test
+    @DisplayName("getActiveCart")
     void test60() {
 
     }
 
     @Test
-    @DisplayName("closeCart")
+    @DisplayName("setAddressToCart")
     void test70() {
 
     }
 
     @Test
-    @DisplayName("userHasOpenCart")
+    @DisplayName("closeCart")
     void test80() {
+
+    }
+
+    @Test
+    @DisplayName("userHasOpenCart")
+    void test90() {
 
     }
 }

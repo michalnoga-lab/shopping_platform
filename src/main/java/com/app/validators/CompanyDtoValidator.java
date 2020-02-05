@@ -9,7 +9,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 @Component
-public class CompanyValidator implements Validator {
+public class CompanyDtoValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> aClass) {
