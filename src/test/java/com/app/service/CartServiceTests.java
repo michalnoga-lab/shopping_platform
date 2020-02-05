@@ -1,6 +1,7 @@
 package com.app.service;
 
 import com.app.dto.CartDTO;
+import com.app.dto.DeliveryAddressDTO;
 import com.app.exceptions.AppException;
 import com.app.mappers.CartMapper;
 import com.app.model.*;
@@ -33,13 +34,10 @@ public class CartServiceTests {
     private UserRepository userRepository;
 
     @Autowired
-    private ProductRepository productRepository;
-
-    @Autowired
     private DeliveryAddressRepository deliveryAddressRepository;
 
     @Autowired
-    private CompanyRepository companyRepository;
+    private ProductRepository productRepository;
 
     @Autowired
     private CartService cartService;
@@ -54,17 +52,14 @@ public class CartServiceTests {
         private UserRepository userRepository;
 
         @MockBean
-        private ProductRepository productRepository;
-
-        @MockBean
-        private CompanyRepository companyRepository;
-
-        @MockBean
         private DeliveryAddressRepository deliveryAddressRepository;
+
+        @MockBean
+        private ProductRepository productRepository;
 
         @Bean
         public CartService cartService() {
-            return new CartService(cartRepository, userRepository, productRepository, companyRepository, deliveryAddressRepository);
+            return new CartService(cartRepository, userRepository, productRepository, deliveryAddressRepository);
         }
     }
 
@@ -565,17 +560,52 @@ public class CartServiceTests {
     @DisplayName("setAddressToCart")
     void test70() {
 
+        User user = User.builder().id(1L).build();
+        DeliveryAddress deliveryAddress = DeliveryAddress.builder().id(2L).build();
+        DeliveryAddressDTO deliveryAddressDTO = DeliveryAddressDTO.builder().id(2L).build();
+        CartDTO cartDTO = CartDTO.builder().id(3L).cartClosed(false).build();
+        Cart cart = Cart.builder().id(3L).cartClosed(false).build();
+        List<Cart> carts = List.of(cart);
+
+        Mockito
+                .when(cartRepository.findAllByUserId(user.getId()))
+                .thenReturn(carts);
+
+        Mockito
+                .when(cartRepository.getOne(cartDTO.getId()))
+                .thenReturn(cart);
+
+        Mockito
+                .when(deliveryAddressRepository.getOne(deliveryAddress.getId()))
+                .thenReturn(deliveryAddress);
+
+        cartDTO.setDeliveryAddressDTO(deliveryAddressDTO);
+        CartDTO actualCart = cartService.setAddressToCart(deliveryAddress.getId(), user.getId());
+
+        Assertions.assertEquals(cartDTO, actualCart);
     }
 
     @Test
     @DisplayName("closeCart")
     void test80() {
 
-    }
+        User user = User.builder().id(1L).build();
+        CartDTO cartDTO = CartDTO.builder().id(3L).cartClosed(false).build();
+        Cart cart = Cart.builder().id(3L).cartClosed(false).build();
+        List<Cart> carts = List.of(cart);
 
-    @Test
-    @DisplayName("userHasOpenCart")
-    void test90() {
+        Mockito
+                .when(cartRepository.findAllByUserId(user.getId()))
+                .thenReturn(carts);
 
+        Mockito
+                .when(cartRepository.getOne(cartDTO.getId()))
+                .thenReturn(cart);
+
+        cartDTO.setCartClosed(true);
+        CartDTO actualCart = cartService.closeCart(user.getId());
+        actualCart.setPurchaseTime(null);
+
+        Assertions.assertEquals(cartDTO, actualCart);
     }
 }

@@ -23,7 +23,6 @@ public class CartService {
     private final CartRepository cartRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
-    private final CompanyRepository companyRepository;
     private final DeliveryAddressRepository deliveryAddressRepository;
 
     public CartDTO getCart(Long cartId) {
