@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 public class CompanyService {
 
     private final CompanyRepository companyRepository;
-    private final UserRepository userRepository;
 
     public CompanyDTO getCompanyOfUser(Long userId) {
         if (userId == null) {
@@ -76,7 +75,7 @@ public class CompanyService {
                 .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_COMPANY, "findById - no company with ID: " + companyId));
     }
 
-    public void disableEnable(Long companyId, Boolean enabled) {
+    public CompanyDTO disableEnable(Long companyId, Boolean enabled) {
         if (companyId == null) {
             throw new AppException(ExceptionCodes.SERVICE_COMPANY, "disableEnable - company ID is null");
         }
@@ -87,6 +86,7 @@ public class CompanyService {
                 .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_COMPANY, "disableEnable - no company with ID: " + companyId));
         company.setActive(enabled);
         companyRepository.save(company);
+        return CompanyMapper.toDto(company);
     }
 
     public CompanyDTO edit(Long companyId) {

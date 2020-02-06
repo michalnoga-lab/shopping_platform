@@ -48,6 +48,9 @@ public class FileService {
             try (Reader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
                 int character = 0;
                 while ((character = reader.read()) != -1) {
+
+                    // TODO: 2020-02-05 if char does not match forbidden chars add it to SB
+
                     stringBuilder.append((char) character);
                 }
             } catch (Exception e) {

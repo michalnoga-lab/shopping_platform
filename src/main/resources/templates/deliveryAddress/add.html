@@ -15,8 +15,8 @@
         <div class="form-group">
             <label class="text-secondary" for="street">ADRES DOSTAWY</label>
             <input id="street" type="text" class="form-control" th:field="*{street}"/>
-            <p id="streetFeedback"></p>
         </div>
+        <label id="streetFeedback"></label>
         <p class="text text-danger" th:if="${errors.containsKey('street')}" th:text="${errors.get('street')}"></p>
         <div class="form-group">
             <label class="text-secondary" for="phone">TELEFON KONTAKTOWY</label>

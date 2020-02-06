@@ -1,4 +1,5 @@
-const streetRegex = new RegExp('abc', 'g');
+
+const streetRegex = new RegExp('^\\d', 'g');
 const street = document.getElementById('street');
 
 const checkStreet = () => {
@@ -12,7 +13,7 @@ const checkStreet = () => {
                                             //todo <input id="street" class="form-control" type="text" name="street" value="">
     console.log(street.value);
 
-    if (streetRegex.test(street.accessKey)) {
+    if (!streetRegex.test(street.value)) {
         const response = 'PODANY ADRES NIE JEST PRAWIDŁOWY 00000000000000000';
         response.fontcolor('red');
         streetFeedback.textContent = response;

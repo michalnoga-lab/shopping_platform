@@ -5,7 +5,6 @@ import com.app.mappers.CompanyMapper;
 import com.app.model.Company;
 import com.app.model.User;
 import com.app.repository.CompanyRepository;
-import com.app.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,17 +16,16 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 @ExtendWith(SpringExtension.class)
 public class CompanyServiceTests {
 
     @Autowired
     private CompanyRepository companyRepository;
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private CompanyService companyService;
@@ -38,12 +36,9 @@ public class CompanyServiceTests {
         @MockBean
         private CompanyRepository companyRepository;
 
-        @MockBean
-        private UserRepository userRepository;
-
         @Bean
         public CompanyService companyService() {
-            return new CompanyService(companyRepository, userRepository);
+            return new CompanyService(companyRepository);
         }
     }
 
@@ -138,30 +133,131 @@ public class CompanyServiceTests {
     @Test
     @DisplayName("add")
     void test20() {
-// TODO: 2020-02-05
+
+        CompanyDTO companyDTO = CompanyDTO.builder().id(1L).build();
+        CompanyDTO expectedCompany = CompanyDTO.builder().id(1L).active(true).build();
+
+        CompanyDTO actualCompany = companyService.add(companyDTO);
+
+        Assertions.assertEquals(expectedCompany, actualCompany);
     }
 
     @Test
-    @DisplayName("findAll")
+    @DisplayName("findAll - no companies in DB")
     void test30() {
-// TODO: 2020-02-05
+
+        List<Company> companies = new ArrayList<>();
+        List<CompanyDTO> companyDTOS = new ArrayList<>();
+
+        Mockito
+                .when(companyRepository.findAll())
+                .thenReturn(companies);
+
+        List<CompanyDTO> expectedCompanies = companyService.findAll();
+
+        Assertions.assertEquals(0, expectedCompanies.size());
+        Assertions.assertEquals(companyDTOS, expectedCompanies);
+    }
+
+    @Test
+    @DisplayName("findAll - one company in DB")
+    void test31() {
+
+        Company company = Company.builder().id(1L).build();
+
+        List<Company> companies = List.of(company);
+        List<CompanyDTO> companyDTOS = List.of(CompanyMapper.toDto(company));
+
+        Mockito
+                .when(companyRepository.findAll())
+                .thenReturn(companies);
+
+        List<CompanyDTO> expectedCompanies = companyService.findAll();
+
+        Assertions.assertEquals(1, expectedCompanies.size());
+        Assertions.assertEquals(companyDTOS, expectedCompanies);
+    }
+
+    @Test
+    @DisplayName("findAll - many companies in DB")
+    void test32() {
+
+        Company company1 = Company.builder().id(1L).build();
+        Company company2 = Company.builder().id(2L).build();
+        Company company3 = Company.builder().id(3L).build();
+
+        List<Company> companies = List.of(company1, company2, company3);
+        List<CompanyDTO> companyDTOS = List.of(
+                CompanyMapper.toDto(company1),
+                CompanyMapper.toDto(company2),
+                CompanyMapper.toDto(company3));
+
+        Mockito
+                .when(companyRepository.findAll())
+                .thenReturn(companies);
+
+        List<CompanyDTO> expectedCompanies = companyService.findAll();
+
+        Assertions.assertEquals(3, expectedCompanies.size());
+        Assertions.assertEquals(companyDTOS, expectedCompanies);
     }
 
     @Test
     @DisplayName("findById")
     void test40() {
-// TODO: 2020-02-05
+
+        Company company1 = Company.builder().id(1L).build();
+        CompanyDTO expectedCompany = CompanyDTO.builder().id(1L).build();
+        Optional<Company> companyOptional = Optional.of(company1);
+
+        Mockito
+                .when(companyRepository.findById(company1.getId()))
+                .thenReturn(companyOptional);
+
+        CompanyDTO actualCompany = companyService.findById(company1.getId());
+
+        Assertions.assertEquals(expectedCompany, actualCompany);
     }
 
     @Test
-    @DisplayName("disableEnable")
+    @DisplayName("disableEnable - enable")
     void test50() {
-// TODO: 2020-02-05
+
+        Company company = Company.builder().id(1L).build();
+        Optional<Company> companyOptional = Optional.of(company);
+        CompanyDTO companyDTO = CompanyMapper.toDto(company);
+
+        Mockito
+                .when(companyRepository.findById(company.getId()))
+                .thenReturn(companyOptional);
+
+        CompanyDTO actualCompany = companyService.disableEnable(company.getId(), true);
+        companyDTO.setActive(true);
+
+        Assertions.assertEquals(companyDTO, actualCompany);
+    }
+
+    @Test
+    @DisplayName("disableEnable - disable")
+    void test51() {
+
+        Company company = Company.builder().id(1L).build();
+        Optional<Company> companyOptional = Optional.of(company);
+        CompanyDTO companyDTO = CompanyMapper.toDto(company);
+
+        Mockito
+                .when(companyRepository.findById(company.getId()))
+                .thenReturn(companyOptional);
+
+        CompanyDTO actualCompany = companyService.disableEnable(company.getId(), false);
+        companyDTO.setActive(false);
+
+        Assertions.assertEquals(companyDTO, actualCompany);
     }
 
     @Test
     @DisplayName("edit")
     void test60() {
-// TODO: 2020-02-05
+        // TODO: 2020-02-05
     }
 }
