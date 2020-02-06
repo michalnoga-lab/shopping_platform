@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -256,29 +255,5 @@ public class ProductServiceTests {
                 productService.search(ProductSearchDTO.builder().userInput("XX").build());
 
         Assertions.assertEquals(expectedProducts, actualProducts);
-    }
-
-    @Test
-    @DisplayName("addProducts")
-    void test60() {
-        // TODO: 2020-02-05
-    }
-
-    @Test
-    @DisplayName("removeFromCart")
-    void test70() {
-        // TODO: 2020-02-05
-    }
-
-    @Test
-    @DisplayName("setCode")
-    void test80() {
-        // TODO: 2020-02-05
-    }
-
-    @Test
-    @DisplayName("removeCode")
-    void test90() {
-        // TODO: 2020-02-05
     }
 }

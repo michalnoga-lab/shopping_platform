@@ -34,7 +34,7 @@ public class UserService {
                 .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_USER, "findUserByLogin - no user with login:" + login));
     }
 
-    public UserDTO addUser(UserDTO userDTO) {
+    public UserDTO addUser(UserDTO userDTO) { // TODO: 2020-02-06 jako drugi parametr role
         if (userDTO == null) {
             throw new AppException(ExceptionCodes.SERVICE_USER, "addUser - user is null");
         }
@@ -69,7 +69,7 @@ public class UserService {
                 .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_USER, "findById - no user with ID: " + id));
     }
 
-    public void disableEnable(Long userId, Boolean enabled) {
+    public UserDTO disableEnable(Long userId, Boolean enabled) {
         if (userId == null) {
             throw new AppException(ExceptionCodes.SERVICE_COMPANY, "disableEnable - user ID is null");
         }
@@ -80,5 +80,6 @@ public class UserService {
                 .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_USER, "disableEnable - no user with ID: " + userId));
         user.setEnabled(enabled);
         userRepository.save(user);
+        return UserMapper.toDto(user);
     }
 }

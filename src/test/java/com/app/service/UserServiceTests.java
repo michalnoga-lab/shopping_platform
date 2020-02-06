@@ -2,8 +2,8 @@ package com.app.service;
 
 import com.app.dto.UserDTO;
 import com.app.mappers.UserMapper;
+import com.app.model.Role;
 import com.app.model.User;
-import com.app.repository.CompanyRepository;
 import com.app.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -17,12 +17,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 @ExtendWith(SpringExtension.class)
 public class UserServiceTests {
-
-    @Autowired
-    private CompanyRepository companyRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -32,9 +30,6 @@ public class UserServiceTests {
 
     @TestConfiguration
     public static class AppTestConfiguration {
-
-        @MockBean
-        private CompanyRepository companyRepository;
 
         @MockBean
         private UserRepository userRepository;
@@ -64,24 +59,143 @@ public class UserServiceTests {
     @Test
     @DisplayName("addUser")
     void test20() {
-        // TODO: 2020-02-05
+
+        UserDTO userDTO = UserDTO.builder().id(1L).build();
+
+        UserDTO expectedUser = UserDTO.builder()
+                .id(1L)
+                .enabled(true)
+                .role(Role.USER)
+                .build();
+
+        UserDTO actualUser = userService.addUser(userDTO);
+
+        Assertions.assertEquals(expectedUser, actualUser);
     }
 
     @Test
-    @DisplayName("findAll")
+    @DisplayName("findAll - no users in DB")
     void test30() {
-        // TODO: 2020-02-05
+
+        List<User> users = List.of();
+        List<UserDTO> expectedUsers = List.of();
+
+        Mockito
+                .when(userRepository.findAll())
+                .thenReturn(users);
+
+        List<UserDTO> actualUsers = userService.findAll();
+
+        Assertions.assertEquals(expectedUsers, actualUsers);
     }
 
     @Test
-    @DisplayName("findbyId")
+    @DisplayName("findAll - many users in DB")
+    void test31() {
+
+        User user1 = User.builder().id(1L).build();
+        User user2 = User.builder().id(2L).build();
+        User user3 = User.builder().id(3L).build();
+
+        List<User> users = List.of(user1, user2, user3);
+
+        UserDTO userDTO1 = UserDTO.builder().id(1L).build();
+        UserDTO userDTO2 = UserDTO.builder().id(2L).build();
+        UserDTO userDTO3 = UserDTO.builder().id(3L).build();
+
+        List<UserDTO> expectedUsers = List.of(userDTO1, userDTO2, userDTO3);
+
+        Mockito
+                .when(userRepository.findAll())
+                .thenReturn(users);
+
+        List<UserDTO> actualUsers = userService.findAll();
+
+        Assertions.assertEquals(expectedUsers, actualUsers);
+    }
+
+    @Test
+    @DisplayName("findById")
     void test40() {
-        // TODO: 2020-02-05
+
+        User user = User.builder().id(1L).build();
+        Optional<User> userOptional = Optional.of(user);
+
+        Mockito
+                .when(userRepository.findById(user.getId()))
+                .thenReturn(userOptional);
+
+        UserDTO actualUser = userService.findById(user.getId());
+        UserDTO expectedUser = UserDTO.builder().id(1L).build();
+
+        Assertions.assertEquals(expectedUser, actualUser);
     }
 
     @Test
-    @DisplayName("disableEnable")
+    @DisplayName("disableEnable - enable when null")
     void test50() {
-        // TODO: 2020-02-05
+
+        User user = User.builder().id(1L).build();
+        Optional<User> userOptional = Optional.of(user);
+
+        Mockito
+                .when(userRepository.findById(user.getId()))
+                .thenReturn(userOptional);
+
+        UserDTO actualUser = userService.disableEnable(user.getId(), true);
+        UserDTO expectedUser = UserDTO.builder().id(1L).enabled(true).build();
+
+        Assertions.assertEquals(expectedUser, actualUser);
+    }
+
+    @Test
+    @DisplayName("disableEnable - disable when null")
+    void test51() {
+
+        User user = User.builder().id(1L).build();
+        Optional<User> userOptional = Optional.of(user);
+
+        Mockito
+                .when(userRepository.findById(user.getId()))
+                .thenReturn(userOptional);
+
+        UserDTO actualUser = userService.disableEnable(user.getId(), false);
+        UserDTO expectedUser = UserDTO.builder().id(1L).enabled(false).build();
+
+        Assertions.assertEquals(expectedUser, actualUser);
+    }
+
+    @Test
+    @DisplayName("disableEnable - enable when disabled")
+    void test52() {
+
+        User user = User.builder().id(1L).enabled(false).build();
+        Optional<User> userOptional = Optional.of(user);
+
+        Mockito
+                .when(userRepository.findById(user.getId()))
+                .thenReturn(userOptional);
+
+        UserDTO actualUser = userService.disableEnable(user.getId(), true);
+        UserDTO expectedUser = UserDTO.builder().id(1L).enabled(true).build();
+
+        Assertions.assertEquals(expectedUser, actualUser);
+    }
+
+    @Test
+    @DisplayName("disableEnable - disable when enabled")
+    void test53() {
+
+        User user = User.builder().id(1L).enabled(true).build();
+        Optional<User> userOptional = Optional.of(user);
+
+        Mockito
+                .when(userRepository.findById(user.getId()))
+                .thenReturn(userOptional);
+
+        UserDTO actualUser = userService.disableEnable(user.getId(), false);
+        UserDTO expectedUser = UserDTO.builder().id(1L).enabled(false).build();
+
+        Assertions.assertEquals(expectedUser, actualUser);
     }
 }
