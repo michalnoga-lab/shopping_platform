@@ -52,9 +52,9 @@ public class DeliveryAddressServiceTests {
     @DisplayName("findAll - user has no addresses")
     void test10() {
 
-        DeliveryAddress deliveryAddress1 = DeliveryAddress.builder().street("Address 1").build();
-        DeliveryAddress deliveryAddress2 = DeliveryAddress.builder().street("Address 2").build();
-        DeliveryAddress deliveryAddress3 = DeliveryAddress.builder().street("Address 3").build();
+        DeliveryAddress deliveryAddress1 = DeliveryAddress.builder().street("Address 1").hidden(false).build();
+        DeliveryAddress deliveryAddress2 = DeliveryAddress.builder().street("Address 2").hidden(false).build();
+        DeliveryAddress deliveryAddress3 = DeliveryAddress.builder().street("Address 3").hidden(false).build();
 
         User user1 = User.builder().id(1L).build();
         User user2 = User.builder().id(2L).build();
@@ -78,9 +78,9 @@ public class DeliveryAddressServiceTests {
     @DisplayName("findAll - user has one address")
     void test11() {
 
-        DeliveryAddress deliveryAddress1 = DeliveryAddress.builder().street("Address 1").build();
-        DeliveryAddress deliveryAddress2 = DeliveryAddress.builder().street("Address 2").build();
-        DeliveryAddress deliveryAddress3 = DeliveryAddress.builder().street("Address 3").build();
+        DeliveryAddress deliveryAddress1 = DeliveryAddress.builder().street("Address 1").hidden(false).build();
+        DeliveryAddress deliveryAddress2 = DeliveryAddress.builder().street("Address 2").hidden(false).build();
+        DeliveryAddress deliveryAddress3 = DeliveryAddress.builder().street("Address 3").hidden(false).build();
 
         User user1 = User.builder().id(1L).build();
         User user2 = User.builder().id(2L).build();
@@ -106,9 +106,9 @@ public class DeliveryAddressServiceTests {
     @DisplayName("findAll - user has many addresses")
     void test12() {
 
-        DeliveryAddress deliveryAddress1 = DeliveryAddress.builder().street("Address 1").build();
-        DeliveryAddress deliveryAddress2 = DeliveryAddress.builder().street("Address 2").build();
-        DeliveryAddress deliveryAddress3 = DeliveryAddress.builder().street("Address 3").build();
+        DeliveryAddress deliveryAddress1 = DeliveryAddress.builder().street("Address 1").hidden(false).build();
+        DeliveryAddress deliveryAddress2 = DeliveryAddress.builder().street("Address 2").hidden(false).build();
+        DeliveryAddress deliveryAddress3 = DeliveryAddress.builder().street("Address 3").hidden(false).build();
 
         User user1 = User.builder().id(1L).build();
         User user2 = User.builder().id(2L).build();
