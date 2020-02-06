@@ -34,7 +34,6 @@ import java.util.List;
         classes = PrimaPlatformaApplication.class
 )
 @AutoConfigureMockMvc
-@ContextConfiguration(classes = {ProductSearchDtoValidator.class, ProductSearchDTO.class}) // TODO: 28.01.2020
 @TestPropertySource(locations = "classpath:application.tests.properties")
 public class ProductSearchControllerTests {
 
@@ -59,9 +58,7 @@ public class ProductSearchControllerTests {
 
     @Test
     @DisplayName("products - POST")
-    void test2() throws Exception { // TODO: 2020-01-12 validation error
-        // TODO: 28.01.2020 org.springframework.web.util.NestedServletException: Request processing failed;
-        //  nested exception is AppException{id=null, exceptionCode=VALIDATION, description='ProductSearchDto'}
+    void test2() throws Exception {
 
         Product product = Product.builder().id(1L).build();
         ProductSearchDTO productSearchDTO = ProductSearchDTO.builder().build();
@@ -75,7 +72,9 @@ public class ProductSearchControllerTests {
                 .thenReturn(List.of(ProductMapper.toDto(product)));
 
         mockMvc
-                .perform(MockMvcRequestBuilders.post("/search/products").contentType(MediaType.TEXT_HTML))
+                .perform(MockMvcRequestBuilders.post("/search/products")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("userInput", "exampleInput"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }
