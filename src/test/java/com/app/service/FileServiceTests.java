@@ -20,19 +20,10 @@ public class FileServiceTests {
     @MockBean
     private FileService fileService;
 
-
-    /**
-     * @ParameterizedTest
-     * @CsvFileSource(resources = "/file.csv")
-     * public void test6(String x, int y) {
-     * System.out.println(x + " " + y);
-     * }
-     */
-
     @ParameterizedTest
     //@CsvFileSource(resources = "/tests/upload.csv")
     @CsvSource({"a,1", "b,2"})
-    void test10(String letter, int number) {
+    void test10(String letter) {
 
         System.out.println(letter);
         // TODO: 06.02.2020

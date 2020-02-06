@@ -3,17 +3,11 @@ package com.app.integration.web;
 import com.app.PrimaPlatformaApplication;
 import com.app.dto.CartDTO;
 import com.app.dto.ProductDTO;
-import com.app.mappers.ProductMapper;
-import com.app.model.Product;
 import com.app.service.CartService;
 import com.app.service.ProductService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -23,11 +17,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 
@@ -75,27 +66,21 @@ public class ProductControllerTests {
     }
 
     @Test
-    @DisplayName("buy")
+    @DisplayName("buy - POST")
     void test3() throws Exception {
 
         ProductDTO productDTO = ProductDTO.builder().id(2L).build();
-        ProductDTO addedProduct = ProductDTO.builder().id(2L).build();
         CartDTO cartDTO = CartDTO.builder().id(3L).build();
 
         Mockito
                 .when(cartService.addProductToCart(productDTO, 2L))
                 .thenReturn(cartDTO);
 
-        // TODO: 2020-01-24 org.springframework.web.util.NestedServletException:
-        //  Request processing failed; nested exception is AppException{id=null, exceptionCode=VALIDATION, description='ProductDTO'}
         mockMvc
                 .perform(MockMvcRequestBuilders.post("/products/buy")
-                ).andExpect(MockMvcResultMatchers.status().isCreated())
-                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
-    }
-
-    private static String toJson(ProductDTO productDTO) throws JsonProcessingException {
-        return new ObjectMapper().writeValueAsString(productDTO);
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("quantity", "111"))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
     }
 
     @Test
