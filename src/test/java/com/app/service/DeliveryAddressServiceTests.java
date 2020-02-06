@@ -2,6 +2,7 @@ package com.app.service;
 
 import com.app.dto.DeliveryAddressDTO;
 import com.app.mappers.DeliveryAddressMapper;
+import com.app.mappers.UserMapper;
 import com.app.model.DeliveryAddress;
 import com.app.model.User;
 import com.app.repository.DeliveryAddressRepository;
@@ -18,6 +19,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 @ExtendWith(SpringExtension.class)
 public class DeliveryAddressServiceTests {
@@ -132,13 +134,43 @@ public class DeliveryAddressServiceTests {
     @Test
     @DisplayName("add")
     void test20() {
-        // TODO: 2020-02-05
+
+        User user = User.builder().id(2L).build();
+        DeliveryAddressDTO deliveryAddressDTO = DeliveryAddressDTO.builder().id(1L).build();
+        Optional<User> userOptional = Optional.of(user);
+
+        Mockito
+                .when(userRepository.findById(user.getId()))
+                .thenReturn(userOptional);
+
+        DeliveryAddressDTO expectedAddress = DeliveryAddressDTO.builder().id(1L)
+                .userDTO(UserMapper.toDto(user))
+                .hidden(false)
+                .build();
+
+        DeliveryAddressDTO actualAddress = deliveryAddressService.add(deliveryAddressDTO, user.getId());
+
+        Assertions.assertEquals(expectedAddress, actualAddress);
     }
 
     @Test
     @DisplayName("hide")
     void test30() {
-        // TODO: 2020-02-05
-    }
 
+        DeliveryAddress deliveryAddress = DeliveryAddress.builder().id(1L).build();
+        DeliveryAddressDTO deliveryAddressDTO = DeliveryAddressDTO.builder().id(1L).build();
+        Optional<DeliveryAddress> deliveryAddressOptional = Optional.of(deliveryAddress);
+
+        Mockito
+                .when(deliveryAddressRepository.findById(deliveryAddressDTO.getId()))
+                .thenReturn(deliveryAddressOptional);
+
+        DeliveryAddressDTO expectedAddress = DeliveryAddressDTO.builder().id(1L)
+                .hidden(true)
+                .build();
+
+        DeliveryAddressDTO actualAddress = deliveryAddressService.hide(deliveryAddressDTO.getId());
+
+        Assertions.assertEquals(expectedAddress, actualAddress);
+    }
 }

@@ -51,10 +51,13 @@ public class DeliveryAddressService {
             throw new AppException(ExceptionCodes.SERVICE_DELIVERY, "add - user ID less than zero: " + userId);
         }
         DeliveryAddress deliveryAddress = DeliveryAddressMapper.fromDto(deliveryAddressDTO);
-        User user = userRepository.findAll()
+        /*User user = userRepository.findAll()
                 .stream()
                 .filter(u -> u.getId().equals(userId))
-                .findFirst()
+                .findFirst() todo tak było, teraz próba szybszą metodą
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_DELIVERY, "add - no user with ID: " + userId));*/
+
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_DELIVERY, "add - no user with ID: " + userId));
 
         deliveryAddress.setUser(user);
@@ -72,6 +75,7 @@ public class DeliveryAddressService {
         }
         DeliveryAddress deliveryAddress = deliveryAddressRepository.findById(addressId)
                 .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_DELIVERY, "hide - no address with ID: " + addressId));
+
         deliveryAddress.setHidden(true);
         deliveryAddressRepository.save(deliveryAddress);
         return DeliveryAddressMapper.toDto(deliveryAddress);
