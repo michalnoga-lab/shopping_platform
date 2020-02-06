@@ -1,7 +1,9 @@
 package com.app.service;
 
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,9 +20,22 @@ public class FileServiceTests {
     @MockBean
     private FileService fileService;
 
-    @Test
-    @DisplayName("getProductsFromFile")
-    void test10() {
-        // TODO: 2020-02-05
+
+    /**
+     * @ParameterizedTest
+     * @CsvFileSource(resources = "/file.csv")
+     * public void test6(String x, int y) {
+     * System.out.println(x + " " + y);
+     * }
+     */
+
+    @ParameterizedTest
+    //@CsvFileSource(resources = "/tests/upload.csv")
+    @CsvSource({"a,1", "b,2"})
+    void test10(String letter, int number) {
+
+        System.out.println(letter);
+        // TODO: 06.02.2020
+
     }
 }

@@ -25,6 +25,8 @@ import java.util.Optional;
 public class FileService {
 
     private final CompanyRepository companyRepository;
+    private final String FILE_NAME_REGEX = "^upload\\.[\\w]{3}$";
+    private final String ALLOWED_CHARS = "[a-z-A-Z\\d\\.,\\]}]+";
 
     public List<ProductDTO> getProductsFromFile(MultipartFile file, Long companyId) {
         try {
@@ -37,7 +39,7 @@ public class FileService {
             if (companyId <= 0) {
                 throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - company ID less than zero");
             }
-            if (!file.getName().equals("upload.csv")) {
+            if (!file.getName().matches(FILE_NAME_REGEX)) {
                 throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - incorrect file extension");
             }
 
@@ -48,10 +50,9 @@ public class FileService {
             try (Reader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
                 int character = 0;
                 while ((character = reader.read()) != -1) {
-
-                    // TODO: 2020-02-05 if char does not match forbidden chars add it to SB
-
-                    stringBuilder.append((char) character);
+                    if (!String.valueOf((char) character).matches(ALLOWED_CHARS)) {
+                        stringBuilder.append((char) character);
+                    }
                 }
             } catch (Exception e) {
                 throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - error reading file content");

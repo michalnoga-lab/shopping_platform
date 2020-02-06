@@ -78,7 +78,7 @@ public class ProductService {
                     .map(ProductMapper::toDto)
                     .collect(Collectors.toSet());
         } else {
-            throw new AppException(ExceptionCodes.SERVICE_PRODUCT, "getOneProduct - no product with ID: " + cartId);
+            throw new AppException(ExceptionCodes.SERVICE_PRODUCT, "getOneProduct - no cart with ID: " + cartId);
         }
     }
 

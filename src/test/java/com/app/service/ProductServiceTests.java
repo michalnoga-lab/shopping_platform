@@ -54,7 +54,32 @@ public class ProductServiceTests {
     @Test
     @DisplayName("findAll")
     void test10() {
-        // TODO: 2020-02-05
+
+        Product product1 = Product.builder().id(1L).build();
+        Product product2 = Product.builder().id(2L).build();
+        Product product3 = Product.builder().id(3L).build();
+        Product product4 = Product.builder().id(4L).build();
+        Product product5 = Product.builder().id(5L).build();
+
+        ProductDTO productDTO1 = ProductDTO.builder().id(1L).build();
+        ProductDTO productDTO2 = ProductDTO.builder().id(2L).build();
+        ProductDTO productDTO3 = ProductDTO.builder().id(3L).build();
+        ProductDTO productDTO4 = ProductDTO.builder().id(4L).build();
+        ProductDTO productDTO5 = ProductDTO.builder().id(5L).build();
+
+        List<Product> products = List.of(product1, product2, product3, product4, product5);
+        List<ProductDTO> expectedProducts = List.of(productDTO1, productDTO2, productDTO3, productDTO4, productDTO5);
+
+        Mockito
+                .when(productRepository.findAll())
+                .thenReturn(products);
+
+        List<ProductDTO> actualProducts = productService.findAll()
+                .stream()
+                .sorted(Comparator.comparing(ProductDTO::getId))
+                .collect(Collectors.toList());
+
+        Assertions.assertEquals(expectedProducts, actualProducts);
     }
 
     @Test
@@ -94,8 +119,7 @@ public class ProductServiceTests {
 
     @Test
     @DisplayName("getOneProduct")
-    void test30() { // TODO: 2020-01-11
-        //AppException{id=null, exceptionCode=SERVICE_PRODUCT, description='getOneProduct - no product with ID: 1'}
+    void test30() {
 
         Product product1 = Product.builder().id(1L).name("Product 1").build();
         Product product2 = Product.builder().id(2L).name("Product 2").build();
@@ -116,7 +140,7 @@ public class ProductServiceTests {
 
     @Test
     @DisplayName("getProductsOfCart")
-    void test40() { // TODO: 2020-01-11
+    void test40() {
 
         Product product1 = Product.builder().id(1L).name("Product 1").build();
         Product product2 = Product.builder().id(2L).name("Product 2").build();
@@ -131,11 +155,12 @@ public class ProductServiceTests {
                 .thenReturn(products);
 
         Cart cart = Cart.builder().id(6L).build();
+        Optional<Cart> cartOptional = Optional.of(cart);
         cart.setProducts(new HashSet<>(products));
 
         Mockito
-                .when(cartRepository.findAll())
-                .thenReturn(List.of(cart));
+                .when(cartRepository.findById(cart.getId()))
+                .thenReturn(cartOptional);
 
         List<ProductDTO> expectedProducts = products
                 .stream()
