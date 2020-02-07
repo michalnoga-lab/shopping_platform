@@ -68,7 +68,7 @@ public class ProductController {
 
     @PostMapping("remove/{id}")
     public String remove(@PathVariable Long id) {
-        productService.removeFromCart(id, securityService.getLoggedInUserId());
+        cartService.removeProductFromCart(id, securityService.getLoggedInUserId());
         /*return "carts/one"; todo tak było */
         return "redirect:/products/all";
     }

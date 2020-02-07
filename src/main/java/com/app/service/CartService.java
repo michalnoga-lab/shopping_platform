@@ -90,30 +90,30 @@ public class CartService {
         return CartMapper.toDto(cart);
     }
 
-    public CartDTO removeProductFromCart(Long productId, Long userId) { // TODO: 2020-02-06 przeliczyć wartość koszyka od nowa
+    public CartDTO removeProductFromCart(Long productId, Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART, "removeProductFromCart - no user with ID: " + userId));
 
-        /*Optional<Cart> cartOptional = cartRepository.findByUserId(userId); // TODO: 2020-01-22 find by cart ID
-        Cart cart = cartOptional.orElseThrow(() ->
-                new AppException(ExceptionCodes.SERVICE_PRODUCT, "removeFromCart - no cart with user ID: " + userId));*/
-
-        Optional<Cart> cart = cartRepository.findAllByUserId(userId)
+        Cart cart = cartRepository.findAllByUserId(userId)
                 .stream()
                 .filter(c -> c.getCartClosed().equals(false))
-                .findFirst();
+                .findFirst()
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART, "removeProductFromCart - no open cart for user with ID: " + userId));
 
-        if (cart.isPresent()) {
-            cart.get().setCartClosed(false);
+        Set<Product> products = cart.getProducts()
+                .stream()
+                .filter(product -> !product.getId().equals(productId))
+                .collect(Collectors.toSet());
 
+        cart.setProducts(products);
 
-            Set<Product> products = cart.get().getProducts();
-            Product product = productRepository.findById(productId).orElseThrow(() ->
-                    new AppException(ExceptionCodes.SERVICE_PRODUCT, "removeFromCart - no product with ID: " + productId));
-            products.remove(product);
-            cartRepository.save(cart.get());
-            return CartMapper.toDto(cart.get());
-        }
+        CartDTO cartValues = calculateCartValue(products, user.getCompany().getDefaultPrice());
+        cart.setTotalNetValue(cartValues.getTotalNetValue());
+        cart.setTotalVatValue(cartValues.getTotalVatValue());
+        cart.setTotalGrossValue(cartValues.getTotalGrossValue());
 
-        return CartDTO.builder().cartClosed(false).build();
+        cartRepository.save(cart);
+        return CartMapper.toDto(cart);
     }
 
     public CartDTO calculateCartValue(Set<Product> productsInCart, Price priceType) {
