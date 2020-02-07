@@ -1,0 +1,58 @@
+package com.app.security;
+
+import com.app.exceptions.AppException;
+import com.app.exceptions.ExceptionCodes;
+import com.app.model.Role;
+import com.app.model.User;
+import com.app.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.Collection;
+
+@Service
+@Qualifier("userDetailsServiceImpl")
+public class UserDetailsServiceImpl implements UserDetailsService {
+
+    private UserRepository userRepository;
+
+    public UserDetailsServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+
+        try {
+            if (login == null) {
+                throw new NullPointerException("loadUserByUsername - login is null");
+            }
+
+            User user = userRepository.findByLogin(login)
+                    .orElseThrow(() -> new UsernameNotFoundException(login));
+
+            return new org.springframework.security.core.userdetails.User(
+                    user.getName(),
+                    user.getPassword(),
+                    user.getEnabled(),
+                    true,
+                    true,
+                    true,
+                    getAuthorities(user.getRole())
+            );
+
+        } catch (Exception e) {
+            throw new AppException(ExceptionCodes.SECURITY, "loadUserByUsername - no user with username: " + login);
+        }
+    }
+
+    private Collection<GrantedAuthority> getAuthorities(Role role) {
+        return Arrays.asList(new SimpleGrantedAuthority(role.getDescription()));
+    }
+}
