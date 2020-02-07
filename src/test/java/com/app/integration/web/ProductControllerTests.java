@@ -91,18 +91,9 @@ public class ProductControllerTests {
                 .perform(MockMvcRequestBuilders.post("/products/remove/{id}", 1L)
                         .contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
-        // TODO: 2020-01-25 org.thymeleaf.exceptions.TemplateProcessingException:
-        //  Exception evaluating SpringEL expression: "cart.cartClosed==false" (template: "carts/one" - line 14, col 10)
 
-        /*MvcResult mvcResult
-                = mockMvc
-                .perform(MockMvcRequestBuilders.get("/products/{id}", 1L))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("products/one"))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("product"))
-                .andExpect(MockMvcResultMatchers.model().attribute("product", Matchers.hasProperty("id", Matchers.is(1L))))
-                .andExpect(MockMvcResultMatchers.model().attribute("product", Matchers.hasProperty("name", Matchers.is("PRALKA"))))
-                .andExpect(MockMvcResultMatchers.model().attribute("product", Matchers.hasProperty("price", Matchers.is(BigDecimal.valueOf(200)))))
-                .andReturn();*/
+        // TODO: 2020-02-06 org.thymeleaf.exceptions.TemplateProcessingException:
+        //  Exception evaluating SpringEL expression: "cart.cartClosed" (template: "carts/one" - line 14, col 10)
+
     }
 }

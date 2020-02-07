@@ -110,18 +110,31 @@ public class ProductService {
         productRepository.saveAll(products);
     }
 
-    public CartDTO removeFromCart(Long productId, Long userId) {
+    /*public CartDTO removeFromCart(Long productId, Long userId) { // TODO: 2020-02-06 przeliczyć wartość koszyka od nowa
 
-        Optional<Cart> cartOptional = cartRepository.findByUserId(userId); // TODO: 2020-01-22 find by cart ID
+        *//*Optional<Cart> cartOptional = cartRepository.findByUserId(userId); // TODO: 2020-01-22 find by cart ID
         Cart cart = cartOptional.orElseThrow(() ->
-                new AppException(ExceptionCodes.SERVICE_PRODUCT, "removeFromCart - no cart with user ID: " + userId));
-        Set<Product> products = cart.getProducts();
-        Product product = productRepository.findById(productId).orElseThrow(() ->
-                new AppException(ExceptionCodes.SERVICE_PRODUCT, "removeFromCart - no product with ID: " + productId));
-        products.remove(product);
-        cartRepository.save(cart);
-        return CartMapper.toDto(cart);
-    }
+                new AppException(ExceptionCodes.SERVICE_PRODUCT, "removeFromCart - no cart with user ID: " + userId));*//*
+
+        Optional<Cart> cart = cartRepository.findAllByUserId(userId)
+                .stream()
+                .filter(c -> c.getCartClosed().equals(false))
+                .findFirst();
+
+        if (cart.isPresent()) {
+            cart.get().setCartClosed(false);
+
+
+            Set<Product> products = cart.get().getProducts();
+            Product product = productRepository.findById(productId).orElseThrow(() ->
+                    new AppException(ExceptionCodes.SERVICE_PRODUCT, "removeFromCart - no product with ID: " + productId));
+            products.remove(product);
+            cartRepository.save(cart.get());
+            return CartMapper.toDto(cart.get());
+        }
+
+        return CartDTO.builder().cartClosed(false).build();
+    }*/
 
     public void setCode(Long productId, String userInput) {
         if (productId == null) {
