@@ -41,24 +41,27 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
 
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/mange/**", "/webjars/**", "/").permitAll()
-                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN") // TODO: 07.02.2020
+                /*.antMatchers("/mange/**", "/webjars/**", "/").permitAll()*/ // TODO: 07.02.2020
+                .antMatchers("/").permitAll()
+                .antMatchers("/users/**").hasAnyRole("USER", "ADMIN", "SUPER") // TODO: 07.02.2020
+                .antMatchers("/admin/**").hasAnyRole("ADMIN", "SUPER")
+                .antMatchers("/super/**").hasAnyRole("SUPER")
                 .anyRequest().authenticated()
 
                 .and()
                 .formLogin()
-                .loginPage("/").permitAll()
-                .loginProcessingUrl("/")
-                .usernameParameter("username")
+                .loginPage("/security/login").permitAll()
+                .loginProcessingUrl("/login")
+                .usernameParameter("login")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/", true)
-                .failureUrl("/")
+                .failureUrl("/security/failure")
 
                 .and()
                 .logout().permitAll()
-                .logoutUrl("/")
+                .logoutUrl("/logout")
                 .clearAuthentication(true)
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("/security/loggedOut")
 
                 .and()
                 .exceptionHandling()
@@ -77,7 +80,7 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
             public void handle(HttpServletRequest httpServletRequest,
                                HttpServletResponse httpServletResponse,
                                AccessDeniedException e) throws IOException, ServletException {
-                httpServletResponse.sendRedirect("/accessDenied"); // TODO: 07.02.2020 zrobić stronę
+                httpServletResponse.sendRedirect("/accessDenied");
             }
         };
     }

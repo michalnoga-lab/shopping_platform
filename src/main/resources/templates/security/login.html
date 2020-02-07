@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Platform</title>
+</head>
+<body>
+<div th:replace="fragments/stylesheet">STYLESHEET</div>
+<div th:replace="fragments/top">TOP MENU</div>
+
+<div class="container">
+    <div class="top-page-text-details">
+        <p class="top-page-text-details-at">@logowanie</p>
+        <p class="top-page-text-details-text">proszę się zalogować w celu korzystania z serwisu</p>
+    </div>
+
+    <form method="post" th:action="@{/login}" id="loginForm">
+        <div class="form-group">
+            <label class="text" for="login">LOGIN</label>
+            <input id="login" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="text" for="password">HASŁO</label>
+            <input id="password" type="password" class="form-control">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-outline-dark btn-block btn-lg" type="submit">ZALOGUJ</button>
+        </div>
+    </form>
+
+    <div th:replace="/fragments/footer">FOOTER</div>
+</div>
+
+</body>
+</html>
