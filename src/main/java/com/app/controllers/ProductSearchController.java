@@ -49,7 +49,7 @@ public class ProductSearchController {
             model.addAttribute("errors", errors);
             return "/search/products";
         }
-        List<ProductDTO> foundedProducts = productService.search(productSearchDTO);
+        List<ProductDTO> foundedProducts = productService.search(productSearchDTO); // TODO: 07.02.2020 wyszukiwanie też po numerze pozycji z przetargu
         if (foundedProducts.size() == 0) {
             return "/products/none";
         }
