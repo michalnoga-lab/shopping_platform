@@ -58,8 +58,8 @@
             </td>
         </tr>
         </tbody>
-        <div th:if="${cart.cartClosed}!=true"> <!-- todo jak wartość koszyka zero to wyłączyć przycisk-->
-
+        <!--<div th:if="${cart.cartClosed}!=true"> &lt;!&ndash; todo jak wartość koszyka zero to wyłączyć przycisk&ndash;&gt;-->
+        <div th:if="${cart.cartClosed!=true and cart.totalNetValue &gt; 0}">
             <a href="/deliveryAddress/all" class="btn btn-outline-dark btn-lg btn-block">ZAPISZ KOSZYK I USTAW MIEJSCE
                 DOSTAWY</a>
         </div>
