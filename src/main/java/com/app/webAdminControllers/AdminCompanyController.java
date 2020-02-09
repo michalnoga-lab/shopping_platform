@@ -1,4 +1,4 @@
-package com.app.adminControllers;
+package com.app.webAdminControllers;
 
 import com.app.dto.CompanyDTO;
 import com.app.service.CompanyService;

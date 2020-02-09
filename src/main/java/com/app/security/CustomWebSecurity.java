@@ -41,8 +41,7 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
 
         httpSecurity
                 .authorizeRequests()
-                /*.antMatchers("/mange/**", "/webjars/**", "/").permitAll()*/ // TODO: 07.02.2020
-                .antMatchers("/").permitAll()
+                .antMatchers("/mange/**", "/webjars/**","/static/**", "/").permitAll()
                 .antMatchers("/users/**").hasAnyRole("USER", "ADMIN", "SUPER") // TODO: 07.02.2020
                 .antMatchers("/admin/**").hasAnyRole("ADMIN", "SUPER")
                 .antMatchers("/super/**").hasAnyRole("SUPER")
@@ -55,7 +54,7 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
                 .usernameParameter("login")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/", true)
-                .failureUrl("/security/failure")
+                .failureUrl("/security/failed")
 
                 .and()
                 .logout().permitAll()

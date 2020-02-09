@@ -1,4 +1,4 @@
-package com.app.controllers;
+package com.app.webControllers;
 
 import com.app.dto.ProductDTO;
 import com.app.dto.ProductSearchDTO;

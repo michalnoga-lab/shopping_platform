@@ -1,10 +1,8 @@
 package com.app.integration.web;
 
 import com.app.PrimaPlatformaApplication;
-import com.app.controllers.CartController;
 import com.app.dto.CartDTO;
 import com.app.mappers.CartMapper;
-import com.app.model.Cart;
 import com.app.repository.CartRepository;
 import com.app.service.CartService;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +11,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;

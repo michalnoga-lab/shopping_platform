@@ -37,6 +37,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             User user = userRepository.findByLogin(login)
                     .orElseThrow(() -> new UsernameNotFoundException(login));
 
+
+            System.out.println("_____________________________________________");
+            System.out.println(user);
+
+
             return new org.springframework.security.core.userdetails.User(
                     user.getName(),
                     user.getPassword(),
@@ -46,7 +51,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                     true,
                     getAuthorities(user.getRole())
             );
-
         } catch (Exception e) {
             throw new AppException(ExceptionCodes.SECURITY, "loadUserByUsername - no user with username: " + login);
         }

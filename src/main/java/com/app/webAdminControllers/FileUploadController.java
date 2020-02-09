@@ -1,4 +1,4 @@
-package com.app.adminControllers;
+package com.app.webAdminControllers;
 
 import com.app.dto.CompanySearchDTO;
 import com.app.service.FileService;

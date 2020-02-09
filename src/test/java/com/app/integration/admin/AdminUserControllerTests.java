@@ -1,6 +1,6 @@
 package com.app.integration.admin;
 
-import com.app.adminControllers.AdminUserController;
+import com.app.webAdminControllers.AdminUserController;
 import com.app.dto.CompanyDTO;
 import com.app.dto.UserDTO;
 import com.app.model.Role;

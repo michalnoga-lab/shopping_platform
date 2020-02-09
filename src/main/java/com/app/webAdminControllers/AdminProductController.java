@@ -1,12 +1,9 @@
-package com.app.adminControllers;
+package com.app.webAdminControllers;
 
 import com.app.dto.GeneralUserInputDTO;
-import com.app.dto.ProductDTO;
-import com.app.dto.ProductSearchDTO;
 import com.app.service.ProductService;
 import com.app.validators.GeneralUserInputDtoValidator;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
