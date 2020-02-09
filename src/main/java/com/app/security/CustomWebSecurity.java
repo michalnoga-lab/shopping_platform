@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +42,7 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
 
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/mange/**", "/webjars/**","/static/**", "/").permitAll()
+                .antMatchers("/mange/**", "/webjars/**", "/static/**", "/").permitAll()
                 .antMatchers("/users/**").hasAnyRole("USER", "ADMIN", "SUPER") // TODO: 07.02.2020
                 .antMatchers("/admin/**").hasAnyRole("ADMIN", "SUPER")
                 .antMatchers("/super/**").hasAnyRole("SUPER")

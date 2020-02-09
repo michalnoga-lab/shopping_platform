@@ -1,4 +1,4 @@
-package com.app.webControllers;
+package com.app.controllersWeb;
 
 public class ExceptionController {
 

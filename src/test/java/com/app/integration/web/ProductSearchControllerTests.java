@@ -7,6 +7,7 @@ import com.app.model.Product;
 import com.app.repository.ProductRepository;
 import com.app.service.ProductService;
 import com.app.validators.ProductSearchDtoValidator;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,8 +23,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
 
@@ -40,11 +43,19 @@ public class ProductSearchControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private WebApplicationContext webApplicationContext;
+
     @MockBean
     private ProductRepository productRepository;
 
     @MockBean
     private ProductService productService;
+
+    @BeforeEach
+    private void setup() {
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+    }
 
     @Test
     @DisplayName("products - GET")

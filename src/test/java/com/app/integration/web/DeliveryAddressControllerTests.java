@@ -12,6 +12,7 @@ import com.app.service.CartService;
 import com.app.service.DeliveryAddressService;
 import com.app.service.SecurityService;
 import com.app.validators.DeliveryAddressDtoValidator;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,6 +28,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Optional;
 
@@ -43,6 +46,9 @@ public class DeliveryAddressControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private WebApplicationContext webApplicationContext;
+
     @MockBean
     private DeliveryAddressRepository deliveryAddressRepository;
 
@@ -57,6 +63,11 @@ public class DeliveryAddressControllerTests {
 
     @SpyBean
     private DeliveryAddressDtoValidator deliveryAddressDtoValidator;
+
+    @BeforeEach
+    private void setup() {
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+    }
 
     @Test
     @DisplayName("all")

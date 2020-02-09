@@ -27,18 +27,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         try {
-            if (login == null) {
+            if (username == null) {
                 throw new NullPointerException("loadUserByUsername - login is null");
             }
 
-            User user = userRepository.findByLogin(login)
-                    .orElseThrow(() -> new UsernameNotFoundException(login));
+            User user = userRepository.findByLogin(username)
+                    .orElseThrow(() -> new UsernameNotFoundException(username));
 
 
-            System.out.println("_____________________________________________");
+            System.out.println("_____________________________________________"); // TODO: 2020-02-09
             System.out.println(user);
 
 
@@ -52,7 +52,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                     getAuthorities(user.getRole())
             );
         } catch (Exception e) {
-            throw new AppException(ExceptionCodes.SECURITY, "loadUserByUsername - no user with username: " + login);
+            throw new AppException(ExceptionCodes.SECURITY, "loadUserByUsername - no user with username: " + username);
         }
     }
 

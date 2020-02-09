@@ -1,14 +1,16 @@
-package com.app.webAdminControllers;
+package com.app.controllersWebAdmin;
 
 import com.app.dto.CompanyDTO;
 import com.app.service.CompanyService;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.http.parser.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,7 +22,7 @@ public class AdminCompanyController {
 
     private final CompanyService companyService;
 
-    @GetMapping("add")
+    @GetMapping(value = "add")
     public String adminAddCompanyGET(Model model) {
         model.addAttribute("company", new CompanyDTO());
         model.addAttribute("errors", new HashMap<>());
