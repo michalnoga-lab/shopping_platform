@@ -28,6 +28,7 @@ public class Company {
     private String streetNumber;
     private String city;
     private String postCode;
+    private Integer paymentInDays;
     private Boolean active;
 
     @Enumerated(EnumType.STRING)

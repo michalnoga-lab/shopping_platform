@@ -5,7 +5,9 @@ import com.app.dto.ProductDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.CartMapper;
+import com.app.mappers.ProductMapper;
 import com.app.model.*;
+import com.app.parsers.XmlParser;
 import com.app.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,8 @@ public class CartService {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
     private final DeliveryAddressRepository deliveryAddressRepository;
+
+    private final XmlParser xmlParser;
 
     public CartDTO getCart(Long cartId) {
         if (cartId == null) {
@@ -213,7 +217,7 @@ public class CartService {
         if (userId <= 0) {
             throw new AppException(ExceptionCodes.SERVICE_CART, "closeCart - cart ID less than zero");
         }
-        User user = userRepository.getOne(userId);
+        User user = userRepository.getOne(userId); // TODO: 2020-02-10  remove line
         Optional<CartDTO> cartDTOOptional = getActiveCart(userId);
         CartDTO cartDTO = cartDTOOptional.orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART, "closeCart - no cart for user with ID: " + userId));
         Cart cart = cartRepository.getOne(cartDTO.getId());
@@ -222,7 +226,15 @@ public class CartService {
 
         // TODO: 16.01.2020 send order to XML
 
+
         cartRepository.save(cart);
+        Set<ProductDTO> productsInCart = cart.getProducts()
+                .stream()
+                .map(ProductMapper::toDto)
+                .collect(Collectors.toSet());
+
+        xmlParser.generateXmlFileContent(cartDTO, productsInCart);
+
         return CartMapper.toDto(cart);
     }
 

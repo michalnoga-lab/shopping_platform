@@ -5,6 +5,7 @@ import com.app.dto.DeliveryAddressDTO;
 import com.app.exceptions.AppException;
 import com.app.mappers.CartMapper;
 import com.app.model.*;
+import com.app.parsers.XmlParser;
 import com.app.repository.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -42,6 +43,9 @@ public class CartServiceTests {
     @Autowired
     private CartService cartService;
 
+    @Autowired
+    private XmlParser xmlParser;
+
     @TestConfiguration
     public static class AppTestConfiguration {
 
@@ -57,9 +61,12 @@ public class CartServiceTests {
         @MockBean
         private ProductRepository productRepository;
 
+        @MockBean
+        private XmlParser xmlParser;
+
         @Bean
         public CartService cartService() {
-            return new CartService(cartRepository, userRepository, productRepository, deliveryAddressRepository);
+            return new CartService(cartRepository, userRepository, productRepository, deliveryAddressRepository, xmlParser);
         }
     }
 

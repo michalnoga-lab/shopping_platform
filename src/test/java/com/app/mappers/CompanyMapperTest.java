@@ -32,6 +32,7 @@ public class CompanyMapperTest {
                 .streetNumber("12A")
                 .active(true)
                 .defaultPrice(Price.NET)
+                .paymentInDays(10)
                 .build();
 
         CompanyDTO expectedCompany = CompanyDTO.builder()
@@ -44,6 +45,7 @@ public class CompanyMapperTest {
                 .streetNumber("12A")
                 .active(true)
                 .defaultPrice(Price.NET)
+                .paymentInDays(10)
                 .build();
 
         CompanyDTO actualCompany = CompanyMapper.toDto(company);
@@ -64,6 +66,7 @@ public class CompanyMapperTest {
                 .streetNumber("12A")
                 .active(false)
                 .defaultPrice(Price.NET)
+                .paymentInDays(10)
                 .build();
 
         Company expectedCompany = Company.builder()
@@ -78,6 +81,7 @@ public class CompanyMapperTest {
                 .users(new HashSet<>())
                 .active(false)
                 .defaultPrice(Price.NET)
+                .paymentInDays(10)
                 .build();
 
         Company actualCompany = CompanyMapper.fromDto(companyDTO);

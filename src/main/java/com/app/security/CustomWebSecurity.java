@@ -49,8 +49,7 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .authorizeRequests()
                 .antMatchers("/manage/**", "/webjars/**").permitAll()
-                .antMatchers("/resources/**").permitAll()
-                .antMatchers("/resources/css/**").permitAll()
+                .antMatchers("/resources/static/**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers(
                         "/templates/carts/**",

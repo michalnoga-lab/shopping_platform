@@ -19,6 +19,7 @@ public interface CompanyMapper {
                 .streetNumber(company.getStreetNumber())
                 .active(company.getActive())
                 .defaultPrice(company.getDefaultPrice())
+                .paymentInDays(company.getPaymentInDays())
                 .build();
     }
 
@@ -35,6 +36,7 @@ public interface CompanyMapper {
                 .products(new HashSet<>())
                 .active(companyDTO.getActive())
                 .defaultPrice(companyDTO.getDefaultPrice())
+                .paymentInDays(companyDTO.getPaymentInDays())
                 .build();
     }
 }

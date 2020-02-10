@@ -1,6 +1,5 @@
 package com.app.dto;
 
-import com.app.model.Price;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,16 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Data
-public class CompanyDTO {
+public class CompanyDTODetailsFromFile {
 
-    private Long id;
+    private String code;
     private String name;
     private String nip;
-    private String street;
-    private String streetNumber;
+    private String postalCode;
     private String city;
-    private String postCode;
-    private Boolean active;
-    private Integer paymentInDays;
-    private Price defaultPrice;
+    private String street;
 }

@@ -1,11 +1,13 @@
 package com.app.service;
 
+import com.app.Utilities.CustomPaths;
+import com.app.Utilities.CustomRegex;
+import com.app.dto.CompanyDTODetailsFromFile;
 import com.app.dto.ProductDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.ProductMapper;
 import com.app.model.Company;
-import com.app.model.Price;
 import com.app.model.Product;
 import com.app.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,8 +28,9 @@ import java.util.Optional;
 public class FileService {
 
     private final CompanyRepository companyRepository;
-    private final String FILE_NAME_REGEX = "^upload\\.[\\w]{3}$";
-    private final String ALLOWED_CHARS = "[a-z-A-Z\\d\\.,\\]}]+";
+    private final String PRODUCTS_FILE_NAME_REGEX = "^upload\\.[\\w]{3}$";
+    private final String COMPANIES_FILE_NAME_REGEX = "^companies.csv$";
+    private final String ALLOWED_CHARS = CustomRegex.TEXT_WITH_DIGITS_REGEX;
 
     public List<ProductDTO> getProductsFromFile(MultipartFile file, Long companyId) {
         try {
@@ -39,7 +43,7 @@ public class FileService {
             if (companyId <= 0) {
                 throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - company ID less than zero");
             }
-            if (!file.getName().matches(FILE_NAME_REGEX)) {
+            if (!file.getName().matches(PRODUCTS_FILE_NAME_REGEX)) {
                 throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - incorrect file extension");
             }
 
@@ -98,5 +102,72 @@ public class FileService {
         } catch (Exception e) {
             throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - error during file upload");
         }
+    }
+
+    public CompanyDTODetailsFromFile getCompanyDetailsFromFile(String nip) {
+        if (nip == null) {
+            throw new AppException(ExceptionCodes.SERVICE_FILES, "getCompanyDetailsFromFile - nip is null");
+        }
+        int character = 0;
+
+        try {
+            InputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(CustomPaths.COMPANIES_FILE_PATH.toAbsolutePath()));
+            Reader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            while ((character = reader.read()) != -1) {
+                if (String.valueOf((char) character).matches(ALLOWED_CHARS) ||
+                        String.valueOf((char) character).matches("[\\.\\]]+")) {
+                    stringBuilder.append((char) character);
+                }
+            }
+
+            CompanyDTODetailsFromFile companyDTODetailsFromFile = new CompanyDTODetailsFromFile();
+
+            Arrays.stream(stringBuilder.toString().split("\n"))
+                    .forEach(line -> {
+
+                                try {
+                                    System.out.println("--------------------1");
+                                    System.out.println("LINE=" + line);
+                                    System.out.println("LS=" + line.split("]")[2]);
+
+
+                                    /*                                    if (line.matches("[\\w\\]]+")) {*/ // TODO: 2020-02-10 sprawdzamy linie ??
+
+                                    System.out.println("--------------------2");
+
+                                    String[] lineSplit = line.split("]");
+
+                                    System.out.println("--------------------3");
+
+                                    if (lineSplit[2].replaceAll("[^\\d]+", "").matches(nip)) {
+
+                                        System.out.println("--------------------4");
+
+                                        companyDTODetailsFromFile.setCode(lineSplit[0]);
+                                        companyDTODetailsFromFile.setName(lineSplit[1]);
+                                        companyDTODetailsFromFile.setNip(nip);
+                                        companyDTODetailsFromFile.setPostalCode(lineSplit[3]);
+                                        companyDTODetailsFromFile.setCity(lineSplit[4]);
+                                        companyDTODetailsFromFile.setStreet(lineSplit[5]);
+
+                                        /*              }*/ // TODO: 2020-02-10
+
+                                    }
+                                } catch (Exception e) {
+                                    // TODO: 2020-02-10 exception to logs ???
+                                }
+                            }
+                    );
+            return companyDTODetailsFromFile;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new AppException(ExceptionCodes.FILE_UPLOAD, "getCompanyDetailsFromFile - error reading file content");
+        }
+
+        // TODO: 2020-02-10
     }
 }
