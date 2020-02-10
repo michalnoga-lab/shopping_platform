@@ -20,7 +20,7 @@ public class UserDtoValidator implements Validator {
     public void validate(Object o, Errors errors) {
         UserDTO userDTO = (UserDTO) o;
         final String USER_NAME_SURNAME_REGEX = CustomRegex.TEXT_ONLY_REGEX;
-        final String PASSWORD_REGEX = "(.){8,50}";
+        final String PASSWORD_REGEX = "(.){7,50}";
 
         try {
             if (!userDTO.getLogin().matches(USER_NAME_SURNAME_REGEX)) { // TODO: 14.01.2020 check if login is unique

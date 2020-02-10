@@ -1,9 +1,6 @@
 package com.app.tools;
 
-import com.app.model.Company;
-import com.app.model.Price;
-import com.app.model.Product;
-import com.app.model.User;
+import com.app.model.*;
 import com.app.repository.CompanyRepository;
 import com.app.repository.ProductRepository;
 import com.app.repository.UserRepository;
@@ -32,13 +29,20 @@ public class dataInitialization implements CommandLineRunner { // TODO: 2019-09-
             .nip("234567")
             .build();
 
-    User user1 = User.builder()
+    User user3 = User.builder()
             .login("log")
             .name("name 1")
             .build();
     User user2 = User.builder()
             .login("log2")
             .name("name 2")
+            .build();
+    User user1 = User.builder()
+            .login("user")
+            .name("user")
+            .role(Role.USER)
+            .enabled(true)
+            .password("{brypt}$2a$10$6op.4jKJkjcRvTaiCpEituTGHz3NSgRnXLyt8Hyz4k5qnwyu1rvBK")
             .build();
 
     Product product1 = Product.builder().name("Prod1")

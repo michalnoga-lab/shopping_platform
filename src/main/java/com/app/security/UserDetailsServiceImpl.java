@@ -29,8 +29,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
+        System.out.println("_____________1________________________________"); // TODO: 2020-02-09
+        System.out.println(username);
+
+        System.out.println("-------------------1.5-----------------------");
+
         try {
             if (username == null) {
+
+
+                System.out.println("________2_____________________________________"); // TODO: 2020-02-09
+                System.out.println(username);
+
                 throw new NullPointerException("loadUserByUsername - login is null");
             }
 
@@ -38,7 +48,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                     .orElseThrow(() -> new UsernameNotFoundException(username));
 
 
-            System.out.println("_____________________________________________"); // TODO: 2020-02-09
+            System.out.println("_____________3________________________________"); // TODO: 2020-02-09
             System.out.println(user);
 
 

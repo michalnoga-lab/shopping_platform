@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -36,16 +37,31 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
     }
+/*
+    @Override
+    public void configure(WebSecurity webSecurity) {
+        webSecurity.ignoring().antMatchers("/resources/static/css/**").anyRequest();
+    }*/ // TODO: 2020-02-09 wyłącza security
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/mange/**", "/webjars/**", "/static/**", "/").permitAll()
-                .antMatchers("/users/**").hasAnyRole("USER", "ADMIN", "SUPER") // TODO: 07.02.2020
-                .antMatchers("/admin/**").hasAnyRole("ADMIN", "SUPER")
-                .antMatchers("/super/**").hasAnyRole("SUPER")
+                /*.antMatchers("/mange/**", "/webjars/**", "/").permitAll()*/ // TODO: 2020-02-09   tak było
+                .antMatchers("/manage/**", "/webjars/**").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/templates/index.html").permitAll()
+                .antMatchers("/templates/fragments/**").permitAll()
+                .antMatchers("/resources/**").permitAll()
+                .antMatchers("/resources/css/*.css").permitAll()
+                .antMatchers("/templates/carts/**",
+                        "/templates/deliveryAddress/**",
+                        "/templates/products/**",
+                        "/templates/search/**",
+                        "/templates/security/**").hasAnyRole("USER", "ADMIN", "SUPER")
+                .antMatchers("/admin/**").permitAll() // TODO: 2020-02-09 tylko admin i super
+
                 .anyRequest().authenticated()
 
                 .and()

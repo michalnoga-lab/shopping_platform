@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
@@ -28,15 +29,21 @@ public class UserServiceTests {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @TestConfiguration
     public static class AppTestConfiguration {
 
         @MockBean
         private UserRepository userRepository;
 
+        @MockBean
+        private PasswordEncoder passwordEncoder;
+
         @Bean
         public UserService userService() {
-            return new UserService(userRepository);
+            return new UserService(userRepository, passwordEncoder);
         }
     }
 
@@ -68,7 +75,7 @@ public class UserServiceTests {
                 .role(Role.USER)
                 .build();
 
-        UserDTO actualUser = userService.addUser(userDTO);
+        UserDTO actualUser = userService.addUser(userDTO, Role.USER);
 
         Assertions.assertEquals(expectedUser, actualUser);
     }

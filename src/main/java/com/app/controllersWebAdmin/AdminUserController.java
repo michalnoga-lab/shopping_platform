@@ -1,6 +1,7 @@
 package com.app.controllersWebAdmin;
 
 import com.app.dto.UserDTO;
+import com.app.model.Role;
 import com.app.service.UserService;
 import com.app.validators.UserDtoValidator;
 import lombok.RequiredArgsConstructor;
@@ -48,8 +49,13 @@ public class AdminUserController {
             model.addAttribute("errors", errors);
             return "admin/users/add";
         }
-        userService.addUser(userDTO);
+        userService.addUser(userDTO, Role.USER);
         return "redirect:/admin/users/added";
+    }
+
+    @GetMapping("added")
+    public String added() {
+        return "admin/users/added";
     }
 
     @GetMapping("all")

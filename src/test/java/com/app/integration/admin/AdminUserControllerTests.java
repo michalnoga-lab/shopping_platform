@@ -91,7 +91,7 @@ public class AdminUserControllerTests {
                 .build();
 
         Mockito
-                .when(userService.addUser(inputUser))
+                .when(userService.addUser(inputUser, Role.USER))
                 .thenReturn(userDTO);
 
         mockMvc
