@@ -67,7 +67,7 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/security/login").permitAll()
-                .loginProcessingUrl("/login")
+                .loginProcessingUrl("/app-login")
                 .usernameParameter("login")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/", true)
@@ -75,7 +75,7 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .logout().permitAll()
-                .logoutUrl("/logout")
+                .logoutUrl("/app-logout")
                 .clearAuthentication(true)
                 .logoutSuccessUrl("/security/loggedOut")
 

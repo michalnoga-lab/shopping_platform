@@ -30,7 +30,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         System.out.println("_____________1________________________________"); // TODO: 2020-02-09
-        System.out.println(username);
+        System.out.println("USERNAME=" + username);
 
         System.out.println("-------------------1.5-----------------------");
 
