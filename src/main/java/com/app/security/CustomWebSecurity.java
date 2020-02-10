@@ -48,18 +48,18 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
 
         httpSecurity
                 .authorizeRequests()
-                /*.antMatchers("/mange/**", "/webjars/**", "/").permitAll()*/ // TODO: 2020-02-09   tak było
                 .antMatchers("/manage/**", "/webjars/**").permitAll()
-                .antMatchers("/").permitAll()
-                .antMatchers("/templates/index.html").permitAll()
-                .antMatchers("/templates/fragments/**").permitAll()
                 .antMatchers("/resources/**").permitAll()
-                .antMatchers("/resources/css/*.css").permitAll()
-                .antMatchers("/templates/carts/**",
+                .antMatchers("/resources/css/**").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers(
+                        "/templates/carts/**",
                         "/templates/deliveryAddress/**",
+                        "/templates/fragments/**",
                         "/templates/products/**",
                         "/templates/search/**",
-                        "/templates/security/**").hasAnyRole("USER", "ADMIN", "SUPER")
+                        "/templates/security/**",
+                        "/templates/index.html").hasAnyRole("USER", "ADMIN", "SUPER")
                 .antMatchers("/admin/**").permitAll() // TODO: 2020-02-09 tylko admin i super
 
                 .anyRequest().authenticated()
@@ -68,7 +68,7 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/security/login").permitAll()
                 .loginProcessingUrl("/app-login")
-                .usernameParameter("login")
+                .usernameParameter("username")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/", true)
                 .failureUrl("/security/failed")
@@ -77,10 +77,10 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
                 .logout().permitAll()
                 .logoutUrl("/app-logout")
                 .clearAuthentication(true)
-                .logoutSuccessUrl("/security/loggedOut")
+                .logoutSuccessUrl("/security/loggedOut").permitAll()
 
                 .and()
-                .exceptionHandling()
+                .exceptionHandling().accessDeniedPage("/security/accessDenied") // TODO: 10.02.2020 moje
                 .accessDeniedHandler(accessDeniedHandler());
     }
 
