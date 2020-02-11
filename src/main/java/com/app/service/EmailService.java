@@ -61,7 +61,6 @@ public class EmailService {
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
-
         mailSender.setJavaMailProperties(properties);
         return mailSender;
     }

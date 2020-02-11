@@ -236,7 +236,9 @@ public class CartService {
         String fileName = FileUtilities.generateFileName(cartDTO.getUserDTO().getCompanyDTO().getNip());
         String orderInXml = xmlParser.generateXmlFileContent(cartDTO, productsInCart);
         String pathToFile = FileUtilities.saveFileToDisk(orderInXml, fileName);
-        //emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
+        emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
+
+
         // TODO: 11.02.2020 enable
 
         return CartMapper.toDto(cart);

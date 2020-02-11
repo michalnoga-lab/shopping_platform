@@ -3,6 +3,7 @@ package com.app.service;
 import com.app.dto.CompanyDTODetailsFromFile;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -17,14 +18,11 @@ public class FileServiceTests {
     @SpyBean
     private FileService fileService;
 
-    @DisplayName("..............")
-    @ParameterizedTest
-    //@CsvFileSource(resources = "/tests/upload.csv")
-    @CsvSource({"a,1", "b,2"})
-    void test10(String letter) {
+    @Test
+    @DisplayName("getProductsFromFile")
+    void test10() {
 
-        System.out.println(letter);
-        // TODO: 06.02.2020 upload data from file
+        // TODO: 06.02.2020
 
     }
 

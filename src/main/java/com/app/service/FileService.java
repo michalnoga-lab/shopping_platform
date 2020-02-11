@@ -18,6 +18,7 @@ import java.io.*;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -110,7 +111,7 @@ public class FileService {
         int character = 0;
 
         try {
-            InputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(CustomPaths.COMPANIES_FILE_PATH.toAbsolutePath()));
+            InputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(Paths.get(CustomPaths.COMPANIES_FILE_PATH)));
             Reader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
 
             StringBuilder stringBuilder = new StringBuilder();
