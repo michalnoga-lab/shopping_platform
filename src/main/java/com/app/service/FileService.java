@@ -142,19 +142,17 @@ public class FileService {
                                         companyDTODetailsFromFile.setStreet(lineSplit[5]);
                                     }
                                 } catch (Exception e) {
-                                    // TODO: 2020-02-10 exception to logs ???
+
+                                    e.printStackTrace(); // TODO: 2020-02-11 to logs
+
                                 }
                             }
                     );
-
-            System.out.println("#######################"); // TODO: 11.02.2020
-            System.out.println(companyDTODetailsFromFile);
-
-
             return companyDTODetailsFromFile;
 
         } catch (Exception e) {
-            e.printStackTrace();
+
+            e.printStackTrace(); // TODO: 2020-02-11 to logs
             throw new AppException(ExceptionCodes.FILE_UPLOAD, "getCompanyDetailsFromFile - error reading file content");
         }
     }

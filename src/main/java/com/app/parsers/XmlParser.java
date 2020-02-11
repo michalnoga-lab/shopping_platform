@@ -1,13 +1,10 @@
 package com.app.parsers;
 
-import com.app.Utilities.CustomPaths;
 import com.app.dto.CartDTO;
 import com.app.dto.CompanyDTODetailsFromFile;
 import com.app.dto.ProductDTO;
 import com.app.service.FileService;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,29 +13,17 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @Component
-@NoArgsConstructor
 @Data
+@RequiredArgsConstructor
 public class XmlParser {
 
-    private FileService fileService;
+    private final FileService fileService;
 
     public String generateXmlFileContent(CartDTO cartDTO, Set<ProductDTO> productsInCart) {
         StringBuilder stringBuilder = new StringBuilder();
 
-
-        System.out.println("**************************************");
-        System.out.println("NIP=" + cartDTO.getUserDTO().getCompanyDTO().getNip());
-        System.out.println("cartdto=" + cartDTO);
-        System.out.println("products=" + productsInCart);
-        System.out.println("cmp detail sfile="+CustomPaths.COMPANIES_FILE_PATH);
-        System.out.println("saved path=" + CustomPaths.SAVED_ORDERS_PATH);
-
-
-        try {
-
             CompanyDTODetailsFromFile companyDTODetailsFromFile =
                     fileService.getCompanyDetailsFromFile(cartDTO.getUserDTO().getCompanyDTO().getNip());
-
 
             stringBuilder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
             stringBuilder.append("<ROOT xmlns=\"http://www.cdn.com.pl/optima/dokument\">");
@@ -279,12 +264,6 @@ public class XmlParser {
             stringBuilder.append("<ATRYBUTY/>");
             stringBuilder.append("</DOKUMENT>");
             stringBuilder.append("</ROOT>");
-
-
-        } catch (Exception e) {
-            System.out.println("________________________________________________________");
-            e.printStackTrace();
-        }
 
         return stringBuilder.toString();
     }
