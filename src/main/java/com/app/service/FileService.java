@@ -28,8 +28,6 @@ import java.util.Optional;
 public class FileService {
 
     private final CompanyRepository companyRepository;
-    private final String PRODUCTS_FILE_NAME_REGEX = "^upload\\.[\\w]{3}$";
-    private final String COMPANIES_FILE_NAME_REGEX = "^companies.csv$";
     private final String ALLOWED_CHARS = CustomRegex.TEXT_WITH_DIGITS_REGEX;
 
     public List<ProductDTO> getProductsFromFile(MultipartFile file, Long companyId) {
@@ -43,6 +41,7 @@ public class FileService {
             if (companyId <= 0) {
                 throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - company ID less than zero");
             }
+            String PRODUCTS_FILE_NAME_REGEX = "^upload\\.[\\w]{3}$";
             if (!file.getName().matches(PRODUCTS_FILE_NAME_REGEX)) {
                 throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - incorrect file extension");
             }
@@ -133,18 +132,10 @@ public class FileService {
                                     System.out.println("LINE=" + line);
                                     System.out.println("LS=" + line.split("]")[2]);
 
-
-                                    /*                                    if (line.matches("[\\w\\]]+")) {*/ // TODO: 2020-02-10 sprawdzamy linie ??
-
-                                    System.out.println("--------------------2");
-
                                     String[] lineSplit = line.split("]");
 
-                                    System.out.println("--------------------3");
-
-                                    if (lineSplit[2].replaceAll("[^\\d]+", "").matches(nip)) {
-
-                                        System.out.println("--------------------4");
+                                    if (lineSplit[2].replaceAll("[^\\d]+", "").matches(nip) &&
+                                            line.length() > 10) {
 
                                         companyDTODetailsFromFile.setCode(lineSplit[0]);
                                         companyDTODetailsFromFile.setName(lineSplit[1]);
@@ -152,9 +143,6 @@ public class FileService {
                                         companyDTODetailsFromFile.setPostalCode(lineSplit[3]);
                                         companyDTODetailsFromFile.setCity(lineSplit[4]);
                                         companyDTODetailsFromFile.setStreet(lineSplit[5]);
-
-                                        /*              }*/ // TODO: 2020-02-10
-
                                     }
                                 } catch (Exception e) {
                                     // TODO: 2020-02-10 exception to logs ???
@@ -167,7 +155,5 @@ public class FileService {
             e.printStackTrace();
             throw new AppException(ExceptionCodes.FILE_UPLOAD, "getCompanyDetailsFromFile - error reading file content");
         }
-
-        // TODO: 2020-02-10
     }
 }

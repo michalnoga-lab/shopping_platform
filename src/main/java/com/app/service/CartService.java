@@ -1,5 +1,7 @@
 package com.app.service;
 
+import com.app.Utilities.CustomAddresses;
+import com.app.Utilities.FileUtilities;
 import com.app.dto.CartDTO;
 import com.app.dto.ProductDTO;
 import com.app.exceptions.AppException;
@@ -28,6 +30,7 @@ public class CartService {
     private final DeliveryAddressRepository deliveryAddressRepository;
 
     private final XmlParser xmlParser;
+    private final EmailService emailService;
 
     public CartDTO getCart(Long cartId) {
         if (cartId == null) {
@@ -231,8 +234,8 @@ public class CartService {
                 .collect(Collectors.toSet());
 
         String orderInXml = xmlParser.generateXmlFileContent(cartDTO, productsInCart);
-
-        // TODO: 16.01.2020 send order out
+        String pathToFile = FileUtilities.saveFileToDisk(orderInXml);
+        emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", pathToFile);
 
         return CartMapper.toDto(cart);
     }

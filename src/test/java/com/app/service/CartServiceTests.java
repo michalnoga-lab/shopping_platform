@@ -46,6 +46,9 @@ public class CartServiceTests {
     @Autowired
     private XmlParser xmlParser;
 
+    @Autowired
+    private EmailService emailService;
+
     @TestConfiguration
     public static class AppTestConfiguration {
 
@@ -64,9 +67,13 @@ public class CartServiceTests {
         @MockBean
         private XmlParser xmlParser;
 
+        @MockBean
+        private EmailService emailService;
+
         @Bean
         public CartService cartService() {
-            return new CartService(cartRepository, userRepository, productRepository, deliveryAddressRepository, xmlParser);
+            return new CartService(cartRepository, userRepository,
+                    productRepository, deliveryAddressRepository, xmlParser, emailService);
         }
     }
 
