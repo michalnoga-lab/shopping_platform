@@ -224,16 +224,15 @@ public class CartService {
         cart.setCartClosed(true);
         cart.setPurchaseTime(LocalDateTime.now());
 
-        // TODO: 16.01.2020 send order to XML
-
-
         cartRepository.save(cart);
         Set<ProductDTO> productsInCart = cart.getProducts()
                 .stream()
                 .map(ProductMapper::toDto)
                 .collect(Collectors.toSet());
 
-        xmlParser.generateXmlFileContent(cartDTO, productsInCart);
+        String orderInXml = xmlParser.generateXmlFileContent(cartDTO, productsInCart);
+
+        // TODO: 16.01.2020 send order out
 
         return CartMapper.toDto(cart);
     }

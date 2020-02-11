@@ -2,6 +2,7 @@ package com.app.service;
 
 import com.app.Utilities.CustomPaths;
 import com.app.dto.CompanyDTODetailsFromFile;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.api.Test;
@@ -35,18 +36,28 @@ public class FileServiceTests {
 
     }
 
-    @DisplayName("getCompnayDetailsFromFile")
+    @DisplayName("getCompanyDetailsFromFile - read content of file")
     @ParameterizedTest
     @CsvFileSource(resources = "/files/companies.csv")
-    void test20(String a) {
+    void test20() {
+    }
 
-        /*System.out.println("----- jej ----");*/
-        /*System.out.println(a);*/
+    @DisplayName("getCompanyDetailsFromFile - find company in file")
+    @ParameterizedTest
+    @CsvFileSource(resources = "/files/companies.csv")
+    void test21() {
 
-        CompanyDTODetailsFromFile companyDTODetailsFromFile = fileService.getCompanyDetailsFromFile("0000000000");
+        CompanyDTODetailsFromFile expectedResult = CompanyDTODetailsFromFile.builder()
+                .code("TESTCODE")
+                .name("TESTNAME")
+                .nip("0000000000")
+                .postalCode("TESTPOSTALCODE")
+                .city("TESTCITY")
+                .street("TESTSTREET")
+                .build();
 
-        System.out.println("++++++ PPPPP +++++++++++");
-        System.out.println(companyDTODetailsFromFile);
+        CompanyDTODetailsFromFile actualResult = fileService.getCompanyDetailsFromFile("0000000000");
 
+        Assertions.assertEquals(expectedResult, actualResult);
     }
 }
