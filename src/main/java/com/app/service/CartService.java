@@ -220,7 +220,7 @@ public class CartService {
         if (userId <= 0) {
             throw new AppException(ExceptionCodes.SERVICE_CART, "closeCart - cart ID less than zero");
         }
-        User user = userRepository.getOne(userId); // TODO: 2020-02-10  remove line
+
         Optional<CartDTO> cartDTOOptional = getActiveCart(userId);
         CartDTO cartDTO = cartDTOOptional.orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART, "closeCart - no cart for user with ID: " + userId));
         Cart cart = cartRepository.getOne(cartDTO.getId());
@@ -233,9 +233,11 @@ public class CartService {
                 .map(ProductMapper::toDto)
                 .collect(Collectors.toSet());
 
+        String fileName = FileUtilities.generateFileName(cartDTO.getUserDTO().getCompanyDTO().getNip());
         String orderInXml = xmlParser.generateXmlFileContent(cartDTO, productsInCart);
-        String pathToFile = FileUtilities.saveFileToDisk(orderInXml);
-        emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", pathToFile);
+        String pathToFile = FileUtilities.saveFileToDisk(orderInXml, fileName);
+        //emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
+        // TODO: 11.02.2020 enable
 
         return CartMapper.toDto(cart);
     }

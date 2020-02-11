@@ -21,7 +21,7 @@ public class dataInitialization implements CommandLineRunner { // TODO: 2019-09-
 
     Company company1 = Company.builder()
             .name("company 1")
-            .nip("123456")
+            .nip("0000000000")
             .defaultPrice(Price.NET)
             .build();
     Company company2 = Company.builder()

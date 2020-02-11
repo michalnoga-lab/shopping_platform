@@ -3,10 +3,6 @@ package com.app.service;
 import com.app.Utilities.CustomAddresses;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -19,7 +15,7 @@ import java.util.Properties;
 @Service
 public class EmailService {
 
-    public void sendEmail(String to, String subject, String pathToAttachment) {
+    public void sendEmail(String to, String subject, String fileName, String pathToAttachment) {
         try {
             if (to == null) {
                 throw new AppException(ExceptionCodes.SERVICE_EMAIL, "sendEmail - filed to is null");
@@ -40,11 +36,13 @@ public class EmailService {
                 helper.setTo(to);
                 helper.setSubject(subject);
                 helper.setText("OTWÓRZ ZAŁĄCZNIK");
-                helper.addAttachment("", new File(pathToAttachment));
+                helper.addAttachment(fileName, new File(pathToAttachment));
 
             } catch (Exception e) {
                 throw new AppException(ExceptionCodes.SERVICE_EMAIL, "sendEmail - error creating message");
             }
+
+            javaMailSender().send(message);
 
         } catch (Exception e) {
             throw new AppException(ExceptionCodes.SERVICE_EMAIL, "sendEmail - error sending email to: " + to);

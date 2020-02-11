@@ -128,10 +128,6 @@ public class FileService {
                     .forEach(line -> {
 
                                 try {
-                                    System.out.println("--------------------1");
-                                    System.out.println("LINE=" + line);
-                                    System.out.println("LS=" + line.split("]")[2]);
-
                                     String[] lineSplit = line.split("]");
 
                                     if (lineSplit[2].replaceAll("[^\\d]+", "").matches(nip) &&
@@ -149,6 +145,11 @@ public class FileService {
                                 }
                             }
                     );
+
+            System.out.println("#######################"); // TODO: 11.02.2020
+            System.out.println(companyDTODetailsFromFile);
+
+
             return companyDTODetailsFromFile;
 
         } catch (Exception e) {

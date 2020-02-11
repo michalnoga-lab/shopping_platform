@@ -23,8 +23,21 @@ public class XmlParser {
 
     public String generateXmlFileContent(CartDTO cartDTO, Set<ProductDTO> productsInCart) {
         StringBuilder stringBuilder = new StringBuilder();
-        CompanyDTODetailsFromFile companyDTODetailsFromFile =
-                fileService.getCompanyDetailsFromFile(cartDTO.getUserDTO().getCompanyDTO().getNip());
+
+
+        System.out.println("**************************************");
+        System.out.println("NIP=" + cartDTO.getUserDTO().getCompanyDTO().getNip());
+        System.out.println("cartdto=" + cartDTO);
+        System.out.println("products=" + productsInCart);
+
+
+        try {
+
+            CompanyDTODetailsFromFile companyDTODetailsFromFile =
+                    fileService.getCompanyDetailsFromFile(cartDTO.getUserDTO().getCompanyDTO().getNip());
+
+
+
 
         stringBuilder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         stringBuilder.append("<ROOT xmlns=\"http://www.cdn.com.pl/optima/dokument\">");
@@ -158,7 +171,7 @@ public class XmlParser {
         stringBuilder.append("</NAGLOWEK>");
         stringBuilder.append("<POZYCJE>");
 
-       productsInCart
+        productsInCart
                 .forEach(product -> {
                     stringBuilder.append("<POZYCJA>");
                     stringBuilder.append("<TOWAR>");
@@ -265,6 +278,12 @@ public class XmlParser {
         stringBuilder.append("<ATRYBUTY/>");
         stringBuilder.append("</DOKUMENT>");
         stringBuilder.append("</ROOT>");
+
+
+        }catch (Exception e){
+            System.out.println("________________________________________________________");
+            e.printStackTrace();
+        }
 
         return stringBuilder.toString();
     }

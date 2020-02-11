@@ -46,7 +46,7 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
-        httpSecurity
+        /*httpSecurity
                 .authorizeRequests()
                 .antMatchers("/manage/**", "/webjars/**").permitAll()
                 .antMatchers("/resources/static/**").permitAll()
@@ -80,7 +80,7 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .exceptionHandling().accessDeniedPage("/security/accessDenied") // TODO: 10.02.2020 moje
-                .accessDeniedHandler(accessDeniedHandler());
+                .accessDeniedHandler(accessDeniedHandler());*/
     }
 
     @Bean
