@@ -37,12 +37,6 @@ public class DeliveryAddressDtoValidator implements Validator {
                 errors.rejectValue("phone", "NIEPRAWIDŁOWA WARTOŚĆ. WPROWADZONY TEKST JEST ZA DŁUGI.");
             }
         } catch (Exception e) {
-            System.out.println("--------------------------------------"); // TODO: 2020-01-27
-            System.out.println(e.getStackTrace());
-            System.out.println(e.getCause());
-            System.out.println(e.getMessage());
-            System.out.println(e.toString());
-            e.printStackTrace();
             throw new AppException(ExceptionCodes.VALIDATION, "DeliveryAddressDto");
         }
     }

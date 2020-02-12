@@ -34,7 +34,7 @@
                         <button class="btn btn-outline-dark btn-small" type="submit">USUŃ KOD</button>
                     </div>
                 </form>
-            </td> <!-- todo display string value of enum + if null display none -->
+            </td>
             <td>
                 <form method="post" th:action="@{/admin/products/addCode/{id}(id=${p.id})}"
                       th:object="${generalUserInput}"

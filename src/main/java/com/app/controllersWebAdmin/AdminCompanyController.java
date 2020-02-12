@@ -59,13 +59,13 @@ public class AdminCompanyController {
     @PostMapping("edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
         model.addAttribute("company", companyService.edit(id));
-        return "redirect:/admin/companies/all"; // TODO: 2020-01-25 TODO: jak przekazać ID powrotu do strony ???
+        return "redirect:/admin/companies/all";
     }
 
     @PostMapping("enable/{id}")
     public String enable(@PathVariable Long id) {
         companyService.disableEnable(id, true);
-        return "redirect:/admin/companies/all"; // TODO: 21.01.2020 jak przekazać ID powrotu do strony ???
+        return "redirect:/admin/companies/all";
     }
 
     @PostMapping("disable/{id}")

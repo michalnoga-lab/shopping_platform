@@ -4,12 +4,21 @@ import com.app.Utilities.CustomRegex;
 import com.app.dto.UserDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
+import com.app.model.User;
+import com.app.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import java.util.Optional;
+
 @Component
+@RequiredArgsConstructor
 public class UserDtoValidator implements Validator {
+
+    private final UserRepository userRepository;
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -23,8 +32,12 @@ public class UserDtoValidator implements Validator {
         final String PASSWORD_REGEX = "(.){7,50}";
 
         try {
-            if (!userDTO.getLogin().matches(USER_NAME_SURNAME_REGEX)) { // TODO: 14.01.2020 check if login is unique
-                errors.rejectValue("login", "NIEPRAWIDŁOWA WARTOŚĆ. DOZWOLONE SĄ TYLKO LITERY.");
+            Optional<User> userOptional = userRepository.findByLogin(userDTO.getLogin());
+
+            if (!userDTO.getLogin().matches(USER_NAME_SURNAME_REGEX) ||
+                    userOptional.isPresent()) {
+                errors.rejectValue("login", "NIEPRAWIDŁOWA WARTOŚĆ. " +
+                        "DOZWOLONE SĄ TYLKO LITERY LUB TAKI LOGIN JUŻ JEST ZAREJESTROWANY");
             }
             if (!userDTO.getName().matches(USER_NAME_SURNAME_REGEX)) {
                 errors.rejectValue("name", "NIEPRAWIDŁOWA WARTOŚĆ. DOZWOLONE SĄ TYLKO LITERY.");
@@ -32,12 +45,13 @@ public class UserDtoValidator implements Validator {
             if (!userDTO.getSurname().matches(USER_NAME_SURNAME_REGEX)) {
                 errors.rejectValue("surname", "NIEPRAWIDŁOWA WARTOŚĆ. DOZWOLONE SĄ TYLKO LITERY.");
             }
-            if (!userDTO.getPassword().matches(PASSWORD_REGEX)) { // TODO: 14.01.2020 check if passwords are the same
+            if (!userDTO.getPassword().matches(PASSWORD_REGEX)) {
                 errors.rejectValue("password",
                         "MINIMALNA DŁUGOŚĆ HASŁA 8 ZNAKÓW. MAKSYMALNA 50 ZNAKÓW.\n" +
                                 "HASŁO ORAZ JEGO POTWIERDZENIE MUSZĄ BYĆ TAKIE SAME.\nDOZWOLONE SĄ WSZYSTKIE ZNAKI.");
             }
-            if (!userDTO.getPasswordConfirmation().matches(PASSWORD_REGEX)) {
+            if (!userDTO.getPasswordConfirmation().matches(PASSWORD_REGEX) ||
+                    !userDTO.getPassword().equals(userDTO.getPasswordConfirmation())) {
                 errors.rejectValue("passwordConfirmation",
                         "MINIMALNA DŁUGOŚĆ HASŁA 8 ZNAKÓW. MAKSYMALNA 50 ZNAKÓW\n" +
                                 "HASŁO ORAZ JEGO POTWIERDZENIE MUSZĄ BYĆ TAKIE SAME.\nDOZWOLONE SĄ WSZYSTKIE ZNAKI.");

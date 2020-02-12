@@ -55,7 +55,7 @@ public class dataInitialization implements CommandLineRunner { // TODO: 2019-09-
             .name("user")
             .role(Role.USER)
             .enabled(true)
-            .password("{brypt}$2a$10$6op.4jKJkjcRvTaiCpEituTGHz3NSgRnXLyt8Hyz4k5qnwyu1rvBK")
+            .password("{bcrypt}$2a$10$/HxZgKD8i8uVvtbyMcYPkeeybREyK72tEtVV25OxPvufeUSt9fFEa")
             .build();
 
     Product product1 = Product.builder().name("Prod1")

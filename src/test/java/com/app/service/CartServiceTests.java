@@ -603,6 +603,7 @@ public class CartServiceTests {
 
     @Test
     @DisplayName("closeCart")
+        // TODO: 2020-02-12 dokończyć
     void test80() {
 
         User user = User.builder().id(1L).build();

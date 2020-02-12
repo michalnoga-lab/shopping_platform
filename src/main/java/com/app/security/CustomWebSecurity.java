@@ -46,9 +46,10 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
-        /*httpSecurity
+        httpSecurity
                 .authorizeRequests()
                 .antMatchers("/manage/**", "/webjars/**").permitAll()
+                .antMatchers("/templates/fragments/**").permitAll()
                 .antMatchers("/resources/static/**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers(
@@ -60,13 +61,14 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
                         "/templates/security/**",
                         "/templates/index.html").hasAnyRole("USER", "ADMIN", "SUPER")
                 .antMatchers("/admin/**").permitAll() // TODO: 2020-02-09 tylko admin i super
+                // TODO: 2020-02-12 antMatchers super - tylko super
 
                 .anyRequest().authenticated()
 
                 .and()
                 .formLogin()
                 .loginPage("/security/login").permitAll()
-                .loginProcessingUrl("/app-login")
+                .loginProcessingUrl("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/", true)
@@ -74,13 +76,13 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .logout().permitAll()
-                .logoutUrl("/app-logout")
+                .logoutUrl("/logout")
                 .clearAuthentication(true)
                 .logoutSuccessUrl("/security/loggedOut").permitAll()
 
                 .and()
                 .exceptionHandling().accessDeniedPage("/security/accessDenied") // TODO: 10.02.2020 moje
-                .accessDeniedHandler(accessDeniedHandler());*/
+                .accessDeniedHandler(accessDeniedHandler());
     }
 
     @Bean

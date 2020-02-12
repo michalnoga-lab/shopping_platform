@@ -42,7 +42,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             System.out.println(username);
 
             User user = userRepository.findByLogin(username)
-                    .orElseThrow(() -> new UsernameNotFoundException(username));
+                    .orElseThrow(() -> new UsernameNotFoundException(username)); // TODO: 2020-02-12 TU !!!
 
 
             System.out.println("_____________3________________________________"); // TODO: 2020-02-09
@@ -59,6 +59,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                     getAuthorities(user.getRole())
             );
         } catch (Exception e) {
+            System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"); // TODO: 2020-02-12
+            e.printStackTrace();
             throw new AppException(ExceptionCodes.SECURITY, "loadUserByUsername - no user with username: " + username);
         }
     }
