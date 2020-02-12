@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
+@RequestMapping("admin")
 @RequiredArgsConstructor
 public class FileUploadController {
 
@@ -32,14 +33,14 @@ public class FileUploadController {
         webDataBinder.setValidator(companySearchDtoValidator);
     }
 
-    @GetMapping("admin/products/add")
+    @GetMapping("products/add")
     public String handleFileUploadGET(Model model) {
         model.addAttribute("productSearch", new CompanySearchDTO());
         model.addAttribute("errors", new HashMap<>());
         return "admin/products/add";
     }
 
-    @PostMapping("admin/products/add")
+    @PostMapping("products/add")
     public String handleFileUploadPOST(@RequestParam("file") MultipartFile file, @Valid @ModelAttribute CompanySearchDTO companySearchDTO,
                                        BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {

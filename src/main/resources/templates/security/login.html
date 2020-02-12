@@ -15,10 +15,10 @@
         <p class="top-page-text-details-text">proszę się zalogować w celu korzystania z serwisu</p>
     </div>
 
-    <form method="post" th:action="@{/login}" id="loginForm"> <!-- todo inni mają required autofocus -->
+    <form method="post" th:action="@{/app-login}" id="loginForm"> <!-- todo inni mają required autofocus -->
         <div class="form-group">
             <label class="text" for="username">LOGIN</label>
-            <input id="username" type="text" name="=username" class="form-control">
+            <input id="username" type="text" name="username" class="form-control">
         </div>
         <div class="form-group">
             <label class="text" for="password">HASŁO</label>

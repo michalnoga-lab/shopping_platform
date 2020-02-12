@@ -6,14 +6,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -37,11 +35,6 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
     }
-/*
-    @Override
-    public void configure(WebSecurity webSecurity) {
-        webSecurity.ignoring().antMatchers("/resources/static/css/**").anyRequest();
-    }*/ // TODO: 2020-02-09 wyłącza security
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -49,26 +42,17 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .authorizeRequests()
                 .antMatchers("/manage/**", "/webjars/**").permitAll()
-                .antMatchers("/templates/fragments/**").permitAll()
-                .antMatchers("/resources/static/**").permitAll()
+                .antMatchers("/css/**", "/img/**", "/js/**").permitAll()
                 .antMatchers("/").permitAll()
-                .antMatchers(
-                        "/templates/carts/**",
-                        "/templates/deliveryAddress/**",
-                        "/templates/fragments/**",
-                        "/templates/products/**",
-                        "/templates/search/**",
-                        "/templates/security/**",
-                        "/templates/index.html").hasAnyRole("USER", "ADMIN", "SUPER")
-                .antMatchers("/admin/**").permitAll() // TODO: 2020-02-09 tylko admin i super
-                // TODO: 2020-02-12 antMatchers super - tylko super
+                .antMatchers("/admin/**").hasAnyRole("ADMIN", "SUPER")
+                .antMatchers("/super/**").hasAnyRole("SUPER")
 
                 .anyRequest().authenticated()
 
                 .and()
                 .formLogin()
                 .loginPage("/security/login").permitAll()
-                .loginProcessingUrl("/login")
+                .loginProcessingUrl("/app-login")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/", true)
@@ -81,7 +65,7 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/security/loggedOut").permitAll()
 
                 .and()
-                .exceptionHandling().accessDeniedPage("/security/accessDenied") // TODO: 10.02.2020 moje
+                .exceptionHandling().accessDeniedPage("/security/accessDenied")
                 .accessDeniedHandler(accessDeniedHandler());
     }
 

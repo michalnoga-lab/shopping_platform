@@ -13,12 +13,12 @@ public class PrimaPlatformaApplication {
 
     // TODO: 2020-02-12 logowanie do aplikacji
     // TODO: 2020-02-12 principal null
-    // TODO: 2020-02-12 jak dodać do top ??? --->    xmlns:th="http://www.thymeleaf.org
     // TODO: 2020-02-12 zapisywanie wyjątków na HDD
-    // TODO: 2020-02-12 jaka aktywność w programie ma być logowana ???
     // TODO: 2020-02-12 jak dodać pierwszego użytkownika ???
     // TODO: 2020-02-12 jak wrócić do aktualnego koszyka ???
 
+
+    // TODO: 2020-02-12 produkty w application.properties ???
 
     //--------------------------------------------------------------------------------------------
 

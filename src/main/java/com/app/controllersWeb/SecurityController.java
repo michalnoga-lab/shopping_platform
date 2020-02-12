@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/security")
 public class SecurityController {
 
-    @GetMapping("login")
+    @GetMapping("/login")
     public String login() {
         return "security/login";
     }
 
-    @GetMapping("logout")
+    @GetMapping("/logout")
     public String logout() {
         return "security/logout";
     }
@@ -26,5 +26,10 @@ public class SecurityController {
     @GetMapping("accessDenied")
     public String accessDenied() {
         return "security/accessDenied";
+    }
+
+    @GetMapping("loggedOut")
+    public String loggedOut() {
+        return "security/loggedOut";
     }
 }

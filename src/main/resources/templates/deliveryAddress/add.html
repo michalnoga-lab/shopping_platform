@@ -11,7 +11,8 @@
 <div class="container">
     <h5 class="top-page-text">DODAJ NOWY ADRES DOSTAWY</h5>
 
-    <form method="post" th:action="@{/deliveryAddress/add}" th:object="${address}" enctype="multipart/form-data" id="form">
+    <form method="post" th:action="@{/deliveryAddress/add}" th:object="${address}" enctype="multipart/form-data"
+          id="form">
         <div class="form-group">
             <label class="text-secondary" for="street">ADRES DOSTAWY</label>
             <input id="street" type="text" class="form-control" th:field="*{street}"/>
