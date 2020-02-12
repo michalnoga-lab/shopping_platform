@@ -69,7 +69,7 @@ public class ProductController {
     @PostMapping("remove/{id}")
     public String remove(@PathVariable Long id) {
         cartService.removeProductFromCart(id, securityService.getLoggedInUserId());
-        /*return "carts/one"; todo tak było */
+        /*return "carts/one"; todo jak wrócić do aktualnego koszyka ??? */
         return "redirect:/products/all";
     }
 }

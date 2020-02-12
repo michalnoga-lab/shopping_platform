@@ -80,7 +80,10 @@ public class CartServiceTests {
     @DisplayName("getCart - no cart in DB with searching ID")
     void test10() {
 
-        // TODO: 28.01.2020
+        AppException appException = Assertions.assertThrows(
+                AppException.class, () -> cartService.getCart(5L));
+
+        Assertions.assertEquals("getCart - no cart with ID: 5", appException.getDescription());
     }
 
     @Test
@@ -604,7 +607,7 @@ public class CartServiceTests {
 
         User user = User.builder().id(1L).build();
         CartDTO cartDTO = CartDTO.builder().id(3L).cartClosed(false).build();
-        Cart cart = Cart.builder().id(3L).cartClosed(false).build();
+        Cart cart = Cart.builder().id(3L).products(Set.of()).cartClosed(false).build();
         List<Cart> carts = List.of(cart);
 
         Mockito

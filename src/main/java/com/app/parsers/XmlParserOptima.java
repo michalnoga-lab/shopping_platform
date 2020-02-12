@@ -51,7 +51,7 @@ public class XmlParserOptima {
         stringBuilder.append("<RABAT>0.00</RABAT>");
         stringBuilder.append("<OPIS>");
         stringBuilder.append(cartDTO.getDeliveryAddressDTO().getStreet());
-        stringBuilder.append("\ngit kontakt: "); // TODO: 12.02.2020 \n
+        stringBuilder.append("\ngit kontakt: ");
         stringBuilder.append(cartDTO.getUserDTO().getName());
         stringBuilder.append(" ");
         stringBuilder.append(cartDTO.getUserDTO().getSurname());

@@ -1,15 +1,13 @@
 package com.app.service;
 
-import com.app.dto.UserDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
-import com.app.mappers.UserMapper;
 import com.app.model.User;
 import com.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,15 +17,21 @@ public class SecurityService {
 
     public Long getLoggedInUserId() {
 
-        String login = "log";
+        String username;
 
-        Optional<User> userOptional = userRepository
-                .findAll()
-                .stream()
-                .filter(user -> user.getLogin().equals(login))
-                .findFirst();
-                /*.map(UserMapper::toDto)
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE, "getLoggedInUser - no user with login: " + login));*/
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+
+        /*User user = userRepository
+                .findByLogin(username) // TODO: 12.02.2020 null jeżeli nie ma secuirty
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_SECURITY, "getLoggedInUser - no user with username: " + username));*/
+
+        /*return user.getId();*/
 
         return 3L; // TODO: 09.01.2020  return real ID
     }

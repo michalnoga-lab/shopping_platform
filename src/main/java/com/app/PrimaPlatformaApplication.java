@@ -35,23 +35,4 @@ public class PrimaPlatformaApplication {
     // TODO: 2020-02-05 vat bez miejsc po przecinku
     // TODO: 2020-02-05 https://www.w3schools.com/cssref/css3_pr_mediaquery.asp - urządzenia mobilne
     // TODO: 10.02.2020 transactional do wszystkich serwisów
-
-
-    /**
-     *
-     *
-     * Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-     *
-     * if (principal instanceof UserDetails) {
-     *
-     *   String username = ((UserDetails)principal).getUsername();
-     *
-     * } else {
-     *
-     *   String username = principal.toString();
-     *
-     * }
-     *
-     *
-     * */
 }

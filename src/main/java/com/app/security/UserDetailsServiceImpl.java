@@ -5,6 +5,7 @@ import com.app.exceptions.ExceptionCodes;
 import com.app.model.Role;
 import com.app.model.User;
 import com.app.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,14 +18,11 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @Service
+@RequiredArgsConstructor
 @Qualifier("userDetailsServiceImpl")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private UserRepository userRepository;
-
-    public UserDetailsServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -37,12 +35,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         try {
             if (username == null) {
 
-
-                System.out.println("________2_____________________________________"); // TODO: 2020-02-09
-                System.out.println(username);
-
                 throw new NullPointerException("loadUserByUsername - login is null");
             }
+
+            System.out.println("________2_____________________________________"); // TODO: 2020-02-09
+            System.out.println(username);
 
             User user = userRepository.findByLogin(username)
                     .orElseThrow(() -> new UsernameNotFoundException(username));
