@@ -5,14 +5,13 @@ import com.app.dto.DeliveryAddressDTO;
 import com.app.exceptions.AppException;
 import com.app.mappers.CartMapper;
 import com.app.model.*;
-import com.app.parsers.XmlParser;
+import com.app.parsers.XmlParserOptima;
 import com.app.repository.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
-import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -44,7 +43,7 @@ public class CartServiceTests {
     private CartService cartService;
 
     @Autowired
-    private XmlParser xmlParser;
+    private XmlParserOptima xmlParserOptima;
 
     @Autowired
     private EmailService emailService;
@@ -65,7 +64,7 @@ public class CartServiceTests {
         private ProductRepository productRepository;
 
         @MockBean
-        private XmlParser xmlParser;
+        private XmlParserOptima xmlParserOptima;
 
         @MockBean
         private EmailService emailService;
@@ -73,7 +72,7 @@ public class CartServiceTests {
         @Bean
         public CartService cartService() {
             return new CartService(cartRepository, userRepository,
-                    productRepository, deliveryAddressRepository, xmlParser, emailService);
+                    productRepository, deliveryAddressRepository, xmlParserOptima, emailService);
         }
     }
 

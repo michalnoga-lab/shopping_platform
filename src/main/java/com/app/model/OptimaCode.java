@@ -4,7 +4,8 @@ public enum OptimaCode {
 
     TEST("TEST_CODE"),
     ACE_WYBIELACZ_LAGODNY("ACE WYBIELACZ 1000 D"),
-    AJAX_PROSZEK_450("AJAX PROSZEK 450");
+    AJAX_PROSZEK_450("AJAX PROSZEK 450"),
+    AMBIPUR("AMBIPUR");
 
     private String description;
 

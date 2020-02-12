@@ -9,7 +9,7 @@ import com.app.exceptions.ExceptionCodes;
 import com.app.mappers.CartMapper;
 import com.app.mappers.ProductMapper;
 import com.app.model.*;
-import com.app.parsers.XmlParser;
+import com.app.parsers.XmlParserOptima;
 import com.app.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ public class CartService {
     private final ProductRepository productRepository;
     private final DeliveryAddressRepository deliveryAddressRepository;
 
-    private final XmlParser xmlParser;
+    private final XmlParserOptima xmlParserOptima;
     private final EmailService emailService;
 
     public CartDTO getCart(Long cartId) {
@@ -234,7 +234,7 @@ public class CartService {
                 .collect(Collectors.toSet());
 
         String fileName = FileUtilities.generateFileName(cartDTO.getUserDTO().getCompanyDTO().getNip());
-        String orderInXml = xmlParser.generateXmlFileContent(cartDTO, productsInCart);
+        String orderInXml = xmlParserOptima.generateXmlFileContent(cartDTO, productsInCart);
         String pathToFile = FileUtilities.saveFileToDisk(orderInXml, fileName);
         emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
 
