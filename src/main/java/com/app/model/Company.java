@@ -35,10 +35,10 @@ public class Company {
     private Price defaultPrice;
 
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "company")
-    private Set<User> users = new HashSet<>();
+    private Set<User> users;
 
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "company")
-    private Set<Product> products = new HashSet<>();
+    private Set<Product> products;
 
     @Override
     public boolean equals(Object o) {

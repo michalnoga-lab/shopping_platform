@@ -33,14 +33,14 @@ public class User {
     private String passwordConfirmation;
 
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "user")
-    private Set<DeliveryAddress> deliveryAddresses = new HashSet<>(); // TODO: 2019-10-22 remove all hash set ???
+    private Set<DeliveryAddress> deliveryAddresses;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "company_id")
     private Company company;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
-    private Set<Cart> carts = new HashSet<>();
+    private Set<Cart> carts;
 
     @Override
     public boolean equals(Object o) {
