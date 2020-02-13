@@ -13,19 +13,29 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             <ul class="navbar-nav m-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/products/all">Moje produkty</a>
+                    <div sec:authorize="hasRole('ROLE_USER')">
+                        <a class="nav-link" href="/products/all">Moje produkty</a>
+                    </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/carts/all">Moje koszyki</a>
+                    <div sec:authorize="hasRole('ROLE_USER')">
+                        <a class="nav-link" href="/carts/all">Moje koszyki</a>
+                    </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/deliveryAddress/all">Moje adresy</a>
+                    <div sec:authorize="hasRole('ROLE_USER')">
+                        <a class="nav-link" href="/deliveryAddress/all">Moje adresy</a>
+                    </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/deliveryAddress/add">Dodaj adres</a>
+                    <div sec:authorize="hasRole('ROLE_USER')">
+                        <a class="nav-link" href="/deliveryAddress/add">Dodaj adres</a>
+                    </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/search/products">Wyszukaj produkt</a>
+                    <div sec:authorize="hasRole('ROLE_USER')">
+                        <a class="nav-link" href="/search/products">Wyszukaj produkt</a>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <div sec:authorize="isAnonymous()">
@@ -44,7 +54,7 @@
                 </li>
                 <li>
                     <div sec:authorize="hasRole('ROLE_SUPER')">
-                        <a class="nav-link" href="#">SUPER</a>
+                        <a class="nav-link" href="#">PANEL SUPER ADMINISTRATORA</a>
                     </div>
                 </li>
             </ul>

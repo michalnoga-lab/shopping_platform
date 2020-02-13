@@ -45,8 +45,11 @@ public class dataInitialization implements CommandLineRunner { // TODO: 2019-09-
             .build();
 
     User user3 = User.builder()
-            .login("log")
-            .name("name 1")
+            .login("super")
+            .name("super")
+            .role(Role.SUPER)
+            .enabled(true)
+            .password("{bcrypt}$2a$10$/HxZgKD8i8uVvtbyMcYPkeeybREyK72tEtVV25OxPvufeUSt9fFEa")
             .build();
     User user2 = User.builder()
             .login("admin")
@@ -76,7 +79,7 @@ public class dataInitialization implements CommandLineRunner { // TODO: 2019-09-
     public void run(String... args) throws Exception {
 
         companyRepository.saveAll(List.of(company1, company2));
-        userRepository.saveAll(List.of(user1, user2));
+        userRepository.saveAll(List.of(user1, user2, user3));
 
         Company company = companyRepository.findById(1L).get();
         User user = userRepository.findById(3L).get();
