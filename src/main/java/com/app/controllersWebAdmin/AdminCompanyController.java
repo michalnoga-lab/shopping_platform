@@ -2,14 +2,17 @@ package com.app.controllersWebAdmin;
 
 import com.app.dto.CompanyDTO;
 import com.app.service.CompanyService;
+import com.app.validators.CompanyDtoValidator;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.http.parser.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +25,13 @@ public class AdminCompanyController {
 
     private final CompanyService companyService;
 
+    private final CompanyDtoValidator companyDtoValidator;
+
+    @InitBinder
+    public void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.setValidator(companyDtoValidator);
+    }
+
     @GetMapping(value = "add")
     public String adminAddCompanyGET(Model model) {
         model.addAttribute("company", new CompanyDTO());
@@ -30,7 +40,7 @@ public class AdminCompanyController {
     }
 
     @PostMapping("add")
-    public String adminAddCompanyPOST(@ModelAttribute CompanyDTO companyDTO, BindingResult bindingResult, Model model) {
+    public String adminAddCompanyPOST(@Valid @ModelAttribute CompanyDTO companyDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = bindingResult
                     .getFieldErrors()

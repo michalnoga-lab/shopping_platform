@@ -19,13 +19,14 @@ public class CompanyDtoValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         CompanyDTO companyDTO = (CompanyDTO) o;
+        final String NAME_REGEX =CustomRegex.TEXT_WITH_DIGITS_AND_SPECIALS_REGEX;
         final String USER_INPUT_REGEX = CustomRegex.TEXT_ONLY_REGEX;
         final String NIP_REGEX = "(\\d){10}";
         final String STREET_NUMBER_REGEX = "[a-zA-z\\s\\d]+";
         final String POST_CODE_REGEX = "(\\d){2}-(\\d){3}";
 
         try {
-            if (!companyDTO.getCity().matches(USER_INPUT_REGEX)) {
+            if (!companyDTO.getName().matches(NAME_REGEX)) {
                 errors.rejectValue("name", "NIEPRAWIDŁOWA NAZWA. DOZWOLONE SĄ TYLKO LITERY.");
             }
             if (!companyDTO.getNip().matches(NIP_REGEX)) {

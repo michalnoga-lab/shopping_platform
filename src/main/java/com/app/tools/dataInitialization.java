@@ -49,8 +49,11 @@ public class dataInitialization implements CommandLineRunner { // TODO: 2019-09-
             .name("name 1")
             .build();
     User user2 = User.builder()
-            .login("log2")
-            .name("name 2")
+            .login("admin")
+            .name("admin")
+            .role(Role.ADMIN)
+            .enabled(true)
+            .password("{bcrypt}$2a$10$/HxZgKD8i8uVvtbyMcYPkeeybREyK72tEtVV25OxPvufeUSt9fFEa")
             .build();
     User user1 = User.builder()
             .login("user")

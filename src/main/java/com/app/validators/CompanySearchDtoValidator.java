@@ -1,6 +1,5 @@
 package com.app.validators;
 
-import com.app.dto.CompanyDTO;
 import com.app.dto.CompanySearchDTO;
 import com.app.exceptions.AppException;
 import com.app.exceptions.ExceptionCodes;
