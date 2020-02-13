@@ -182,7 +182,7 @@ public class XmlParserOptima {
                     stringBuilder.append("<STAWKA>");
                     stringBuilder.append(product.getVat());
                     stringBuilder.append("</STAWKA>");
-                    stringBuilder.append("<FLAGA>2</FLAGA>"); // TODO: 2020-02-10 od czego jest ta flaga ???
+                    stringBuilder.append("<FLAGA>2</FLAGA>");
                     stringBuilder.append("<ZRODLOWA>0.00</ZRODLOWA>");
                     stringBuilder.append("</STAWKA_VAT>");
                     stringBuilder.append("<CENY>");

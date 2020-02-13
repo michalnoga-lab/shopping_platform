@@ -19,20 +19,18 @@ public class SecurityService {
 
         String username;
 
-      /*  Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        if (principal instanceof UserDetails) { // TODO: 2020-02-12 user  null
+        if (principal instanceof UserDetails) {
             username = ((UserDetails) principal).getUsername();
         } else {
             username = principal.toString();
-        }*/
+        }
 
-        /*User user = userRepository
-                .findByLogin(username) // TODO: 12.02.2020 null jeżeli nie ma secuirty
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_SECURITY, "getLoggedInUser - no user with username: " + username));*/
+        User user = userRepository
+                .findByLogin(username)
+                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_SECURITY, "getLoggedInUser - no user with username: " + username));
 
-        /*return user.getId();*/
-
-        return 3L; // TODO: 09.01.2020  return real ID
+        return user.getId();
     }
 }
