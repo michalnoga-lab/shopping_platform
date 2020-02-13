@@ -15,13 +15,13 @@
           id="form">
         <div class="form-group">
             <label class="text-secondary" for="street">ADRES DOSTAWY</label>
-            <input id="street" type="text" class="form-control" th:field="*{street}"/>
+            <input id="street" type="text" class="form-control" th:field="*{street}" required/>
         </div>
         <p class="text text-danger" id="streetFeedback"></p>
         <p class="text text-danger" th:if="${errors.containsKey('street')}" th:text="${errors.get('street')}"></p>
         <div class="form-group">
             <label class="text-secondary" for="phone">TELEFON KONTAKTOWY</label>
-            <input id="phone" type="text" class="form-control" th:field="*{phone}"/>
+            <input id="phone" type="text" class="form-control" th:field="*{phone}" required/>
         </div>
         <p class="text text-danger" id="phoneFeedback"></p>
         <p class="text text-danger" th:if="${errors.containsKey('phone')}" th:text="${errors.get('phone')}"></p>

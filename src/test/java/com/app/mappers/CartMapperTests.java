@@ -36,6 +36,7 @@ public class CartMapperTests {
                 .deliveryAddress(DeliveryAddress.builder().street("Address 1").build())
                 .purchaseTime(LocalDateTime.of(2019, 10, 22, 0, 0, 0))
                 .products(Set.of(Product.builder().id(10L).build()))
+                .orderNumber("NUMBER")
                 .build();
 
         CartDTO expectedCart = CartDTO.builder()
@@ -47,6 +48,7 @@ public class CartMapperTests {
                 .deliveryAddressDTO(DeliveryAddressDTO.builder().street("Address 1").build())
                 .cartClosed(false)
                 .purchaseTime(LocalDateTime.of(2019, 10, 22, 0, 0, 0))
+                .orderNumber("NUMBER")
                 .build();
 
         CartDTO actualCart = CartMapper.toDto(cart);
@@ -66,6 +68,7 @@ public class CartMapperTests {
                 .deliveryAddressDTO(DeliveryAddressDTO.builder().street("Address 1").build())
                 .cartClosed(false)
                 .purchaseTime(LocalDateTime.of(2019, 10, 22, 0, 0, 0))
+                .orderNumber("NUMBER")
                 .build();
 
         Cart expectedCart = Cart.builder()
@@ -78,6 +81,7 @@ public class CartMapperTests {
                 .deliveryAddress(DeliveryAddress.builder().street("Address 1").build())
                 .purchaseTime(LocalDateTime.of(2019, 10, 22, 0, 0, 0))
                 .products(Set.of(Product.builder().id(10L).build()))
+                .orderNumber("NUMBER")
                 .build();
 
         Cart actualCart = CartMapper.fromDto(cartDTO);

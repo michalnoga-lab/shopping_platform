@@ -1,6 +1,5 @@
 package com.app.dto;
 
-import com.app.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,4 +22,5 @@ public class CartDTO {
     private LocalDateTime purchaseTime;
     private DeliveryAddressDTO deliveryAddressDTO;
     private UserDTO userDTO;
+    private String orderNumber;
 }

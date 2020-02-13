@@ -18,23 +18,23 @@
         </div>
         <div class="form-group">
             <label class="text-secondary" for="nip">NIP</label>
-            <input id="nip" type="text" class="form-control" th:field="*{nip}"/>
+            <input id="nip" type="text" class="form-control" th:field="*{nip}" required/>
         </div>
         <div class="form-group">
             <label class="text-secondary" for="street">ULICA</label>
-            <input id="street" type="text" class="form-control" th:field="*{street}"/>
+            <input id="street" type="text" class="form-control" th:field="*{street}" required/>
         </div>
         <div class="form-group">
             <label class="text-secondary" for="streetNumber">NUMER ULICY</label>
-            <input id="streetNumber" type="text" class="form-control" th:field="*{streetNumber}"/>
+            <input id="streetNumber" type="text" class="form-control" th:field="*{streetNumber}" required/>
         </div>
         <div class="form-group">
             <label class="text-secondary" for="city">MIASTO</label>
-            <input id="city" type="text" class="form-control" th:field="*{city}"/>
+            <input id="city" type="text" class="form-control" th:field="*{city}" required/>
         </div>
         <div class="form-group">
             <label class="text-secondary" for="postCode">KOD POCZTOWY</label>
-            <input id="postCode" type="text" class="form-control" th:field="*{postCode}"/>
+            <input id="postCode" type="text" class="form-control" th:field="*{postCode}" required/>
         </div>
         <div class="form-group">
             <button class="btn btn-outline-dark btn-block" type="submit">DODAJ FIRMĘ</button>

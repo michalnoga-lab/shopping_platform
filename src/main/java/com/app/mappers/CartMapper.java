@@ -19,6 +19,7 @@ public interface CartMapper {
                 .deliveryAddressDTO(cart.getDeliveryAddress() == null ?
                         null : DeliveryAddressMapper.toDto(cart.getDeliveryAddress()))
                 .purchaseTime(cart.getPurchaseTime())
+                .orderNumber(cart.getOrderNumber())
                 .build();
     }
 
@@ -34,6 +35,7 @@ public interface CartMapper {
                         null : DeliveryAddressMapper.fromDto(cartDTO.getDeliveryAddressDTO()))
                 .products(new HashSet<>())
                 .purchaseTime(cartDTO.getPurchaseTime())
+                .orderNumber(cartDTO.getOrderNumber())
                 .build();
     }
 }

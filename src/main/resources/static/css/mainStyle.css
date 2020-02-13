@@ -27,12 +27,6 @@
     margin-top: 0;
 }
 
-/*input:valid:focus {   todo
-    outline: 0;
-    border: none;
-    box-shadow: 0 0 3px 6px lawngreen;
-}*/
-
 input:invalid:focus {
     outline: 0;
     border: none;

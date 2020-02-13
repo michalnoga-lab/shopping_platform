@@ -29,6 +29,7 @@ public class Cart {
     private BigDecimal totalGrossValue;
     private Boolean cartClosed;
     private LocalDateTime purchaseTime;
+    private String orderNumber;
 
     @OneToOne
     private DeliveryAddress deliveryAddress;

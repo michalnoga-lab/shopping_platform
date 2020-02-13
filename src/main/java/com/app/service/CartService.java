@@ -226,6 +226,8 @@ public class CartService {
         Cart cart = cartRepository.getOne(cartDTO.getId());
         cart.setCartClosed(true);
         cart.setPurchaseTime(LocalDateTime.now());
+        String fileName = FileUtilities.generateFileName(cartDTO.getUserDTO().getCompanyDTO().getNip());
+        cart.setOrderNumber(fileName);
 
         cartRepository.save(cart);
         Set<ProductDTO> productsInCart = cart.getProducts()
@@ -233,7 +235,6 @@ public class CartService {
                 .map(ProductMapper::toDto)
                 .collect(Collectors.toSet());
 
-        String fileName = FileUtilities.generateFileName(cartDTO.getUserDTO().getCompanyDTO().getNip());
         String orderInXml = xmlParserOptima.generateXmlFileContent(cartDTO, productsInCart);
         String pathToFile = FileUtilities.saveFileToDisk(orderInXml, fileName);
         emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);

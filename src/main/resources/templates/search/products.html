@@ -19,7 +19,7 @@
     <form method="post" th:action="@{/search/products}" th:object="${productSearch}" enctype="multipart/form-data">
         <div class="form-group">
             <label class="text-secondary" for="name">Wyszukaj w nazwach</label>
-            <input id="name" type="text" class="form-control" th:field="*{userInput}">
+            <input id="name" type="text" class="form-control" th:field="*{userInput}" required>
         </div>
         <p class="text text-danger" th:if="${errors.containsKey('userInput')}" th:text="${errors.get('userInput')}"></p>
         <div class="form-group">

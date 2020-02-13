@@ -15,6 +15,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class dataInitialization implements CommandLineRunner { // TODO: 2019-09-23 enable for tests only!
 
+    // TODO: 13.02.2020 if no users id DB create SUPER
+
     private final CompanyRepository companyRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
