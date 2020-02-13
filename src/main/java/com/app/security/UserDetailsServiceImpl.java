@@ -27,27 +27,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        System.out.println("_____________1________________________________"); // TODO: 2020-02-09
-        System.out.println("USERNAME=" + username);
-
-        System.out.println("-------------------1.5-----------------------");
-
         try {
             if (username == null) {
 
                 throw new NullPointerException("loadUserByUsername - login is null");
             }
 
-            System.out.println("________2_____________________________________"); // TODO: 2020-02-09
-            System.out.println(username);
-
             User user = userRepository.findByLogin(username)
-                    .orElseThrow(() -> new UsernameNotFoundException(username)); // TODO: 2020-02-12 TU !!!
-
-
-            System.out.println("_____________3________________________________"); // TODO: 2020-02-09
-            System.out.println(user);
-
+                    .orElseThrow(() -> new UsernameNotFoundException(username));
 
             return new org.springframework.security.core.userdetails.User(
                     user.getName(),
@@ -59,8 +46,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                     getAuthorities(user.getRole())
             );
         } catch (Exception e) {
-            System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"); // TODO: 2020-02-12
-            e.printStackTrace();
             throw new AppException(ExceptionCodes.SECURITY, "loadUserByUsername - no user with username: " + username);
         }
     }

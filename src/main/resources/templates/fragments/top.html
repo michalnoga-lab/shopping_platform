@@ -28,7 +28,9 @@
                     <a class="nav-link" href="/search/products">Wyszukaj produkt</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/security/login">ZALOGUJ</a>
+                    <div sec:authorize="isAnonymous()">
+                        <a class="nav-link" href="/security/login">ZALOGUJ</a>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <div sec:authorize="isAuthenticated()">

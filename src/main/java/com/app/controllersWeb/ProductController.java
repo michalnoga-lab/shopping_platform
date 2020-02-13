@@ -1,6 +1,8 @@
 package com.app.controllersWeb;
 
+import com.app.dto.CartDTO;
 import com.app.dto.ProductDTO;
+import com.app.dto.UserDTO;
 import com.app.service.CartService;
 import com.app.service.CompanyService;
 import com.app.service.ProductService;
@@ -69,7 +71,7 @@ public class ProductController {
     @PostMapping("remove/{id}")
     public String remove(@PathVariable Long id) {
         cartService.removeProductFromCart(id, securityService.getLoggedInUserId());
-        /*return "carts/one"; todo jak wrócić do aktualnego koszyka ??? */
-        return "redirect:/products/all";
+        CartDTO cartDTO = cartService.removeProductFromCart(id, securityService.getLoggedInUserId());
+        return "redirect:/carts/one";
     }
 }

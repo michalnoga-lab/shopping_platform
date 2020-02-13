@@ -41,10 +41,10 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
 
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/manage/**", "/webjars/**").permitAll()
+                //.antMatchers("/manage/**", "/webjars/**").permitAll() // TODO: 13.02.2020 czy działa bez tego ???
                 .antMatchers("/css/**", "/img/**", "/js/**").permitAll()
                 .antMatchers("/").permitAll()
-                .antMatchers("/admin/**").hasAnyRole("ADMIN", "SUPER")
+                .antMatchers("/admin/**").hasAnyRole("SUPER", "ADMIN")
                 .antMatchers("/super/**").hasAnyRole("SUPER")
 
                 .anyRequest().authenticated()
@@ -52,7 +52,7 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/security/login").permitAll()
-                .loginProcessingUrl("/app-login")
+                .loginProcessingUrl("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/", true)
