@@ -5,11 +5,6 @@
      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <div class="container top-menu">
         <a class="navbar-brand" href="/">START</a>
-        <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button> todo usunąć to !!! -->
-
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             <ul class="navbar-nav m-auto">
                 <li class="nav-item">
@@ -39,7 +34,7 @@
                 </li>
                 <li class="nav-item">
                     <div sec:authorize="isAnonymous()">
-                        <a class="nav-link" href="/security/login">ZALOGUJ</a>
+                        <a class="navbar-brand" href="/security/login">ZALOGUJ</a>
                     </div>
                 </li>
                 <li class="nav-item">
