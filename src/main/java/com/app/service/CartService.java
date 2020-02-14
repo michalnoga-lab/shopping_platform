@@ -1,7 +1,7 @@
 package com.app.service;
 
 import com.app.Utilities.CustomAddresses;
-import com.app.Utilities.FileUtilities;
+import com.app.Utilities.FileManager;
 import com.app.dto.CartDTO;
 import com.app.dto.ProductDTO;
 import com.app.exceptions.AppException;
@@ -226,7 +226,7 @@ public class CartService {
         Cart cart = cartRepository.getOne(cartDTO.getId());
         cart.setCartClosed(true);
         cart.setPurchaseTime(LocalDateTime.now());
-        String fileName = FileUtilities.generateFileName(cartDTO.getUserDTO().getCompanyDTO().getNip());
+        String fileName = FileManager.generateFileName(cartDTO.getUserDTO().getCompanyDTO().getNip());
         cart.setOrderNumber(fileName);
 
         cartRepository.save(cart);
@@ -236,7 +236,7 @@ public class CartService {
                 .collect(Collectors.toSet());
 
         String orderInXml = xmlParserOptima.generateXmlFileContent(cartDTO, productsInCart);
-        String pathToFile = FileUtilities.saveFileToDisk(orderInXml, fileName);
+        String pathToFile = FileManager.saveFileToDisk(orderInXml, fileName);
         emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
 
         return CartMapper.toDto(cart);

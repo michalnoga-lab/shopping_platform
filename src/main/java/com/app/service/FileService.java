@@ -2,6 +2,7 @@ package com.app.service;
 
 import com.app.Utilities.CustomPaths;
 import com.app.Utilities.CustomRegex;
+import com.app.Utilities.FileManager;
 import com.app.dto.CompanyDTODetailsFromFile;
 import com.app.dto.ProductDTO;
 import com.app.exceptions.AppException;
@@ -29,7 +30,6 @@ import java.util.Optional;
 public class FileService {
 
     private final CompanyRepository companyRepository;
-    private final String ALLOWED_CHARS = CustomRegex.TEXT_WITH_DIGITS_REGEX;
 
     public List<ProductDTO> getProductsFromFile(MultipartFile file, Long companyId) {
         try {
@@ -42,25 +42,31 @@ public class FileService {
             if (companyId <= 0) {
                 throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - company ID less than zero");
             }
-            String PRODUCTS_FILE_NAME_REGEX = "^upload\\.[\\w]{3}$";
-            if (!file.getName().matches(PRODUCTS_FILE_NAME_REGEX)) {
+         /*   if (!file.getName().matches(PRODUCTS_FILE_NAME_REGEX)) { // TODO: 14.02.2020 upload file name check
+                System.out.println(file.getName());
                 throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - incorrect file extension");
             }
+*/
+            String filename = FileManager.uploadFileFromUser(file);
+            // TODO: 14.02.2020 logs plik uploaded
+
 
             List<ProductDTO> productDTOS = new ArrayList<>();
-            InputStream inputStream = new ByteArrayInputStream(file.getBytes());
+            InputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(
+                    Paths.get(CustomPaths.UPLOADED_PRODUCTS_PATH + filename)));
 
             StringBuilder stringBuilder = new StringBuilder();
             try (Reader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
                 int character = 0;
                 while ((character = reader.read()) != -1) {
-                    if (!String.valueOf((char) character).matches(ALLOWED_CHARS)) {
+                    if (String.valueOf((char) character).matches(CustomRegex.UPLOAD_FILES_ALLOWED_CHARS)) {
                         stringBuilder.append((char) character);
                     }
                 }
             } catch (Exception e) {
                 throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - error reading file content");
             }
+
             Arrays.stream(stringBuilder.toString().split("(])"))
                     .forEach(line -> {
                         try {
@@ -70,29 +76,33 @@ public class FileService {
                                     .replaceAll("\"", "")
                                     .replaceAll("'", "");
 
-                            String[] lineSplit = linePured.split("(})");
-                            Optional<Company> companyOptional = companyRepository.findById(companyId);
-                            Company company = companyOptional.orElseThrow(() -> new AppException(
-                                    ExceptionCodes.SERVICE_FILES, "getProductsFromFile - no company with ID: " + companyId));
+                            if (line.length() > 10) {
 
-                            productDTOS.add(ProductMapper.toDto(Product.builder()
-                                    .name(lineSplit[0])
-                                    .numberInAuction(lineSplit[1])
-                                    .auctionIndex(lineSplit[2])
-                                    .description(lineSplit[3])
-                                    .nettPrice(BigDecimal.valueOf(Double.parseDouble(lineSplit[4]
-                                            .replaceAll("[złl\\s]+", "")
-                                            .replaceAll(",", "\\."))))
-                                    .vat(Double.parseDouble(lineSplit[5]
-                                            .replaceAll("[złl\\s]", "")
-                                            .replaceAll(",", "\\.")))
-                                    .grossPrice(BigDecimal.valueOf(Double.parseDouble(lineSplit[6]
-                                            .replaceAll("[złl\\s]", "")
-                                            .replaceAll(",", "\\."))))
-                                    .company(company)
-                                    .build()));
+                                String[] lineSplit = linePured.split("(})");
+                                Optional<Company> companyOptional = companyRepository.findById(companyId);
+                                Company company = companyOptional.orElseThrow(() -> new AppException(
+                                        ExceptionCodes.SERVICE_FILES, "getProductsFromFile - no company with ID: " + companyId));
 
+                                productDTOS.add(ProductMapper.toDto(Product.builder()
+                                        .name(lineSplit[0])
+                                        .numberInAuction(lineSplit[1])
+                                        .auctionIndex(lineSplit[2])
+                                        .description(lineSplit[3])
+                                        .nettPrice(BigDecimal.valueOf(Double.parseDouble(lineSplit[4]
+                                                .replaceAll("[złl\\s]+", "")
+                                                .replaceAll(",", "\\."))))
+                                        .vat(Double.parseDouble(lineSplit[5]
+                                                .replaceAll("[złl\\s]", "")
+                                                .replaceAll(",", "\\.")))
+                                        .grossPrice(BigDecimal.valueOf(Double.parseDouble(lineSplit[6]
+                                                .replaceAll("[złl\\s]", "")
+                                                .replaceAll(",", "\\."))))
+                                        .company(company)
+                                        .build()));
+                            }
                         } catch (Exception e) {
+                            System.out.println("**********************************************");
+                            e.printStackTrace();
                             // TODO: 2020-01-18 exception to logs - line not added
 
                         }
@@ -100,6 +110,8 @@ public class FileService {
 
             return productDTOS;
         } catch (Exception e) {
+            System.out.println("**********************************");
+            e.printStackTrace();
             throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - error during file upload");
         }
     }
@@ -117,7 +129,7 @@ public class FileService {
             StringBuilder stringBuilder = new StringBuilder();
 
             while ((character = reader.read()) != -1) {
-                if (String.valueOf((char) character).matches(ALLOWED_CHARS) ||
+                if (String.valueOf((char) character).matches(CustomRegex.UPLOAD_FILES_ALLOWED_CHARS) ||
                         String.valueOf((char) character).matches("[\\.\\]]+")) {
                     stringBuilder.append((char) character);
                 }

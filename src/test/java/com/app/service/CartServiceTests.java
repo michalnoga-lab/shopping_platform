@@ -1,6 +1,6 @@
 package com.app.service;
 
-import com.app.Utilities.FileUtilities;
+import com.app.Utilities.FileManager;
 import com.app.dto.CartDTO;
 import com.app.dto.CompanyDTO;
 import com.app.dto.DeliveryAddressDTO;
@@ -53,7 +53,7 @@ public class CartServiceTests {
     private EmailService emailService;
 
     @Autowired
-    private FileUtilities fileUtilities;
+    private FileManager fileManager;
 
     @TestConfiguration
     public static class AppTestConfiguration {
@@ -77,7 +77,7 @@ public class CartServiceTests {
         private EmailService emailService;
 
         @MockBean
-        private FileUtilities fileUtilities;
+        private FileManager fileManager;
 
         @Bean
         public CartService cartService() {

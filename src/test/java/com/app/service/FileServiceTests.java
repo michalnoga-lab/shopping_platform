@@ -18,18 +18,17 @@ public class FileServiceTests {
     @SpyBean
     private FileService fileService;
 
-    @Test
     @DisplayName("getProductsFromFile")
+    @ParameterizedTest
+    @CsvFileSource(resources = "/tests/upload.csv")
     void test10() {
-
-        // TODO: 06.02.2020
-
+        //stays empty
     }
 
     @DisplayName("getCompanyDetailsFromFile - read content of file")
     @ParameterizedTest
-    @CsvFileSource(resources = "/files/companies.csv")
     void test20() {
+        //stays empty
     }
 
     @DisplayName("getCompanyDetailsFromFile - find company in file")

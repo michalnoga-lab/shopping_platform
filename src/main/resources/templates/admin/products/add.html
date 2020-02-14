@@ -10,8 +10,12 @@
 <div th:replace="fragments/topbanner">TOP BANNER</div>
 
 <div class="container">
-
-    <h5 class="top-page-text">WCZYTYWANIE PRODUKTÓW</h5>
+    <h5 class="top-page-text">WCZYTYWANIE PRODUKTÓW DO BAZY DANYCH</h5>
+    <div class="top-page-text-details">
+        <p class="top-page-text-details-text">plik do wczytania danych powinien mieć następującą strukturę:</p>
+        <p class="top-page-text-details-text">nazwa produktu } numer pozycji przetargowej } kod produktu }
+            opis z przetargu } cena netto } stawka vat w formacie 0.00 } cena brutto ]</p>
+    </div>
 
     <form method="post" enctype="multipart/form-data" th:action="@{/admin/products/add}" class="form-group"
           th:object="${productSearch}">
@@ -23,7 +27,8 @@
             <label for="company">PODAJ ID FIRMY DO KTÓREJ MAJĄ BYC PRZYPISANE PRODUKTY</label>
             <input type="text" class="form-control" id="company" th:field="*{userIdInput}" required>
         </div>
-        <p class="text text-danger" th:if="${errors.containsKey('userIdInput')}" th:text="${errors.get('userIdInput')}"></p>
+        <p class="text text-danger" th:if="${errors.containsKey('userIdInput')}"
+           th:text="${errors.get('userIdInput')}"></p>
         <button type="submit" class="btn btn-outline-dark btn-lg btn-block">WCZYTAJ PLIK I ZAPISZ PRODUKTY</button>
     </form>
 

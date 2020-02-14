@@ -10,7 +10,7 @@
 <div th:replace="fragments/topbanner">TOP BANNER</div>
 
 <div class="container">
-    <h5 class="top-page-text">SZCZEGÓŁY UŻYTKOWNIKA</h5>
+    <h5 class="top-page-text">SZCZEGÓŁY FIRMY</h5>
     <table class="table">
         <thead class="table-head-custom">
         <tr>
@@ -29,6 +29,7 @@
             <td><p th:text="${company.street}+' '+${company.streetNumber}"></p></td>
             <td><p th:text="${company.city}"></p></td>
             <td><p th:text="${company.active}?'AKTYWNA':'ZABLOKOWANA'"></p></td>
+            <!-- todo pokaż produkty danej firmy  -->
             <td>
                 <div class="btn-group" role="group">
                     <form method="post" th:action="@{/admin/companies/edit/{id}(id=${company.id})}"

@@ -20,6 +20,10 @@ public class PrimaPlatformaApplication {
 
     // TODO: 2020-02-12 produkty w application.properties ???
 
+    // TODO: 14.02.2020 admin - pokaż wszystkich użytkowników bez adminów i super
+
+    // TODO: 14.02.2020 ŁĄCZENIE PRODUKTU Z KODEM OPTIMA - dodać pokaż produkt
+
     //--------------------------------------------------------------------------------------------
 
 
