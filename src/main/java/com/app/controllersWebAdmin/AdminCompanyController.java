@@ -60,8 +60,14 @@ public class AdminCompanyController {
         return "admin/companies/all";
     }
 
+    @GetMapping("one/{id}")
+    public String oneGET(@PathVariable Long id, Model model) {
+        model.addAttribute("company", companyService.findById(id));
+        return "admin/companies/one";
+    }
+
     @PostMapping("one/{id}")
-    public String one(@PathVariable Long id, Model model) {
+    public String onePOST(@PathVariable Long id, Model model) {
         model.addAttribute("company", companyService.findById(id));
         return "admin/companies/one";
     }
@@ -75,12 +81,12 @@ public class AdminCompanyController {
     @PostMapping("enable/{id}")
     public String enable(@PathVariable Long id) {
         companyService.disableEnable(id, true);
-        return "redirect:/admin/companies/all";
+        return "redirect:/admin/companies/one/" + id;
     }
 
     @PostMapping("disable/{id}")
     public String disable(@PathVariable Long id) {
         companyService.disableEnable(id, false);
-        return "redirect:/admin/companies/all";
+        return "redirect:/admin/companies/one/" + id;
     }
 }
