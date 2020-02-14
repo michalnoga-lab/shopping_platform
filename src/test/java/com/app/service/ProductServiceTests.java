@@ -105,8 +105,8 @@ public class ProductServiceTests {
                 .when(productRepository.findAll())
                 .thenReturn(List.of(product1, product2, product3, product4, product5));
 
-        List<ProductDTO> actualProductOfCompany1 = productService.getProductsOfCompany(companyDTO1);
-        List<ProductDTO> actualProductOfCompany2 = productService.getProductsOfCompany(companyDTO2);
+        List<ProductDTO> actualProductOfCompany1 = productService.findProductsOfCompany(companyDTO1.getId());
+        List<ProductDTO> actualProductOfCompany2 = productService.findProductsOfCompany(companyDTO2.getId());
 
         List<ProductDTO> expectedProductOfCompany1 = List.of(ProductMapper.toDto(product1),
                 ProductMapper.toDto(product2), ProductMapper.toDto(product3));

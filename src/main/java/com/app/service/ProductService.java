@@ -36,15 +36,15 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    public List<ProductDTO> getProductsOfCompany(CompanyDTO companyDTO) {
-        if (companyDTO == null) {
+    public List<ProductDTO> findProductsOfCompany(Long companyId) {
+        if (companyId == null) {
             throw new AppException(ExceptionCodes.SERVICE_PRODUCT, "getProductsOfCompany - company is null");
         }
 
         return productRepository
                 .findAll()
                 .stream()
-                .filter(product -> product.getCompany().getId().equals((companyDTO.getId())))
+                .filter(product -> product.getCompany().getId().equals((companyId)))
                 .map(ProductMapper::toDto)
                 .collect(Collectors.toList());
     }

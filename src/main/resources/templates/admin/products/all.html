@@ -9,7 +9,7 @@
 <div th:replace="fragments/top">TOP MENU</div>
 
 <div class="container">
-    <h5 class="top-page-text">ŁĄCZENIE PRODUKTU Z KODEM OPTIMA</h5>
+    <h5 class="top-page-text">PRODUKTY</h5>
 
     <table class="table">
         <thead class="table-head-custom">
@@ -24,7 +24,7 @@
         <tbody class="table-body-custom" th:each="p:${products}">
         <tr>
             <td><p th:text="${p.name}"></p></td>
-            <td><p th:text="${p.companyDTO.name}"></td>g
+            <td><p th:text="${p.companyDTO.name}"></td>
             <td>
                 <form method="post" th:action="@{/admin/companies/one/{id}(id=${p.companyDTO.id})}">
                     <div class="form-group">

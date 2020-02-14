@@ -1,8 +1,6 @@
 package com.app.controllersWeb;
 
-import com.app.dto.CartDTO;
 import com.app.dto.ProductDTO;
-import com.app.dto.UserDTO;
 import com.app.service.CartService;
 import com.app.service.CompanyService;
 import com.app.service.ProductService;
@@ -40,8 +38,8 @@ public class ProductController {
 
     @GetMapping("/all")
     public String all(Model model) {
-        model.addAttribute("products", productService.getProductsOfCompany(
-                companyService.getCompanyOfUser(securityService.getLoggedInUserId())));
+        model.addAttribute("products", productService.findProductsOfCompany(
+                companyService.getCompanyOfUser(securityService.getLoggedInUserId()).getId()));
         return "products/all";
     }
 

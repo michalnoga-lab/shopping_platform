@@ -32,24 +32,31 @@
             <!-- todo pokaż produkty danej firmy  -->
             <td>
                 <div class="btn-group" role="group">
+                    <form method="post" th:action="@{/admin/products/all/{id}(id=${company.id})}"
+                          enctype="multipart/form-data">
+                        <label>
+                            <input hidden="hidden" readonly="readonly" th:value="${company.id}"/>
+                        </label>
+                        <button class="btn btn-outline-dark btn-small" type="submit">PRODUKTY</button>
+                    </form>
                     <form method="post" th:action="@{/admin/companies/edit/{id}(id=${company.id})}"
                           enctype="multipart/form-data">
                         <label>
-                            <input hidden="hidden" readonly="readonly" th:value="${company.id}">
+                            <input hidden="hidden" readonly="readonly" th:value="${company.id}"/>
                         </label>
                         <button class="btn btn-outline-dark btn-small" type="submit">EDYTUJ</button>
                     </form>
                     <form method="post" th:action="@{/admin/companies/enable/{id}(id=${company.id})}"
                           enctype="multipart/form-data">
                         <label>
-                            <input hidden="hidden" readonly="readonly" th:value="${company.id}">
+                            <input hidden="hidden" readonly="readonly" th:value="${company.id}"/>
                         </label>
                         <button class="btn btn-outline-dark btn-small">ODBLOKUJ</button>
                     </form>
                     <form method="post" th:action="@{/admin/companies/disable/{id}(id=${company.id})}"
                           enctype="multipart/form-data">
                         <label>
-                            <input readonly="readonly" hidden="hidden" th:value="${company.id}">
+                            <input readonly="readonly" hidden="hidden" th:value="${company.id}"/>
                         </label>
                         <button class="btn btn-outline-dark btn-small" type="submit">ZABLOKUJ</button>
                     </form>

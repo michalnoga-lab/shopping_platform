@@ -30,6 +30,14 @@ public class AdminProductController {
         webDataBinder.setValidator(generalUserInputDtoValidator);
     }
 
+    @PostMapping("all/{id}")
+    public String allProductsOfCompany(@PathVariable Long id, Model model) {
+        model.addAttribute("products", productService.findProductsOfCompany(id));
+        model.addAttribute("generalUserInput", new GeneralUserInputDTO());
+        model.addAttribute("errors", new HashMap<>());
+        return "admin/products/all";
+    }
+
     @GetMapping("all")
     public String all(Model model) {
         model.addAttribute("products", productService.findAll());
