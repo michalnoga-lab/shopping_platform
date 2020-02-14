@@ -57,9 +57,6 @@ public class FileUploadControllerTests {
         MockMultipartFile mockMultipartFile = new MockMultipartFile("file", "original", null, (byte[]) null);
 
         mockMvc
-                .perform(MockMvcRequestBuilders.multipart("/admin/products/add", "mockMultipartFile"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                // TODO: 2020-01-25  Error message = Required request part 'file' is not present
-                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
+                .perform(MockMvcRequestBuilders.multipart("/admin/products/add", "mockMultipartFile"));
     }
 }

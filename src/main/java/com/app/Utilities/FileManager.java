@@ -58,16 +58,4 @@ public interface FileManager {
             throw new AppException(ExceptionCodes.FILE_MANAGER, "uploadFile - failed to upload: ");
         }
     }
-
-  /*  static String addFileFromDiskToMethod(MultipartFile multipartFile) {
-        try {
-            if (multipartFile == null || multipartFile.getBytes().length == 0) {
-                throw new AppException(ExceptionCodes.FILE_MANAGER, "addFileFromDiskToMethod - file is not correct");
-            }
-
-
-        } catch (Exception e) {
-            throw new AppException(ExceptionCodes.FILE_MANAGER, "addFileFromDiskToMethod - failed to add file");
-        }
-    }*/ // TODO: 14.02.2020 remove
 }

@@ -71,7 +71,6 @@ public class ProductController {
     @PostMapping("remove/{id}")
     public String remove(@PathVariable Long id) {
         cartService.removeProductFromCart(id, securityService.getLoggedInUserId());
-        /*CartDTO cartDTO = cartService.removeProductFromCart(id, securityService.getLoggedInUserId()); // TODO: 14.02.2020*/
         return "redirect:/carts/one";
     }
 }
