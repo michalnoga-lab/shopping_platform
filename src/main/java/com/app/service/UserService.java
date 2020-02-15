@@ -53,6 +53,7 @@ public class UserService {
 
         return users
                 .stream()
+                .filter(user -> user.getRole().equals(Role.USER))
                 .map(UserMapper::toDto)
                 .collect(Collectors.toList());
     }

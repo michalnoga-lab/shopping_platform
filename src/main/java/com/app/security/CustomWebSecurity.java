@@ -43,8 +43,9 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/css/**", "/img/**", "/js/**").permitAll()
                 .antMatchers("/").permitAll()
-                .antMatchers("/admin/**").hasAnyRole("SUPER", "ADMIN")
-                .antMatchers("/super/**").hasAnyRole("SUPER")
+                .antMatchers("/admin/**").hasAnyRole("ROOT", "SUPER", "ADMIN")
+                .antMatchers("/super/**").hasAnyRole("ROOT", "SUPER")
+                .antMatchers("/root/**").hasAnyRole("ROOT")
 
                 .anyRequest().authenticated()
 

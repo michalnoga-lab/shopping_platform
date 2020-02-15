@@ -66,6 +66,14 @@ public class dataInitialization implements CommandLineRunner { // TODO: 2019-09-
             .password("{bcrypt}$2a$10$/HxZgKD8i8uVvtbyMcYPkeeybREyK72tEtVV25OxPvufeUSt9fFEa")
             .build();
 
+    User user4 = User.builder()
+            .login("root")
+            .name("user")
+            .role(Role.ROOT)
+            .enabled(true)
+            .password("{bcrypt}$2a$10$/HxZgKD8i8uVvtbyMcYPkeeybREyK72tEtVV25OxPvufeUSt9fFEa")
+            .build();
+
     Product product1 = Product.builder().name("Prod1")
             .nettPrice(BigDecimal.valueOf(2.44))
             .vat(23.0)
@@ -86,7 +94,7 @@ public class dataInitialization implements CommandLineRunner { // TODO: 2019-09-
     public void run(String... args) throws Exception {
 
         companyRepository.saveAll(List.of(company1, company2));
-        userRepository.saveAll(List.of(user1, user2, user3));
+        userRepository.saveAll(List.of(user1, user2, user3, user4));
 
         Company company = companyRepository.findById(1L).get();
         User user = userRepository.findById(3L).get();

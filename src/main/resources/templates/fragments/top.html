@@ -43,13 +43,18 @@
                     </div>
                 </li>
                 <li>
-                    <div sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPER')">
+                    <div sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPER') or hasRole('ROLE_ROOT')">
                         <a class="nav-link" href="/admin/panel">PANEL ADMINISTRATORA</a>
                     </div>
                 </li>
                 <li>
-                    <div sec:authorize="hasRole('ROLE_SUPER')">
+                    <div sec:authorize="hasRole('ROLE_SUPER') or hasRole('ROLE_ROOT')">
                         <a class="nav-link" href="#">PANEL SUPER ADMINISTRATORA</a>
+                    </div>
+                </li>
+                <li>
+                    <div sec:authorize="hasRole('ROLE_ROOT')">
+                        <a class="nav-link" href="#">ROOT PANEL</a>
                     </div>
                 </li>
             </ul>

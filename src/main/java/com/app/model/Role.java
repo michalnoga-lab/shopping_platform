@@ -4,7 +4,8 @@ public enum Role {
 
     USER("ROLE_USER"),
     ADMIN("ROLE_ADMIN"),
-    SUPER("ROLE_SUPER");
+    SUPER("ROLE_SUPER"),
+    ROOT("ROLE_ROOT");
 
     private String description;
 
