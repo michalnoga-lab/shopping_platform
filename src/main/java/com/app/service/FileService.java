@@ -113,6 +113,8 @@ public class FileService {
                         }
                     });
 
+            // TODO: 2020-02-15 kojarzenie produktów z kodami
+
             return productDTOS;
         } catch (Exception e) {
             throw new AppException(InfoCodes.FILE_UPLOAD, "getProductsFromFile - error during file upload");

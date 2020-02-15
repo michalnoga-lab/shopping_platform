@@ -48,6 +48,8 @@ public class Product {
     @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "products")
     private Set<Cart> carts;
 
+    private Boolean hidden;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

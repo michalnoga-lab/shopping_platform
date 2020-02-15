@@ -36,7 +36,14 @@
                         <label>
                             <input hidden="hidden" readonly="readonly" th:value="${company.id}"/>
                         </label>
-                        <button class="btn btn-outline-dark btn-small" type="submit">PRODUKTY</button>
+                        <button class="btn btn-outline-dark btn-small" type="submit">POKAŻ PRODUKTY</button>
+                    </form>
+                    <form method="post" th:action="@{/admin/products/hideAll/{id}(id=${company.id})}"
+                          enctype="multipart/form-data">
+                        <label>
+                            <input hidden="hidden" readonly="readonly" th:value="${company.id}"/>
+                        </label>
+                        <button class="btn btn-outline-dark btn-small" type="submit">USUŃ PRODUKTY</button>
                     </form>
                     <form method="post" th:action="@{/admin/companies/edit/{id}(id=${company.id})}"
                           enctype="multipart/form-data">

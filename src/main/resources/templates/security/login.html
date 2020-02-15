@@ -18,11 +18,13 @@
     <form method="post" th:action="@{/login}" id="loginForm">
         <div class="form-group">
             <label class="text" for="username">LOGIN</label>
-            <input id="username" type="text" name="username" class="form-control" autofocus required>
+            <input id="username" type="text" name="username" class="form-control" autofocus required
+                   placeholder="IMIĘ KROPKA NAZWISKO">
         </div>
         <div class="form-group">
             <label class="text" for="password">HASŁO</label>
-            <input id="password" type="password" name="password" class="form-control" autofocus required>
+            <input id="password" type="password" name="password" class="form-control" autofocus required
+                   placeholder="HASŁO">
         </div>
         <div class="form-group">
             <button class="btn btn-outline-dark btn-block btn-lg" type="submit">ZALOGUJ</button>

@@ -16,7 +16,7 @@ public enum InfoCodes {
     SERVICE_EMAIL("EMAIL_SERVICE"),
     SERVICE_SECURITY("SECURITY_SERVICE"),
     SERVICE_USER("USER_SERVICE"),
-    UNKNOWN("UNKNOWN");
+    EXCEPTION("EXCEPTION");
 
     private String code;
 

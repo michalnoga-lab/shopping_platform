@@ -32,12 +32,6 @@ public class UserDtoValidator implements Validator {
 
         try {
             Optional<User> userOptional = userRepository.findByLogin(userDTO.getLogin());
-
-            if (!userDTO.getLogin().matches(USER_NAME_SURNAME_REGEX) ||
-                    userOptional.isPresent()) {
-                errors.rejectValue("login", "NIEPRAWIDŁOWA WARTOŚĆ. " +
-                        "DOZWOLONE SĄ TYLKO LITERY LUB TAKI LOGIN JUŻ JEST ZAREJESTROWANY");
-            }
             if (!userDTO.getName().matches(USER_NAME_SURNAME_REGEX)) {
                 errors.rejectValue("name", "NIEPRAWIDŁOWA WARTOŚĆ. DOZWOLONE SĄ TYLKO LITERY.");
             }

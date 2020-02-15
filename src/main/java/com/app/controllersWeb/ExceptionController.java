@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 @ControllerAdvice
 @RequiredArgsConstructor
@@ -36,8 +37,8 @@ public class ExceptionController {
     @ExceptionHandler({Exception.class})
     public String exception(Exception e) {
         loggerService.add(LoggerInfo.builder()
-                .infoCode(InfoCodes.UNKNOWN)
-                .message(e.getMessage())
+                .infoCode(InfoCodes.EXCEPTION)
+                .message(Arrays.toString(e.getStackTrace()))
                 .time(LocalDateTime.now())
                 .userId(securityService.getLoggedInUserId())
                 .remoteAddress(requestService.getRemoteAddress())

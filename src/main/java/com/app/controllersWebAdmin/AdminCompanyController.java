@@ -32,7 +32,7 @@ public class AdminCompanyController {
         webDataBinder.setValidator(companyDtoValidator);
     }
 
-    @GetMapping(value = "add")
+    @GetMapping("add")
     public String adminAddCompanyGET(Model model) {
         model.addAttribute("company", new CompanyDTO());
         model.addAttribute("errors", new HashMap<>());

@@ -40,6 +40,7 @@ public class UserService {
             throw new AppException(InfoCodes.SERVICE_USER, "addUser - user is null");
         }
         User user = UserMapper.fromDto(userDTO);
+        user.setLogin(userDTO.getName() + "." + userDTO.getSurname());
         user.setEnabled(true);
         user.setRole(role);
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));

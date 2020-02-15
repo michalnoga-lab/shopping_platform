@@ -8,6 +8,7 @@ import com.app.mappers.ProductMapper;
 import com.app.model.Cart;
 import com.app.model.Product;
 import com.app.repository.CartRepository;
+import com.app.repository.CompanyRepository;
 import com.app.repository.ProductRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -33,6 +34,9 @@ public class ProductServiceTests {
     private CartRepository cartRepository;
 
     @Autowired
+    private CompanyRepository companyRepository;
+
+    @Autowired
     private ProductService productService;
 
     @TestConfiguration
@@ -44,9 +48,12 @@ public class ProductServiceTests {
         @MockBean
         private CartRepository cartRepository;
 
+        @MockBean
+        private CompanyRepository companyRepository;
+
         @Bean
         public ProductService productService() {
-            return new ProductService(productRepository, cartRepository);
+            return new ProductService(productRepository, cartRepository, companyRepository);
         }
     }
 

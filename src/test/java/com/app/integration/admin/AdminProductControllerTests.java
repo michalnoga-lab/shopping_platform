@@ -4,6 +4,7 @@ import com.app.PrimaPlatformaApplication;
 import com.app.dto.GeneralUserInputDTO;
 import com.app.dto.ProductDTO;
 import com.app.mappers.ProductMapper;
+import com.app.model.Company;
 import com.app.model.Product;
 import com.app.repository.ProductRepository;
 import com.app.service.ProductService;
@@ -102,5 +103,17 @@ public class AdminProductControllerTests {
                         .param("userInput", "TEST_CODE")
                 )
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+    }
+
+    @Test
+    @DisplayName("hideAll/{id}")
+    void test40() throws Exception {
+        Company company = Company.builder().id(1L).build();
+
+        mockMvc
+                .perform(MockMvcRequestBuilders.post("/admin/products/hideAll/{id}", company.getId())
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+
     }
 }

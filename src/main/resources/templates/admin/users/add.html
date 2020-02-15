@@ -13,11 +13,6 @@
     <h5 class="top-page-text">DODAJ UŻYTKOWNIKA</h5>
     <form method="post" th:action="@{/admin/users/add}" th:object="${user}" enctype="multipart/form-data">
         <div class="form-group">
-            <label class="text-secondary" for="login">LOGIN</label>
-            <input id="login" type="text" class="form-control" th:field="*{login}" required/>
-        </div>
-        <p class="text text-danger" th:if="${errors.containsKey('login')}" th:text="${errors.get('login')}"></p>
-        <div class="form-group">
             <label class="text-secondary" for="name">IMIĘ</label>
             <input id="name" type="text" class="form-control" th:field="*{name}" required/>
         </div>

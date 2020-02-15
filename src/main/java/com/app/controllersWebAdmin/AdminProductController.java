@@ -62,9 +62,15 @@ public class AdminProductController {
         return "redirect:/admin/products/all";
     }
 
-    @PostMapping(value = "removeCode/{id}")
+    @PostMapping("removeCode/{id}")
     public String removeCode(@PathVariable Long id) {
         productService.removeCode(id);
         return "redirect:/admin/products/all";
+    }
+
+    @PostMapping("hideAll/{id}")
+    public String hideAllProductsOfCompany(@PathVariable Long id) {
+        productService.hideAllProductsOfCompany(id);
+        return "redirect:/admin/companies/one/" + id;
     }
 }

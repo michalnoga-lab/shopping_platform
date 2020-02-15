@@ -36,6 +36,7 @@ public class ProductMapperTests {
                 .grossPrice(BigDecimal.ONE)
                 .auctionIndex("1aa")
                 .optimaCode(OptimaCode.TEST)
+                .hidden(false)
                 .build();
 
         ProductDTO expectedProduct = ProductDTO.builder()
@@ -50,6 +51,7 @@ public class ProductMapperTests {
                 .grossPrice(BigDecimal.ONE)
                 .auctionIndex("1aa")
                 .optimaCode(OptimaCode.TEST)
+                .hidden(false)
                 .build();
 
         ProductDTO actualProduct = ProductMapper.toDto(product);
@@ -73,6 +75,7 @@ public class ProductMapperTests {
                 .grossPrice(BigDecimal.ONE)
                 .auctionIndex("1aa")
                 .optimaCode(OptimaCode.TEST)
+                .hidden(false)
                 .build();
 
         Product expectedProduct = Product.builder()
@@ -88,6 +91,7 @@ public class ProductMapperTests {
                 .grossPrice(BigDecimal.ONE)
                 .auctionIndex("1aa")
                 .optimaCode(OptimaCode.TEST)
+                .hidden(false)
                 .build();
 
         Product actualProduct = ProductMapper.fromDto(productDTO);

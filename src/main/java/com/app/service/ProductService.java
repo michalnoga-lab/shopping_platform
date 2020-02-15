@@ -3,12 +3,10 @@ package com.app.service;
 import com.app.dto.ProductDTO;
 import com.app.dto.ProductSearchDTO;
 import com.app.exceptions.AppException;
-import com.app.model.InfoCodes;
+import com.app.model.*;
 import com.app.mappers.ProductMapper;
-import com.app.model.Cart;
-import com.app.model.OptimaCode;
-import com.app.model.Product;
 import com.app.repository.CartRepository;
+import com.app.repository.CompanyRepository;
 import com.app.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,12 +20,14 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final CartRepository cartRepository;
+    private final CompanyRepository companyRepository;
 
     public List<ProductDTO> findAll() {
         List<Product> products = productRepository.findAll();
 
         return products
                 .stream()
+                .filter(product -> !product.getHidden())
                 .map(ProductMapper::toDto)
                 .collect(Collectors.toList());
     }
@@ -41,6 +41,7 @@ public class ProductService {
                 .findAll()
                 .stream()
                 .filter(product -> product.getCompany().getId().equals((companyId)))
+                .filter(product -> !product.getHidden())
                 .map(ProductMapper::toDto)
                 .collect(Collectors.toList());
     }
@@ -87,6 +88,7 @@ public class ProductService {
                 .stream()
                 .filter(product ->
                         product.getName().toLowerCase().contains(productSearchDTO.getUserInput().toLowerCase()))
+                .filter(product -> !product.getHidden())
                 .map(ProductMapper::toDto)
                 .collect(Collectors.toList());
     }
@@ -103,6 +105,9 @@ public class ProductService {
                         .stream()
                         .map(ProductMapper::fromDto)
                         .collect(Collectors.toList());
+        products
+                .forEach(product -> product.setHidden(false));
+
         productRepository.saveAll(products);
     }
 
@@ -135,11 +140,30 @@ public class ProductService {
             throw new AppException(InfoCodes.SERVICE_PRODUCT, "removeCode - product it null");
         }
         if (productId <= 0) {
-            throw new AppException(InfoCodes.SERVICE_PRODUCT, "removeCode- product Id less than zero");
+            throw new AppException(InfoCodes.SERVICE_PRODUCT, "removeCode- product ID less than zero");
         }
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new AppException(InfoCodes.SERVICE_PRODUCT, "removeCode - no product with ID: " + productId));
         product.setOptimaCode(null);
         productRepository.save(product);
+    }
+
+    public void hideAllProductsOfCompany(Long id) {
+        if (id == null) {
+            throw new AppException(InfoCodes.SERVICE_PRODUCT, "hideAllProductsOfCompany - ID is null");
+        }
+        if (id < 0) {
+            throw new AppException(InfoCodes.SERVICE_PRODUCT, "hideAllProductsOfCompany - ID less than zero");
+        }
+
+        Company company = companyRepository.findById(id)
+                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_PRODUCT, "hideAllProductsOfCompany - no company with ID: " + id));
+
+        Set<Product> updatedProducts = company.getProducts();
+        updatedProducts
+                .forEach(product -> product.setHidden(true));
+
+        company.setProducts(updatedProducts);
+        companyRepository.save(company);
     }
 }

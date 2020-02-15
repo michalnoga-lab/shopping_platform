@@ -22,6 +22,7 @@ public interface ProductMapper {
                 .vat(product.getVat())
                 .auctionIndex(product.getAuctionIndex())
                 .optimaCode(product.getOptimaCode())
+                .hidden(product.getHidden())
                 .build();
     }
 
@@ -39,6 +40,7 @@ public interface ProductMapper {
                 .vat(productDTO.getVat())
                 .auctionIndex(productDTO.getAuctionIndex())
                 .optimaCode(productDTO.getOptimaCode())
+                .hidden(productDTO.getHidden())
                 .build();
     }
 }

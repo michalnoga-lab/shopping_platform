@@ -25,4 +25,5 @@ public class ProductDTO {
     private BigDecimal grossPrice;
     private OptimaCode optimaCode;
     private CompanyDTO companyDTO;
+    private Boolean hidden;
 }
