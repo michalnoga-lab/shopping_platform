@@ -20,6 +20,9 @@ public class RequestService {
                 remoteAddress = request.getRemoteAddr();
             }
         }
+        if (remoteAddress.equals("0:0:0:0:0:0:0:1")) {
+            return "localhost";
+        }
 
         return remoteAddress;
     }

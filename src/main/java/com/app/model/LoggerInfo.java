@@ -27,10 +27,4 @@ public class LoggerInfo {
     private String remoteAddress;
     private LocalDateTime time;
 
-    public LoggerInfo(InfoCodes infoCode, String message) {
-        this.infoCode = infoCode;
-        this.message = message;
-        this.remoteAddress = remoteAddress;
-        this.time = LocalDateTime.now();
-    }
 }

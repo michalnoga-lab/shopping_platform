@@ -54,7 +54,7 @@ public class FileService {
 
             loggerService.add(LoggerInfo.builder()
                     .infoCode(InfoCodes.FILE_UPLOAD)
-                    .message("file " + filename + " uploaded to server")
+                    .message(filename + " uploaded to server")
                     .build());
 
             List<ProductDTO> productDTOS = new ArrayList<>();
@@ -107,13 +107,15 @@ public class FileService {
                                         .build()));
                             }
                         } catch (Exception e) {
-                            throw new AppException(InfoCodes.FILE_UPLOAD, "line from file " + filename + " not added: " + line);
+                            loggerService.add(LoggerInfo.builder()
+                                    .infoCode(InfoCodes.FILE_UPLOAD)
+                                    .message("line from file " + filename + " not added: " + line).build());
                         }
                     });
 
             return productDTOS;
         } catch (Exception e) {
-            throw new AppException(InfoCodes.FILE_UPLOAD, "getProductsFromFile - error during file upload ");
+            throw new AppException(InfoCodes.FILE_UPLOAD, "getProductsFromFile - error during file upload");
         }
     }
 
@@ -155,8 +157,10 @@ public class FileService {
                                         companyDTODetailsFromFile.setStreet(lineSplit[5]);
                                     }
                                 } catch (Exception e) {
-                                    throw new AppException(InfoCodes.FILE_UPLOAD, "line from file companies.csv not added: " + line);
-                               }
+                                    loggerService.add(LoggerInfo.builder()
+                                            .infoCode(InfoCodes.FILE_UPLOAD)
+                                            .message("line from file companies.csv not added: " + line).build());
+                                }
                             }
                     );
             return companyDTODetailsFromFile;
