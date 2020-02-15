@@ -1,10 +1,13 @@
 package com.app.security;
 
 import com.app.exceptions.AppException;
-import com.app.exceptions.ExceptionCodes;
+import com.app.model.InfoCodes;
+import com.app.model.LoggerInfo;
 import com.app.model.Role;
 import com.app.model.User;
 import com.app.repository.UserRepository;
+import com.app.service.LoggerService;
+import com.app.service.RequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,6 +27,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
 
+    private final LoggerService loggerService;
+    private final RequestService requestService;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -36,6 +42,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             User user = userRepository.findByLogin(username)
                     .orElseThrow(() -> new UsernameNotFoundException(username));
 
+
+            loggerService.add(LoggerInfo.builder()
+                    .infoCode(InfoCodes.SECURITY)
+                    .message(username + " logged in" + requestService.getRemoteAddress())
+                    .build());
+
             return new org.springframework.security.core.userdetails.User(
                     user.getName(),
                     user.getPassword(),
@@ -45,8 +57,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                     true,
                     getAuthorities(user.getRole())
             );
+
         } catch (Exception e) {
-            throw new AppException(ExceptionCodes.SECURITY, "loadUserByUsername - no user with username: " + username);
+            throw new AppException(InfoCodes.SECURITY, "loadUserByUsername - failed to login user: " + username);
         }
     }
 

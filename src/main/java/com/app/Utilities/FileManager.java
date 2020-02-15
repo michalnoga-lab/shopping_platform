@@ -1,7 +1,7 @@
 package com.app.Utilities;
 
 import com.app.exceptions.AppException;
-import com.app.exceptions.ExceptionCodes;
+import com.app.model.InfoCodes;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,7 +39,7 @@ public interface FileManager {
             fileOutputStream.write(fileContentInBytes, 0, fileContentInBytes.length);
 
         } catch (Exception e) {
-            throw new AppException(ExceptionCodes.FILE_UTILITIES, "saveToDisk - error saving file: " + fileName);
+            throw new AppException(InfoCodes.FILE_UTILITIES, "saveToDisk - error saving file: " + fileName);
         }
         return CustomPaths.SAVED_ORDERS_PATH + fileName;
     }
@@ -47,7 +47,7 @@ public interface FileManager {
     static String uploadFileFromUser(MultipartFile multipartFile) {
         try {
             if (multipartFile == null || multipartFile.getBytes().length == 0) {
-                throw new AppException(ExceptionCodes.FILE_MANAGER, "uploadFile - file is not correct");
+                throw new AppException(InfoCodes.FILE_MANAGER, "uploadFile - file is not correct");
             }
 
             final String filename = FileManager.generateFileName();
@@ -55,7 +55,7 @@ public interface FileManager {
             return filename;
 
         } catch (Exception e) {
-            throw new AppException(ExceptionCodes.FILE_MANAGER, "uploadFile - failed to upload: ");
+            throw new AppException(InfoCodes.FILE_MANAGER, "uploadFile - failed to upload: ");
         }
     }
 }

@@ -3,8 +3,7 @@ package com.app.validators;
 import com.app.Utilities.CustomRegex;
 import com.app.dto.ProductSearchDTO;
 import com.app.exceptions.AppException;
-import com.app.exceptions.ExceptionCodes;
-import lombok.Data;
+import com.app.model.InfoCodes;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -30,7 +29,7 @@ public class ProductSearchDtoValidator implements Validator {
                 errors.rejectValue("userInput", "NIEPRAWIDŁOWA WARTOŚĆ. WPROWADZONY TEKST JEST ZA DŁUGI.");
             }
         } catch (Exception e) {
-            throw new AppException(ExceptionCodes.VALIDATION, "ProductSearchDto");
+            throw new AppException(InfoCodes.VALIDATION, "ProductSearchDto");
         }
     }
 }

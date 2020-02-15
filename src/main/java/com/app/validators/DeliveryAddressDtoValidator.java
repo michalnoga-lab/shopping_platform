@@ -3,7 +3,7 @@ package com.app.validators;
 import com.app.Utilities.CustomRegex;
 import com.app.dto.DeliveryAddressDTO;
 import com.app.exceptions.AppException;
-import com.app.exceptions.ExceptionCodes;
+import com.app.model.InfoCodes;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -37,7 +37,7 @@ public class DeliveryAddressDtoValidator implements Validator {
                 errors.rejectValue("phone", "NIEPRAWIDŁOWA WARTOŚĆ. WPROWADZONY TEKST JEST ZA DŁUGI.");
             }
         } catch (Exception e) {
-            throw new AppException(ExceptionCodes.VALIDATION, "DeliveryAddressDto");
+            throw new AppException(InfoCodes.VALIDATION, "DeliveryAddressDto");
         }
     }
 }

@@ -2,7 +2,7 @@ package com.app.validators;
 
 import com.app.dto.CompanySearchDTO;
 import com.app.exceptions.AppException;
-import com.app.exceptions.ExceptionCodes;
+import com.app.model.InfoCodes;
 import com.app.model.Company;
 import com.app.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +35,7 @@ public class CompanySearchDtoValidator implements Validator {
                 errors.rejectValue("userIdInput", "NIEPRAWIDŁOWA WARTOŚĆ. DOZWOLONE SĄ TYLKO CYFRY.");
             }
         } catch (Exception e) {
-            throw new AppException(ExceptionCodes.VALIDATION, "CompanySearchDTO");
+            throw new AppException(InfoCodes.VALIDATION, "CompanySearchDTO");
         }
     }
 }

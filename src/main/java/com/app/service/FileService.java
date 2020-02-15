@@ -6,9 +6,10 @@ import com.app.Utilities.FileManager;
 import com.app.dto.CompanyDTODetailsFromFile;
 import com.app.dto.ProductDTO;
 import com.app.exceptions.AppException;
-import com.app.exceptions.ExceptionCodes;
+import com.app.model.InfoCodes;
 import com.app.mappers.ProductMapper;
 import com.app.model.Company;
+import com.app.model.LoggerInfo;
 import com.app.model.Product;
 import com.app.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,16 +32,18 @@ public class FileService {
 
     private final CompanyRepository companyRepository;
 
+    private final LoggerService loggerService;
+
     public List<ProductDTO> getProductsFromFile(MultipartFile file, Long companyId) {
         try {
             if (file == null || file.getBytes().length == 0) {
-                throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - file is not correct");
+                throw new AppException(InfoCodes.FILE_UPLOAD, "getProductsFromFile - file is not correct");
             }
             if (companyId == null) {
-                throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - company id is null");
+                throw new AppException(InfoCodes.FILE_UPLOAD, "getProductsFromFile - company id is null");
             }
             if (companyId <= 0) {
-                throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - company ID less than zero");
+                throw new AppException(InfoCodes.FILE_UPLOAD, "getProductsFromFile - company ID less than zero");
             }
          /*   if (!file.getName().matches(PRODUCTS_FILE_NAME_REGEX)) { // TODO: 14.02.2020 upload file name check
                 System.out.println(file.getName());
@@ -48,8 +51,11 @@ public class FileService {
             }
 */
             String filename = FileManager.uploadFileFromUser(file);
-            // TODO: 14.02.2020 logs plik uploaded
 
+            loggerService.add(LoggerInfo.builder()
+                    .infoCode(InfoCodes.FILE_UPLOAD)
+                    .message("file " + filename + " uploaded to server")
+                    .build());
 
             List<ProductDTO> productDTOS = new ArrayList<>();
             InputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(
@@ -64,7 +70,7 @@ public class FileService {
                     }
                 }
             } catch (Exception e) {
-                throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - error reading file content");
+                throw new AppException(InfoCodes.FILE_UPLOAD, "getProductsFromFile - error reading file content");
             }
 
             Arrays.stream(stringBuilder.toString().split("(])"))
@@ -81,7 +87,7 @@ public class FileService {
                                 String[] lineSplit = linePured.split("(})");
                                 Optional<Company> companyOptional = companyRepository.findById(companyId);
                                 Company company = companyOptional.orElseThrow(() -> new AppException(
-                                        ExceptionCodes.SERVICE_FILES, "getProductsFromFile - no company with ID: " + companyId));
+                                        InfoCodes.SERVICE_FILES, "getProductsFromFile - no company with ID: " + companyId));
 
                                 productDTOS.add(ProductMapper.toDto(Product.builder()
                                         .name(lineSplit[0])
@@ -101,24 +107,19 @@ public class FileService {
                                         .build()));
                             }
                         } catch (Exception e) {
-                            System.out.println("**********************************************");
-                            e.printStackTrace();
-                            // TODO: 2020-01-18 exception to logs - line not added
-
+                            throw new AppException(InfoCodes.FILE_UPLOAD, "line from file " + filename + " not added: " + line);
                         }
                     });
 
             return productDTOS;
         } catch (Exception e) {
-            System.out.println("**********************************");
-            e.printStackTrace();
-            throw new AppException(ExceptionCodes.FILE_UPLOAD, "getProductsFromFile - error during file upload");
+            throw new AppException(InfoCodes.FILE_UPLOAD, "getProductsFromFile - error during file upload ");
         }
     }
 
     public CompanyDTODetailsFromFile getCompanyDetailsFromFile(String nip) {
         if (nip == null) {
-            throw new AppException(ExceptionCodes.SERVICE_FILES, "getCompanyDetailsFromFile - nip is null");
+            throw new AppException(InfoCodes.SERVICE_FILES, "getCompanyDetailsFromFile - nip is null");
         }
         int character = 0;
 
@@ -154,18 +155,14 @@ public class FileService {
                                         companyDTODetailsFromFile.setStreet(lineSplit[5]);
                                     }
                                 } catch (Exception e) {
-
-                                    e.printStackTrace(); // TODO: 2020-02-11 to logs
-
-                                }
+                                    throw new AppException(InfoCodes.FILE_UPLOAD, "line from file companies.csv not added: " + line);
+                               }
                             }
                     );
             return companyDTODetailsFromFile;
 
         } catch (Exception e) {
-
-            e.printStackTrace(); // TODO: 2020-02-11 to logs
-            throw new AppException(ExceptionCodes.FILE_UPLOAD, "getCompanyDetailsFromFile - error reading file content");
+            throw new AppException(InfoCodes.FILE_UPLOAD, "getCompanyDetailsFromFile - error reading file content");
         }
     }
 }

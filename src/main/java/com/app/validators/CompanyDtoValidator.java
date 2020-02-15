@@ -3,7 +3,7 @@ package com.app.validators;
 import com.app.Utilities.CustomRegex;
 import com.app.dto.CompanyDTO;
 import com.app.exceptions.AppException;
-import com.app.exceptions.ExceptionCodes;
+import com.app.model.InfoCodes;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -45,7 +45,7 @@ public class CompanyDtoValidator implements Validator {
                 errors.rejectValue("postCode", "NIEPRAWIDŁOWY KOD POCZTOWY. DOZWOLONE SĄ TYLKO CYFRY");
             }
         } catch (Exception e) {
-            throw new AppException(ExceptionCodes.VALIDATION, "CompanyDto");
+            throw new AppException(InfoCodes.VALIDATION, "CompanyDto");
         }
     }
 }

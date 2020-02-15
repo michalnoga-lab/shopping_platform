@@ -2,7 +2,9 @@ package com.app.service;
 
 import com.app.Utilities.CustomAddresses;
 import com.app.exceptions.AppException;
-import com.app.exceptions.ExceptionCodes;
+import com.app.model.InfoCodes;
+import com.app.model.LoggerInfo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -13,18 +15,21 @@ import java.io.File;
 import java.util.Properties;
 
 @Service
+@RequiredArgsConstructor
 public class EmailService {
+
+    private final LoggerService loggerService;
 
     public void sendEmail(String to, String subject, String fileName, String pathToAttachment) {
         try {
             if (to == null) {
-                throw new AppException(ExceptionCodes.SERVICE_EMAIL, "sendEmail - filed to is null");
+                throw new AppException(InfoCodes.SERVICE_EMAIL, "sendEmail - filed to is null");
             }
             if (subject == null) {
-                throw new AppException(ExceptionCodes.SERVICE_EMAIL, "sendEmail - filed subject is null");
+                throw new AppException(InfoCodes.SERVICE_EMAIL, "sendEmail - filed subject is null");
             }
             if (pathToAttachment == null) {
-                throw new AppException(ExceptionCodes.SERVICE_EMAIL, "sendEmail - filed pathToAttachment is null");
+                throw new AppException(InfoCodes.SERVICE_EMAIL, "sendEmail - filed pathToAttachment is null");
             }
 
             MimeMessage message = javaMailSender().createMimeMessage();
@@ -39,13 +44,18 @@ public class EmailService {
                 helper.addAttachment(fileName, new File(pathToAttachment));
 
             } catch (Exception e) {
-                throw new AppException(ExceptionCodes.SERVICE_EMAIL, "sendEmail - error creating message");
+                throw new AppException(InfoCodes.SERVICE_EMAIL, "sendEmail - error creating message");
             }
 
             javaMailSender().send(message);
 
+            loggerService.add(LoggerInfo.builder()
+                    .infoCode(InfoCodes.SERVICE_EMAIL)
+                    .message("email sent " + message.getFileName()) // TODO: 2020-02-15 czy nazwa pliku ok
+                    .build());
+
         } catch (Exception e) {
-            throw new AppException(ExceptionCodes.SERVICE_EMAIL, "sendEmail - error sending email to: " + to);
+            throw new AppException(InfoCodes.SERVICE_EMAIL, "sendEmail - error sending email to: " + to);
         }
     }
 

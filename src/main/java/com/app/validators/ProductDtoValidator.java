@@ -2,7 +2,7 @@ package com.app.validators;
 
 import com.app.dto.ProductDTO;
 import com.app.exceptions.AppException;
-import com.app.exceptions.ExceptionCodes;
+import com.app.model.InfoCodes;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -33,7 +33,7 @@ public class ProductDtoValidator implements Validator {
                 errors.rejectValue("quantity", "DOZWOLONE SĄ TYLKO CYFRY.");
             }
         } catch (Exception e) {
-            throw new AppException(ExceptionCodes.VALIDATION, "ProductDTO");
+            throw new AppException(InfoCodes.VALIDATION, "ProductDTO");
         }
     }
 }

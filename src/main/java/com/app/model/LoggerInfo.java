@@ -1,6 +1,5 @@
 package com.app.model;
 
-import com.app.exceptions.ExceptionCodes;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,7 +21,16 @@ public class LoggerInfo {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private ExceptionCodes exceptionCode;
-    private String exceptionMessage;
+    private InfoCodes infoCode;
+    private Long userId;
+    private String message;
+    private String remoteAddress;
     private LocalDateTime time;
+
+    public LoggerInfo(InfoCodes infoCode, String message) {
+        this.infoCode = infoCode;
+        this.message = message;
+        this.remoteAddress = remoteAddress;
+        this.time = LocalDateTime.now();
+    }
 }

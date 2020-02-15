@@ -1,7 +1,7 @@
 package com.app.service;
 
 import com.app.exceptions.AppException;
-import com.app.exceptions.ExceptionCodes;
+import com.app.model.InfoCodes;
 import com.app.model.User;
 import com.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ public class SecurityService {
 
         User user = userRepository
                 .findByLogin(username)
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_SECURITY, "getLoggedInUser - no user with username: " + username));
+                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_SECURITY, "getLoggedInUser - no user with username: " + username));
 
         return user.getId();
     }

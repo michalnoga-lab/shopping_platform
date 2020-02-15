@@ -2,12 +2,11 @@ package com.app.service;
 
 import com.app.dto.CompanyDTO;
 import com.app.exceptions.AppException;
-import com.app.exceptions.ExceptionCodes;
+import com.app.model.InfoCodes;
 import com.app.mappers.CompanyMapper;
 import com.app.model.Company;
 import com.app.model.User;
 import com.app.repository.CompanyRepository;
-import com.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +22,7 @@ public class CompanyService {
 
     public CompanyDTO getCompanyOfUser(Long userId) {
         if (userId == null) {
-            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "getCompanyOfUser - no user with ID: " + userId);
+            throw new AppException(InfoCodes.SERVICE_COMPANY, "getCompanyOfUser - no user with ID: " + userId);
         }
 
         Company company = companyRepository
@@ -38,13 +37,13 @@ public class CompanyService {
                     return userOptional.isPresent();
                 })
                 .findFirst()
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_COMPANY, "getCompanyOfUser - no company related with user with ID: " + userId));
+                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_COMPANY, "getCompanyOfUser - no company related with user with ID: " + userId));
         return CompanyMapper.toDto(company);
     }
 
     public CompanyDTO add(CompanyDTO companyDTO) {
         if (companyDTO == null) {
-            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "add - company dto is null");
+            throw new AppException(InfoCodes.SERVICE_COMPANY, "add - company dto is null");
         }
         Company company = CompanyMapper.fromDto(companyDTO);
         company.setActive(true);
@@ -63,27 +62,27 @@ public class CompanyService {
 
     public CompanyDTO findById(Long companyId) {
         if (companyId == null) {
-            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "findById - company ID is null");
+            throw new AppException(InfoCodes.SERVICE_COMPANY, "findById - company ID is null");
         }
         if (companyId <= 0) {
-            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "findById - company ID less than zero");
+            throw new AppException(InfoCodes.SERVICE_COMPANY, "findById - company ID less than zero");
         }
         return companyRepository.findById(companyId)
                 .stream()
                 .map(CompanyMapper::toDto)
                 .findFirst()
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_COMPANY, "findById - no company with ID: " + companyId));
+                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_COMPANY, "findById - no company with ID: " + companyId));
     }
 
     public CompanyDTO disableEnable(Long companyId, Boolean enabled) {
         if (companyId == null) {
-            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "disableEnable - company ID is null");
+            throw new AppException(InfoCodes.SERVICE_COMPANY, "disableEnable - company ID is null");
         }
         if (companyId <= 0) {
-            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "disableEnable - company ID less than zero");
+            throw new AppException(InfoCodes.SERVICE_COMPANY, "disableEnable - company ID less than zero");
         }
         Company company = companyRepository.findById(companyId)
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_COMPANY, "disableEnable - no company with ID: " + companyId));
+                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_COMPANY, "disableEnable - no company with ID: " + companyId));
         company.setActive(enabled);
         companyRepository.save(company);
         return CompanyMapper.toDto(company);
@@ -91,10 +90,10 @@ public class CompanyService {
 
     public CompanyDTO edit(Long companyId) {
         if (companyId == null) {
-            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "edit - company ID is null");
+            throw new AppException(InfoCodes.SERVICE_COMPANY, "edit - company ID is null");
         }
         if (companyId <= 0) {
-            throw new AppException(ExceptionCodes.SERVICE_COMPANY, "edit - company ID less than zero");
+            throw new AppException(InfoCodes.SERVICE_COMPANY, "edit - company ID less than zero");
         }
 
         // TODO: 2020-01-25 edit company method body

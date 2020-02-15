@@ -3,11 +3,10 @@ package com.app.validators;
 import com.app.Utilities.CustomRegex;
 import com.app.dto.UserDTO;
 import com.app.exceptions.AppException;
-import com.app.exceptions.ExceptionCodes;
+import com.app.model.InfoCodes;
 import com.app.model.User;
 import com.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -57,7 +56,7 @@ public class UserDtoValidator implements Validator {
                                 "HASŁO ORAZ JEGO POTWIERDZENIE MUSZĄ BYĆ TAKIE SAME.\nDOZWOLONE SĄ WSZYSTKIE ZNAKI.");
             }
         } catch (Exception e) {
-            throw new AppException(ExceptionCodes.VALIDATION, "UserDto");
+            throw new AppException(InfoCodes.VALIDATION, "UserDto");
         }
     }
 }

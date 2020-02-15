@@ -5,7 +5,7 @@ import com.app.Utilities.FileManager;
 import com.app.dto.CartDTO;
 import com.app.dto.ProductDTO;
 import com.app.exceptions.AppException;
-import com.app.exceptions.ExceptionCodes;
+import com.app.model.InfoCodes;
 import com.app.mappers.CartMapper;
 import com.app.mappers.ProductMapper;
 import com.app.model.*;
@@ -34,22 +34,22 @@ public class CartService {
 
     public CartDTO getCart(Long cartId) {
         if (cartId == null) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "getCart - cart ID is null");
+            throw new AppException(InfoCodes.SERVICE_CART, "getCart - cart ID is null");
         }
         if (cartId <= 0) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "getCart - cart ID less than zero");
+            throw new AppException(InfoCodes.SERVICE_CART, "getCart - cart ID less than zero");
         }
 
         return cartRepository.findById(cartId)
                 .stream()
                 .map(CartMapper::toDto)
                 .findFirst()
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART, "getCart - no cart with ID: " + cartId));
+                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "getCart - no cart with ID: " + cartId));
     }
 
     public CartDTO addProductToCart(ProductDTO productDTO, Long userId) {
         if (productDTO == null) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "addProductToCart - product is null");
+            throw new AppException(InfoCodes.SERVICE_CART, "addProductToCart - product is null");
         }
         User user = userRepository.getOne(userId);
         Optional<CartDTO> cartDTOOptional = getActiveCart(userId);
@@ -99,13 +99,13 @@ public class CartService {
 
     public CartDTO removeProductFromCart(Long productId, Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART, "removeProductFromCart - no user with ID: " + userId));
+                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "removeProductFromCart - no user with ID: " + userId));
 
         Cart cart = cartRepository.findAllByUserId(userId)
                 .stream()
                 .filter(c -> c.getCartClosed().equals(false))
                 .findFirst()
-                .orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART, "removeProductFromCart - no open cart for user with ID: " + userId));
+                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "removeProductFromCart - no open cart for user with ID: " + userId));
 
         Set<Product> products = cart.getProducts()
                 .stream()
@@ -125,7 +125,7 @@ public class CartService {
 
     public CartDTO calculateCartValue(Set<Product> productsInCart, Price priceType) {
         if (productsInCart == null) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "calculateCartValue - products set is null");
+            throw new AppException(InfoCodes.SERVICE_CART, "calculateCartValue - products set is null");
         }
         CartDTO cartDTO = new CartDTO();
         BigDecimal totalNetValue = BigDecimal.ZERO;
@@ -163,7 +163,7 @@ public class CartService {
 
     public List<CartDTO> getAllUsersCarts(Long userId) {
         if (userId == null) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "getAllUsersCarts - ID is null");
+            throw new AppException(InfoCodes.SERVICE_CART, "getAllUsersCarts - ID is null");
         }
         List<CartDTO> usersCarts = new ArrayList<>();
 
@@ -177,10 +177,10 @@ public class CartService {
 
     public Optional<CartDTO> getActiveCart(Long userId) {
         if (userId == null) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "getActiveCart - ID is null");
+            throw new AppException(InfoCodes.SERVICE_CART, "getActiveCart - ID is null");
         }
         if (userId <= 0) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "getActiveCart - ID less than zero");
+            throw new AppException(InfoCodes.SERVICE_CART, "getActiveCart - ID less than zero");
         }
         List<CartDTO> allUserCarts = getAllUsersCarts(userId);
 
@@ -199,13 +199,13 @@ public class CartService {
 
     public CartDTO setAddressToCart(Long addressId, Long userId) {
         if (addressId == null) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "setAddressToCart - ID is null");
+            throw new AppException(InfoCodes.SERVICE_CART, "setAddressToCart - ID is null");
         }
         if (addressId <= 0) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "setAddressToCart - ID less than zero");
+            throw new AppException(InfoCodes.SERVICE_CART, "setAddressToCart - ID less than zero");
         }
         Optional<CartDTO> optionalCartDTO = getActiveCart(userId);
-        CartDTO cartDTO = optionalCartDTO.orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART, "setAddressToCart - cart Id is null"));
+        CartDTO cartDTO = optionalCartDTO.orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "setAddressToCart - cart Id is null"));
         Cart cart = cartRepository.getOne(cartDTO.getId());
         DeliveryAddress deliveryAddress = deliveryAddressRepository.getOne(addressId);
         cart.setDeliveryAddress(deliveryAddress);
@@ -215,14 +215,14 @@ public class CartService {
 
     public CartDTO closeCart(Long userId) {
         if (userId == null) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "closeCart - cart ID is null");
+            throw new AppException(InfoCodes.SERVICE_CART, "closeCart - cart ID is null");
         }
         if (userId <= 0) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "closeCart - cart ID less than zero");
+            throw new AppException(InfoCodes.SERVICE_CART, "closeCart - cart ID less than zero");
         }
 
         Optional<CartDTO> cartDTOOptional = getActiveCart(userId);
-        CartDTO cartDTO = cartDTOOptional.orElseThrow(() -> new AppException(ExceptionCodes.SERVICE_CART, "closeCart - no cart for user with ID: " + userId));
+        CartDTO cartDTO = cartDTOOptional.orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "closeCart - no cart for user with ID: " + userId));
         Cart cart = cartRepository.getOne(cartDTO.getId());
         cart.setCartClosed(true);
         cart.setPurchaseTime(LocalDateTime.now());
@@ -244,10 +244,10 @@ public class CartService {
 
     public boolean userHasOpenCart(Long userId) {
         if (userId == null) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "userHasOpenCart - cart ID is null");
+            throw new AppException(InfoCodes.SERVICE_CART, "userHasOpenCart - cart ID is null");
         }
         if (userId <= 0) {
-            throw new AppException(ExceptionCodes.SERVICE_CART, "userHasOpenCart - cart ID less than zero");
+            throw new AppException(InfoCodes.SERVICE_CART, "userHasOpenCart - cart ID less than zero");
         }
         return getActiveCart(userId).isPresent();
     }

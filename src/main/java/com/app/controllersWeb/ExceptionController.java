@@ -1,9 +1,9 @@
 package com.app.controllersWeb;
 
 import com.app.exceptions.AppException;
-import com.app.exceptions.ExceptionCodes;
+import com.app.model.InfoCodes;
 import com.app.model.LoggerInfo;
-import com.app.service.LoggerInfoService;
+import com.app.service.LoggerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,13 +14,13 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class ExceptionController {
 
-    private final LoggerInfoService loggerInfoService;
+    private final LoggerService loggerService;
 
     @ExceptionHandler(AppException.class)
     public String appExceptionHandler(AppException e) {
-        loggerInfoService.add(LoggerInfo.builder()
-                .exceptionCode(e.getExceptionCode())
-                .exceptionMessage(e.getDescription())
+        loggerService.add(LoggerInfo.builder()
+                .infoCode(e.getExceptionCode())
+                .message(e.getDescription())
                 .time(LocalDateTime.now())
                 .build());
 
@@ -29,9 +29,9 @@ public class ExceptionController {
 
     @ExceptionHandler(Exception.class)
     public String exception(Exception e) {
-        loggerInfoService.add(LoggerInfo.builder()
-                .exceptionCode(ExceptionCodes.UNKNOWN)
-                .exceptionMessage(e.getMessage())
+        loggerService.add(LoggerInfo.builder()
+                .infoCode(InfoCodes.UNKNOWN)
+                .message(e.getMessage())
                 .time(LocalDateTime.now())
                 .build());
 
