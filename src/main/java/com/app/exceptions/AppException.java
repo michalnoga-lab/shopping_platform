@@ -14,13 +14,13 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
-@Table(name = "exceptions")
+/*@Entity
+@Table(name = "exceptions")*/ // TODO: 2020-02-15
 public class AppException extends RuntimeException {
 
-    @Id
+    /*@Id
     @GeneratedValue
-    private Long id;
+    private Long id;*/
     private ExceptionCodes exceptionCode;
     private String description;
     private LocalDateTime time;
@@ -29,6 +29,10 @@ public class AppException extends RuntimeException {
         this.exceptionCode = exceptionCode;
         this.description = description;
         this.time = LocalDateTime.now();
+    }
+
+    public ExceptionCodes getExceptionCode() {
+        return exceptionCode;
     }
 
     public String getDescription() {
@@ -40,21 +44,19 @@ public class AppException extends RuntimeException {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AppException that = (AppException) o;
-        return Objects.equals(id, that.id) &&
-                exceptionCode == that.exceptionCode &&
+        return exceptionCode == that.exceptionCode &&
                 Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, exceptionCode, description);
+        return Objects.hash(exceptionCode, description);
     }
 
     @Override
     public String toString() {
         return "AppException{" +
-                "id=" + id +
-                ", exceptionCode=" + exceptionCode +
+                "exceptionCode=" + exceptionCode +
                 ", description='" + description + '\'' +
                 '}';
     }

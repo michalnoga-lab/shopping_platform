@@ -1,17 +1,20 @@
 package com.app;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class PrimaPlatformaApplication {
 
+    private final static Logger LOGGER = LoggerFactory.getLogger(PrimaPlatformaApplication.class);
+
     public static void main(String[] args) {
         SpringApplication.run(PrimaPlatformaApplication.class, args);
-
     }
 
-    // TODO: 2020-02-12 produkty w application.properties ???
+    // TODO: 2020-02-15 cookies info
 
     // TODO: 14.02.2020 admin - pokaż wszystkich użytkowników bez adminów i super
 
@@ -20,13 +23,10 @@ public class PrimaPlatformaApplication {
     //--------------------------------------------------------------------------------------------
 
 
-    // TODO: 2020-01-12 backups
-    // TODO: 22.01.2020 contact form - ideas
     // TODO: 2020-01-25 invalid login counter
     // TODO: 2020-01-25 http only and secure flags
 
     // TODO: 28.01.2020 samodzielna rejestracja z kodem
-
 
     // TODO: 04.02.2020 ukrywanie wszysktich produktów danej firmy
 
