@@ -205,4 +205,31 @@ public class UserServiceTests {
 
         Assertions.assertEquals(expectedUser, actualUser);
     }
+
+    @Test
+    @DisplayName("update")
+    void test60() {
+
+        User user = User.builder().id(1L).build();
+        Optional<User> userOptional = Optional.of(user);
+        UserDTO inputUser = UserDTO.builder()
+                .id(1L)
+                .name("name")
+                .surname("surname")
+                .build();
+
+        Mockito
+                .when(userRepository.findById(user.getId()))
+                .thenReturn(userOptional);
+
+        UserDTO actualUser = userService.update(inputUser);
+
+        UserDTO expectedUser = UserDTO.builder()
+                .id(1L)
+                .name("name")
+                .surname("surname")
+                .build();
+
+        Assertions.assertEquals(expectedUser, actualUser);
+    }
 }

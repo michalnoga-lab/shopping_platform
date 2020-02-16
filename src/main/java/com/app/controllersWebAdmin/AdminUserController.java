@@ -79,13 +79,13 @@ public class AdminUserController {
     @PostMapping("disable/{id}")
     public String disable(@PathVariable Long id) {
         userService.disableEnable(id, false);
-        return "redirect:/admin/users/one/" + id;
+        return String.format("redirect:/admin/users/one/%d", id);
     }
 
     @PostMapping("enable/{id}")
     public String enable(@PathVariable Long id) {
         userService.disableEnable(id, true);
-        return "redirect:/admin/users/one/" + id;
+        return String.format("redirect:/admin/users/one/%d", id);
     }
 
     @PostMapping("edit/{id}")
@@ -96,6 +96,7 @@ public class AdminUserController {
 
     @PostMapping("edit")
     public String edit(@ModelAttribute UserDTO userDTO) {
-        return "redirect:/admin/users/one/" + userDTO.getId(); // TODO: 2020-02-16 id
+        userService.update(userDTO);
+        return String.format("redirect:/admin/users/one/%d", userDTO.getId());
     }
 }
