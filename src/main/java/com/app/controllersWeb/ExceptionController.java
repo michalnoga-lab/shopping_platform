@@ -21,7 +21,7 @@ public class ExceptionController {
     private final SecurityService securityService;
     private final RequestService requestService;
 
-    @ExceptionHandler({AppException.class})
+    @ExceptionHandler(AppException.class)
     public String appExceptionHandler(AppException e) {
         loggerService.add(LoggerInfo.builder()
                 .infoCode(e.getExceptionCode())
@@ -34,13 +34,13 @@ public class ExceptionController {
         return "exception";
     }
 
-    @ExceptionHandler({Exception.class})
+    @ExceptionHandler(Exception.class)
     public String exception(Exception e) {
         loggerService.add(LoggerInfo.builder()
                 .infoCode(InfoCodes.EXCEPTION)
                 .message(Arrays.toString(e.getStackTrace()))
                 .time(LocalDateTime.now())
-                .userId(securityService.getLoggedInUserId())
+                .userId(1L)
                 .remoteAddress(requestService.getRemoteAddress())
                 .build());
 

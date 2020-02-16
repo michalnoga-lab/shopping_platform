@@ -160,5 +160,30 @@ public class AdminUserControllerTests {
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
     }
 
-    // TODO: 2020-01-25 edit test
+    @Test
+    @DisplayName("edit/{id}")
+    void test70() throws Exception {
+
+        UserDTO userDTO = UserDTO.builder().id(1L).build();
+
+        Mockito
+                .when(userService.findById(userDTO.getId()))
+                .thenReturn(userDTO);
+
+        mockMvc
+                .perform(MockMvcRequestBuilders.post("/admin/users/edit/{id}", userDTO.getId())
+                        .contentType(MediaType.TEXT_HTML))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
+    }
+
+    @Test
+    @DisplayName("edit")
+    void test80() throws Exception {
+
+        mockMvc
+                .perform(MockMvcRequestBuilders.post("/admin/users/edit")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+    }
 }

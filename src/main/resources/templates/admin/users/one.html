@@ -33,10 +33,10 @@
             <td><p th:text="${user.enabled} ? 'AKTYWNY':'ZABLOKOWANY'"></p></td>
             <td>
                 <div class="btn-group" role="group">
-                    <form method="post" th:action="@{/admin/users/edit/{id}(id=${user.id})}"
+                    <form method="post" th:action="@{/admin/users/edit/{id}(id=${user.id})}" th:object="${user}"
                           enctype="multipart/form-data">
                         <label>
-                            <input hidden="hidden" readonly="readonly" th:value="${user.id}">
+                            <input hidden="hidden" readonly="readonly" th:value="${user}">
                         </label>
                         <button class="btn btn-outline-dark btn-small" type="submit">EDYTUJ</button>
                     </form>

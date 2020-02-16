@@ -26,9 +26,9 @@
             <td><p th:text="${u.surname}"></p></td>
             <td><p th:text="${u.enabled} ? 'AKTYWNY':'ZABLOKOWANY'"></p></td>
             <td>
-                <form method="post" th:action="@{/admin/users/one/{id}(id=${u.id})}">
+                <form method="post" th:action="@{/admin/users/one/{id}(id=${u.id})}" enctype="multipart/form-data">
                     <label>
-                        <input type="hidden" readonly="readonly" name="id" th:value="${u.id}">
+                        <input type="hidden" readonly="readonly" name="id" th:value="${u.id}"/>
                     </label>
                     <button class="btn btn-outline-dark btn-small" type="submit">PODGLĄD</button>
                 </form>

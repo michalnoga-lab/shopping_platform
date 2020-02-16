@@ -64,23 +64,38 @@ public class AdminUserController {
         return "admin/users/all";
     }
 
-    @PostMapping("one/{id}")
-    public String one(@PathVariable Long id, Model model) {
+    @GetMapping("one/{id}")
+    public String oneGET(@PathVariable Long id, Model model) {
         model.addAttribute("user", userService.findById(id));
-        return "/admin/users/one";
+        return "admin/users/one";
+    }
+
+    @PostMapping("one/{id}")
+    public String onePOST(@PathVariable Long id, Model model) {
+        model.addAttribute("user", userService.findById(id));
+        return "admin/users/one";
     }
 
     @PostMapping("disable/{id}")
     public String disable(@PathVariable Long id) {
         userService.disableEnable(id, false);
-        return "redirect:/admin/users/all";
+        return "redirect:/admin/users/one/" + id;
     }
 
     @PostMapping("enable/{id}")
     public String enable(@PathVariable Long id) {
         userService.disableEnable(id, true);
-        return "redirect:/admin/users/all";
+        return "redirect:/admin/users/one/" + id;
     }
 
-    // TODO: 14.01.2020 edit method
+    @PostMapping("edit/{id}")
+    public String edit(@PathVariable Long id, Model model) {
+        model.addAttribute("user", userService.findById(id));
+        return "admin/users/edit";
+    }
+
+    @PostMapping("edit")
+    public String edit(@ModelAttribute UserDTO userDTO) {
+        return "redirect:/admin/users/one/" + userDTO.getId(); // TODO: 2020-02-16 id
+    }
 }

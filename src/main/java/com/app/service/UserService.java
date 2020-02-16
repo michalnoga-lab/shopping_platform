@@ -86,4 +86,24 @@ public class UserService {
         userRepository.save(user);
         return UserMapper.toDto(user);
     }
+
+    public UserDTO update(UserDTO userDTO) {
+
+        if (userDTO == null) {
+            throw new AppException(InfoCodes.SERVICE_USER, "update - userDTO is null");
+        }
+
+        User user = userRepository.findById(userDTO.getId())
+                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_USER, "update - no user in DB with ID: " + userDTO.getId()));
+
+        user.setName(userDTO.getName() == null ? user.getName() : userDTO.getName());
+        user.setSurname(userDTO.getSurname() == null ? user.getSurname() : userDTO.getSurname());
+        user.setEmail(userDTO.getEmail() == null ? user.getEmail() : userDTO.getEmail());
+        user.setPassword(userDTO.getPassword() == null ? user.getPassword() : userDTO.getPassword());
+        user.setPasswordConfirmation(userDTO.getPasswordConfirmation() == null ?
+                user.getPasswordConfirmation() : userDTO.getPasswordConfirmation());
+
+        userRepository.save(user);
+        return UserMapper.toDto(user);
+    }
 }

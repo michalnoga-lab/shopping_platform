@@ -12,7 +12,7 @@ public class RequestService {
     private final HttpServletRequest request;
 
     public String getRemoteAddress() {
-        String remoteAddress = "";
+        String remoteAddress = "internal";
 
         if (request != null) {
             remoteAddress = request.getHeader("X-FORWARDED-FOR");
