@@ -14,7 +14,7 @@ public class FileManagerTests {
     @DisplayName("generateFileName")
     void test10() {
 
-        String regex = "\\d{14}_\\d{10}_[\\da-z]{12}";
+        String regex = "\\d{14}_\\d{10}_[\\da-z]{12}.xml";
 
         String filename1 = FileManager.generateFileName("0000000000");
         String filename2 = FileManager.generateFileName("0000000000");

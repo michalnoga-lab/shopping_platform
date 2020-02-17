@@ -4,6 +4,7 @@ import com.app.PrimaPlatformaApplication;
 import com.app.dto.CompanyDTO;
 import com.app.model.Company;
 import com.app.service.CompanyService;
+import com.app.service.SecurityService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,15 +15,16 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilderSupport;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import org.thymeleaf.model.IStandaloneElementTag;
 
 @ExtendWith(SpringExtension.class)
 
@@ -41,11 +43,21 @@ public class AdminAdminCompanyControllerTests {
     private WebApplicationContext webApplicationContext;
 
     @MockBean
+    private SecurityService securityService;
+
+    @MockBean
     private CompanyService companyService;
 
     @BeforeEach
     private void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+
+        Authentication authentication = Mockito.mock(Authentication.class);
+        SecurityContext securityContext = Mockito.mock(SecurityContext.class);
+        Mockito
+                .when(securityContext.getAuthentication())
+                .thenReturn(authentication);
+        SecurityContextHolder.setContext(securityContext);
     }
 
     @Test
@@ -75,6 +87,7 @@ public class AdminAdminCompanyControllerTests {
                         .contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
+        // TODO: 2020-02-17 security context holder null pointer
     }
 
     @Test

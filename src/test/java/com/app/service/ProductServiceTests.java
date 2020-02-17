@@ -61,17 +61,17 @@ public class ProductServiceTests {
     @DisplayName("findAll")
     void test10() {
 
-        Product product1 = Product.builder().id(1L).build();
-        Product product2 = Product.builder().id(2L).build();
-        Product product3 = Product.builder().id(3L).build();
-        Product product4 = Product.builder().id(4L).build();
-        Product product5 = Product.builder().id(5L).build();
+        Product product1 = Product.builder().id(1L).hidden(false).build();
+        Product product2 = Product.builder().id(2L).hidden(false).build();
+        Product product3 = Product.builder().id(3L).hidden(false).build();
+        Product product4 = Product.builder().id(4L).hidden(false).build();
+        Product product5 = Product.builder().id(5L).hidden(false).build();
 
-        ProductDTO productDTO1 = ProductDTO.builder().id(1L).build();
-        ProductDTO productDTO2 = ProductDTO.builder().id(2L).build();
-        ProductDTO productDTO3 = ProductDTO.builder().id(3L).build();
-        ProductDTO productDTO4 = ProductDTO.builder().id(4L).build();
-        ProductDTO productDTO5 = ProductDTO.builder().id(5L).build();
+        ProductDTO productDTO1 = ProductDTO.builder().id(1L).hidden(false).build();
+        ProductDTO productDTO2 = ProductDTO.builder().id(2L).hidden(false).build();
+        ProductDTO productDTO3 = ProductDTO.builder().id(3L).hidden(false).build();
+        ProductDTO productDTO4 = ProductDTO.builder().id(4L).hidden(false).build();
+        ProductDTO productDTO5 = ProductDTO.builder().id(5L).hidden(false).build();
 
         List<Product> products = List.of(product1, product2, product3, product4, product5);
         List<ProductDTO> expectedProducts = List.of(productDTO1, productDTO2, productDTO3, productDTO4, productDTO5);
@@ -92,11 +92,11 @@ public class ProductServiceTests {
     @DisplayName("getProductsOfCompany")
     void test20() {
 
-        Product product1 = Product.builder().name("Product 1").build();
-        Product product2 = Product.builder().name("Product 2").build();
-        Product product3 = Product.builder().name("Product 3").build();
-        Product product4 = Product.builder().name("Product 4").build();
-        Product product5 = Product.builder().name("Product 5").build();
+        Product product1 = Product.builder().name("Product 1").hidden(false).build();
+        Product product2 = Product.builder().name("Product 2").hidden(false).build();
+        Product product3 = Product.builder().name("Product 3").hidden(false).build();
+        Product product4 = Product.builder().name("Product 4").hidden(false).build();
+        Product product5 = Product.builder().name("Product 5").hidden(false).build();
 
         CompanyDTO companyDTO1 = CompanyDTO.builder().name("Example company 1").id(1L).build();
         CompanyDTO companyDTO2 = CompanyDTO.builder().name("Example company 2").id(2L).build();
@@ -185,11 +185,11 @@ public class ProductServiceTests {
     @Test
     @DisplayName("search - one product matches")
     void test50() {
-        Product product1 = Product.builder().id(1L).name("AAA").build();
-        Product product2 = Product.builder().id(2L).name("BBB").build();
-        Product product3 = Product.builder().id(3L).name("CCC").build();
-        Product product4 = Product.builder().id(4L).name("DDD").build();
-        Product product5 = Product.builder().id(5L).name("EEE").build();
+        Product product1 = Product.builder().id(1L).name("AAA").hidden(false).build();
+        Product product2 = Product.builder().id(2L).name("BBB").hidden(false).build();
+        Product product3 = Product.builder().id(3L).name("CCC").hidden(false).build();
+        Product product4 = Product.builder().id(4L).name("DDD").hidden(false).build();
+        Product product5 = Product.builder().id(5L).name("EEE").hidden(false).build();
 
         List<Product> products = List.of(product1, product2, product3, product4, product5);
 
@@ -212,11 +212,11 @@ public class ProductServiceTests {
     @Test
     @DisplayName("search - two products match")
     void test51() {
-        Product product1 = Product.builder().id(1L).name("AAA").build();
-        Product product2 = Product.builder().id(2L).name("BBB").build();
-        Product product3 = Product.builder().id(3L).name("CCC").build();
-        Product product4 = Product.builder().id(4L).name("DDD").build();
-        Product product5 = Product.builder().id(5L).name("EEE").build();
+        Product product1 = Product.builder().id(1L).name("AAA").hidden(false).build();
+        Product product2 = Product.builder().id(2L).name("BBB").hidden(false).build();
+        Product product3 = Product.builder().id(3L).name("CCC").hidden(false).build();
+        Product product4 = Product.builder().id(4L).name("DDD").hidden(false).build();
+        Product product5 = Product.builder().id(5L).name("EEE").hidden(false).build();
 
         List<Product> products = List.of(product1, product2, product3, product4, product5);
 

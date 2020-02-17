@@ -9,6 +9,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 
+import java.security.cert.CertSelector;
+
 @AutoConfigureMockMvc
 @SpringBootTest
 public class FileServiceTests {
@@ -25,6 +27,7 @@ public class FileServiceTests {
 
     @DisplayName("getCompanyDetailsFromFile - read content of file")
     @ParameterizedTest
+    @CsvFileSource(resources = "/tests/companies.csv")
     void test20() {
         //stays empty
     }
