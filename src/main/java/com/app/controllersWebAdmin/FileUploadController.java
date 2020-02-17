@@ -54,7 +54,7 @@ public class FileUploadController {
         }
 
         model.addAttribute("productSearch", companySearchDTO);
-        productService.addProducts(fileService.getProductsFromFile(file, companySearchDTO.getUserIdInput()));
+        productService.addProducts(fileService.getProductsFromFileUploadedByUser(file, companySearchDTO.getUserIdInput()));
         return "admin/panel";
     }
 }

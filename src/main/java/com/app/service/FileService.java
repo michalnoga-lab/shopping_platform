@@ -34,7 +34,7 @@ public class FileService {
 
     private final LoggerService loggerService;
 
-    public List<ProductDTO> getProductsFromFile(MultipartFile file, Long companyId) {
+    public List<ProductDTO> getProductsFromFileUploadedByUser(MultipartFile file, Long companyId) {
         try {
             if (file == null || file.getBytes().length == 0) {
                 throw new AppException(InfoCodes.FILE_UPLOAD, "getProductsFromFile - file is not correct");
@@ -171,4 +171,6 @@ public class FileService {
             throw new AppException(InfoCodes.FILE_UPLOAD, "getCompanyDetailsFromFile - error reading file content");
         }
     }
+
+
 }
