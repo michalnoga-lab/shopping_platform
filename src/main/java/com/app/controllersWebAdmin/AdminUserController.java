@@ -64,6 +64,12 @@ public class AdminUserController {
         return "admin/users/all";
     }
 
+    @PostMapping("all/{id}")
+    public String getAllOfCompany(@PathVariable Long id, Model model) {
+        model.addAttribute("users", userService.findAllOfCompany(id));
+        return "admin/users/all";
+    }
+
     @GetMapping("one/{id}")
     public String oneGET(@PathVariable Long id, Model model) {
         model.addAttribute("user", userService.findById(id));

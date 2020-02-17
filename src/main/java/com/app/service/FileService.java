@@ -4,6 +4,7 @@ import com.app.Utilities.CustomPaths;
 import com.app.Utilities.CustomRegex;
 import com.app.Utilities.FileManager;
 import com.app.dto.CompanyDTODetailsFromFile;
+import com.app.dto.ProductCodeDTO;
 import com.app.dto.ProductDTO;
 import com.app.exceptions.AppException;
 import com.app.model.InfoCodes;
@@ -21,10 +22,7 @@ import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -172,5 +170,39 @@ public class FileService {
         }
     }
 
+    public List<ProductCodeDTO> getProductsCodeFromFile() {
+        int character = 0;
+        List<ProductCodeDTO> productCodeDTOS = new ArrayList<>();
 
+        try {
+            InputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(Paths.get(CustomPaths.PRODUCTS_CODES_PATH)));
+            Reader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            while ((character = reader.read()) != -1) {
+                if (String.valueOf((char) character).matches(CustomRegex.UPLOAD_FILES_ALLOWED_CHARS)) {
+                    stringBuilder.append((char) character);
+                }
+            }
+
+            Arrays.stream(stringBuilder.toString().split("]"))
+                    .forEach(line -> {
+                        String[] lineSplit = line.split("}");
+
+                        productCodeDTOS.add(
+                                ProductCodeDTO.builder()
+                                        .code(lineSplit[0])
+                                        .name(lineSplit[1])
+                                        .keywords(Set.of(lineSplit[2].split("\\s")))
+                                        .build()
+                        );
+                    });
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return productCodeDTOS;
+    }
 }

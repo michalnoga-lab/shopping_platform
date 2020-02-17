@@ -1,5 +1,6 @@
 package com.app.model;
 
+import com.app.dto.ProductCodeDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -37,9 +38,7 @@ public class Product {
     private BigDecimal nettPrice;
     private Double vat;
     private BigDecimal grossPrice;
-
-    @Enumerated(EnumType.STRING)
-    private OptimaCode optimaCode;
+    private String productCode;
 
     @ManyToOne
     @JoinColumn(name = "company_id")

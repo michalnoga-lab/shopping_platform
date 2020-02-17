@@ -23,7 +23,7 @@ public class ProductDTO {
     private BigDecimal nettPrice;
     private Double vat;
     private BigDecimal grossPrice;
-    private OptimaCode optimaCode;
+    private String productCode;
     private CompanyDTO companyDTO;
     private Boolean hidden;
 }

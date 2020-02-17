@@ -33,6 +33,12 @@
                     </label>
                     <button class="btn btn-outline-dark btn-small" type="submit">PODGLĄD</button>
                 </form>
+                <form method="post" th:action="@{/admin/users/all/{id}(id=${c.id})}" enctype="multipart/form-data">
+                    <label>
+                        <input hidden="hidden" readonly="readonly" th:value="${c.id}">
+                    </label>
+                    <button class="btn btn-outline-dark btn-small">UŻYTKOWNICY</button>
+                </form>
             </td>
         </tr>
         </tbody>

@@ -3,10 +3,8 @@ package com.app.service;
 import com.app.dto.CompanyDTODetailsFromFile;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
@@ -33,7 +31,7 @@ public class FileServiceTests {
 
     @DisplayName("getCompanyDetailsFromFile - find company in file")
     @ParameterizedTest
-    @CsvFileSource(resources = "/files/companies.csv")
+    @CsvFileSource(resources = "/tests/companies.csv")
     void test21() {
 
         CompanyDTODetailsFromFile expectedResult = CompanyDTODetailsFromFile.builder()

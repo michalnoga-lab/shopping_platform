@@ -4,6 +4,7 @@ import com.app.dto.UserDTO;
 import com.app.mappers.UserMapper;
 import com.app.model.Role;
 import com.app.model.User;
+import com.app.repository.CompanyRepository;
 import com.app.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -27,6 +28,9 @@ public class UserServiceTests {
     private UserRepository userRepository;
 
     @Autowired
+    private CompanyRepository companyRepository;
+
+    @Autowired
     private UserService userService;
 
     @Autowired
@@ -39,11 +43,14 @@ public class UserServiceTests {
         private UserRepository userRepository;
 
         @MockBean
+        private CompanyRepository companyRepository;
+
+        @MockBean
         private PasswordEncoder passwordEncoder;
 
         @Bean
         public UserService userService() {
-            return new UserService(userRepository, passwordEncoder);
+            return new UserService(userRepository, companyRepository, passwordEncoder);
         }
     }
 

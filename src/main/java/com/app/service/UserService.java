@@ -2,10 +2,12 @@ package com.app.service;
 
 import com.app.dto.UserDTO;
 import com.app.exceptions.AppException;
+import com.app.model.Company;
 import com.app.model.InfoCodes;
 import com.app.mappers.UserMapper;
 import com.app.model.Role;
 import com.app.model.User;
+import com.app.repository.CompanyRepository;
 import com.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final CompanyRepository companyRepository;
     private final PasswordEncoder passwordEncoder;
 
     public UserDTO findUserByLogin(String login) {
@@ -44,6 +47,11 @@ public class UserService {
         user.setEnabled(true);
         user.setRole(role);
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+
+        Company company = companyRepository.findById(userDTO.getCompanyDTO().getId())
+                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_USER, "addUser - no company with ID: " + userDTO.getCompanyDTO().getId()));
+
+        user.setCompany(company);
         userRepository.save(user);
         return UserMapper.toDto(user);
     }
@@ -54,6 +62,17 @@ public class UserService {
         return users
                 .stream()
                 .filter(user -> user.getRole().equals(Role.USER))
+                .map(UserMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<UserDTO> findAllOfCompany(Long companyId) {
+        List<User> users = new ArrayList<>(userRepository.findAll());
+
+        return users
+                .stream()
+                .filter(user -> user.getRole().equals(Role.USER))
+                .filter(user -> user.getCompany().getId().equals(companyId))
                 .map(UserMapper::toDto)
                 .collect(Collectors.toList());
     }

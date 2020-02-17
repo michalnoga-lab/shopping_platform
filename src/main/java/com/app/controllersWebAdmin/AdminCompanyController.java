@@ -75,7 +75,7 @@ public class AdminCompanyController {
     @PostMapping("edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
         model.addAttribute("company", companyService.edit(id));
-        return "redirect:/admin/companies/all";
+        return "redirect:/admin/companies/one/" + id;
     }
 
     @PostMapping("enable/{id}")

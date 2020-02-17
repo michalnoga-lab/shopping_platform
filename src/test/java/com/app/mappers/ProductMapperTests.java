@@ -35,7 +35,7 @@ public class ProductMapperTests {
                 .vat(23.0)
                 .grossPrice(BigDecimal.ONE)
                 .auctionIndex("1aa")
-                .optimaCode(OptimaCode.TEST)
+                .productCode("code")
                 .hidden(false)
                 .build();
 
@@ -50,7 +50,7 @@ public class ProductMapperTests {
                 .vat(23.0)
                 .grossPrice(BigDecimal.ONE)
                 .auctionIndex("1aa")
-                .optimaCode(OptimaCode.TEST)
+                .productCode("code")
                 .hidden(false)
                 .build();
 
@@ -74,7 +74,7 @@ public class ProductMapperTests {
                 .vat(23.0)
                 .grossPrice(BigDecimal.ONE)
                 .auctionIndex("1aa")
-                .optimaCode(OptimaCode.TEST)
+                .productCode("code")
                 .hidden(false)
                 .build();
 
@@ -90,7 +90,7 @@ public class ProductMapperTests {
                 .vat(23.0)
                 .grossPrice(BigDecimal.ONE)
                 .auctionIndex("1aa")
-                .optimaCode(OptimaCode.TEST)
+                .productCode("code")
                 .hidden(false)
                 .build();
 

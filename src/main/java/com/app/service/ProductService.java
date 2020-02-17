@@ -124,11 +124,12 @@ public class ProductService {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new AppException(InfoCodes.SERVICE_PRODUCT, "setCode - no product with ID: " + productId));
         try {
-            OptimaCode optimaCode = Arrays.stream(OptimaCode.values())
+            /*OptimaCode optimaCode = Arrays.stream(OptimaCode.values())
                     .filter(code -> code.getDescription().equals(userInput))
                     .findFirst()
                     .orElseThrow(() -> new AppException(InfoCodes.SERVICE_PRODUCT, "setCode - no optima code for enum"));
-            product.setOptimaCode(optimaCode);
+            product.setOptimaCode(optimaCode);*/ // TODO: 17.02.2020 set product code
+            product.setProductCode(userInput);
             productRepository.save(product);
         } catch (Exception e) {
             throw new AppException(InfoCodes.SERVICE_PRODUCT, "setCode - no optima code in enum: " + userInput);
@@ -144,7 +145,7 @@ public class ProductService {
         }
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new AppException(InfoCodes.SERVICE_PRODUCT, "removeCode - no product with ID: " + productId));
-        product.setOptimaCode(null);
+        product.setProductCode(""); // TODO: 17.02.2020 tu był kiedyś enum
         productRepository.save(product);
     }
 

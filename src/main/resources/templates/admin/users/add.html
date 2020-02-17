@@ -40,6 +40,11 @@
         <p class="text text-danger" th:if="${errors.containsKey('passwordConfirmation')}"
            th:text="${errors.get('passwordConfirmation')}"></p>
         <div class="form-group">
+            <label class="text-secondary" for="companyId">ID FIRMY</label>
+            <input id="companyId" type="number" class="form-control" th:field="*{companyDTO.id}"/>
+        </div>
+        <div class="form-group">
+            <!-- todo input validation -->
             <button class="btn btn-outline-dark btn-block" type="submit">DODAJ UŻYTKOWNIKA</button>
             <button class="btn btn-outline-dark btn-block" type="reset">WYCZYŚĆ FORMULARZ</button>
         </div>

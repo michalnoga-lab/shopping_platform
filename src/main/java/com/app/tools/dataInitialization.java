@@ -77,14 +77,14 @@ public class dataInitialization implements CommandLineRunner { // TODO: 2019-09-
     Product product1 = Product.builder().name("Prod1")
             .nettPrice(BigDecimal.valueOf(2.44))
             .vat(23.0)
-            .optimaCode(OptimaCode.AMBIPUR)
+            .productCode("ambipur")
             .grossPrice(BigDecimal.valueOf(15))
             .hidden(false)
             .build();
     Product product2 = Product.builder().name("Prod1")
             .nettPrice(BigDecimal.valueOf(2.44))
             .vat(23.0)
-            .optimaCode(OptimaCode.AMBIPUR)
+            .productCode("ace")
             .grossPrice(BigDecimal.valueOf(15))
             .hidden(false)
             .build();

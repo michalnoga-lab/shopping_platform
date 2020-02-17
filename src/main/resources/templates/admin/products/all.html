@@ -35,7 +35,7 @@
                     </div>
                 </form>
             </td>
-            <td><p th:text="${p.optimaCode}"></p>
+            <td><p th:text="${p.productCode}"></p>
                 <form method="post" th:action="@{/admin/products/removeCode/{id}(id=${p.id})}"
                       enctype="multipart/form-data">
                     <div class="form-group">
