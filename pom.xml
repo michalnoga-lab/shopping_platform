@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.app</groupId>
     <artifactId>primaplatforma</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>20200218-001</version>
     <packaging>war</packaging>
     <name>PrimaPlatforma</name>
     <description>Platforma do składania zamówień</description>
@@ -91,14 +91,14 @@
             <scope>runtime</scope>
         </dependency>
         <!-- WEBJARS -->
-   <!--     <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>jquery</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>bootstrap</artifactId>
-        </dependency> todo -->
+        <!--     <dependency>
+                 <groupId>org.webjars</groupId>
+                 <artifactId>jquery</artifactId>
+             </dependency>
+             <dependency>
+                 <groupId>org.webjars</groupId>
+                 <artifactId>bootstrap</artifactId>
+             </dependency> todo -->
         <!-- EMAIL SENDING -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -113,6 +113,7 @@
     </dependencies>
 
     <build>
+        <finalName>platforma-app</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
