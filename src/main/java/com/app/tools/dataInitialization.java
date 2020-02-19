@@ -17,8 +17,8 @@ public class dataInitialization implements CommandLineRunner { // TODO: 2019-09-
 
     // TODO: 13.02.2020 if no users id DB create SUPER
 
-    private final CompanyRepository companyRepository;
     private final UserRepository userRepository;
+    private final CompanyRepository companyRepository;
     private final ProductRepository productRepository;
 
     Company company1 = Company.builder()
@@ -89,11 +89,14 @@ public class dataInitialization implements CommandLineRunner { // TODO: 2019-09-
             .hidden(false)
             .build();
 
-
     @Override
     public void run(String... args) throws Exception {
 
-        companyRepository.saveAll(List.of(company1, company2));
+        if (userRepository.findAll().size() == 0) {
+            userRepository.save(user3);
+        }
+
+        /*companyRepository.saveAll(List.of(company1, company2));
         userRepository.saveAll(List.of(user1, user2, user3, user4));
 
         Company company = companyRepository.findById(1L).get();
@@ -105,6 +108,6 @@ public class dataInitialization implements CommandLineRunner { // TODO: 2019-09-
 
         product1.setCompany(company);
 
-        productRepository.saveAndFlush(product1);
+        productRepository.saveAndFlush(product1);*/
     }
 }
