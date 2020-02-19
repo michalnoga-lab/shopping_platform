@@ -12,4 +12,9 @@ public class MainController {
     public String welcome() {
         return "/index";
     }
+
+    @GetMapping("cookies")
+    public String cookies() {
+        return "/cookies/cookies";
+    }
 }

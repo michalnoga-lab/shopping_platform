@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.app</groupId>
     <artifactId>primaplatforma</artifactId>
-    <version>20200218-001</version>
+    <version>2020.2.001</version>
     <packaging>war</packaging>
     <name>PrimaPlatforma</name>
     <description>Platforma do składania zamówień</description>
