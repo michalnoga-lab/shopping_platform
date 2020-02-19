@@ -48,10 +48,11 @@ public class UserService {
         user.setRole(role);
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
-        Company company = companyRepository.findById(userDTO.getCompanyDTO().getId())
-                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_USER, "addUser - no company with ID: " + userDTO.getCompanyDTO().getId()));
-
-        user.setCompany(company);
+        if (role.equals(Role.USER)) {
+            Company company = companyRepository.findById(userDTO.getCompanyDTO().getId())
+                    .orElseThrow(() -> new AppException(InfoCodes.SERVICE_USER, "addUser - no company with ID: " + userDTO.getCompanyDTO().getId()));
+            user.setCompany(company);
+        }
         userRepository.save(user);
         return UserMapper.toDto(user);
     }
