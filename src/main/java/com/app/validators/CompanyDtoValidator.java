@@ -19,7 +19,7 @@ public class CompanyDtoValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         CompanyDTO companyDTO = (CompanyDTO) o;
-        final String NAME_REGEX =CustomRegex.TEXT_WITH_DIGITS_AND_SPECIALS_REGEX;
+        final String NAME_REGEX = CustomRegex.TEXT_WITH_DIGITS_AND_SPECIALS_REGEX;
         final String USER_INPUT_REGEX = CustomRegex.TEXT_ONLY_REGEX;
         final String NIP_REGEX = "(\\d){10}";
         final String STREET_NUMBER_REGEX = "[a-zA-z\\s\\d]+";
@@ -28,6 +28,9 @@ public class CompanyDtoValidator implements Validator {
         try {
             if (!companyDTO.getName().matches(NAME_REGEX)) {
                 errors.rejectValue("name", "NIEPRAWIDŁOWA NAZWA. DOZWOLONE SĄ TYLKO LITERY.");
+            }
+            if (!companyDTO.getNameShortcut().matches(NAME_REGEX)) {
+                errors.rejectValue("nameShortcut", "NIEPRAWIDŁOWY SKRÓT. DOZWOLONE SĄ TYLKO LITERY.");
             }
             if (!companyDTO.getNip().matches(NIP_REGEX)) {
                 errors.rejectValue("nip", "NIEPRAWIŁOWY NIP. DOZWOLONE SĄ TYLKO CYFRY.");

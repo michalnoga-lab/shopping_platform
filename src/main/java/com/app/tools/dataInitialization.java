@@ -13,9 +13,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class dataInitialization implements CommandLineRunner { // TODO: 2019-09-23 enable for tests only!
-
-    // TODO: 13.02.2020 if no users id DB create SUPER
+public class dataInitialization implements CommandLineRunner {
 
     private final UserRepository userRepository;
     private final CompanyRepository companyRepository;
@@ -31,6 +29,7 @@ public class dataInitialization implements CommandLineRunner { // TODO: 2019-09-
             .street("street")
             .streetNumber("10")
             .postCode("1111")
+            .id(1L)
             .build();
     Company company2 = Company.builder()
             .name("company 2")
@@ -92,22 +91,32 @@ public class dataInitialization implements CommandLineRunner { // TODO: 2019-09-
     @Override
     public void run(String... args) throws Exception {
 
+        // ------------------------------------------------------------------------------------
+        // TODO: 21.02.2020 for production only
         if (userRepository.findAll().size() == 0) {
+            userRepository.save(user4);
             userRepository.save(user3);
         }
+        // ------------------------------------------------------------------------------------
 
-        /*companyRepository.saveAll(List.of(company1, company2));
+
+        // ------------------------------------------------------------------------------------
+        // TODO: 21.02.2020 for tests only
+
+    /*
+        companyRepository.saveAll(List.of(company1, company2));
         userRepository.saveAll(List.of(user1, user2, user3, user4));
-
         Company company = companyRepository.findById(1L).get();
+        companyRepository.saveAndFlush(company);
         User user = userRepository.findById(3L).get();
         user.setCompany(company);
 
-        companyRepository.saveAndFlush(company);
         userRepository.saveAndFlush(user);
 
         product1.setCompany(company);
 
         productRepository.saveAndFlush(product1);*/
+        // ------------------------------------------------------------------------------------
+
     }
 }

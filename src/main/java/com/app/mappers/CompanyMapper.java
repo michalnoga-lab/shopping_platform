@@ -20,6 +20,7 @@ public interface CompanyMapper {
                 .active(company.getActive())
                 .defaultPrice(company.getDefaultPrice())
                 .paymentInDays(company.getPaymentInDays())
+                .nameShortcut(company.getNameShortcut())
                 .build();
     }
 
@@ -37,6 +38,7 @@ public interface CompanyMapper {
                 .active(companyDTO.getActive())
                 .defaultPrice(companyDTO.getDefaultPrice())
                 .paymentInDays(companyDTO.getPaymentInDays())
+                .nameShortcut(companyDTO.getNameShortcut())
                 .build();
     }
 }

@@ -52,6 +52,7 @@ public class UserService {
             Company company = companyRepository.findById(userDTO.getCompanyDTO().getId())
                     .orElseThrow(() -> new AppException(InfoCodes.SERVICE_USER, "addUser - no company with ID: " + userDTO.getCompanyDTO().getId()));
             user.setCompany(company);
+            user.setLogin(company.getNameShortcut() + "@" + userDTO.getName() + "." + userDTO.getSurname());
         }
         userRepository.save(user);
         return UserMapper.toDto(user);

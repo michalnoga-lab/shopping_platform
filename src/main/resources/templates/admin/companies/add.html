@@ -18,6 +18,12 @@
         </div>
         <p class="text text-danger" th:if="${errors.containsKey('name')}" th:text="${errors.get('name')}"></p>
         <div class="form-group">
+            <label class="text-secondary" for="nameShortcut">SKRÓT NAZWY FIRMY</label>
+            <input id="nameShortcut" type="text" class="form-control" th:field="*{nameShortcut}"/>
+        </div>
+        <p class="text text-danger" th:if="${errors.containsKey('nameShortcut')}"
+           th:text="${errors.get('nameShortcut')}"></p>
+        <div class="form-group">
             <label class="text-secondary" for="nip">NIP</label>
             <input id="nip" type="text" class="form-control" th:field="*{nip}" required/>
         </div>
