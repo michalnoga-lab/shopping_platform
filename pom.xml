@@ -108,14 +108,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
+            <!--<scope>provided</scope> todo -->
         </dependency>
     </dependencies>
 
     <build>
-        <finalName>platforma-app</finalName>
         <plugins>
             <plugin>
+                <configuration>
+                    <finalName>platforma</finalName>
+                </configuration>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>

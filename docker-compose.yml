@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  database:
+    image: mysql:8.0
+    container_name: database
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=platforma
+      - MYSQL_PASSWORD=root
+    volumes:
+      - /data/mysql
+    ports:
+      - 3306:3306
+  platforma:
+    image: platforma
+    container_name: platforma
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - database
+    links:
+      - database:3306
+    ports:
+      - 8000:8000
+    volumes:
+      - /data/platforma
