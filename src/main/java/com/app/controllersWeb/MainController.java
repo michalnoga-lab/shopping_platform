@@ -15,6 +15,11 @@ public class MainController {
 
     @GetMapping("cookies")
     public String cookies() {
-        return "/cookies/cookies";
+        return "/policies/cookies";
+    }
+
+    @GetMapping("rodo")
+    public String rodo() {
+        return "/policies/rodo";
     }
 }

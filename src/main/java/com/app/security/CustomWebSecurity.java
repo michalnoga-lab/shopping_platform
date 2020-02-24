@@ -42,7 +42,7 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .authorizeRequests()
                 .antMatchers("/css/**", "/img/**", "/js/**").permitAll()
-                .antMatchers("/", "/cookies").permitAll()
+                .antMatchers("/", "/cookies", "/rodo").permitAll()
                 .antMatchers("/admin/**").hasAnyRole("ROOT", "SUPER", "ADMIN")
                 .antMatchers("/super/**").hasAnyRole("ROOT", "SUPER")
                 .antMatchers("/root/**").hasAnyRole("ROOT")
