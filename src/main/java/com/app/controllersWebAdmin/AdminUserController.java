@@ -78,7 +78,8 @@ public class AdminUserController {
 
     @PostMapping("/one/{id}")
     public String onePOST(@PathVariable Long id, Model model) {
-        model.addAttribute("user", userService.findById(id));
+        UserDTO userDTO = userService.findById(id);
+        model.addAttribute("user", userDTO);
         return "admin/users/one";
     }
 
