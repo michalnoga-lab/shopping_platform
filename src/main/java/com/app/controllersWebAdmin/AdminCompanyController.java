@@ -32,14 +32,14 @@ public class AdminCompanyController {
         webDataBinder.setValidator(companyDtoValidator);
     }
 
-    @GetMapping("add")
+    @GetMapping("/add")
     public String adminAddCompanyGET(Model model) {
         model.addAttribute("company", new CompanyDTO());
         model.addAttribute("errors", new HashMap<>());
         return "admin/companies/add";
     }
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public String adminAddCompanyPOST(@Valid @ModelAttribute CompanyDTO companyDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = bindingResult
@@ -54,39 +54,39 @@ public class AdminCompanyController {
         return "admin/companies/added";
     }
 
-    @GetMapping("all")
+    @GetMapping("/all")
     public String adminAll(Model model) {
         model.addAttribute("companies", companyService.findAll());
         return "admin/companies/all";
     }
 
-    @GetMapping("one/{id}")
+    @GetMapping("/one/{id}")
     public String oneGET(@PathVariable Long id, Model model) {
         model.addAttribute("company", companyService.findById(id));
         return "admin/companies/one";
     }
 
-    @PostMapping("one/{id}")
+    @PostMapping("/one/{id}")
     public String onePOST(@PathVariable Long id, Model model) {
         model.addAttribute("company", companyService.findById(id));
         return "admin/companies/one";
     }
 
-    @PostMapping("edit/{id}")
+    @PostMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
         model.addAttribute("company", companyService.edit(id));
-        return "redirect:/admin/companies/one/" + id;
+        return String.format("redirect:/admin/companies/one/%d", id);
     }
 
-    @PostMapping("enable/{id}")
+    @PostMapping("/enable/{id}")
     public String enable(@PathVariable Long id) {
         companyService.disableEnable(id, true);
-        return "redirect:/admin/companies/one/" + id;
+        return String.format("redirect:/admin/companies/one/%d", id);
     }
 
-    @PostMapping("disable/{id}")
+    @PostMapping("/disable/{id}")
     public String disable(@PathVariable Long id) {
         companyService.disableEnable(id, false);
-        return "redirect:/admin/companies/one/" + id;
+        return String.format("redirect:/admin/companies/one/%d", id);
     }
 }

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/security")
+@RequestMapping("security")
 public class SecurityController {
 
     @GetMapping("/login")
@@ -18,17 +18,17 @@ public class SecurityController {
         return "security/logout";
     }
 
-    @GetMapping("failed")
+    @GetMapping("/failed")
     public String loginFailed() {
         return "security/failed";
     }
 
-    @GetMapping("accessDenied")
+    @GetMapping("/accessDenied")
     public String accessDenied() {
         return "security/accessDenied";
     }
 
-    @GetMapping("loggedOut")
+    @GetMapping("/loggedOut")
     public String loggedOut() {
         return "security/loggedOut";
     }

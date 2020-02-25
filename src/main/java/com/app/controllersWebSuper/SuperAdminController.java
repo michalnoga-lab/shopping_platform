@@ -20,14 +20,14 @@ public class SuperAdminController {
 
     private final UserService userService;
 
-    @GetMapping("add")
+    @GetMapping("/add")
     public String addGET(Model model) {
         model.addAttribute("user", new UserDTO());
         model.addAttribute("errors", new HashMap<>());
         return "super/admins/add";
     }
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public String addPOST(UserDTO userDTO, Model model) {
         userService.addUser(userDTO, Role.ADMIN);
         return "redirect:/admin/users/added";

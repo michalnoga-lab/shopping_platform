@@ -5,21 +5,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("")
 public class MainController {
 
-    @GetMapping("")
+    @GetMapping("/")
     public String welcome() {
-        return "/index";
+        return "index";
     }
 
-    @GetMapping("cookies")
+    @GetMapping("/cookies")
     public String cookies() {
-        return "/policies/cookies";
+        return "policies/cookies";
     }
 
-    @GetMapping("rodo")
+    @GetMapping("/rodo")
     public String rodo() {
-        return "/policies/rodo";
+        return "policies/rodo";
     }
 }

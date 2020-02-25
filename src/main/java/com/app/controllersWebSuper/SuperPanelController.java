@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("super")
 public class SuperPanelController {
 
-    @GetMapping("panel")
+    @GetMapping("/panel")
     public String showSuperPanel() {
         return "super/panel";
     }

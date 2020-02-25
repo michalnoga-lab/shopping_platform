@@ -31,14 +31,14 @@ public class AdminUserController {
         webDataBinder.setValidator(userDtoValidator);
     }
 
-    @GetMapping("add")
+    @GetMapping("/add")
     public String addGET(Model model) {
         model.addAttribute("user", new UserDTO());
         model.addAttribute("errors", new HashMap<>());
         return "admin/users/add";
     }
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public String addPOST(@Valid @ModelAttribute UserDTO userDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = bindingResult
@@ -53,54 +53,54 @@ public class AdminUserController {
         return "redirect:/admin/users/added";
     }
 
-    @GetMapping("added")
+    @GetMapping("/added")
     public String added() {
         return "admin/users/added";
     }
 
-    @GetMapping("all")
+    @GetMapping("/all")
     public String getAll(Model model) {
         model.addAttribute("users", userService.findAll());
         return "admin/users/all";
     }
 
-    @PostMapping("all/{id}")
+    @PostMapping("/all/{id}")
     public String getAllOfCompany(@PathVariable Long id, Model model) {
         model.addAttribute("users", userService.findAllOfCompany(id));
         return "admin/users/all";
     }
 
-    @GetMapping("one/{id}")
+    @GetMapping("/one/{id}")
     public String oneGET(@PathVariable Long id, Model model) {
         model.addAttribute("user", userService.findById(id));
         return "admin/users/one";
     }
 
-    @PostMapping("one/{id}")
+    @PostMapping("/one/{id}")
     public String onePOST(@PathVariable Long id, Model model) {
         model.addAttribute("user", userService.findById(id));
         return "admin/users/one";
     }
 
-    @PostMapping("disable/{id}")
+    @PostMapping("/disable/{id}")
     public String disable(@PathVariable Long id) {
         userService.disableEnable(id, false);
         return String.format("redirect:/admin/users/one/%d", id);
     }
 
-    @PostMapping("enable/{id}")
+    @PostMapping("/enable/{id}")
     public String enable(@PathVariable Long id) {
         userService.disableEnable(id, true);
         return String.format("redirect:/admin/users/one/%d", id);
     }
 
-    @PostMapping("edit/{id}")
+    @PostMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
         model.addAttribute("user", userService.findById(id));
         return "admin/users/edit";
     }
 
-    @PostMapping("edit")
+    @PostMapping("/edit")
     public String edit(@ModelAttribute UserDTO userDTO) {
         userService.update(userDTO);
         return String.format("redirect:/admin/users/one/%d", userDTO.getId());

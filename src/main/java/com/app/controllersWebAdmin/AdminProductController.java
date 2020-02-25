@@ -30,7 +30,7 @@ public class AdminProductController {
         webDataBinder.setValidator(generalUserInputDtoValidator);
     }
 
-    @PostMapping("all/{id}")
+    @PostMapping("/all/{id}")
     public String allProductsOfCompany(@PathVariable Long id, Model model) {
         model.addAttribute("products", productService.findProductsOfCompany(id));
         model.addAttribute("generalUserInput", new GeneralUserInputDTO());
@@ -38,7 +38,7 @@ public class AdminProductController {
         return "admin/products/all";
     }
 
-    @GetMapping("all")
+    @GetMapping("/all")
     public String all(Model model) {
         model.addAttribute("products", productService.findAll());
         model.addAttribute("generalUserInput", new GeneralUserInputDTO());
@@ -46,7 +46,7 @@ public class AdminProductController {
         return "admin/products/all";
     }
 
-    @PostMapping("addCode/{id}")
+    @PostMapping("/addCode/{id}")
     public String addCode(@PathVariable Long id, @Valid @ModelAttribute GeneralUserInputDTO generalUserInputDTO,
                           BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -62,15 +62,15 @@ public class AdminProductController {
         return "redirect:/admin/products/all";
     }
 
-    @PostMapping("removeCode/{id}")
+    @PostMapping("/removeCode/{id}")
     public String removeCode(@PathVariable Long id) {
         productService.removeCode(id);
         return "redirect:/admin/products/all";
     }
 
-    @PostMapping("hideAll/{id}")
+    @PostMapping("/hideAll/{id}")
     public String hideAllProductsOfCompany(@PathVariable Long id) {
         productService.hideAllProductsOfCompany(id);
-        return "redirect:/admin/companies/one/" + id;
+        return String.format("redirect:/admin/companies/one/%d", id);
     }
 }

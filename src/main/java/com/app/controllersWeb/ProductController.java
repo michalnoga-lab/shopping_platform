@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/products")
+@RequestMapping("products")
 public class ProductController {
 
     private final SecurityService securityService;
@@ -58,7 +58,7 @@ public class ProductController {
                     .collect(Collectors.toMap(FieldError::getField, FieldError::getCode));
             model.addAttribute("product", new ProductDTO());
             model.addAttribute("errors", errors);
-            return "/products/buy";
+            return "products/buy";
         }
         model.addAttribute("product", productDTO);
 
@@ -66,7 +66,7 @@ public class ProductController {
         return "redirect:/products/all";
     }
 
-    @PostMapping("remove/{id}")
+    @PostMapping("/remove/{id}")
     public String remove(@PathVariable Long id) {
         cartService.removeProductFromCart(id, securityService.getLoggedInUserId());
         return "redirect:/carts/one";

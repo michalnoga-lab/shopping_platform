@@ -16,31 +16,31 @@ import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/carts")
+@RequestMapping("carts")
 public class CartController {
 
     private final SecurityService securityService;
     private final CartService cartService;
     private final ProductService productService;
 
-    @GetMapping("all")
+    @GetMapping("/all")
     public String all(Model model) {
         List<CartDTO> carts = cartService.getAllUsersCarts(securityService.getLoggedInUserId());
         if (carts.size() == 0) {
-            return "/carts/none";
+            return "carts/none";
         }
         model.addAttribute("carts", carts);
         return "carts/all";
     }
 
-    @GetMapping("one/{id}")
+    @GetMapping("/one/{id}")
     public String one(@PathVariable Long id, Model model) {
         model.addAttribute("cart", cartService.getCart(id));
         model.addAttribute("products", productService.getProductsOfCart(id));
         return "carts/one";
     }
 
-    @GetMapping("one")
+    @GetMapping("/one")
     public String activeOne(Model model) {
         Optional<CartDTO> cartDTOOptional = cartService.getActiveCart(securityService.getLoggedInUserId());
 
@@ -52,7 +52,7 @@ public class CartController {
         return "carts/one";
     }
 
-    @GetMapping("closed")
+    @GetMapping("/closed")
     public String closeActiveCart() {
         cartService.closeCart(securityService.getLoggedInUserId());
         return "carts/closed";

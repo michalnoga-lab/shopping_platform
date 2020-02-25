@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/deliveryAddress")
+@RequestMapping("deliveryAddress")
 public class DeliveryAddressController {
 
     private final DeliveryAddressService deliveryAddressService;
@@ -78,7 +78,7 @@ public class DeliveryAddressController {
         return "redirect:/deliveryAddress/all";
     }
 
-    @PostMapping("pick/{id}")
+    @PostMapping("/pick/{id}")
     public String pickPOST(@PathVariable Long id) {
         cartService.setAddressToCart(id, securityService.getLoggedInUserId());
         return "deliveryAddress/picked";

@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/search")
+@RequestMapping("search")
 public class ProductSearchController {
 
     private final ProductService productService;
@@ -36,7 +36,7 @@ public class ProductSearchController {
     public String searchGET(Model model) {
         model.addAttribute("productSearch", new ProductSearchDTO());
         model.addAttribute("errors", new HashMap<>());
-        return "/search/products";
+        return "search/products";
     }
 
     @PostMapping("/products")
@@ -47,14 +47,14 @@ public class ProductSearchController {
                     .collect(Collectors.toMap(FieldError::getField, FieldError::getCode));
             model.addAttribute("productSearch", new ProductSearchDTO());
             model.addAttribute("errors", errors);
-            return "/search/products";
+            return "search/products";
         }
         List<ProductDTO> foundedProducts = productService.search(productSearchDTO);
         if (foundedProducts.size() == 0) {
-            return "/products/none";
+            return "products/none";
         }
         model.addAttribute("products", foundedProducts);
-        return "/products/founded";
+        return "products/founded";
 
 
         // TODO: 07.02.2020 wyszukiwanie też po numerze pozycji z przetargu
