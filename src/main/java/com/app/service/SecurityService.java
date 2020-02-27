@@ -27,6 +27,12 @@ public class SecurityService {
             username = principal.toString();
         }
 
+
+        System.out.println("-------------------------------");
+        System.out.println("-------------------------------");
+        System.out.println(username);
+
+
         User user = userRepository
                 .findByLogin(username)
                 .orElseThrow(() -> new AppException(InfoCodes.SERVICE_SECURITY, "getLoggedInUser - no user with username: " + username));

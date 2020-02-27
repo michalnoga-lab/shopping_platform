@@ -29,6 +29,7 @@ public class dataInitialization implements CommandLineRunner {
             .street("street")
             .streetNumber("10")
             .postCode("1111")
+            .nameShortcut("prima")
             .id(1L)
             .build();
     Company company2 = Company.builder()
@@ -48,6 +49,7 @@ public class dataInitialization implements CommandLineRunner {
             .name("super")
             .role(Role.SUPER)
             .enabled(true)
+            .company(company1)
             .password("{bcrypt}$2a$10$/HxZgKD8i8uVvtbyMcYPkeeybREyK72tEtVV25OxPvufeUSt9fFEa")
             .build();
     User user2 = User.builder()
@@ -70,6 +72,7 @@ public class dataInitialization implements CommandLineRunner {
             .name("user")
             .role(Role.ROOT)
             .enabled(true)
+            .company(company1)
             .password("{bcrypt}$2a$10$/HxZgKD8i8uVvtbyMcYPkeeybREyK72tEtVV25OxPvufeUSt9fFEa")
             .build();
 
