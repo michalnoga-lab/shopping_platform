@@ -30,7 +30,7 @@ public class dataInitialization implements CommandLineRunner {
             .streetNumber("10")
             .postCode("1111")
             .nameShortcut("prima")
-            .id(1L)
+//            .id(1L)
             .build();
     Company company2 = Company.builder()
             .name("company 2")
@@ -45,8 +45,9 @@ public class dataInitialization implements CommandLineRunner {
             .build();
 
     User user3 = User.builder()
-            .login("super")
+            .login("prima@super.super")
             .name("super")
+            .surname("super")
             .role(Role.SUPER)
             .enabled(true)
             .company(company1)
@@ -68,11 +69,13 @@ public class dataInitialization implements CommandLineRunner {
             .build();
 
     User user4 = User.builder()
-            .login("root")
-            .name("user")
+            .login("prima@root.root")
+            .name("root")
+            .surname("root")
+            .company(Company.builder().nameShortcut("prima").build())
             .role(Role.ROOT)
             .enabled(true)
-            .company(company1)
+            .company(Company.builder().nameShortcut("prima").build())
             .password("{bcrypt}$2a$10$/HxZgKD8i8uVvtbyMcYPkeeybREyK72tEtVV25OxPvufeUSt9fFEa")
             .build();
 
@@ -98,7 +101,7 @@ public class dataInitialization implements CommandLineRunner {
         // TODO: 21.02.2020 for production only
         if (userRepository.findAll().size() == 0) {
             userRepository.save(user4);
-            userRepository.save(user3);
+            /*userRepository.save(user3);*/
         }
         // ------------------------------------------------------------------------------------
 
