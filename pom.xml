@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.app</groupId>
     <artifactId>primaplatforma</artifactId>
-    <version>2020.2.002</version>
+    <version>2020.3.001</version>
     <packaging>war</packaging>
     <name>PrimaPlatforma</name>
     <description>Platforma do składania zamówień</description>
@@ -108,7 +108,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
-            <!--<scope>provided</scope> todo -->
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

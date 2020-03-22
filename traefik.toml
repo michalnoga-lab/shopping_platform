@@ -1,0 +1,41 @@
+defaultEntryPoints = ["http", "https"]
+logLevel = "INFO"
+
+[docker]
+ endpoint = "unix:///var/run/docker.sock"
+ exposedByDefault = false
+
+[api]
+ dashboard = true
+ entrypoint = "dashboard"
+
+[entryPoints]
+
+ [entryPoints.http]
+ address = ":80"
+  [entyPoints.http.rediect]
+  entryPoint = "https"
+
+ [entryPoints.https]
+ address = ":443"
+  [entryPoints.https.tls]
+#   [[entryPoints.https.tls.certificates]] for self signing certs only
+#   certFile = "/certs/tls.crt"
+#   keyFile = "/certs/tls.key"
+
+ [entryPoints.dashborad]
+  address = ":9000"
+
+[acme]
+entrypoint="https"
+acmeLogging=true
+email="biuro@primakrakow.pl"
+storage="acme.json"
+caServer="https://acme-staging-v02.api.letsencrypt.org/directory"
+#onHostRule=true
+
+[acme.httpChallenge]
+ entryPoint="http"
+
+[[acme.domains]] # domain challange
+ main="www.prima-platforma.pl"

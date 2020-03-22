@@ -1,28 +1,145 @@
 version: '3'
 
 services:
-  database:
-    image: mysql:8.0
-    container_name: database
+
+  traefik:
+    image: traefik:alpine
+    container_name: traefik
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${PWD}/traefik.toml:/etc/traefik/traefik.toml
+      - ${PWD}/acme.json:/acme.json
+    ports:
+      - 80:80
+      - 443:443
+    #    networks:
+    #      web:
+
+    #nginx:
+    #  image: nginx:alpine
+    #  container_name: nginx
+    #  labels:
+    #    - traefik.frontend.rule=Host:www.prima-platforma.pl
+    #    - traefik.port=80
+    #    - traefik.enable=true
+    #  volumes:
+    #    - ${PWD}/example1.html:/usr/share/nginx/html/index.html
+
+    #apache:
+    #  image: httpd:alpine
+    #  container_name: httpd
+    #  labels:
+    #    #      - traefik.frontend.rule=Host:example2.prima-platforma.pl
+    #    - traefik.port=80
+    #    - traefik.enable=true
+    #  volumes:
+    #    - ${PWD}/example2.html:/usr/local/apache2/htdocs/index.html
+
+    #  database:
+    #    image: mysql
+    #    container_name: database
+    #    volumes:
+    #      - ${PWD}/mysql_datadir:/var/lib/mysql
+    #    #    labels:
+    #    #      - traefik.enable=false
+    #    restart: always
+    #    ports:
+    #      - 3306:3306
+    #    environment:
+    #      - MYSQL_ROOT_PASSWORD=root
+    #      - MYSQL_DATABASE=platforma
+    #      - MYSQL_PASSWORD=root
+
+    #  tomcat:
+    #    image: platforma
+    #    container_name: platforma
+    #    labels:
+    #      - traefik.frontend.rule=Host:www.prima-platforma.pl
+    #      - traefik.port=80
+    #      - traefik.enable=true
+    #    volumes:
+    #      - ${PWD}/platforma.war:/usr/share/tomcat/webapps/platforma.war
+    #    depends_on:
+    #      - database
+    #    links:
+    #      - database:3306
+
+    #  base:
+    #    container_name: base
+    #    image: mysql
+    #    environment:
+    #      - MYSQL_ROOT_USER = root
+    #      - MYSQL_ROOT_PASSWORD = root
+    #      - MYSQL_DATABASE = platforma
+    #      - MYSQL_USER = root
+    #      - MYSQL_PASSWORD = root
+    #    volumes:
+    #      - ${PWD}/mysql_datadir:/var/lib/mysql
+    #    ports:
+    #      - 3306:3306
+    #    networks:
+    #      web:
+
+  mysqldb:
+    image: mysql
+    container_name: mysqldb
+    #    labels:
+    #      - traefik.port = 3306
+    #      - traefik.enable = true
+    volumes:
+      - ${PWD}/mysql_datadir:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=platforma
+      #      - MYSQL_USER=root
       - MYSQL_PASSWORD=root
-    volumes:
-      - /data/mysql
-    ports:
-      - 3306:3306
+    #    networks:
+    #      web:
+
+    #  mysqldb:
+    #    image: mysql:5.7
+    #    restart: always
+    #    environment:
+    #      MYSQL_DATABASE: 'platforma'
+    #      MYSQL_USER: 'user'
+    #      MYSQL_PASSWORD: 'user'
+    #      MYSQL_ROOT_PASSWORD: 'root'
+    #    ports:
+    #      - '3306:3306'
+    #    #    expose:
+    #    #      - '3306'
+    #    volumes:
+    #      - ${PWD}/mysql_datadir:/var/lib/mysql
+    #    networks:
+    #      web:
+
   platforma:
-    image: platforma
     container_name: platforma
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    depends_on:
-      - database
-    links:
-      - database:3306
-    ports:
-      - 80:8080
+    image: platforma
+    labels:
+      - traefik.frontend.rule=Host:www.prima-platforma.pl
+      - traefik.port = 80
+      - traefik.enable = true
     volumes:
-      - /data/platforma
+      - ${PWD}/platforma_datadir:/files
+      #    build:
+      #      context: ./
+      #      dockerfile: Dockerfile
+    depends_on:
+      - mysqldb
+    links:
+      - mysqldb:3306
+#      networks:
+#        web:
+
+#  mysql-container:
+#    image: mysql:latest
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=root
+#      - MYSQL_DATABASE=platforma
+#      - MYSQL_USER=root
+#      - MYSQL_PASSWORD=root
+
+
+networks:
+  web:
