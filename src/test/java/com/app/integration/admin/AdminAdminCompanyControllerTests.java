@@ -87,7 +87,6 @@ public class AdminAdminCompanyControllerTests {
                         .contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
-        // TODO: 2020-02-17 security context holder null pointer
     }
 
     @Test

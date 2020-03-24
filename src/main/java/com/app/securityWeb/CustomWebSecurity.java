@@ -1,4 +1,4 @@
-package com.app.security;
+package com.app.securityWeb;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;

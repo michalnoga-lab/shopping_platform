@@ -12,8 +12,8 @@ services:
     ports:
       - 80:80
       - 443:443
-    #    networks:
-    #      web:
+    networks:
+      web:
 
     #nginx:
     #  image: nginx:alpine
@@ -110,8 +110,8 @@ services:
     #    #      - '3306'
     #    volumes:
     #      - ${PWD}/mysql_datadir:/var/lib/mysql
-    #    networks:
-    #      web:
+    networks:
+      web:
 
   platforma:
     container_name: platforma
@@ -122,15 +122,15 @@ services:
       - traefik.enable = true
     volumes:
       - ${PWD}/platforma_datadir:/files
-      #    build:
-      #      context: ./
-      #      dockerfile: Dockerfile
+    build:
+      context: ./
+      dockerfile: Dockerfile
     depends_on:
       - mysqldb
-    links:
-      - mysqldb:3306
-#      networks:
-#        web:
+    #    links:
+    #      - mysqldb:3306
+    networks:
+      web:
 
 #  mysql-container:
 #    image: mysql:latest

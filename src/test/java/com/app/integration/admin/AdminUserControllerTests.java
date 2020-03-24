@@ -130,14 +130,6 @@ public class AdminUserControllerTests {
         Mockito
                 .when(userService.findById(userDTO.getId()))
                 .thenReturn(userDTO);
-
-       /* mockMvc
-                .perform(MockMvcRequestBuilders.post("/admin/users/one/{id}", 1L)
-                        .contentType(MediaType.TEXT_HTML))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
-        // org.thymeleaf.exceptions.TemplateProcessingException: Exception evaluating SpringEL expression:
-        //  "user.companyDTO.name" (template: "/admin/users/one" - line 32, col 20)*/
     }
 
     @Test

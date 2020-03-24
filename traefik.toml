@@ -10,14 +10,13 @@ logLevel = "INFO"
  entrypoint = "dashboard"
 
 [entryPoints]
-
  [entryPoints.http]
  address = ":80"
   [entyPoints.http.rediect]
   entryPoint = "https"
 
  [entryPoints.https]
- address = ":443"
+  address = ":443"
   [entryPoints.https.tls]
 #   [[entryPoints.https.tls.certificates]] for self signing certs only
 #   certFile = "/certs/tls.crt"
@@ -37,5 +36,11 @@ caServer="https://acme-staging-v02.api.letsencrypt.org/directory"
 [acme.httpChallenge]
  entryPoint="http"
 
-[[acme.domains]] # domain challange
+[[acme.domains]]
  main="www.prima-platforma.pl"
+
+
+# połączenie z DB
+# ustawienie sieci dla bazy danych
+# dysk/volumen do trzymania danych
+# nowy kontener JS

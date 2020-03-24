@@ -1,4 +1,4 @@
-package com.app.security;
+package com.app.securityWeb;
 
 import com.app.exceptions.AppException;
 import com.app.model.InfoCodes;

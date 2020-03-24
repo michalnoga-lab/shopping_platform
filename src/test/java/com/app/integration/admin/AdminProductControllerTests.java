@@ -126,13 +126,5 @@ public class AdminProductControllerTests {
         Mockito
                 .when(productRepository.findAll())
                 .thenReturn(List.of(product));
-
-        /*updatedProducts
-                .forEach(product -> product.setHidden(true));*/ // TODO: 2020-02-22 null
-
-       /* mockMvc
-                .perform(MockMvcRequestBuilders.post("/admin/products/hideAll/{id}", 1L)
-                        .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());*/
     }
 }
