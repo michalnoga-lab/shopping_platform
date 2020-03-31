@@ -1,4 +1,4 @@
-package com.app.controllersWeb;
+package com.app.controllerExceptions;
 
 import com.app.exceptions.AppException;
 import com.app.model.InfoCodes;

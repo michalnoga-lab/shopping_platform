@@ -23,8 +23,18 @@ public class LoggerInfo {
     @Enumerated(EnumType.STRING)
     private InfoCodes infoCode;
     private Long userId;
+
+    @Column(length = 10000)
     private String message;
+
     private String remoteAddress;
     private LocalDateTime time;
 
+    public void setMessage(String message) {
+        if (message.length() > 10000) {
+            this.message = message.substring(0, 10000);
+        } else {
+            this.message = message;
+        }
+    }
 }

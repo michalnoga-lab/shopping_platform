@@ -67,8 +67,8 @@ public class CartControllerTests {
     }
 
     @Test
-    @DisplayName("all")
-    void test1() throws Exception {
+    @DisplayName("carts/all - GET")
+    void test10() throws Exception {
 
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/carts/all").contentType(MediaType.TEXT_HTML))
@@ -77,7 +77,7 @@ public class CartControllerTests {
     }
 
     @Test
-    @DisplayName("/one/{id}")
+    @DisplayName("carts/one/{id} - GET")
     void test2() throws Exception {
 
         CartDTO cart = CartDTO.builder().id(1L).build();
@@ -96,7 +96,7 @@ public class CartControllerTests {
     }
 
     @Test
-    @DisplayName("one")
+    @DisplayName("carts/one - GET")
     void test3() throws Exception {
 
         Mockito
@@ -110,7 +110,7 @@ public class CartControllerTests {
     }
 
     @Test
-    @DisplayName("closed")
+    @DisplayName("carts/closed - GET")
     void test4() throws Exception {
 
         mockMvc

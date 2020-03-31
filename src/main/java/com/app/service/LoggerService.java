@@ -15,11 +15,11 @@ public class LoggerService {
     private final RequestService requestService;
     private final SecurityService securityService;
 
-    public void add(LoggerInfo loggerInfo) {
+    public LoggerInfo add(LoggerInfo loggerInfo) {
         loggerInfo.setTime(LocalDateTime.now());
         loggerInfo.setRemoteAddress(requestService.getRemoteAddress());
         loggerInfo.setUserId(securityService.getLoggedInUserId());
 
-        loggerInfoRepository.save(loggerInfo);
+        return loggerInfoRepository.save(loggerInfo);
     }
 }

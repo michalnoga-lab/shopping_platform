@@ -29,6 +29,15 @@ public class CartRestController {
 
     @GetMapping("all")
     public ResponseEntity<List<CartDTO>> all(HttpServletRequest request) {
+
+        System.out.println("********************************");
+        System.out.println(request.getAttribute("username")); // TODO: 30.03.2020 ---> null
+
+        String username = (String) request.getAttribute("username");
+
+        if (username == null) {
+            // TODO: 31.03.2020 access denied
+        }
         return new ResponseEntity<>(cartService.getAllUsersCarts(
                 securityService.getLoggedInUserId(request.getAttribute("username").toString())), HttpStatus.OK);
     }
@@ -44,7 +53,7 @@ public class CartRestController {
         Optional<CartDTO> cartDTOOptional = cartService.getActiveCart(
                 securityService.getLoggedInUserId(request.getAttribute("username").toString()));
         if (cartDTOOptional.isEmpty()) {
-            return new ResponseEntity<>(Set.of(), HttpStatus.OK);
+            return ResponseEntity.notFound().build();
         }
         return new ResponseEntity<>(productService.getProductsOfCart(cartDTOOptional.get().getId()), HttpStatus.OK);
     }
