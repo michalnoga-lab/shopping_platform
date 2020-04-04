@@ -37,7 +37,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         }
 
         UsernamePasswordAuthenticationToken authentication = getAuthentication(request, response);
-        request.setAttribute("username", authentication.getName());
+        //request.setAttribute("username", authentication.getName()); // TODO: 2020-04-04 czy może login ???
         SecurityContextHolder.getContext().setAuthentication(authentication);
         chain.doFilter(request, response);
     }

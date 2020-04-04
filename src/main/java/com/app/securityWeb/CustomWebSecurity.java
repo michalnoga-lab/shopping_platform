@@ -62,7 +62,7 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/css/**", "/img/**", "/js/**").permitAll()
+//                .antMatchers("/css/**", "/img/**", "/js/**").permitAll()
                 .antMatchers("/", "/cookies", "/rodo").permitAll()
                 .antMatchers("/admin/**").hasAnyRole("ROOT", "SUPER", "ADMIN")
                 .antMatchers("/super/**").hasAnyRole("ROOT", "SUPER")
@@ -72,26 +72,26 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-
-                // TODO: 2020-03-29 enable for web use only
-                .and()
-                .formLogin()
-                .loginPage("/security/login").permitAll()
-                .loginProcessingUrl("/login")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/", true)
-                .failureUrl("/security/failed")
-
-                .and()
-                .logout().permitAll()
-                .logoutUrl("/logout")
-                .clearAuthentication(true)
-                .logoutSuccessUrl("/security/loggedOut").permitAll()
-
-                .and()
-                .exceptionHandling().accessDeniedPage("/security/accessDenied")
-                .accessDeniedHandler(accessDeniedHandler())
+//
+//                // TODO: 2020-03-29 enable for web use only
+//                .and()
+//                .formLogin()
+//                .loginPage("/security/login").permitAll()
+//                .loginProcessingUrl("/login")
+//                .usernameParameter("username")
+//                .passwordParameter("password")
+//                .defaultSuccessUrl("/", true)
+//                .failureUrl("/security/failed")
+//
+//                .and()
+//                .logout().permitAll()
+//                .logoutUrl("/logout")
+//                .clearAuthentication(true)
+//                .logoutSuccessUrl("/security/loggedOut").permitAll()
+//
+//                .and()
+//                .exceptionHandling().accessDeniedPage("/security/accessDenied")
+//                .accessDeniedHandler(accessDeniedHandler());
 
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
