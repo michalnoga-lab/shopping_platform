@@ -74,24 +74,24 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
                 // TODO: 2020-03-29 enable for web use only
-//                .and()
-//                .formLogin()
-//                .loginPage("/security/login").permitAll()
-//                .loginProcessingUrl("/login")
-//                .usernameParameter("username")
-//                .passwordParameter("password")
-//                .defaultSuccessUrl("/", true)
-//                .failureUrl("/security/failed")
-//
-//                .and()
-//                .logout().permitAll()
-//                .logoutUrl("/logout")
-//                .clearAuthentication(true)
-//                .logoutSuccessUrl("/security/loggedOut").permitAll()
-//
-//                .and()
-//                .exceptionHandling().accessDeniedPage("/security/accessDenied")
-//                .accessDeniedHandler(accessDeniedHandler())
+                .and()
+                .formLogin()
+                .loginPage("/security/login").permitAll()
+                .loginProcessingUrl("/login")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/", true)
+                .failureUrl("/security/failed")
+
+                .and()
+                .logout().permitAll()
+                .logoutUrl("/logout")
+                .clearAuthentication(true)
+                .logoutSuccessUrl("/security/loggedOut").permitAll()
+
+                .and()
+                .exceptionHandling().accessDeniedPage("/security/accessDenied")
+                .accessDeniedHandler(accessDeniedHandler())
 
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
