@@ -29,7 +29,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         try {
             if (username == null) {
-
                 throw new NullPointerException("loadUserByUsername - login is null");
             }
 

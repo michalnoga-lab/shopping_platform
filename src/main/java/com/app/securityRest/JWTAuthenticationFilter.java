@@ -1,5 +1,6 @@
 package com.app.securityRest;
 
+import com.app.dto.UserLoginDTO;
 import com.app.exceptions.AppException;
 import com.app.model.InfoCodes;
 import com.app.model.User;
@@ -35,8 +36,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 
         try {
-            User user = new ObjectMapper().readValue(request.getInputStream(), User.class);
-            
+            UserLoginDTO user = new ObjectMapper().readValue(request.getInputStream(), UserLoginDTO.class);
+
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     user.getLogin(),
                     user.getPassword(),
