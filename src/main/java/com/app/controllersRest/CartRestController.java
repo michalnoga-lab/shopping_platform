@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -30,14 +31,15 @@ public class CartRestController {
     @GetMapping("all")
     public ResponseEntity<List<CartDTO>> all(HttpServletRequest request) {
 
-        System.out.println("********************************");
-        System.out.println(request.getAttribute("username")); // TODO: 30.03.2020 ---> null
+        System.out.println("************* username *******************");
+        System.out.println("---> " + request.getAttribute("username")); // TODO: 30.03.2020 ---> null
 
         String username = (String) request.getAttribute("username");
 
-        if (username == null) {
-            // TODO: 31.03.2020 access denied
-        }
+//        if (username == null) {
+//            // TODO: 31.03.2020 access denied
+//            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
+//        }
         return new ResponseEntity<>(cartService.getAllUsersCarts(
                 securityService.getLoggedInUserId(request.getAttribute("username").toString())), HttpStatus.OK);
     }
@@ -48,12 +50,12 @@ public class CartRestController {
         return new ResponseEntity<>(cartService.getCart(id), HttpStatus.OK);
     }
 
-    @GetMapping("one")
-    public ResponseEntity<Set<ProductDTO>> activeOne(HttpServletRequest request) {
+    @GetMapping("active")
+    public ResponseEntity<Set<ProductDTO>> getActiveOne(HttpServletRequest request) {
         Optional<CartDTO> cartDTOOptional = cartService.getActiveCart(
                 securityService.getLoggedInUserId(request.getAttribute("username").toString()));
         if (cartDTOOptional.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            return new ResponseEntity<>(Set.of(), HttpStatus.OK);
         }
         return new ResponseEntity<>(productService.getProductsOfCart(cartDTOOptional.get().getId()), HttpStatus.OK);
     }

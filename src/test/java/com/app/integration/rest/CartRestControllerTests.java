@@ -2,6 +2,7 @@ package com.app.integration.rest;
 
 import com.app.PrimaPlatformaApplication;
 import com.app.dto.CartDTO;
+import com.app.dto.UserDTO;
 import com.app.mappers.CartMapper;
 import com.app.repository.CartRepository;
 import com.app.service.CartService;
@@ -16,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,7 +29,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
+import java.net.URI;
+import java.util.*;
 
 @ExtendWith(SpringExtension.class)
 
@@ -75,9 +78,20 @@ public class CartRestControllerTests {
     @DisplayName("api/carts/all - GET")
     void test10() throws Exception {
 
+        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+        UserDTO user = UserDTO.builder().id(1L).build();
+
+        Mockito
+                .when(request.getAttribute("username"))
+                .thenReturn(user);
+
         Mockito
                 .when(securityService.getLoggedInUserId("username"))
-                .thenReturn(100L);
+                .thenReturn(1L);
+
+        Mockito
+                .when(cartService.getAllUsersCarts(1L))
+                .thenReturn(List.of(CartDTO.builder().id(2L).build()));
 
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/api/carts/all").contentType(MediaType.APPLICATION_JSON))
@@ -106,8 +120,19 @@ public class CartRestControllerTests {
     }
 
     @Test
-    @DisplayName("api/carts/one - GET")
+    @DisplayName("api/carts/active - GET")
     void test30() throws Exception {
+
+        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+        UserDTO user = UserDTO.builder().id(1L).build();
+
+        Mockito
+                .when(request.getAttribute("username"))
+                .thenReturn(user);
+
+        Mockito
+                .when(securityService.getLoggedInUserId("username"))
+                .thenReturn(1L);
 
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/api/carts/one").contentType(MediaType.APPLICATION_JSON))
