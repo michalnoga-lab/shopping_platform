@@ -83,7 +83,7 @@ public class CartRestControllerTests {
 
         Mockito
                 .when(request.getAttribute("username"))
-                .thenReturn(user);
+                .thenReturn("root@gmail.com");
 
         Mockito
                 .when(securityService.getLoggedInUserId("username"))
