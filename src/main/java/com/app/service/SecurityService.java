@@ -33,11 +33,11 @@ public class SecurityService {
         return user.getId();
     }
 
-    public Long getLoggedInUserId(String username) {
+    public Long getLoggedInUserId(String login) {
 
         User user = userRepository
-                .findByLogin(username)
-                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_SECURITY, "getLoggedInUser - no user with username: " + username));
+                .findByLogin(login)
+                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_SECURITY, "getLoggedInUser - no user with login: " + login));
 
         return user.getId();
     }

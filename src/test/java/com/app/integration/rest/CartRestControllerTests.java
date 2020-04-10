@@ -5,6 +5,7 @@ import com.app.dto.CartDTO;
 import com.app.mappers.CartMapper;
 import com.app.repository.CartRepository;
 import com.app.service.CartService;
+import com.app.service.SecurityService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -50,12 +51,19 @@ public class CartRestControllerTests {
     @MockBean
     private CartRepository cartRepository;
 
+    @MockBean
+    private SecurityService securityService;
+
     @BeforeEach
     private void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
         Authentication authentication = Mockito.mock(Authentication.class);
         SecurityContext securityContext = Mockito.mock(SecurityContext.class);
+
+        Mockito
+                .when(securityService.getLoggedInUserId())
+                .thenReturn(1L);
 
         Mockito
                 .when(securityContext.getAuthentication())

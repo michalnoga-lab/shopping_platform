@@ -30,23 +30,12 @@ public class CartRestController {
 
     @GetMapping("all")
     public ResponseEntity<List<CartDTO>> all(HttpServletRequest request) {
-
-        System.out.println("************* username *******************");
-        System.out.println("---> " + request.getAttribute("username")); // TODO: 30.03.2020 ---> null
-
-        String username = (String) request.getAttribute("username");
-
-//        if (username == null) {
-//            // TODO: 31.03.2020 access denied
-//            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
-//        }
         return new ResponseEntity<>(cartService.getAllUsersCarts(
                 securityService.getLoggedInUserId(request.getAttribute("username").toString())), HttpStatus.OK);
     }
 
     @GetMapping("one/{id}")
     public ResponseEntity<CartDTO> one(@PathVariable Long id, HttpServletRequest request) {
-        System.out.println(request.getAttribute("username"));
         return new ResponseEntity<>(cartService.getCart(id), HttpStatus.OK);
     }
 
