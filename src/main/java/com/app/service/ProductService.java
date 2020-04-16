@@ -79,7 +79,7 @@ public class ProductService {
         }
     }
 
-    public List<ProductDTO> search(ProductSearchDTO productSearchDTO) {
+    public List<ProductDTO> search(ProductSearchDTO productSearchDTO) { // TODO: 16.04.2020 może zwrócimy tylko produkty danego użytkownika ????
         if (productSearchDTO == null) {
             throw new AppException(InfoCodes.CONTROLLERS, "search - search is null");
         }
