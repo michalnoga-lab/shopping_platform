@@ -1,10 +1,6 @@
 package com.app.integration.rest;
 
 import com.app.PrimaPlatformaApplication;
-import com.app.dto.CartDTO;
-import com.app.mappers.CartMapper;
-import com.app.repository.CartRepository;
-import com.app.service.CartService;
 import com.app.service.SecurityService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -27,8 +23,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.Optional;
-
 @ExtendWith(SpringExtension.class)
 
 @SpringBootTest(
@@ -37,19 +31,13 @@ import java.util.Optional;
 )
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application.tests.properties")
-public class CartRestControllerTests {
+public class DeliveryAddressRestControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
     private WebApplicationContext webApplicationContext;
-
-    @MockBean
-    private CartService cartService;
-
-    @MockBean
-    private CartRepository cartRepository;
 
     @MockBean
     private SecurityService securityService;
@@ -73,39 +61,40 @@ public class CartRestControllerTests {
     }
 
     @Test
-    @DisplayName("api/carts/all - GET")
+    @DisplayName("/api/deliveryAddress/all - GET")
     void test10() throws Exception {
 
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/api/carts/all").contentType(MediaType.APPLICATION_JSON))
+                .perform(MockMvcRequestBuilders.get("/api/deliveryAddress/all").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
-    @DisplayName("api/carts/one/{id} - GET")
+    @DisplayName("/api/deliveryAddress/add - POST")
     void test20() throws Exception {
 
-        CartDTO cart = CartDTO.builder().id(1L).build();
-        Mockito
-                .when(cartService.getCart(1L))
-                .thenReturn(cart);
+        mockMvc
+                .perform(MockMvcRequestBuilders.post("/api/deliveryAddress/add").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
 
-        Mockito
-                .when(cartRepository.findById(1L))
-                .thenReturn(Optional.of(CartMapper.fromDto(cart)));
+    @Test
+    @DisplayName("/api/deliveryAddress/remove/{id} - POST")
+    void test30() throws Exception {
 
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/api/carts/one/{id}", 1L)
+                .perform(MockMvcRequestBuilders.post("/api/deliveryAddress/remove/{id}", 2L)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
-    @DisplayName("api/carts/close - GET")
+    @DisplayName("/api/deliveryAddress/pick/{id} - GET")
     void test40() throws Exception {
 
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/api/carts/close").contentType(MediaType.APPLICATION_JSON))
+                .perform(MockMvcRequestBuilders.get("/api/deliveryAddress/pick/{id}", 2L)
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 }
