@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -28,18 +27,18 @@ public class CartRestController {
     private final ProductService productService;
     private final SecurityService securityService;
 
-    @GetMapping("all")
+    @GetMapping("/all")
     public ResponseEntity<List<CartDTO>> all(HttpServletRequest request) {
         return new ResponseEntity<>(cartService.getAllUsersCarts(
                 securityService.getLoggedInUserId(request.getAttribute("username").toString())), HttpStatus.OK);
     }
 
-    @GetMapping("one/{id}")
+    @GetMapping("/one/{id}")
     public ResponseEntity<CartDTO> one(@PathVariable Long id, HttpServletRequest request) {
         return new ResponseEntity<>(cartService.getCart(id), HttpStatus.OK);
     }
 
-    @GetMapping("active")
+    @GetMapping("/active")
     public ResponseEntity<Set<ProductDTO>> getActiveOne(HttpServletRequest request) {
         Optional<CartDTO> cartDTOOptional = cartService.getActiveCart(
                 securityService.getLoggedInUserId(request.getAttribute("username").toString()));
@@ -49,7 +48,7 @@ public class CartRestController {
         return new ResponseEntity<>(productService.getProductsOfCart(cartDTOOptional.get().getId()), HttpStatus.OK);
     }
 
-    @GetMapping("close")
+    @GetMapping("/close")
     public ResponseEntity<CartDTO> closeActiveCart(HttpServletRequest request) {
         return new ResponseEntity<>(cartService.closeCart(
                 securityService.getLoggedInUserId(request.getAttribute("username").toString())), HttpStatus.OK);

@@ -28,18 +28,18 @@ public class DeliveryAddressRestController {
                 request.getAttribute("username").toString())), HttpStatus.OK);
     }
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public ResponseEntity<DeliveryAddressDTO> add(@RequestBody DeliveryAddressDTO deliveryAddressDTO, HttpServletRequest request) {
         return new ResponseEntity<>(deliveryAddressService.add(deliveryAddressDTO,
                 securityService.getLoggedInUserId(request.getAttribute("username").toString())), HttpStatus.OK);
     }
 
-    @PostMapping("remove/{id}")
+    @PostMapping("/remove/{id}")
     public ResponseEntity<DeliveryAddressDTO> remove(@PathVariable Long id) {
         return new ResponseEntity<>(deliveryAddressService.hide(id), HttpStatus.OK);
     }
 
-    @GetMapping("pick/{id}")
+    @GetMapping("/pick/{id}")
     public ResponseEntity<CartDTO> pick(@PathVariable Long id, HttpServletRequest request) {
         return new ResponseEntity<>(cartService.setAddressToCart(id,
                 securityService.getLoggedInUserId(request.getAttribute("username").toString())), HttpStatus.OK);
