@@ -1,4 +1,4 @@
-package com.app.integration.web;
+package com.app.integration.webUser;
 
 import com.app.PrimaPlatformaApplication;
 import com.app.dto.ProductSearchDTO;
@@ -6,7 +6,6 @@ import com.app.mappers.ProductMapper;
 import com.app.model.Product;
 import com.app.repository.ProductRepository;
 import com.app.service.ProductService;
-import com.app.validators.ProductSearchDtoValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,15 +16,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;

@@ -1,7 +1,6 @@
-package com.app.integration.admin;
+package com.app.integration.webUser;
 
 import com.app.PrimaPlatformaApplication;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,8 +13,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 @ExtendWith(SpringExtension.class)
 
@@ -25,26 +22,17 @@ import org.springframework.web.context.WebApplicationContext;
 )
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application.tests.properties")
-public class AdminPanelControllerTests {
+public class MainControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
-
-    @BeforeEach
-    private void setup() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-    }
-
     @Test
-    @DisplayName("panel")
-    void test10() throws Exception {
+    @DisplayName("welcome")
+    void test1() throws Exception {
 
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/admin/panel")
-                        .contentType(MediaType.TEXT_HTML))
+                .perform(MockMvcRequestBuilders.get("/").contentType(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }

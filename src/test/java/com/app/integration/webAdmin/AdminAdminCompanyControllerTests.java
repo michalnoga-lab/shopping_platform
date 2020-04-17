@@ -1,4 +1,4 @@
-package com.app.integration.admin;
+package com.app.integration.webAdmin;
 
 import com.app.PrimaPlatformaApplication;
 import com.app.dto.CompanyDTO;

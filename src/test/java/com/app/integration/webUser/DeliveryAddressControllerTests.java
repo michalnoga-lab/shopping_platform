@@ -1,4 +1,4 @@
-package com.app.integration.web;
+package com.app.integration.webUser;
 
 import com.app.PrimaPlatformaApplication;
 import com.app.dto.CartDTO;

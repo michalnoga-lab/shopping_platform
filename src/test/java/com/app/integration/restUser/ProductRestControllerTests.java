@@ -1,4 +1,4 @@
-package com.app.integration.rest;
+package com.app.integration.restUser;
 
 import com.app.PrimaPlatformaApplication;
 import com.app.service.SecurityService;

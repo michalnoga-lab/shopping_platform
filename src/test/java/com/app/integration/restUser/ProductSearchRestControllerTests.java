@@ -1,15 +1,20 @@
-package com.app.integration.admin;
+package com.app.integration.restUser;
 
 import com.app.PrimaPlatformaApplication;
+import com.app.service.SecurityService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -26,7 +31,7 @@ import org.springframework.web.context.WebApplicationContext;
 )
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application.tests.properties")
-public class FileUploadControllerTests {
+public class ProductSearchRestControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -34,29 +39,33 @@ public class FileUploadControllerTests {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
+    @MockBean
+    private SecurityService securityService;
+
     @BeforeEach
     private void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+
+        Authentication authentication = Mockito.mock(Authentication.class);
+        SecurityContext securityContext = Mockito.mock(SecurityContext.class);
+
+        Mockito
+                .when(securityService.getLoggedInUserId())
+                .thenReturn(1L);
+
+        Mockito
+                .when(securityContext.getAuthentication())
+                .thenReturn(authentication);
+
+        SecurityContextHolder.setContext(securityContext);
     }
 
     @Test
-    @DisplayName("add - GET")
-    void test1() throws Exception {
+    @DisplayName("/api/search/products")
+    void test10() throws Exception {
 
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/admin/products/add")
-                        .contentType(MediaType.TEXT_HTML))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
-    }
-
-    @Test
-    @DisplayName("get - POST")
-    void test2() throws Exception {
-
-        MockMultipartFile mockMultipartFile = new MockMultipartFile("file", "original", null, (byte[]) null);
-
-        mockMvc
-                .perform(MockMvcRequestBuilders.multipart("/admin/products/add", "mockMultipartFile"));
+                .perform(MockMvcRequestBuilders.get("/api/search/products").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 }
