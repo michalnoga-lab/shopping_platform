@@ -1,20 +1,29 @@
 package com.app.service;
 
+import com.app.dto.CompanyDTO;
 import com.app.dto.ProductDTO;
 import com.app.dto.ProductSearchDTO;
 import com.app.exceptions.AppException;
-import com.app.model.*;
+import com.app.mappers.CompanyMapper;
 import com.app.mappers.ProductMapper;
+import com.app.model.Cart;
+import com.app.model.Company;
+import com.app.model.InfoCodes;
+import com.app.model.Product;
 import com.app.repository.CartRepository;
 import com.app.repository.CompanyRepository;
 import com.app.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ProductService {
 
@@ -111,7 +120,7 @@ public class ProductService {
         productRepository.saveAll(products);
     }
 
-    public void setCode(Long productId, String userInput) {
+    public ProductDTO setCode(Long productId, String userInput) {
         if (productId == null) {
             throw new AppException(InfoCodes.SERVICE_PRODUCT, "setCode - product it null");
         }
@@ -121,22 +130,37 @@ public class ProductService {
         if (userInput == null || userInput.length() == 0) {
             throw new AppException(InfoCodes.SERVICE_PRODUCT, "setCode - user input is null");
         }
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_PRODUCT, "setCode - no product with ID: " + productId));
-        try {
-            /*OptimaCode optimaCode = Arrays.stream(OptimaCode.values())
-                    .filter(code -> code.getDescription().equals(userInput))
-                    .findFirst()
-                    .orElseThrow(() -> new AppException(InfoCodes.SERVICE_PRODUCT, "setCode - no optima code for enum"));
-            product.setOptimaCode(optimaCode);*/ // TODO: 17.02.2020 set product code
-            product.setProductCode(userInput);
+
+        Optional<Product> productOptional = productRepository.findById(productId);
+
+        if (productOptional.isPresent()) {
+            Product product = productOptional.get();
+            product.setProductCode(userInput); // TODO: 17.04.2020 czy kod przechodzi prawidłowo ???
             productRepository.save(product);
-        } catch (Exception e) {
+
+            return ProductMapper.toDto(product);
+        } else {
             throw new AppException(InfoCodes.SERVICE_PRODUCT, "setCode - no optima code in enum: " + userInput);
-        }
+        } // TODO: 17.04.2020 czy opis app exceptio jest ok ??? skąd idą kody ???
+
+//        Product product = productRepository.findById(productId)
+//                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_PRODUCT, "setCode - no product with ID: " + productId));
+//
+//        try {
+//            /*OptimaCode optimaCode = Arrays.stream(OptimaCode.values())
+//                    .filter(code -> code.getDescription().equals(userInput))
+//                    .findFirst()
+//                    .orElseThrow(() -> new AppException(InfoCodes.SERVICE_PRODUCT, "setCode - no optima code for enum"));
+//            product.setOptimaCode(optimaCode);*/ // TODO: 17.02.2020 set product code
+//            product.setProductCode(userInput);
+//            productRepository.save(product);
+//
+//        } catch (Exception e) {
+//            throw new AppException(InfoCodes.SERVICE_PRODUCT, "setCode - no optima code in enum: " + userInput);
+//        }
     }
 
-    public void removeCode(Long productId) {
+    public ProductDTO removeCode(Long productId) {
         if (productId == null) {
             throw new AppException(InfoCodes.SERVICE_PRODUCT, "removeCode - product it null");
         }
@@ -147,9 +171,10 @@ public class ProductService {
                 .orElseThrow(() -> new AppException(InfoCodes.SERVICE_PRODUCT, "removeCode - no product with ID: " + productId));
         product.setProductCode(""); // TODO: 17.02.2020 tu był kiedyś enum
         productRepository.save(product);
+        return ProductMapper.toDto(product);
     }
 
-    public void hideAllProductsOfCompany(Long id) {
+    public CompanyDTO hideAllProductsOfCompany(Long id) {
         if (id == null) {
             throw new AppException(InfoCodes.SERVICE_PRODUCT, "hideAllProductsOfCompany - ID is null");
         }
@@ -166,5 +191,6 @@ public class ProductService {
 
         company.setProducts(updatedProducts);
         companyRepository.save(company);
+        return CompanyMapper.toDto(company);
     }
 }
