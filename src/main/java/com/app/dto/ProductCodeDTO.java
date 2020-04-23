@@ -13,7 +13,5 @@ import java.util.Set;
 @Data
 public class ProductCodeDTO {
 
-    private String code;
-    private String name;
-    private Set<String> keywords;
+    private String codeFromOptima;
 }

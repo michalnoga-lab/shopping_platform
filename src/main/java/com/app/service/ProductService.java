@@ -1,17 +1,16 @@
 package com.app.service;
 
 import com.app.dto.CompanyDTO;
+import com.app.dto.ProductCodeDTO;
 import com.app.dto.ProductDTO;
 import com.app.dto.ProductSearchDTO;
 import com.app.exceptions.AppException;
 import com.app.mappers.CompanyMapper;
 import com.app.mappers.ProductMapper;
-import com.app.model.Cart;
-import com.app.model.Company;
-import com.app.model.InfoCodes;
-import com.app.model.Product;
+import com.app.model.*;
 import com.app.repository.CartRepository;
 import com.app.repository.CompanyRepository;
+import com.app.repository.ProductCodeRepository;
 import com.app.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,6 +29,7 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final CartRepository cartRepository;
     private final CompanyRepository companyRepository;
+    private final ProductCodeRepository productCodeRepository;
 
     public List<ProductDTO> findAll() {
         List<Product> products = productRepository.findAll();
@@ -132,16 +132,18 @@ public class ProductService {
         }
 
         Optional<Product> productOptional = productRepository.findById(productId);
+        ProductCode productCode = productCodeRepository.findByCodeFromOptima(userInput)
+                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_PRODUCT, "setCode - no product code in DB:" + userInput));
 
         if (productOptional.isPresent()) {
             Product product = productOptional.get();
-            product.setProductCode(userInput); // TODO: 17.04.2020 czy kod przechodzi prawidłowo ???
+            product.setProductCode(productCode);
             productRepository.save(product);
 
             return ProductMapper.toDto(product);
         } else {
             throw new AppException(InfoCodes.SERVICE_PRODUCT, "setCode - no optima code in enum: " + userInput);
-        } // TODO: 17.04.2020 czy opis app exceptio jest ok ??? skąd idą kody ???
+        } // TODO: 17.04.2020 czy opis app exception jest ok ??? skąd idą kody ???
 
 //        Product product = productRepository.findById(productId)
 //                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_PRODUCT, "setCode - no product with ID: " + productId));
@@ -169,7 +171,7 @@ public class ProductService {
         }
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new AppException(InfoCodes.SERVICE_PRODUCT, "removeCode - no product with ID: " + productId));
-        product.setProductCode(""); // TODO: 17.02.2020 tu był kiedyś enum
+        product.setProductCode(null); // TODO: 17.02.2020 tu był kiedyś enum
         productRepository.save(product);
         return ProductMapper.toDto(product);
     }

@@ -82,14 +82,14 @@ public class dataInitialization implements CommandLineRunner {
     Product product1 = Product.builder().name("Prod1")
             .nettPrice(BigDecimal.valueOf(2.44))
             .vat(23.0)
-            .productCode("ambipur")
+            //.productCode("ambipur")
             .grossPrice(BigDecimal.valueOf(15))
             .hidden(false)
             .build();
     Product product2 = Product.builder().name("Prod1")
             .nettPrice(BigDecimal.valueOf(2.44))
             .vat(23.0)
-            .productCode("ace")
+          //  .productCode("ace")
             .grossPrice(BigDecimal.valueOf(15))
             .hidden(false)
             .build();

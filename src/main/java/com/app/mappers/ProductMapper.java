@@ -21,7 +21,7 @@ public interface ProductMapper {
                 .grossPrice(product.getGrossPrice())
                 .vat(product.getVat())
                 .auctionIndex(product.getAuctionIndex())
-                .productCode(product.getProductCode())
+                .productCodeDTO(product.getProductCode() == null ? null : ProductCodeMapper.toDto(product.getProductCode()))
                 .hidden(product.getHidden())
                 .build();
     }
@@ -39,7 +39,7 @@ public interface ProductMapper {
                 .numberInAuction(productDTO.getNumberInAuction())
                 .vat(productDTO.getVat())
                 .auctionIndex(productDTO.getAuctionIndex())
-                .productCode(productDTO.getProductCode())
+                .productCode(productDTO.getProductCodeDTO() == null ? null : ProductCodeMapper.fromDto(productDTO.getProductCodeDTO()))
                 .hidden(productDTO.getHidden())
                 .build();
     }

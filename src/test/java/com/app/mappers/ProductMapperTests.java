@@ -1,11 +1,12 @@
 package com.app.mappers;
 
 import com.app.dto.CompanyDTO;
+import com.app.dto.ProductCodeDTO;
 import com.app.dto.ProductDTO;
 import com.app.model.Cart;
 import com.app.model.Company;
-import com.app.model.OptimaCode;
 import com.app.model.Product;
+import com.app.model.ProductCode;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,7 +36,7 @@ public class ProductMapperTests {
                 .vat(23.0)
                 .grossPrice(BigDecimal.ONE)
                 .auctionIndex("1aa")
-                .productCode("code")
+                .productCode(ProductCode.builder().build())
                 .hidden(false)
                 .build();
 
@@ -50,7 +51,7 @@ public class ProductMapperTests {
                 .vat(23.0)
                 .grossPrice(BigDecimal.ONE)
                 .auctionIndex("1aa")
-                .productCode("code")
+                .productCodeDTO(ProductCodeDTO.builder().build())
                 .hidden(false)
                 .build();
 
@@ -74,7 +75,7 @@ public class ProductMapperTests {
                 .vat(23.0)
                 .grossPrice(BigDecimal.ONE)
                 .auctionIndex("1aa")
-                .productCode("code")
+                .productCodeDTO(ProductCodeDTO.builder().build())
                 .hidden(false)
                 .build();
 
@@ -90,7 +91,7 @@ public class ProductMapperTests {
                 .vat(23.0)
                 .grossPrice(BigDecimal.ONE)
                 .auctionIndex("1aa")
-                .productCode("code")
+                .productCode(ProductCode.builder().build())
                 .hidden(false)
                 .build();
 

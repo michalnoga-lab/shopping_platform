@@ -168,7 +168,7 @@ public class XmlParserOptima {
                     stringBuilder.append("<POZYCJA>");
                     stringBuilder.append("<TOWAR>");
                     stringBuilder.append("<KOD>");
-                    stringBuilder.append(product.getProductCode());
+                    stringBuilder.append(product.getProductCodeDTO());
                     stringBuilder.append("</KOD>");
                     stringBuilder.append("<NAZWA>");
                     stringBuilder.append(product.getName());

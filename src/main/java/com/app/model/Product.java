@@ -38,7 +38,10 @@ public class Product {
     private BigDecimal nettPrice;
     private Double vat;
     private BigDecimal grossPrice;
-    private String productCode;
+
+    @OneToOne
+    @JoinColumn(name = "product_code_id")
+    private ProductCode productCode;
 
     @ManyToOne
     @JoinColumn(name = "company_id")

@@ -9,6 +9,7 @@ import com.app.model.Cart;
 import com.app.model.Product;
 import com.app.repository.CartRepository;
 import com.app.repository.CompanyRepository;
+import com.app.repository.ProductCodeRepository;
 import com.app.repository.ProductRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -39,6 +40,9 @@ public class ProductServiceTests {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private ProductCodeRepository productCodeRepository;
+
     @TestConfiguration
     public static class AppTestConfiguration {
 
@@ -51,9 +55,12 @@ public class ProductServiceTests {
         @MockBean
         private CompanyRepository companyRepository;
 
+        @MockBean
+        private ProductCodeRepository productCodeRepository;
+
         @Bean
         public ProductService productService() {
-            return new ProductService(productRepository, cartRepository, companyRepository);
+            return new ProductService(productRepository, cartRepository, companyRepository, productCodeRepository);
         }
     }
 

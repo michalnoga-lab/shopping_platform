@@ -1,6 +1,7 @@
 package com.app.service;
 
 import com.app.dto.CompanyDTODetailsFromFile;
+import com.app.dto.ProductCodeDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 
 import java.security.cert.CertSelector;
+import java.util.List;
 
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -50,4 +52,16 @@ public class FileServiceTests {
 
         Assertions.assertEquals(expectedResult, actualResult);
     }
+
+//    @DisplayName("getProductsCodeFromFile - read content of file")
+//    @ParameterizedTest
+//    @CsvFileSource(resources = "/tests/companies.csv")
+//    void test30() {
+//
+//        List<ProductCodeDTO> productsCodeFromFile = fileService.getProductsCodeFromFile();
+//
+//
+//
+//    }
+    // TODO: 23.04.2020 kasujemy ??? dane mają przychodzić z JS 
 }

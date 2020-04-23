@@ -1,10 +1,13 @@
 package com.app.integration.webAdmin;
 
 import com.app.PrimaPlatformaApplication;
+import com.app.dto.GeneralUserInputDTO;
+import com.app.dto.ProductCodeDTO;
 import com.app.model.Company;
 import com.app.model.Product;
 import com.app.repository.CompanyRepository;
 import com.app.repository.ProductRepository;
+import com.app.service.SecurityService;
 import com.app.validators.GeneralUserInputDtoValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,6 +20,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -50,12 +56,28 @@ public class AdminProductControllerTests {
     @MockBean
     private CompanyRepository companyRepository;
 
+    @MockBean
+    private SecurityService securityService;
+
     @SpyBean
     private GeneralUserInputDtoValidator generalUserInputDtoValidator;
 
     @BeforeEach
     private void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+
+        Authentication authentication = Mockito.mock(Authentication.class);
+        SecurityContext securityContext = Mockito.mock(SecurityContext.class);
+
+        Mockito
+                .when(securityService.getLoggedInUserId())
+                .thenReturn(2L);
+
+        Mockito
+                .when(securityContext.getAuthentication())
+                .thenReturn(authentication);
+
+        SecurityContextHolder.setContext(securityContext);
     }
 
     @Test
@@ -82,9 +104,8 @@ public class AdminProductControllerTests {
         mockMvc
                 .perform(MockMvcRequestBuilders.post("/admin/products/addCode/{id}", 1L)
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                        .param("userInput", "TEST_CODE")
-                )
-                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+                        .param("userInput", "TEST_CODE"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
