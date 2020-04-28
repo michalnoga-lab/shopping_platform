@@ -16,7 +16,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "companies")
-public class Company {
+public class    Company {
 
     @Id
     @GeneratedValue

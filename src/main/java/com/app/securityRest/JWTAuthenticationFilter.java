@@ -63,6 +63,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .compact();
 
         response.addHeader(SecurityConfigConstants.HEADER_STRING, SecurityConfigConstants.TOKEN_PREFIX + token);
+        response.addHeader("Role", roles);
 
         response.getWriter().write(token);
         response.getWriter().flush();
