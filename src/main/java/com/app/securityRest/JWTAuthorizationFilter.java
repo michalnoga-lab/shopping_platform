@@ -43,7 +43,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
         request.setAttribute("username", authentication.getName());
 
-        System.out.println("------> " + request.getAttribute("username"));
+        System.out.println("------> " + request.getAttribute("username")); // TODO: 30.05.2020  
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         chain.doFilter(request, response);

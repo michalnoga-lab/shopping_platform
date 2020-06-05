@@ -1,13 +1,13 @@
 package com.app.securityRest;
 
+import com.app.dto.TokenDTO;
 import com.app.dto.UserLoginDTO;
 import com.app.exceptions.AppException;
 import com.app.model.InfoCodes;
-import com.app.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -62,10 +62,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .claim("roles", roles)
                 .compact();
 
-        response.addHeader(SecurityConfigConstants.HEADER_STRING, SecurityConfigConstants.TOKEN_PREFIX + token);
-        response.addHeader("Role", roles);
+        var tokenDto = TokenDTO
+                .builder()
+                .token(token)
+                .role(roles)
+                .build();
 
-        response.getWriter().write(token);
+        response.getWriter().write(new ObjectMapper().writeValueAsString(tokenDto));
         response.getWriter().flush();
         response.getWriter().close();
     }
