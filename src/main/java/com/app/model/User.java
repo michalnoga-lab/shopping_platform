@@ -27,6 +27,8 @@ public class User {
     private String email;
     private String password;
     private Boolean enabled;
+
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @Transient

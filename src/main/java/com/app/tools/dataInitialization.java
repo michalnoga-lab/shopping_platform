@@ -45,7 +45,8 @@ public class dataInitialization implements CommandLineRunner {
             .build();
 
     User user3 = User.builder()
-            .login("prima@super.super")
+            .login("super@gmail.com")
+            .email("super@gmail.com")
             .name("super")
             .surname("super")
             .role(Role.SUPER)
@@ -54,14 +55,16 @@ public class dataInitialization implements CommandLineRunner {
             .password("{bcrypt}$2a$10$/HxZgKD8i8uVvtbyMcYPkeeybREyK72tEtVV25OxPvufeUSt9fFEa")
             .build();
     User user2 = User.builder()
-            .login("admin")
+            .login("admin@gmail.com")
+            .email("admin@gmail.com")
             .name("admin")
             .role(Role.ADMIN)
             .enabled(true)
             .password("{bcrypt}$2a$10$/HxZgKD8i8uVvtbyMcYPkeeybREyK72tEtVV25OxPvufeUSt9fFEa")
             .build();
     User user1 = User.builder()
-            .login("user")
+            .login("user@gmail.com")
+            .email("user@gmail.com")
             .name("user")
             .role(Role.USER)
             .enabled(true)
@@ -69,7 +72,8 @@ public class dataInitialization implements CommandLineRunner {
             .build();
 
     User user4 = User.builder()
-            .login("prima@root.root")
+            .login("root@gmail.com")
+            .email("root@gmail.com")
             .name("root")
             .surname("root")
             .company(Company.builder().nameShortcut("prima").build())
@@ -101,7 +105,9 @@ public class dataInitialization implements CommandLineRunner {
         // TODO: 21.02.2020 for production only
         if (userRepository.findAll().size() == 0) {
             userRepository.save(user4);
-            /*userRepository.save(user3);*/
+            userRepository.save(user3);
+            userRepository.save(user2);
+            userRepository.save(user1);
         }
         // ------------------------------------------------------------------------------------
 
