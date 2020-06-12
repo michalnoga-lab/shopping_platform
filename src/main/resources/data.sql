@@ -3,19 +3,20 @@ VALUES (1, 'example_optima_code');
 
 INSERT INTO companies (id, active, city, default_price, name, name_shortcut, nip, payment_in_days, post_code, street,
                        street_number)
-VALUES (2, true, 'krakow', 'NET', 'name', 'shortcut', '0000000000', 30, '00-000', 'street', 50);
+VALUES (2, true, 'krakow', 'NET', 'name', 'shortcut', '0000000000', 30, '00-000', 'street', 50),
+       (11, true, 'krakow', 'NET', 'name', 'shortcut', '0000000000', 30, '00-000', 'street', 50);
 
 INSERT INTO products (id, auction_index, description, gross_price, hidden, name, nett_price, number_in_auction,
                       quantity, vat, company_id, product_code_id)
 VALUES (3, 22, 'description', 13, false, 'name', 10, 22, 0, 23, 2, 1),
-       (4, 22, 'description', 13, false, 'name', 10, 22, 0, 23, 2, 1),
+       (4, 22, 'description', 13, false, 'name', 10, 22, 0, 23, 11, 1),
        (5, 22, 'description', 13, false, 'name', 10, 22, 0, 23, 2, 1);
 
 INSERT INTO users (id, email, enabled, login, name, password, role, surname, company_id)
 VALUES (6, 'user@gmail.com', true, 'user@gmail.com', 'name',
         '{bcrypt}$2a$10$/HxZgKD8i8uVvtbyMcYPkeeybREyK72tEtVV25OxPvufeUSt9fFEa', 'USER', 'surname', 2),
        (7, 'admin@gmail.com', true, 'admin@gmail.com', 'name',
-        '{bcrypt}$2a$10$/HxZgKD8i8uVvtbyMcYPkeeybREyK72tEtVV25OxPvufeUSt9fFEa', 'USER', 'surname', 2);
+        '{bcrypt}$2a$10$/HxZgKD8i8uVvtbyMcYPkeeybREyK72tEtVV25OxPvufeUSt9fFEa', 'USER', 'surname', 11);
 
 INSERT INTO delivery_addresses (id, hidden, phone, street, user_id)
 VALUES (10, false, '1121212121', 'street', 6);
