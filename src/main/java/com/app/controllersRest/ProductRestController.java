@@ -27,6 +27,11 @@ public class ProductRestController {
 
     @GetMapping("/all")
     public ResponseEntity<List<ProductDTO>> all(HttpServletRequest request) {
+
+        System.out.println("_______________________________________--"); // TODO: 12.06.2020
+        System.out.println(request.getUserPrincipal());
+
+        
         return new ResponseEntity<>(productService.findProductsOfCompany(companyService.getCompanyOfUser(
                 securityService.getLoggedInUserId(request.getAttribute("username").toString())).getId()
         ), HttpStatus.OK);
