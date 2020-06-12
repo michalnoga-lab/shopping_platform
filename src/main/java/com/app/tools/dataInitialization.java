@@ -1,10 +1,9 @@
 package com.app.tools;
 
 import com.app.model.*;
-import com.app.repository.CompanyRepository;
-import com.app.repository.ProductRepository;
-import com.app.repository.UserRepository;
+import com.app.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.id.IdentifierGeneratorHelper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +17,8 @@ public class dataInitialization implements CommandLineRunner {
     private final UserRepository userRepository;
     private final CompanyRepository companyRepository;
     private final ProductRepository productRepository;
+    private final ProductCodeRepository productCodeRepository;
+    private final DeliveryAddressRepository deliveryAddressRepository;
 
     Company company1 = Company.builder()
             .name("company 1")
@@ -30,8 +31,8 @@ public class dataInitialization implements CommandLineRunner {
             .streetNumber("10")
             .postCode("1111")
             .nameShortcut("prima")
-//            .id(1L)
             .build();
+
     Company company2 = Company.builder()
             .name("company 2")
             .nip("0000000000")
@@ -83,19 +84,44 @@ public class dataInitialization implements CommandLineRunner {
             .password("{bcrypt}$2a$10$/HxZgKD8i8uVvtbyMcYPkeeybREyK72tEtVV25OxPvufeUSt9fFEa")
             .build();
 
+    ProductCode code1 = ProductCode
+            .builder()
+            .codeFromOptima("optima code")
+            .build();
+
     Product product1 = Product.builder().name("Prod1")
             .nettPrice(BigDecimal.valueOf(2.44))
             .vat(23.0)
-            //.productCode("ambipur")
+            .hidden(false)
+            .grossPrice(BigDecimal.ONE)
+            .auctionIndex("AAA")
+            .company(company1)
+            .description("DESCR")
+            .numberInAuction("num in auction")
             .grossPrice(BigDecimal.valueOf(15))
             .hidden(false)
+            .productCode(code1)
             .build();
-    Product product2 = Product.builder().name("Prod1")
+    Product product2 = Product.builder().name("Prod2")
             .nettPrice(BigDecimal.valueOf(2.44))
             .vat(23.0)
-          //  .productCode("ace")
-            .grossPrice(BigDecimal.valueOf(15))
             .hidden(false)
+            .grossPrice(BigDecimal.ONE)
+            .auctionIndex("AAA")
+            .company(company1)
+            .description("DESCR")
+            .numberInAuction("num in auction")
+            .grossPrice(BigDecimal.valueOf(15))
+            .productCode(code1)
+            .hidden(false)
+            .build();
+
+    DeliveryAddress deliveryAddress1 = DeliveryAddress
+            .builder()
+            .street("street")
+            .hidden(false)
+            .phone("phone")
+            .user(user1)
             .build();
 
     @Override
@@ -115,19 +141,23 @@ public class dataInitialization implements CommandLineRunner {
         // ------------------------------------------------------------------------------------
         // TODO: 21.02.2020 for tests only
 
-    /*
-        companyRepository.saveAll(List.of(company1, company2));
-        userRepository.saveAll(List.of(user1, user2, user3, user4));
-        Company company = companyRepository.findById(1L).get();
-        companyRepository.saveAndFlush(company);
+        deliveryAddressRepository.save(deliveryAddress1);
+        productCodeRepository.save(code1);
+
+        //companyRepository.saveAll(List.of(company1, company2));
+        companyRepository.save(company1);
+        //companyRepository.save(company2);
+        //userRepository.saveAll(List.of(user1, user2, user3, user4));
+        //Company company = companyRepository.findById(1L).get();
+        //companyRepository.saveAndFlush(company);
         User user = userRepository.findById(3L).get();
-        user.setCompany(company);
+        user.setCompany(company1);
 
-        userRepository.saveAndFlush(user);
 
-        product1.setCompany(company);
+        productRepository.save(product1);
+        productRepository.save(product2);
 
-        productRepository.saveAndFlush(product1);*/
+        //productRepository.saveAndFlush(product1);
         // ------------------------------------------------------------------------------------
 
     }
