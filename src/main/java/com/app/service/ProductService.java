@@ -92,6 +92,7 @@ public class ProductService {
         if (productSearchDTO == null) {
             throw new AppException(InfoCodes.CONTROLLERS, "search - search is null");
         }
+
         return productRepository
                 .findAll()
                 .stream()

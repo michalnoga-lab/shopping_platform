@@ -43,9 +43,10 @@ public class CartRestController {
         Optional<CartDTO> cartDTOOptional = cartService.getActiveCart(
                 securityService.getLoggedInUserId(request.getAttribute("username").toString()));
         if (cartDTOOptional.isEmpty()) {
-            return new ResponseEntity<>(Set.of(), HttpStatus.OK);
+            return new ResponseEntity<>(Set.of(ProductDTO.builder().description("test_des_from_response").build()), HttpStatus.OK);
         }
         return new ResponseEntity<>(productService.getProductsOfCart(cartDTOOptional.get().getId()), HttpStatus.OK);
+        // TODO: 24.06.2020 do poprawy - wracają produtky ostatniego otwartego koszyka
     }
 
     @GetMapping("/close")
