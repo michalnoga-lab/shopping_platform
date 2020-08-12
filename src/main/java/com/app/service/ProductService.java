@@ -86,9 +86,18 @@ public class ProductService {
         } else {
             throw new AppException(InfoCodes.SERVICE_PRODUCT, "getOneProduct - no cart with ID: " + cartId);
         }
+        // TODO: 21.07.2020 do poprawy całość!
+
+//        return Set.of(ProductDTO.builder().id(11L).name("nama").build(),
+//                ProductDTO.builder().id(12L).name("name_EXAMPLE").build(),
+//                ProductDTO.builder().id(13L).name("name_OOOOO").build(),
+//                ProductDTO.builder().id(14L).name("name_QUIT").build()
+//        );
+
     }
 
     public List<ProductDTO> search(ProductSearchDTO productSearchDTO) { // TODO: 16.04.2020 może zwrócimy tylko produkty danego użytkownika ????
+
         if (productSearchDTO == null) {
             throw new AppException(InfoCodes.CONTROLLERS, "search - search is null");
         }

@@ -55,7 +55,9 @@ public class CartService {
         Optional<CartDTO> cartDTOOptional = getActiveCart(userId);
 
         Product product = productRepository.getOne(productDTO.getId());
-        product.setQuantity(productDTO.getQuantity());
+
+        product.setQuantity(product.getQuantity() + productDTO.getQuantity());
+
         Cart cart;
         Optional<Cart> cartOptional = Optional.empty();
 
@@ -69,20 +71,6 @@ public class CartService {
 
         if (cart.getProducts() != null) {
             productsInCart = cart.getProducts();
-        }
-
-        if (productsInCart.contains(product)) {
-
-            Product productAlreadyInCart = productsInCart
-                    .stream()
-                    .filter(prod -> prod.getId().equals(product.getId()))
-                    .findFirst()
-                    .orElseThrow(() -> new IllegalArgumentException("addProductToCart - no product in cart with ID: " + product.getId()));
-
-            productAlreadyInCart.setQuantity(productAlreadyInCart.getQuantity() + product.getQuantity());
-
-        } else {
-            productsInCart.add(product);
         }
 
         cart.setProducts(productsInCart);
