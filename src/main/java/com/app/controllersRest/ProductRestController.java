@@ -30,7 +30,7 @@ public class ProductRestController {
 
         System.out.println("hit"); // TODO: 21.08.2020 remove
 
-        return new ResponseEntity<>(productService.findProductsOfCompany(companyService.getCompanyOfUser(
+        return new ResponseEntity<>(productService.getProductsOfCompany(companyService.getCompanyOfUser(
                 securityService.getLoggedInUserId(request.getAttribute("username").toString())).getId()
         ), HttpStatus.OK);
     }

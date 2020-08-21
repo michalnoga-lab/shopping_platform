@@ -32,7 +32,7 @@ public class AdminProductController {
 
     @PostMapping("/all/{id}")
     public String allProductsOfCompany(@PathVariable Long id, Model model) {
-        model.addAttribute("products", productService.findProductsOfCompany(id));
+        model.addAttribute("products", productService.getProductsOfCompany(id));
         model.addAttribute("generalUserInput", new GeneralUserInputDTO());
         model.addAttribute("errors", new HashMap<>());
         return "admin/products/all";

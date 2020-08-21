@@ -5,7 +5,7 @@ import com.app.model.Product;
 
 public interface ProductMapper {
 
-    static ProductDTO toDto(Product product) { // TODO: 21.08.2020 poprawić całość
+    static ProductDTO toDto(Product product) {
         return product == null ? null : ProductDTO.builder()
                 .id(product.getId())
                 .name(product.getName())

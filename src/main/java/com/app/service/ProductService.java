@@ -43,35 +43,12 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    public List<ProductDTO> findProductsOfCompany(Long companyId) {
+    public List<ProductDTO> getProductsOfCompany(Long companyId) {
         if (companyId == null) {
             throw new AppException(InfoCodes.SERVICE_PRODUCT, "getProductsOfCompany - company is null");
         }
 
-        System.out.println("bla"); // TODO: 21.08.2020
-        System.out.println(companyId);
-        productRepository
-                .findAll()
-                .forEach(com -> System.out.println(com));
-
-        System.out.println("---------------------------");
-        companyRepository
-                .findAll()
-                .forEach(com -> System.out.println(com));
-
-
-        System.out.println("*************************************");
-//        return companyRepository
-//                .findAll()
-//                .stream()
-//                .filter(company -> company.getId().equals(companyId))
-//                .map(Company::getProducts)
-//                .flatMap(Collection::stream)
-//                .filter(product -> !product.getHidden())
-//                .map(ProductMapper::toDto)
-//                .collect(Collectors.toList());
-
-        List<ProductDTO> all = companyRepository
+        return companyRepository
                 .findAll()
                 .stream()
                 .filter(company -> company.getId().equals(companyId))
@@ -80,23 +57,6 @@ public class ProductService {
                 .filter(product -> !product.getHidden())
                 .map(ProductMapper::toDto)
                 .collect(Collectors.toList());
-
-        System.out.println("*******************************"); // TODO: 21.08.2020 remove
-        System.out.println(all);
-        return List.of(ProductDTO.builder()
-                .name("test name qwa")
-                .nettPrice(BigDecimal.valueOf(22))
-                .build());
-
-//        return productRepository
-//                .findAll()
-//                .stream()
-//                .filter(product -> product.getCompany().getId().equals((companyId)))
-//                .filter(product -> !product.getHidden())
-//                .map(ProductMapper::toDto)
-//                .collect(Collectors.toList());
-        // TODO: 21.08.2020 remove
-//        return List.of();
     }
 
     public ProductDTO getOneProduct(Long id) {

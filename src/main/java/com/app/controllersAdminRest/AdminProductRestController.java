@@ -25,7 +25,7 @@ public class AdminProductRestController {
 
     @GetMapping("/all/{id}")
     public ResponseEntity<List<ProductDTO>> allProductsOfCompany(@PathVariable Long id) {
-        return new ResponseEntity<>(productService.findProductsOfCompany(id), HttpStatus.OK);
+        return new ResponseEntity<>(productService.getProductsOfCompany(id), HttpStatus.OK);
     }
 
     @PostMapping("/addCode/{id}")

@@ -6,6 +6,7 @@ import com.app.dto.ProductSearchDTO;
 import com.app.mappers.CompanyMapper;
 import com.app.mappers.ProductMapper;
 import com.app.model.Cart;
+import com.app.model.Company;
 import com.app.model.Product;
 import com.app.repository.CartRepository;
 import com.app.repository.CompanyRepository;
@@ -83,34 +84,16 @@ public class ProductServiceTests {
         List<Product> products = List.of(product1, product2, product3, product4, product5);
         List<ProductDTO> expectedProducts = List.of(productDTO1, productDTO2, productDTO3, productDTO4, productDTO5);
 
-
-        System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-        System.out.println(products);
-        System.out.println(expectedProducts);
-
         Mockito
                 .when(productRepository.findAll())
                 .thenReturn(products);
 
-        List<Product> productsInRepository = productRepository.findAll();
-
-        System.out.println("prodcuts in repository");
-        System.out.println(productsInRepository);
-
-        List<ProductDTO> actualProducts = productsInRepository
+        List<ProductDTO> actualProducts = productRepository
+                .findAll()
                 .stream()
                 .sorted(Comparator.comparing(Product::getId))
                 .map(ProductMapper::toDto)
                 .collect(Collectors.toList());
-
-//        System.out.println("przed find all");
-//        productRepository
-//                .findAll()
-//                .stream()
-//                .forEach(productDTO -> System.out.println(productDTO));
-
-        System.out.println("actual");
-        System.out.println(actualProducts);
 
         Assertions.assertEquals(expectedProducts, actualProducts);
     }
@@ -119,32 +102,62 @@ public class ProductServiceTests {
     @DisplayName("getProductsOfCompany")
     void test20() {
 
-        Product product1 = Product.builder().name("Product 1").hidden(false).build();
-        Product product2 = Product.builder().name("Product 2").hidden(false).build();
-        Product product3 = Product.builder().name("Product 3").hidden(false).build();
-        Product product4 = Product.builder().name("Product 4").hidden(false).build();
-        Product product5 = Product.builder().name("Product 5").hidden(false).build();
+        Company company1 = Company.builder().id(1L).build();
+        Company company2 = Company.builder().id(2L).build();
 
-        CompanyDTO companyDTO1 = CompanyDTO.builder().name("Example company 1").id(1L).build();
-        CompanyDTO companyDTO2 = CompanyDTO.builder().name("Example company 2").id(2L).build();
-        CompanyDTO companyDTO3 = CompanyDTO.builder().name("Example company 3").id(3L).build();
+        Product product1 = Product.builder().name("Product 1").company(company1).hidden(false).build();
+        Product product2 = Product.builder().name("Product 2").company(company1).hidden(false).build();
+        Product product3 = Product.builder().name("Product 3").company(company1).hidden(false).build();
+        Product product4 = Product.builder().name("Product 4").company(company2).hidden(false).build();
+        Product product5 = Product.builder().name("Product 5").company(company2).hidden(false).build();
 
-        product1.setCompany(CompanyMapper.fromDto(companyDTO1));
-        product2.setCompany(CompanyMapper.fromDto(companyDTO1));
-        product3.setCompany(CompanyMapper.fromDto(companyDTO1));
-        product4.setCompany(CompanyMapper.fromDto(companyDTO2));
-        product5.setCompany(CompanyMapper.fromDto(companyDTO3));
+        CompanyDTO companyDTO1 = CompanyMapper.toDto(company1);
+        CompanyDTO companyDTO2 = CompanyMapper.toDto(company2);
+
+        product1.setCompany(company1);
+        product2.setCompany(company1);
+        product3.setCompany(company1);
+        product4.setCompany(company2);
+        product5.setCompany(company2);
+
+        company1.setProducts(Set.of(product1, product2, product3));
+        company2.setProducts(Set.of(product4, product5));
 
         Mockito
                 .when(productRepository.findAll())
                 .thenReturn(List.of(product1, product2, product3, product4, product5));
 
-        List<ProductDTO> actualProductOfCompany1 = productService.findProductsOfCompany(companyDTO1.getId());
-        List<ProductDTO> actualProductOfCompany2 = productService.findProductsOfCompany(companyDTO2.getId());
+        Mockito
+                .when(companyRepository.findAll())
+                .thenReturn(List.of(company1, company2));
+
+        List<ProductDTO> actualProductOfCompany1 = productService.getProductsOfCompany(companyDTO1.getId());
+        List<ProductDTO> actualProductOfCompany2 = productService.getProductsOfCompany(companyDTO2.getId());
+
+        actualProductOfCompany1 = actualProductOfCompany1
+                .stream()
+                .sorted(Comparator.comparing(ProductDTO::getName))
+                .collect(Collectors.toList());
+
+        actualProductOfCompany2 = actualProductOfCompany2
+                .stream()
+                .sorted(Comparator.comparing(ProductDTO::getName))
+                .collect(Collectors.toList());
 
         List<ProductDTO> expectedProductOfCompany1 = List.of(ProductMapper.toDto(product1),
                 ProductMapper.toDto(product2), ProductMapper.toDto(product3));
-        List<ProductDTO> expectedProductOfCompany2 = List.of(ProductMapper.toDto(product4));
+        List<ProductDTO> expectedProductOfCompany2 = List.of(ProductMapper.toDto(product4),
+                ProductMapper.toDto(product5));
+
+        expectedProductOfCompany1 = expectedProductOfCompany1
+                .stream()
+                .sorted(Comparator.comparing(ProductDTO::getName))
+                .collect(Collectors.toList());
+
+        expectedProductOfCompany2 = expectedProductOfCompany2
+                .stream()
+                .sorted(Comparator.comparing(ProductDTO::getName))
+                .collect(Collectors.toList());
 
         Assertions.assertEquals(expectedProductOfCompany1, actualProductOfCompany1);
         Assertions.assertEquals(expectedProductOfCompany2, actualProductOfCompany2);
