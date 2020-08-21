@@ -16,6 +16,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -46,13 +48,55 @@ public class ProductService {
             throw new AppException(InfoCodes.SERVICE_PRODUCT, "getProductsOfCompany - company is null");
         }
 
-        return productRepository
+        System.out.println("bla"); // TODO: 21.08.2020
+        System.out.println(companyId);
+        productRepository
+                .findAll()
+                .forEach(com -> System.out.println(com));
+
+        System.out.println("---------------------------");
+        companyRepository
+                .findAll()
+                .forEach(com -> System.out.println(com));
+
+
+        System.out.println("*************************************");
+//        return companyRepository
+//                .findAll()
+//                .stream()
+//                .filter(company -> company.getId().equals(companyId))
+//                .map(Company::getProducts)
+//                .flatMap(Collection::stream)
+//                .filter(product -> !product.getHidden())
+//                .map(ProductMapper::toDto)
+//                .collect(Collectors.toList());
+
+        List<ProductDTO> all = companyRepository
                 .findAll()
                 .stream()
-                .filter(product -> product.getCompany().getId().equals((companyId)))
+                .filter(company -> company.getId().equals(companyId))
+                .map(Company::getProducts)
+                .flatMap(Collection::stream)
                 .filter(product -> !product.getHidden())
                 .map(ProductMapper::toDto)
                 .collect(Collectors.toList());
+
+        System.out.println("*******************************"); // TODO: 21.08.2020 remove
+        System.out.println(all);
+        return List.of(ProductDTO.builder()
+                .name("test name qwa")
+                .nettPrice(BigDecimal.valueOf(22))
+                .build());
+
+//        return productRepository
+//                .findAll()
+//                .stream()
+//                .filter(product -> product.getCompany().getId().equals((companyId)))
+//                .filter(product -> !product.getHidden())
+//                .map(ProductMapper::toDto)
+//                .collect(Collectors.toList());
+        // TODO: 21.08.2020 remove
+//        return List.of();
     }
 
     public ProductDTO getOneProduct(Long id) {
@@ -79,10 +123,10 @@ public class ProductService {
         Optional<Cart> cartFromDb = cartRepository.findById(cartId);
 
         if (cartFromDb.isPresent()) {
-            return cartFromDb.get().getProducts()
-                    .stream()
-                    .map(ProductMapper::toDto)
-                    .collect(Collectors.toSet());
+//            return cartFromDb.get().getProducts()
+//                    .stream()
+//                    .map(ProductMapper::toDto)
+//                    .collect(Collectors.toSet()); // TODO: 13.08.2020 zwracanie produktów >
         } else {
             throw new AppException(InfoCodes.SERVICE_PRODUCT, "getOneProduct - no cart with ID: " + cartId);
         }
@@ -94,6 +138,7 @@ public class ProductService {
 //                ProductDTO.builder().id(14L).name("name_QUIT").build()
 //        );
 
+        return null; // TODO: 13.08.2020  
     }
 
     public List<ProductDTO> search(ProductSearchDTO productSearchDTO) { // TODO: 16.04.2020 może zwrócimy tylko produkty danego użytkownika ????

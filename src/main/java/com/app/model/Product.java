@@ -47,9 +47,15 @@ public class Product {
     @JoinColumn(name = "company_id")
     private Company company;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "products")
-    private Set<Cart> carts;
+//    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "products")
+//    private Set<Cart> carts;
+    // TODO: 13.08.2020 remove
 
+//    @ManyToOne(cascade = CascadeType.PERSIST)
+//    @JoinColumn(name = "product_id")
+//    private Cart cart;
+
+    //@Column(columnDefinition = "false") // TODO: 13.08.2020 czy to działa ???
     private Boolean hidden;
 
     @Override
@@ -62,14 +68,13 @@ public class Product {
                 Objects.equals(numberInAuction, product.numberInAuction) &&
                 Objects.equals(auctionIndex, product.auctionIndex) &&
                 Objects.equals(description, product.description) &&
-                Objects.equals(quantity, product.quantity) &&
                 Objects.equals(nettPrice, product.nettPrice) &&
                 Objects.equals(vat, product.vat);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, numberInAuction, auctionIndex, description, quantity, nettPrice, vat);
+        return Objects.hash(id, name, numberInAuction, auctionIndex, description, nettPrice, vat);
     }
 
     @Override
@@ -80,7 +85,6 @@ public class Product {
                 ", numberInAuction='" + numberInAuction + '\'' +
                 ", auctionIndex='" + auctionIndex + '\'' +
                 ", description='" + description + '\'' +
-                ", quantity=" + quantity +
                 ", nettPrice=" + nettPrice +
                 ", vat=" + vat +
                 ", grossPrice=" + grossPrice +

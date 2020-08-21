@@ -1,27 +1,23 @@
 package com.app.mappers;
 
 import com.app.dto.ProductDTO;
-import com.app.model.Cart;
-import com.app.model.Company;
 import com.app.model.Product;
-
-import java.util.HashSet;
 
 public interface ProductMapper {
 
-    static ProductDTO toDto(Product product) {
+    static ProductDTO toDto(Product product) { // TODO: 21.08.2020 poprawić całość
         return product == null ? null : ProductDTO.builder()
                 .id(product.getId())
-                .companyDTO(product.getCompany() == null ? null : CompanyMapper.toDto(product.getCompany()))
-                .description(product.getDescription())
                 .name(product.getName())
-                .nettPrice(product.getNettPrice())
-                .quantity(product.getQuantity())
                 .numberInAuction(product.getNumberInAuction())
-                .grossPrice(product.getGrossPrice())
-                .vat(product.getVat())
                 .auctionIndex(product.getAuctionIndex())
+                .description(product.getDescription())
+                .quantity(product.getQuantity())
+                .nettPrice(product.getNettPrice())
+                .vat(product.getVat())
+                .grossPrice(product.getGrossPrice())
                 .productCodeDTO(product.getProductCode() == null ? null : ProductCodeMapper.toDto(product.getProductCode()))
+                .companyDTO(product.getCompany() == null ? null : CompanyMapper.toDto(product.getCompany()))
                 .hidden(product.getHidden())
                 .build();
     }
@@ -29,17 +25,16 @@ public interface ProductMapper {
     static Product fromDto(ProductDTO productDTO) {
         return productDTO == null ? null : Product.builder()
                 .id(productDTO.getId())
-                .company(productDTO.getCompanyDTO() == null ? null : CompanyMapper.fromDto(productDTO.getCompanyDTO()))
-                .description(productDTO.getDescription())
                 .name(productDTO.getName())
-                .nettPrice(productDTO.getNettPrice())
-                .quantity(productDTO.getQuantity())
-                .carts(new HashSet<>())
-                .grossPrice(productDTO.getGrossPrice())
                 .numberInAuction(productDTO.getNumberInAuction())
-                .vat(productDTO.getVat())
                 .auctionIndex(productDTO.getAuctionIndex())
+                .description(productDTO.getDescription())
+                .quantity(productDTO.getQuantity())
+                .nettPrice(productDTO.getNettPrice())
+                .vat(productDTO.getVat())
+                .grossPrice(productDTO.getGrossPrice())
                 .productCode(productDTO.getProductCodeDTO() == null ? null : ProductCodeMapper.fromDto(productDTO.getProductCodeDTO()))
+                .company(productDTO.getCompanyDTO() == null ? null : CompanyMapper.fromDto(productDTO.getCompanyDTO()))
                 .hidden(productDTO.getHidden())
                 .build();
     }

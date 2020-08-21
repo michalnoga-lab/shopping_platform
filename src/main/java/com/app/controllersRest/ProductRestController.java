@@ -27,13 +27,16 @@ public class ProductRestController {
 
     @GetMapping("/all")
     public ResponseEntity<List<ProductDTO>> all(HttpServletRequest request) {
+
+        System.out.println("hit"); // TODO: 21.08.2020 remove
+
         return new ResponseEntity<>(productService.findProductsOfCompany(companyService.getCompanyOfUser(
                 securityService.getLoggedInUserId(request.getAttribute("username").toString())).getId()
         ), HttpStatus.OK);
     }
 
-    @PostMapping("/buy/{id}")
-    public ResponseEntity<CartDTO> buy(@RequestBody ProductDTO productDTO, HttpServletRequest request) {
+    @PostMapping("/buy") // TODO: 13.08.2020 przesyłanie bez ID wszystko w body
+    public ResponseEntity<CartDTO> buy(HttpServletRequest request, @RequestBody ProductDTO productDTO) {
         return new ResponseEntity<>(cartService.addProductToCart(productDTO,
                 securityService.getLoggedInUserId(request.getAttribute("username").toString())), HttpStatus.OK);
     }

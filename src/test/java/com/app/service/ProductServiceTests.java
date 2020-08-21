@@ -83,14 +83,34 @@ public class ProductServiceTests {
         List<Product> products = List.of(product1, product2, product3, product4, product5);
         List<ProductDTO> expectedProducts = List.of(productDTO1, productDTO2, productDTO3, productDTO4, productDTO5);
 
+
+        System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+        System.out.println(products);
+        System.out.println(expectedProducts);
+
         Mockito
                 .when(productRepository.findAll())
                 .thenReturn(products);
 
-        List<ProductDTO> actualProducts = productService.findAll()
+        List<Product> productsInRepository = productRepository.findAll();
+
+        System.out.println("prodcuts in repository");
+        System.out.println(productsInRepository);
+
+        List<ProductDTO> actualProducts = productsInRepository
                 .stream()
-                .sorted(Comparator.comparing(ProductDTO::getId))
+                .sorted(Comparator.comparing(Product::getId))
+                .map(ProductMapper::toDto)
                 .collect(Collectors.toList());
+
+//        System.out.println("przed find all");
+//        productRepository
+//                .findAll()
+//                .stream()
+//                .forEach(productDTO -> System.out.println(productDTO));
+
+        System.out.println("actual");
+        System.out.println(actualProducts);
 
         Assertions.assertEquals(expectedProducts, actualProducts);
     }
@@ -169,7 +189,7 @@ public class ProductServiceTests {
 
         Cart cart = Cart.builder().id(6L).build();
         Optional<Cart> cartOptional = Optional.of(cart);
-        cart.setProducts(new HashSet<>(products));
+        //cart.setProducts(new HashSet<>(products));
 
         Mockito
                 .when(cartRepository.findById(cart.getId()))

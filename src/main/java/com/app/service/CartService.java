@@ -21,16 +21,29 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor // TODO: 13.08.2020 ma być lombok
 public class CartService {
 
     private final CartRepository cartRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
     private final DeliveryAddressRepository deliveryAddressRepository;
+    private final ProductsInCartRepository productsInCartRepository;
+
 
     private final XmlParserOptima xmlParserOptima;
     private final EmailService emailService;
+
+
+    public CartService(CartRepository cartRepository, UserRepository userRepository, ProductRepository productRepository, DeliveryAddressRepository deliveryAddressRepository, ProductsInCartRepository productsInCartRepository, XmlParserOptima xmlParserOptima, EmailService emailService) {
+        this.cartRepository = cartRepository;
+        this.userRepository = userRepository;
+        this.productRepository = productRepository;
+        this.deliveryAddressRepository = deliveryAddressRepository;
+        this.productsInCartRepository = productsInCartRepository;
+        this.xmlParserOptima = xmlParserOptima;
+        this.emailService = emailService;
+    }
 
     public CartDTO getCart(Long cartId) {
         if (cartId == null) {
@@ -51,12 +64,18 @@ public class CartService {
         if (productDTO == null) {
             throw new AppException(InfoCodes.SERVICE_CART, "addProductToCart - product is null");
         }
+
+        // TODO: 13.08.2020
+        System.out.println(productDTO);
+
+
         User user = userRepository.getOne(userId);
         Optional<CartDTO> cartDTOOptional = getActiveCart(userId);
 
         Product product = productRepository.getOne(productDTO.getId());
 
-        product.setQuantity(product.getQuantity() + productDTO.getQuantity());
+        //product.setQuantity(product.getQuantity() + productDTO.getQuantity());
+        // TODO: 13.08.2020
 
         Cart cart;
         Optional<Cart> cartOptional = Optional.empty();
@@ -66,23 +85,61 @@ public class CartService {
         }
 
         cart = cartOptional.orElseGet(() -> Cart.builder().cartClosed(false).build());
+        // TODO: 13.08.2020 domyślne wartości startowe koszyka netto vat brutto ???
 
-        Set<Product> productsInCart = new HashSet<>();
+        //Set<Product> productsInCart = new HashSet<>();
 
-        if (cart.getProducts() != null) {
+        //Set<ProductsInCart> productsInCart = getAllProductsFromCart(cart.getId());
+
+        ProductsInCart singleProductInCart = ProductsInCart.builder()
+                .cart(cart)
+                .productId(product.getId())
+                .quantity(productDTO.getQuantity())
+                .nettPrice(product.getNettPrice())
+                .vat(product.getVat())
+                .grossPrice(product.getGrossPrice())
+                .build();
+
+        //productsInCart.add(singleProductInCart);
+
+        /*if (cart.getProducts() != null) {
             productsInCart = cart.getProducts();
-        }
+        }*/
+        // TODO: 13.08.2020
 
-        cart.setProducts(productsInCart);
+        //cart.setProducts(productsInCart);
+        // TODO: 13.08.2020
 
-        CartDTO cartValues = calculateCartValue(productsInCart, user.getCompany().getDefaultPrice());
-        cart.setTotalNetValue(cartValues.getTotalNetValue());
-        cart.setTotalVatValue(cartValues.getTotalVatValue());
-        cart.setTotalGrossValue(cartValues.getTotalGrossValue());
+//        CartDTO cartValues = calculateCartValue(productsInCart, user.getCompany().getDefaultPrice());
+//        cart.setTotalNetValue(cartValues.getTotalNetValue());
+//        cart.setTotalVatValue(cartValues.getTotalVatValue());
+//        cart.setTotalGrossValue(cartValues.getTotalGrossValue());
 
+        System.out.println("ble1");
+
+        BigDecimal totalNettCartValue = calculateCartNettValue
+                (singleProductInCart.getNettPrice(),
+                        singleProductInCart.getQuantity());
+
+        System.out.println("ble2");
+        System.out.println(totalNettCartValue);
+
+        cart.setTotalNetValue(totalNettCartValue);
+
+        productsInCartRepository.save(singleProductInCart);
         cart.setUser(user);
         cartRepository.save(cart);
         return CartMapper.toDto(cart);
+    }
+
+    public BigDecimal calculateCartNettValue(BigDecimal price, Integer quantity) {
+        System.out.println(price); // TODO: 14.08.2020  remove
+        System.out.println(quantity);
+        return BigDecimal.valueOf(quantity).multiply(price);
+    }
+
+    public List<ProductsInCart> getAllProductsFromCart(Long cartId) {
+        return List.of(); // TODO: 13.08.2020
     }
 
     public CartDTO removeProductFromCart(Long productId, Long userId) {
@@ -95,23 +152,28 @@ public class CartService {
                 .findFirst()
                 .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "removeProductFromCart - no open cart for user with ID: " + userId));
 
-        Set<Product> products = cart.getProducts()
-                .stream()
-                .filter(product -> !product.getId().equals(productId))
-                .collect(Collectors.toSet());
+//        Set<Product> products = cart.getProducts()
+//                .stream()
+//                .filter(product -> !product.getId().equals(productId))
+//                .collect(Collectors.toSet());
+        Set<Product> products = new HashSet<>();
+        // TODO: 13.08.2020
 
-        cart.setProducts(products);
+        //cart.setProducts(products);
 
-        CartDTO cartValues = calculateCartValue(products, user.getCompany().getDefaultPrice());
-        cart.setTotalNetValue(cartValues.getTotalNetValue());
-        cart.setTotalVatValue(cartValues.getTotalVatValue());
-        cart.setTotalGrossValue(cartValues.getTotalGrossValue());
+//        CartDTO cartValues = calculateCartValue(products, user.getCompany().getDefaultPrice());
+//        cart.setTotalNetValue(cartValues.getTotalNetValue());
+//        cart.setTotalVatValue(cartValues.getTotalVatValue());
+//        cart.setTotalGrossValue(cartValues.getTotalGrossValue());
+
+
+        // TODO: 13.08.2020 do poprawy wartość koszyka
 
         cartRepository.save(cart);
         return CartMapper.toDto(cart);
     }
 
-    public CartDTO calculateCartValue(Set<Product> productsInCart, Price priceType) {
+    public CartDTO calculateCartValue(Set<ProductsInCart> productsInCart, Price priceType) {
         if (productsInCart == null) {
             throw new AppException(InfoCodes.SERVICE_CART, "calculateCartValue - products set is null");
         }
@@ -120,32 +182,33 @@ public class CartService {
         BigDecimal totalVatValue = BigDecimal.ZERO;
         BigDecimal totalGrossValue = BigDecimal.ZERO;
 
-        if (priceType.equals(Price.NET)) {
-            for (Product product : productsInCart) {
-                BigDecimal currentNetValue = product.getNettPrice().multiply(BigDecimal.valueOf(product.getQuantity()));
-                BigDecimal currentVatValue = currentNetValue.multiply(BigDecimal.valueOf(product.getVat()));
-                BigDecimal currentGrossValue = currentNetValue.add(currentVatValue);
-
-                totalNetValue = totalNetValue.add(currentNetValue);
-                totalVatValue = totalVatValue.add(currentVatValue);
-                totalGrossValue = totalGrossValue.add(currentGrossValue);
-            }
-        } else {
-            for (Product product : productsInCart) {
-                BigDecimal currentGrossValue = product.getGrossPrice().multiply(BigDecimal.valueOf(product.getQuantity()));
-                BigDecimal currentNetValue = currentGrossValue.divide(
-                        (BigDecimal.ONE.setScale(2, RoundingMode.HALF_UP).add(BigDecimal.valueOf(
-                                product.getVat()).setScale(2, RoundingMode.HALF_UP))));
-                BigDecimal currentVatValue = currentGrossValue.subtract(currentNetValue);
-
-                totalGrossValue = totalGrossValue.add(currentGrossValue);
-                totalVatValue = totalVatValue.add(currentVatValue);
-                totalNetValue = totalNetValue.add(currentNetValue);
-            }
-        }
-        cartDTO.setTotalNetValue(totalNetValue.setScale(2, RoundingMode.HALF_UP));
-        cartDTO.setTotalVatValue(totalVatValue.setScale(2, RoundingMode.HALF_UP));
-        cartDTO.setTotalGrossValue(totalGrossValue.setScale(2, RoundingMode.HALF_UP));
+        // TODO: 13.08.2020 do poprawy
+//        if (priceType.equals(Price.NET)) {
+//            for (Product product : productsInCart) {
+//                BigDecimal currentNetValue = product.getNettPrice().multiply(BigDecimal.valueOf(product.getQuantity()));
+//                BigDecimal currentVatValue = currentNetValue.multiply(BigDecimal.valueOf(product.getVat()));
+//                BigDecimal currentGrossValue = currentNetValue.add(currentVatValue);
+//
+//                totalNetValue = totalNetValue.add(currentNetValue);
+//                totalVatValue = totalVatValue.add(currentVatValue);
+//                totalGrossValue = totalGrossValue.add(currentGrossValue);
+//            }
+//        } else {
+//            for (Product product : productsInCart) {
+//                BigDecimal currentGrossValue = product.getGrossPrice().multiply(BigDecimal.valueOf(product.getQuantity()));
+//                BigDecimal currentNetValue = currentGrossValue.divide(
+//                        (BigDecimal.ONE.setScale(2, RoundingMode.HALF_UP).add(BigDecimal.valueOf(
+//                                product.getVat()).setScale(2, RoundingMode.HALF_UP))));
+//                BigDecimal currentVatValue = currentGrossValue.subtract(currentNetValue);
+//
+//                totalGrossValue = totalGrossValue.add(currentGrossValue);
+//                totalVatValue = totalVatValue.add(currentVatValue);
+//                totalNetValue = totalNetValue.add(currentNetValue);
+//            }
+//        }
+//        cartDTO.setTotalNetValue(totalNetValue.setScale(2, RoundingMode.HALF_UP));
+//        cartDTO.setTotalVatValue(totalVatValue.setScale(2, RoundingMode.HALF_UP));
+//        cartDTO.setTotalGrossValue(totalGrossValue.setScale(2, RoundingMode.HALF_UP));
         return cartDTO;
     }
 
@@ -218,12 +281,14 @@ public class CartService {
         cart.setOrderNumber(fileName);
 
         cartRepository.save(cart);
-        Set<ProductDTO> productsInCart = cart.getProducts()
-                .stream()
-                .map(ProductMapper::toDto)
-                .collect(Collectors.toSet());
+//        Set<ProductDTO> productsInCart = cart.getProducts()
+//                .stream()
+//                .map(ProductMapper::toDto)
+//                .collect(Collectors.toSet());
 
-        String orderInXml = xmlParserOptima.generateXmlFileContent(cartDTO, productsInCart);
+        //String orderInXml = xmlParserOptima.generateXmlFileContent(cartDTO, productsInCart);
+        String orderInXml = "";
+        // TODO: 13.08.2020  
         String pathToFile = FileManager.saveFileToDisk(orderInXml, fileName);
         emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
 

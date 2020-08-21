@@ -33,7 +33,7 @@ public interface CartMapper {
                 .totalVatValue(cartDTO.getTotalVatValue())
                 .deliveryAddress(cartDTO.getDeliveryAddressDTO() == null ?
                         null : DeliveryAddressMapper.fromDto(cartDTO.getDeliveryAddressDTO()))
-                .products(new HashSet<>())
+//                .products(new HashSet<>())
                 .purchaseTime(cartDTO.getPurchaseTime())
                 .orderNumber(cartDTO.getOrderNumber())
                 .build();

@@ -38,13 +38,20 @@ public class Cart {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(
-            name = "cart_product",
-            joinColumns = {@JoinColumn(name = "cart_id")},
-            inverseJoinColumns = {@JoinColumn(name = "product_id")}
-    )
-    private Set<Product> products;
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "cart")
+    private Set<ProductsInCart> productsInCart;
+
+//    @ManyToMany(cascade = CascadeType.PERSIST)
+//    @JoinTable(
+//            name = "cart_product",
+//            joinColumns = {@JoinColumn(name = "cart_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "product_id")}
+//    )
+//    private Set<Product> products;
+    // TODO: 13.08.2020 remove
+
+//    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "cart")
+//    private Set<Product> products;
 
     @Override
     public boolean equals(Object o) {
@@ -56,11 +63,12 @@ public class Cart {
                 Objects.equals(totalVatValue, cart.totalVatValue) &&
                 Objects.equals(totalGrossValue, cart.totalGrossValue) &&
                 Objects.equals(cartClosed, cart.cartClosed) &&
-                Objects.equals(purchaseTime, cart.purchaseTime);
+                Objects.equals(purchaseTime, cart.purchaseTime) &&
+                Objects.equals(orderNumber, cart.orderNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, totalNetValue, totalVatValue, totalGrossValue, cartClosed, purchaseTime);
+        return Objects.hash(id, totalNetValue, cartClosed, purchaseTime, orderNumber);
     }
 }
