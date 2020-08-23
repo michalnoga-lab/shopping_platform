@@ -256,98 +256,28 @@ public class CartServiceTests {
         Assertions.assertEquals(BigDecimal.valueOf(23).setScale(2, RoundingMode.HALF_UP), actualValue);
     }
 
-
-
     @Test
-    @DisplayName("getAllUsersCarts - user has no carts")
+    @DisplayName("calculateCartGrossValue")
     void test50() {
 
-        Mockito
-                .when(cartRepository.findAll())
-                .thenReturn(List.of());
-
-        List<CartDTO> expectedCarts = List.of();
-
-        Assertions.assertEquals(expectedCarts, cartService.getAllUsersCarts(1L));
+        BigDecimal actualValue = cartService.calculateTotalGrossValue(BigDecimal.TEN, BigDecimal.valueOf(2.30));
+        Assertions.assertEquals(BigDecimal.valueOf(12.30).setScale(2, RoundingMode.HALF_UP), actualValue);
     }
 
     @Test
-    @DisplayName("getAllUsersCarts - user has one open cart")
+    @DisplayName("calculateCartGrossValue")
     void test51() {
 
-        User user = User.builder().id(1L).build();
-        Optional<User> userOptional = Optional.of(user);
-        Cart cart = Cart.builder().id(2L).cartClosed(false).build();
-        List<Cart> carts = List.of(cart);
-
-        Mockito
-                .when(userRepository.findById(1L))
-                .thenReturn(userOptional);
-
-        Mockito
-                .when(cartRepository.findAllByUserId(1L))
-                .thenReturn(carts);
-
-        List<CartDTO> expectedCarts = List.of(CartMapper.toDto(cart));
-
-        Assertions.assertEquals(expectedCarts, cartService.getAllUsersCarts(user.getId()));
+        BigDecimal actualValue = cartService.calculateTotalGrossValue(BigDecimal.valueOf(100), BigDecimal.valueOf(23));
+        Assertions.assertEquals(BigDecimal.valueOf(123).setScale(2, RoundingMode.HALF_UP), actualValue);
     }
 
     @Test
-    @DisplayName("getAllUsersCarts - user has one closed cart")
+    @DisplayName("calculateCartGrossValue")
     void test52() {
 
-        User user = User.builder().id(1L).build();
-        Optional<User> userOptional = Optional.of(user);
-        Cart cart = Cart.builder().id(2L).cartClosed(true).build();
-        List<Cart> carts = List.of(cart);
-
-        Mockito
-                .when(userRepository.findById(1L))
-                .thenReturn(userOptional);
-
-        Mockito
-                .when(cartRepository.findAllByUserId(1L))
-                .thenReturn(carts);
-
-        List<CartDTO> expectedCarts = List.of(CartMapper.toDto(cart));
-
-        Assertions.assertEquals(expectedCarts, cartService.getAllUsersCarts(user.getId()));
-    }
-
-    @Test
-    @DisplayName("getAllUsersCarts - user has many open and closed carts")
-    void test53() {
-
-        User user = User.builder().id(1L).build();
-        Optional<User> userOptional = Optional.of(user);
-
-        Cart cart2 = Cart.builder().id(2L).cartClosed(true).build();
-        Cart cart3 = Cart.builder().id(3L).cartClosed(false).build();
-        Cart cart4 = Cart.builder().id(4L).cartClosed(false).build();
-        Cart cart5 = Cart.builder().id(5L).cartClosed(false).build();
-        Cart cart6 = Cart.builder().id(6L).cartClosed(true).build();
-        Cart cart7 = Cart.builder().id(7L).cartClosed(true).build();
-
-        List<Cart> carts = List.of(cart2, cart3, cart4, cart5, cart6, cart7);
-
-        Mockito
-                .when(userRepository.findById(1L))
-                .thenReturn(userOptional);
-
-        Mockito
-                .when(cartRepository.findAllByUserId(1L))
-                .thenReturn(carts);
-
-        List<CartDTO> expectedCarts = List.of(
-                CartMapper.toDto(cart2),
-                CartMapper.toDto(cart3),
-                CartMapper.toDto(cart4),
-                CartMapper.toDto(cart5),
-                CartMapper.toDto(cart6),
-                CartMapper.toDto(cart7));
-
-        Assertions.assertEquals(expectedCarts, cartService.getAllUsersCarts(user.getId()));
+        BigDecimal actualValue = cartService.calculateTotalGrossValue(BigDecimal.valueOf(200), BigDecimal.valueOf(46));
+        Assertions.assertEquals(BigDecimal.valueOf(246).setScale(2, RoundingMode.HALF_UP), actualValue);
     }
 
     @Test
