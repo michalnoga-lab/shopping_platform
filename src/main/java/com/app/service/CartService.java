@@ -7,7 +7,6 @@ import com.app.dto.ProductDTO;
 import com.app.exceptions.AppException;
 import com.app.model.InfoCodes;
 import com.app.mappers.CartMapper;
-import com.app.mappers.ProductMapper;
 import com.app.model.*;
 import com.app.parsers.XmlParserOptima;
 import com.app.repository.*;
@@ -15,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -124,7 +122,7 @@ public class CartService {
                 (singleProductInCart.getNettPrice(),
                         singleProductInCart.getQuantity());
 
-        BigDecimal totalVatCartValue = calculateVatValue(totalNettCartValue, product.getVat());
+        BigDecimal totalVatCartValue = calculateCartVatValue(totalNettCartValue, product.getVat());
 
         BigDecimal totalGrossCartValue = calculateTotalGrossValue(totalNettCartValue, totalVatCartValue);
 
@@ -146,9 +144,8 @@ public class CartService {
         return BigDecimal.valueOf(quantity).multiply(price).setScale(2, RoundingMode.HALF_UP);
     }
 
-    public BigDecimal calculateVatValue(BigDecimal nettValue, Double vat) {
-        BigDecimal vatInBD = new BigDecimal(vat).divide(BigDecimal.valueOf(100), RoundingMode.DOWN);
-        return nettValue.multiply(vatInBD).setScale(2, RoundingMode.HALF_UP);
+    public BigDecimal calculateCartVatValue(BigDecimal nettValue, Double vat) {
+        return nettValue.multiply(BigDecimal.valueOf(vat / 100)).setScale(2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal calculateTotalGrossValue(BigDecimal nettValue, BigDecimal vatValue) {

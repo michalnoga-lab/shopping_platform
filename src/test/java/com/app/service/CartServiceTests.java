@@ -218,11 +218,45 @@ public class CartServiceTests {
 
     @Test
     @DisplayName("calculateCartNettValue")
-    void test30() {
+    void test31() {
 
-        BigDecimal actualValue = cartService.calculateCartNettValue(BigDecimal.TEN, 10);
-        Assertions.assertEquals(BigDecimal.valueOf(100).setScale(2, RoundingMode.HALF_UP), actualValue);
+        BigDecimal actualValue = cartService.calculateCartNettValue(BigDecimal.TEN, 100);
+        Assertions.assertEquals(BigDecimal.valueOf(1000).setScale(2, RoundingMode.HALF_UP), actualValue);
     }
+
+    @Test
+    @DisplayName("calculateCartNettValue")
+    void test32() {
+
+        BigDecimal actualValue = cartService.calculateCartNettValue(BigDecimal.TEN, 50);
+        Assertions.assertEquals(BigDecimal.valueOf(500).setScale(2, RoundingMode.HALF_UP), actualValue);
+    }
+
+    @Test
+    @DisplayName("calculateCartVatValue")
+    void test40() {
+
+        BigDecimal actualValue = cartService.calculateCartVatValue(BigDecimal.TEN, 23.00);
+        Assertions.assertEquals(BigDecimal.valueOf(2.30).setScale(2, RoundingMode.HALF_UP), actualValue);
+    }
+
+    @Test
+    @DisplayName("calculateCartVatValue")
+    void test41() {
+
+        BigDecimal actualValue = cartService.calculateCartVatValue(BigDecimal.ZERO, 23.00);
+        Assertions.assertEquals(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP), actualValue);
+    }
+
+    @Test
+    @DisplayName("calculateCartVatValue")
+    void test42() {
+
+        BigDecimal actualValue = cartService.calculateCartVatValue(BigDecimal.valueOf(100), 23.00);
+        Assertions.assertEquals(BigDecimal.valueOf(23).setScale(2, RoundingMode.HALF_UP), actualValue);
+    }
+
+
 
     @Test
     @DisplayName("getAllUsersCarts - user has no carts")
