@@ -15,13 +15,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-//@RequiredArgsConstructor // TODO: 13.08.2020 ma być lombok
+@RequiredArgsConstructor
 public class CartService {
 
     private final CartRepository cartRepository;
@@ -35,15 +36,17 @@ public class CartService {
     private final EmailService emailService;
 
 
-    public CartService(CartRepository cartRepository, UserRepository userRepository, ProductRepository productRepository, DeliveryAddressRepository deliveryAddressRepository, ProductsInCartRepository productsInCartRepository, XmlParserOptima xmlParserOptima, EmailService emailService) {
-        this.cartRepository = cartRepository;
-        this.userRepository = userRepository;
-        this.productRepository = productRepository;
-        this.deliveryAddressRepository = deliveryAddressRepository;
-        this.productsInCartRepository = productsInCartRepository;
-        this.xmlParserOptima = xmlParserOptima;
-        this.emailService = emailService;
-    }
+    // TODO: 23.08.2020 remove
+//    public CartService(CartRepository cartRepository, UserRepository userRepository, ProductRepository productRepository, DeliveryAddressRepository deliveryAddressRepository, ProductsInCartRepository productsInCartRepository, XmlParserOptima xmlParserOptima, EmailService emailService) {
+//        this.cartRepository = cartRepository;
+//        this.userRepository = userRepository;
+//        this.productRepository = productRepository;
+//        this.deliveryAddressRepository = deliveryAddressRepository;
+//        this.productsInCartRepository = productsInCartRepository;
+//        this.xmlParserOptima = xmlParserOptima;
+//        this.emailService = emailService;
+//    }
+    // TODO: 21.08.2020 remove
 
     public CartDTO getCart(Long cartId) {
         if (cartId == null) {
@@ -121,10 +124,17 @@ public class CartService {
                 (singleProductInCart.getNettPrice(),
                         singleProductInCart.getQuantity());
 
+        BigDecimal totalVatCartValue = calculateVatValue(totalNettCartValue, product.getVat());
+
+        BigDecimal totalGrossCartValue = calculateTotalGrossValue(totalNettCartValue, totalVatCartValue);
+
         System.out.println("ble2");
         System.out.println(totalNettCartValue);
+        System.out.println(totalVatCartValue);
 
         cart.setTotalNetValue(totalNettCartValue);
+        cart.setTotalVatValue(totalVatCartValue);
+        cart.setTotalGrossValue(totalGrossCartValue);
 
         productsInCartRepository.save(singleProductInCart);
         cart.setUser(user);
@@ -133,9 +143,16 @@ public class CartService {
     }
 
     public BigDecimal calculateCartNettValue(BigDecimal price, Integer quantity) {
-        System.out.println(price); // TODO: 14.08.2020  remove
-        System.out.println(quantity);
-        return BigDecimal.valueOf(quantity).multiply(price);
+        return BigDecimal.valueOf(quantity).multiply(price).setScale(2, RoundingMode.HALF_UP);
+    }
+
+    public BigDecimal calculateVatValue(BigDecimal nettValue, Double vat) {
+        BigDecimal vatInBD = new BigDecimal(vat).divide(BigDecimal.valueOf(100), RoundingMode.DOWN);
+        return nettValue.multiply(vatInBD).setScale(2, RoundingMode.HALF_UP);
+    }
+
+    public BigDecimal calculateTotalGrossValue(BigDecimal nettValue, BigDecimal vatValue) {
+        return nettValue.add(vatValue).setScale(2, RoundingMode.HALF_UP);
     }
 
     public List<ProductsInCart> getAllProductsFromCart(Long cartId) {
