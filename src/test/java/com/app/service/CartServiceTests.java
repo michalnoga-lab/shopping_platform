@@ -1,10 +1,7 @@
 package com.app.service;
 
 import com.app.Utilities.FileManager;
-import com.app.dto.CartDTO;
-import com.app.dto.CompanyDTO;
-import com.app.dto.DeliveryAddressDTO;
-import com.app.dto.ProductDTO;
+import com.app.dto.*;
 import com.app.exceptions.AppException;
 import com.app.mappers.CartMapper;
 import com.app.mappers.CompanyMapper;
@@ -170,7 +167,6 @@ public class CartServiceTests {
     @Test
     @DisplayName("addProductToCart - check cart value - no products in cart")
     void test20() {
-        // TODO: 23.08.2020 dokończyć - nie działa wartość VAT
 
         Cart cart = Cart.builder().id(1L).cartClosed(false).build();
 
@@ -206,6 +202,58 @@ public class CartServiceTests {
                 cartDTO.getTotalVatValue());
         Assertions.assertEquals(BigDecimal.valueOf(615).setScale(2, RoundingMode.HALF_UP),
                 cartDTO.getTotalGrossValue());
+    }
+
+    @Test
+    @DisplayName("addProductToCart - check cart value - products in cart")
+    void test21() {
+
+        // TODO: 23.08.2020 dokończyć
+
+        Cart cart = Cart.builder()
+                .id(1L)
+                .totalNetValue(BigDecimal.valueOf(100))
+                .totalGrossValue(BigDecimal.valueOf(23))
+                .totalGrossValue(BigDecimal.valueOf(123))
+                .cartClosed(false)
+                .build();
+
+        Product product = Product.builder()
+                .id(2L)
+                .name("name")
+                .quantity(10)
+                .nettPrice(BigDecimal.valueOf(10.00))
+                .vat(23.00)
+                .grossPrice(BigDecimal.valueOf(12.30))
+                .hidden(false)
+                .build();
+
+        User user = User.builder().id(3L).build();
+
+        Mockito
+                .when(productRepository.findAll())
+                .thenReturn(List.of(product));
+
+        /*Mockito
+                .when(cartRepository.findAll())
+                .thenReturn(List.of(cart));*/
+
+        Mockito
+                .when(productRepository.getOne(2L))
+                .thenReturn(product);
+
+/*        Mockito
+                .when(cart.getTotalNetValue())
+                .thenReturn(BigDecimal.valueOf(100));*/
+
+        CartDTO cartDTO = cartService.addProductToCart(ProductMapper.toDto(product), user.getId());
+
+        Assertions.assertEquals(BigDecimal.valueOf(200).setScale(2, RoundingMode.HALF_UP),
+                cartDTO.getTotalNetValue());
+       /* Assertions.assertEquals(BigDecimal.valueOf(115).setScale(2, RoundingMode.HALF_UP),
+                cartDTO.getTotalVatValue());
+        Assertions.assertEquals(BigDecimal.valueOf(615).setScale(2, RoundingMode.HALF_UP),
+                cartDTO.getTotalGrossValue());*/
     }
 
     @Test
@@ -281,146 +329,82 @@ public class CartServiceTests {
     }
 
     @Test
-    @DisplayName("getActiveCart - user has no carts")
+    @DisplayName("getAllProductsFromCart - products only from one cart")
     void test60() {
 
-        User user = User.builder().id(1L).build();
-        Optional<User> userOptional = Optional.of(user);
+        Cart usersCart = Cart.builder().id(1L).build();
 
-        List<Cart> carts = List.of();
-
-        Mockito
-                .when(userRepository.findById(user.getId()))
-                .thenReturn(userOptional);
+        ProductsInCart productsInCart1 = ProductsInCart.builder().id(2L).cart(usersCart).build();
+        ProductsInCart productsInCart2 = ProductsInCart.builder().id(3L).cart(usersCart).build();
+        ProductsInCart productsInCart3 = ProductsInCart.builder().id(4L).cart(usersCart).build();
 
         Mockito
-                .when(cartRepository.findAll())
-                .thenReturn(carts);
+                .when(productsInCartRepository.findAll())
+                .thenReturn(List.of(productsInCart1, productsInCart2, productsInCart3));
 
-        Optional<CartDTO> expectedCart = Optional.empty();
-        Optional<CartDTO> actualCart = cartService.getActiveCart(user.getId());
+        List<ProductsInCartDTO> foundedProducts = cartService.getAllProductsFromCart(usersCart.getId());
 
-        Assertions.assertEquals(expectedCart, actualCart);
+        Assertions.assertEquals(3, foundedProducts.size());
     }
 
     @Test
-    @DisplayName("getActiveCart - user has no open carts")
+    @DisplayName("getAllProductsFromCart - products from different carts")
     void test61() {
 
-        User user = User.builder().id(1L).build();
-        Optional<User> userOptional = Optional.of(user);
+        Cart usersCart = Cart.builder().id(1L).build();
+        Cart alienCart = Cart.builder().id(2L).build();
 
-        Cart cart2 = Cart.builder().id(2L).cartClosed(true).build();
-        Cart cart3 = Cart.builder().id(3L).cartClosed(true).build();
-        Cart cart4 = Cart.builder().id(4L).cartClosed(true).build();
-        Cart cart5 = Cart.builder().id(5L).cartClosed(true).build();
-        Cart cart6 = Cart.builder().id(6L).cartClosed(true).build();
-        Cart cart7 = Cart.builder().id(7L).cartClosed(true).build();
-
-        List<Cart> carts = List.of(cart2, cart3, cart4, cart5, cart6, cart7);
+        ProductsInCart productsInCart1 = ProductsInCart.builder().id(3L).cart(usersCart).build();
+        ProductsInCart productsInCart2 = ProductsInCart.builder().id(4L).cart(usersCart).build();
+        ProductsInCart productsInCart3 = ProductsInCart.builder().id(5L).cart(alienCart).build();
 
         Mockito
-                .when(userRepository.findById(user.getId()))
-                .thenReturn(userOptional);
+                .when(productsInCartRepository.findAll())
+                .thenReturn(List.of(productsInCart1, productsInCart2, productsInCart3));
 
-        Mockito
-                .when(cartRepository.findAll())
-                .thenReturn(carts);
+        List<ProductsInCartDTO> foundedProducts = cartService.getAllProductsFromCart(usersCart.getId());
 
-        Optional<CartDTO> expectedCart = Optional.empty();
-        Optional<CartDTO> actualCart = cartService.getActiveCart(user.getId());
-
-        Assertions.assertEquals(expectedCart, actualCart);
+        Assertions.assertEquals(2, foundedProducts.size());
     }
 
     @Test
-    @DisplayName("getActiveCart - user has one open cart (last)")
+    @DisplayName("getAllProductsFromCart - products from different carts")
     void test62() {
 
-        User user = User.builder().id(1L).build();
-        Optional<User> userOptional = Optional.of(user);
+        Cart usersCart = Cart.builder().id(1L).build();
+        Cart alienCart = Cart.builder().id(2L).build();
 
-        Cart cart2 = Cart.builder().id(2L).cartClosed(true).user(user).build();
-        Cart cart3 = Cart.builder().id(3L).cartClosed(true).user(user).build();
-        Cart cart4 = Cart.builder().id(4L).cartClosed(true).user(user).build();
-        Cart cart5 = Cart.builder().id(5L).cartClosed(true).user(user).build();
-        Cart cart6 = Cart.builder().id(6L).cartClosed(true).user(user).build();
-        Cart cart7 = Cart.builder().id(7L).cartClosed(false).user(user).build();
-
-        List<Cart> carts = List.of(cart2, cart3, cart4, cart5, cart6, cart7);
+        ProductsInCart productsInCart1 = ProductsInCart.builder().id(3L).cart(usersCart).build();
+        ProductsInCart productsInCart2 = ProductsInCart.builder().id(4L).cart(alienCart).build();
+        ProductsInCart productsInCart3 = ProductsInCart.builder().id(5L).cart(alienCart).build();
 
         Mockito
-                .when(userRepository.findById(user.getId()))
-                .thenReturn(userOptional);
+                .when(productsInCartRepository.findAll())
+                .thenReturn(List.of(productsInCart1, productsInCart2, productsInCart3));
 
-        Mockito
-                .when(cartRepository.findAllByUserId(user.getId()))
-                .thenReturn(carts);
+        List<ProductsInCartDTO> foundedProducts = cartService.getAllProductsFromCart(usersCart.getId());
 
-        Optional<CartDTO> expectedCart = Optional.of(CartMapper.toDto(cart7));
-        Optional<CartDTO> actualCart = cartService.getActiveCart(user.getId());
-
-        Assertions.assertEquals(expectedCart, actualCart);
+        Assertions.assertEquals(1, foundedProducts.size());
     }
 
     @Test
-    @DisplayName("getActiveCart - user has one open cart (middle)")
+    @DisplayName("getAllProductsFromCart - all products from different carts")
     void test63() {
 
-        User user = User.builder().id(1L).build();
-        Optional<User> userOptional = Optional.of(user);
+        Cart usersCart = Cart.builder().id(1L).build();
+        Cart alienCart = Cart.builder().id(2L).build();
 
-        Cart cart2 = Cart.builder().id(2L).cartClosed(true).user(user).build();
-        Cart cart3 = Cart.builder().id(3L).cartClosed(true).user(user).build();
-        Cart cart4 = Cart.builder().id(4L).cartClosed(false).user(user).build();
-        Cart cart5 = Cart.builder().id(5L).cartClosed(true).user(user).build();
-        Cart cart6 = Cart.builder().id(6L).cartClosed(true).user(user).build();
-        Cart cart7 = Cart.builder().id(7L).cartClosed(true).user(user).build();
-
-        List<Cart> carts = List.of(cart2, cart3, cart4, cart5, cart6, cart7);
+        ProductsInCart productsInCart1 = ProductsInCart.builder().id(3L).cart(alienCart).build();
+        ProductsInCart productsInCart2 = ProductsInCart.builder().id(4L).cart(alienCart).build();
+        ProductsInCart productsInCart3 = ProductsInCart.builder().id(5L).cart(alienCart).build();
 
         Mockito
-                .when(userRepository.findById(user.getId()))
-                .thenReturn(userOptional);
+                .when(productsInCartRepository.findAll())
+                .thenReturn(List.of(productsInCart1, productsInCart2, productsInCart3));
 
-        Mockito
-                .when(cartRepository.findAllByUserId(user.getId()))
-                .thenReturn(carts);
+        List<ProductsInCartDTO> foundedProducts = cartService.getAllProductsFromCart(usersCart.getId());
 
-        Optional<CartDTO> expectedCart = Optional.of(CartMapper.toDto(cart4));
-        Optional<CartDTO> actualCart = cartService.getActiveCart(user.getId());
-
-        Assertions.assertEquals(expectedCart, actualCart);
-    }
-
-    @Test
-    @DisplayName("getActiveCart - user has one open cart (first)")
-    void test64() {
-
-        User user = User.builder().id(1L).build();
-        Optional<User> userOptional = Optional.of(user);
-
-        Cart cart2 = Cart.builder().id(2L).cartClosed(false).user(user).build();
-        Cart cart3 = Cart.builder().id(3L).cartClosed(true).user(user).build();
-        Cart cart4 = Cart.builder().id(4L).cartClosed(true).user(user).build();
-        Cart cart5 = Cart.builder().id(5L).cartClosed(true).user(user).build();
-        Cart cart6 = Cart.builder().id(6L).cartClosed(true).user(user).build();
-        Cart cart7 = Cart.builder().id(7L).cartClosed(true).user(user).build();
-
-        List<Cart> carts = List.of(cart2, cart3, cart4, cart5, cart6, cart7);
-
-        Mockito
-                .when(userRepository.findById(user.getId()))
-                .thenReturn(userOptional);
-
-        Mockito
-                .when(cartRepository.findAllByUserId(user.getId()))
-                .thenReturn(carts);
-
-        Optional<CartDTO> expectedCart = Optional.of(CartMapper.toDto(cart2));
-        Optional<CartDTO> actualCart = cartService.getActiveCart(user.getId());
-
-        Assertions.assertEquals(expectedCart, actualCart);
+        Assertions.assertEquals(0, foundedProducts.size());
     }
 
     @Test

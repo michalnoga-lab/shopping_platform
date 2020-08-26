@@ -4,7 +4,9 @@ import com.app.Utilities.CustomAddresses;
 import com.app.Utilities.FileManager;
 import com.app.dto.CartDTO;
 import com.app.dto.ProductDTO;
+import com.app.dto.ProductsInCartDTO;
 import com.app.exceptions.AppException;
+import com.app.mappers.ProductInCartMapper;
 import com.app.model.InfoCodes;
 import com.app.mappers.CartMapper;
 import com.app.model.*;
@@ -28,7 +30,6 @@ public class CartService {
     private final ProductRepository productRepository;
     private final DeliveryAddressRepository deliveryAddressRepository;
     private final ProductsInCartRepository productsInCartRepository;
-
 
     private final XmlParserOptima xmlParserOptima;
     private final EmailService emailService;
@@ -86,7 +87,6 @@ public class CartService {
         }
 
         cart = cartOptional.orElseGet(() -> Cart.builder().cartClosed(false).build());
-        // TODO: 13.08.2020 domyślne wartości startowe koszyka netto vat brutto ???
 
         //Set<Product> productsInCart = new HashSet<>();
 
@@ -130,7 +130,7 @@ public class CartService {
         System.out.println(totalNettCartValue);
         System.out.println(totalVatCartValue);
 
-        cart.setTotalNetValue(totalNettCartValue);
+        cart.setTotalNetValue(cart.getTotalNetValue().add(totalNettCartValue));
         cart.setTotalVatValue(totalVatCartValue);
         cart.setTotalGrossValue(totalGrossCartValue);
 
@@ -152,8 +152,15 @@ public class CartService {
         return nettValue.add(vatValue).setScale(2, RoundingMode.HALF_UP);
     }
 
-    public List<ProductsInCart> getAllProductsFromCart(Long cartId) {
-        return List.of(); // TODO: 13.08.2020
+    public List<ProductsInCartDTO> getAllProductsFromCart(Long cartId) {
+        // TODO: 23.08.2020 zrobić testy do tej metody
+
+        return productsInCartRepository
+                .findAll()
+                .stream()
+                .filter(product -> product.getCart().getId().equals(cartId))
+                .map(ProductInCartMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     public CartDTO removeProductFromCart(Long productId, Long userId) {
