@@ -67,17 +67,10 @@ public class CartService {
             throw new AppException(InfoCodes.SERVICE_CART, "addProductToCart - product is null");
         }
 
-        // TODO: 13.08.2020
-        System.out.println(productDTO);
-
-
         User user = userRepository.getOne(userId);
         Optional<CartDTO> cartDTOOptional = getActiveCart(userId);
 
         Product product = productRepository.getOne(productDTO.getId());
-
-        //product.setQuantity(product.getQuantity() + productDTO.getQuantity());
-        // TODO: 13.08.2020
 
         Cart cart;
         Optional<Cart> cartOptional = Optional.empty();
@@ -86,11 +79,12 @@ public class CartService {
             cartOptional = cartRepository.findById(cartDTOOptional.get().getId());
         }
 
-        cart = cartOptional.orElseGet(() -> Cart.builder().cartClosed(false).build());
-
-        //Set<Product> productsInCart = new HashSet<>();
-
-        //Set<ProductsInCart> productsInCart = getAllProductsFromCart(cart.getId());
+        cart = cartOptional.orElseGet(() -> Cart.builder()
+                .totalNetValue(BigDecimal.ZERO)
+                .totalVatValue(BigDecimal.ZERO)
+                .totalGrossValue(BigDecimal.ZERO)
+                .cartClosed(false)
+                .build());
 
         ProductsInCart singleProductInCart = ProductsInCart.builder()
                 .cart(cart)
@@ -101,23 +95,6 @@ public class CartService {
                 .grossPrice(product.getGrossPrice())
                 .build();
 
-        //productsInCart.add(singleProductInCart);
-
-        /*if (cart.getProducts() != null) {
-            productsInCart = cart.getProducts();
-        }*/
-        // TODO: 13.08.2020
-
-        //cart.setProducts(productsInCart);
-        // TODO: 13.08.2020
-
-//        CartDTO cartValues = calculateCartValue(productsInCart, user.getCompany().getDefaultPrice());
-//        cart.setTotalNetValue(cartValues.getTotalNetValue());
-//        cart.setTotalVatValue(cartValues.getTotalVatValue());
-//        cart.setTotalGrossValue(cartValues.getTotalGrossValue());
-
-        System.out.println("ble1");
-
         BigDecimal totalNettCartValue = calculateCartNettValue
                 (singleProductInCart.getNettPrice(),
                         singleProductInCart.getQuantity());
@@ -126,13 +103,9 @@ public class CartService {
 
         BigDecimal totalGrossCartValue = calculateTotalGrossValue(totalNettCartValue, totalVatCartValue);
 
-        System.out.println("ble2");
-        System.out.println(totalNettCartValue);
-        System.out.println(totalVatCartValue);
-
         cart.setTotalNetValue(cart.getTotalNetValue().add(totalNettCartValue));
-        cart.setTotalVatValue(totalVatCartValue);
-        cart.setTotalGrossValue(totalGrossCartValue);
+        cart.setTotalVatValue(cart.getTotalVatValue().add(totalVatCartValue));
+        cart.setTotalGrossValue(cart.getTotalGrossValue().add(totalGrossCartValue));
 
         productsInCartRepository.save(singleProductInCart);
         cart.setUser(user);
@@ -153,8 +126,6 @@ public class CartService {
     }
 
     public List<ProductsInCartDTO> getAllProductsFromCart(Long cartId) {
-        // TODO: 23.08.2020 zrobić testy do tej metody
-
         return productsInCartRepository
                 .findAll()
                 .stream()
@@ -173,64 +144,17 @@ public class CartService {
                 .findFirst()
                 .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "removeProductFromCart - no open cart for user with ID: " + userId));
 
-//        Set<Product> products = cart.getProducts()
-//                .stream()
-//                .filter(product -> !product.getId().equals(productId))
-//                .collect(Collectors.toSet());
-        Set<Product> products = new HashSet<>();
-        // TODO: 13.08.2020
+        Set<ProductsInCart> productsInCart = productsInCartRepository
+                .findAll()
+                .stream()
+                .filter(product -> product.getCart().getId().equals(cart.getId()))
+                .filter(product -> !product.getProductId().equals(productId))
+                .collect(Collectors.toSet());
 
-        //cart.setProducts(products);
-
-//        CartDTO cartValues = calculateCartValue(products, user.getCompany().getDefaultPrice());
-//        cart.setTotalNetValue(cartValues.getTotalNetValue());
-//        cart.setTotalVatValue(cartValues.getTotalVatValue());
-//        cart.setTotalGrossValue(cartValues.getTotalGrossValue());
-
-
-        // TODO: 13.08.2020 do poprawy wartość koszyka
-
+        cart.setProductsInCart(productsInCart);
         cartRepository.save(cart);
+
         return CartMapper.toDto(cart);
-    }
-
-    public CartDTO calculateCartValue(Set<ProductsInCart> productsInCart, Price priceType) {
-        if (productsInCart == null) {
-            throw new AppException(InfoCodes.SERVICE_CART, "calculateCartValue - products set is null");
-        }
-        CartDTO cartDTO = new CartDTO();
-        BigDecimal totalNetValue = BigDecimal.ZERO;
-        BigDecimal totalVatValue = BigDecimal.ZERO;
-        BigDecimal totalGrossValue = BigDecimal.ZERO;
-
-        // TODO: 13.08.2020 do poprawy
-//        if (priceType.equals(Price.NET)) {
-//            for (Product product : productsInCart) {
-//                BigDecimal currentNetValue = product.getNettPrice().multiply(BigDecimal.valueOf(product.getQuantity()));
-//                BigDecimal currentVatValue = currentNetValue.multiply(BigDecimal.valueOf(product.getVat()));
-//                BigDecimal currentGrossValue = currentNetValue.add(currentVatValue);
-//
-//                totalNetValue = totalNetValue.add(currentNetValue);
-//                totalVatValue = totalVatValue.add(currentVatValue);
-//                totalGrossValue = totalGrossValue.add(currentGrossValue);
-//            }
-//        } else {
-//            for (Product product : productsInCart) {
-//                BigDecimal currentGrossValue = product.getGrossPrice().multiply(BigDecimal.valueOf(product.getQuantity()));
-//                BigDecimal currentNetValue = currentGrossValue.divide(
-//                        (BigDecimal.ONE.setScale(2, RoundingMode.HALF_UP).add(BigDecimal.valueOf(
-//                                product.getVat()).setScale(2, RoundingMode.HALF_UP))));
-//                BigDecimal currentVatValue = currentGrossValue.subtract(currentNetValue);
-//
-//                totalGrossValue = totalGrossValue.add(currentGrossValue);
-//                totalVatValue = totalVatValue.add(currentVatValue);
-//                totalNetValue = totalNetValue.add(currentNetValue);
-//            }
-//        }
-//        cartDTO.setTotalNetValue(totalNetValue.setScale(2, RoundingMode.HALF_UP));
-//        cartDTO.setTotalVatValue(totalVatValue.setScale(2, RoundingMode.HALF_UP));
-//        cartDTO.setTotalGrossValue(totalGrossValue.setScale(2, RoundingMode.HALF_UP));
-        return cartDTO;
     }
 
     public List<CartDTO> getAllUsersCarts(Long userId) {
@@ -302,14 +226,10 @@ public class CartService {
         cart.setOrderNumber(fileName);
 
         cartRepository.save(cart);
-//        Set<ProductDTO> productsInCart = cart.getProducts()
-//                .stream()
-//                .map(ProductMapper::toDto)
-//                .collect(Collectors.toSet());
 
         //String orderInXml = xmlParserOptima.generateXmlFileContent(cartDTO, productsInCart);
         String orderInXml = "";
-        // TODO: 13.08.2020  
+        // TODO: 13.08.2020  genrownie pliku z zamówieniem
         String pathToFile = FileManager.saveFileToDisk(orderInXml, fileName);
         emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
 

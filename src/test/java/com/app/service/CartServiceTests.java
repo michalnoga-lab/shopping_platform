@@ -1,13 +1,15 @@
 package com.app.service;
 
 import com.app.Utilities.FileManager;
-import com.app.dto.*;
+import com.app.dto.CartDTO;
+import com.app.dto.ProductsInCartDTO;
 import com.app.exceptions.AppException;
 import com.app.mappers.CartMapper;
-import com.app.mappers.CompanyMapper;
 import com.app.mappers.ProductMapper;
-import com.app.mappers.UserMapper;
-import com.app.model.*;
+import com.app.model.Cart;
+import com.app.model.Product;
+import com.app.model.ProductsInCart;
+import com.app.model.User;
 import com.app.parsers.XmlParserOptima;
 import com.app.repository.*;
 import org.junit.jupiter.api.Assertions;
@@ -25,7 +27,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @ExtendWith(SpringExtension.class)
 public class CartServiceTests {
@@ -208,8 +209,6 @@ public class CartServiceTests {
     @DisplayName("addProductToCart - check cart value - products in cart")
     void test21() {
 
-        // TODO: 23.08.2020 dokończyć
-
         Cart cart = Cart.builder()
                 .id(1L)
                 .totalNetValue(BigDecimal.valueOf(100))
@@ -234,26 +233,24 @@ public class CartServiceTests {
                 .when(productRepository.findAll())
                 .thenReturn(List.of(product));
 
-        /*Mockito
+        Mockito
                 .when(cartRepository.findAll())
-                .thenReturn(List.of(cart));*/
+                .thenReturn(List.of(cart));
 
         Mockito
                 .when(productRepository.getOne(2L))
                 .thenReturn(product);
 
-/*        Mockito
-                .when(cart.getTotalNetValue())
-                .thenReturn(BigDecimal.valueOf(100));*/
-
         CartDTO cartDTO = cartService.addProductToCart(ProductMapper.toDto(product), user.getId());
+
+        System.out.println(cartDTO);
 
         Assertions.assertEquals(BigDecimal.valueOf(200).setScale(2, RoundingMode.HALF_UP),
                 cartDTO.getTotalNetValue());
-       /* Assertions.assertEquals(BigDecimal.valueOf(115).setScale(2, RoundingMode.HALF_UP),
+        Assertions.assertEquals(BigDecimal.valueOf(115).setScale(2, RoundingMode.HALF_UP),
                 cartDTO.getTotalVatValue());
         Assertions.assertEquals(BigDecimal.valueOf(615).setScale(2, RoundingMode.HALF_UP),
-                cartDTO.getTotalGrossValue());*/
+                cartDTO.getTotalGrossValue());
     }
 
     @Test
@@ -408,69 +405,33 @@ public class CartServiceTests {
     }
 
     @Test
-    @DisplayName("setAddressToCart")
+    @DisplayName("removeProductFromCart")
     void test70() {
 
-        User user = User.builder().id(1L).build();
-        DeliveryAddress deliveryAddress = DeliveryAddress.builder().id(2L).build();
-        DeliveryAddressDTO deliveryAddressDTO = DeliveryAddressDTO.builder().id(2L).build();
-        CartDTO cartDTO = CartDTO.builder().id(3L).cartClosed(false).build();
-        Cart cart = Cart.builder().id(3L).cartClosed(false).build();
-        List<Cart> carts = List.of(cart);
+        Cart cart = Cart.builder().id(1L).cartClosed(false).build();
+        User user = User.builder().id(5L).build();
+
+        ProductsInCart productsInCart1 = ProductsInCart.builder().id(2L).cart(cart).productId(2L).build();
+        ProductsInCart productsInCart2 = ProductsInCart.builder().id(3L).cart(cart).productId(3L).build();
+        ProductsInCart productsInCart3 = ProductsInCart.builder().id(4L).cart(cart).productId(4L).build();
+
+        Mockito
+                .when(productsInCartRepository.findAll())
+                .thenReturn(List.of(productsInCart1, productsInCart2, productsInCart3));
 
         Mockito
                 .when(cartRepository.findAllByUserId(user.getId()))
-                .thenReturn(carts);
+                .thenReturn(List.of(cart));
 
         Mockito
-                .when(cartRepository.getOne(cartDTO.getId()))
-                .thenReturn(cart);
+                .when(userRepository.findById(user.getId()))
+                .thenReturn(Optional.of(user));
 
-        Mockito
-                .when(deliveryAddressRepository.getOne(deliveryAddress.getId()))
-                .thenReturn(deliveryAddress);
+        List<ProductsInCartDTO> productsBeforeRemove = cartService.getAllProductsFromCart(cart.getId());
+        CartDTO cartAfterRemove = cartService.removeProductFromCart(productsInCart1.getProductId(), user.getId());
+        List<ProductsInCartDTO> productsAfterRemove = cartService.getAllProductsFromCart(cart.getId());
 
-        cartDTO.setDeliveryAddressDTO(deliveryAddressDTO);
-        CartDTO actualCart = cartService.setAddressToCart(deliveryAddress.getId(), user.getId());
-
-        Assertions.assertEquals(cartDTO, actualCart);
-    }
-
-    @Test
-    @DisplayName("closeCart")
-    void test80() {
-
-        CompanyDTO companyDTO = CompanyDTO.builder().nip("0000000000").build();
-        User user = User.builder()
-                .id(1L)
-                .company(CompanyMapper.fromDto(companyDTO))
-                .build();
-
-        CartDTO cartDTO = CartDTO.builder()
-                .id(3L)
-                .cartClosed(false)
-                .userDTO(UserMapper.toDto(user))
-                .build();
-
-        Cart cart = Cart.builder().id(3L).cartClosed(false).build();
-        List<Cart> carts = List.of(cart);
-
-        Mockito
-                .when(cartRepository.findAllByUserId(user.getId()))
-                .thenReturn(carts);
-
-        Mockito
-                .when(cartRepository.getOne(cartDTO.getId()))
-                .thenReturn(cart);
-
-       /* java.lang.NullPointerException
-        at com.app.service.CartService.closeCart(CartService.java:236)
-        at com.app.service.CartServiceTests.test80(CartServiceTests.java:648)
-
-        cartDTO.setCartClosed(true);
-        CartDTO actualCart = cartService.closeCart(user.getId());
-        actualCart.setPurchaseTime(null);
-
-        Assertions.assertEquals(cartDTO, actualCart);*/
+        Assertions.assertEquals(3, productsBeforeRemove.size());
+        //Assertions.assertEquals(2, productsAfterRemove.size()); // TODO: 26.08.2020
     }
 }
