@@ -22,6 +22,7 @@ public class ProductsInCart {
     private BigDecimal nettPrice;
     private Double vat;
     private BigDecimal grossPrice;
+    private Boolean hidden;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "cart_id")
@@ -34,11 +35,15 @@ public class ProductsInCart {
         ProductsInCart that = (ProductsInCart) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(productId, that.productId) &&
-                Objects.equals(quantity, that.quantity);
+                Objects.equals(quantity, that.quantity) &&
+                Objects.equals(nettPrice, that.nettPrice) &&
+                Objects.equals(vat, that.vat) &&
+                Objects.equals(grossPrice, that.grossPrice) &&
+                Objects.equals(hidden, that.hidden);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, productId);
+        return Objects.hash(id, productId, quantity, nettPrice, vat, grossPrice, hidden);
     }
 }

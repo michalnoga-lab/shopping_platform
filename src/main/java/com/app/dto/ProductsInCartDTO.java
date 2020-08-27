@@ -21,5 +21,6 @@ public class ProductsInCartDTO {
     private BigDecimal nettPrice;
     private Double vat;
     private BigDecimal grossPrice;
+    private Boolean hidden;
     private Cart cart;
 }

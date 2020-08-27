@@ -1,7 +1,6 @@
 package com.app.service;
 
 import com.app.dto.CompanyDTO;
-import com.app.dto.ProductCodeDTO;
 import com.app.dto.ProductDTO;
 import com.app.dto.ProductSearchDTO;
 import com.app.exceptions.AppException;
@@ -16,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;

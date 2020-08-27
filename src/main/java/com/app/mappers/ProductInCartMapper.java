@@ -13,7 +13,7 @@ public interface ProductInCartMapper {
                 .nettPrice(productsInCart.getNettPrice())
                 .vat(productsInCart.getVat())
                 .grossPrice(productsInCart.getGrossPrice())
-                .cart(productsInCart.getCart())
+                .hidden(productsInCart.getHidden())
                 .build();
     }
 
@@ -25,7 +25,7 @@ public interface ProductInCartMapper {
                 .nettPrice(productsInCartDTO.getNettPrice())
                 .vat(productsInCartDTO.getVat())
                 .grossPrice(productsInCartDTO.getGrossPrice())
-                .cart(productsInCartDTO.getCart())
+                .hidden(productsInCartDTO.getHidden())
                 .build();
     }
 }

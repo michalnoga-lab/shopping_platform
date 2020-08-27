@@ -14,6 +14,7 @@ import com.app.parsers.XmlParserOptima;
 import com.app.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -22,6 +23,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CartService {
 
@@ -33,19 +35,6 @@ public class CartService {
 
     private final XmlParserOptima xmlParserOptima;
     private final EmailService emailService;
-
-
-    // TODO: 23.08.2020 remove
-//    public CartService(CartRepository cartRepository, UserRepository userRepository, ProductRepository productRepository, DeliveryAddressRepository deliveryAddressRepository, ProductsInCartRepository productsInCartRepository, XmlParserOptima xmlParserOptima, EmailService emailService) {
-//        this.cartRepository = cartRepository;
-//        this.userRepository = userRepository;
-//        this.productRepository = productRepository;
-//        this.deliveryAddressRepository = deliveryAddressRepository;
-//        this.productsInCartRepository = productsInCartRepository;
-//        this.xmlParserOptima = xmlParserOptima;
-//        this.emailService = emailService;
-//    }
-    // TODO: 21.08.2020 remove
 
     public CartDTO getCart(Long cartId) {
         if (cartId == null) {
@@ -135,26 +124,60 @@ public class CartService {
     }
 
     public CartDTO removeProductFromCart(Long productId, Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "removeProductFromCart - no user with ID: " + userId));
+//        User user = userRepository.findById(userId)
+//                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "removeProductFromCart - no user with ID: " + userId));
 
-        Cart cart = cartRepository.findAllByUserId(userId)
-                .stream()
-                .filter(c -> c.getCartClosed().equals(false))
-                .findFirst()
-                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "removeProductFromCart - no open cart for user with ID: " + userId));
+        // TODO: 27.08.2020
+        // nie rob filtrowania tylko metode w repo
+//        Cart cart = cartRepository.findAllByUserId(userId)
+//                .stream()
+//                .filter(c -> c.getCartClosed().equals(false))
+//                .findFirst()
+//                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "removeProductFromCart - no open cart for user with ID: " + userId));
 
-        Set<ProductsInCart> productsInCart = productsInCartRepository
-                .findAll()
-                .stream()
-                .filter(product -> product.getCart().getId().equals(cart.getId()))
-                .filter(product -> !product.getProductId().equals(productId))
-                .collect(Collectors.toSet());
 
-        cart.setProductsInCart(productsInCart);
-        cartRepository.save(cart);
+        // TODO: 27.08.2020
+//        Long cartId = cartRepository.findByUserId(userId)
+//                .stream()
+//                .filter(c -> c.getCartClosed().equals(false))
+//                .findFirst()
+//                .get()
+//                .getId();
 
-        return CartMapper.toDto(cart);
+
+        // TODO: 27.08.2020 metoda w repo
+//        Optional<ProductsInCart> productsInCartToRemove = productsInCartRepository
+//                .findAll()
+//                .stream()
+//                .filter(productsInCart -> productsInCart.getProductId().equals(productId))
+//                .findFirst();
+        //.orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "removeProductFromCart - no product with productID in cart: " + productId));
+
+        // TODO: 27.08.2020
+        // przeciez tutaj mozna robic takie pobranie produktow za pomoca metody w repo
+//        Set<ProductsInCart> productsInCart = productsInCartRepository
+//                .findAll()
+//                .stream()
+//                .filter(product -> product.getCart().getId().equals(cartId))
+//                //        .filter(product -> !product.getProductId().equals(productId))
+//                .collect(Collectors.toSet());
+
+
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%%");
+        //System.out.println(productsInCartToRemove);
+
+        //productsInCartRepository.delete(productsInCartToRemove);
+        productsInCartRepository.deleteAll();
+        productsInCartRepository.flush();
+
+        System.out.println("products in cart");
+
+        //cart.setProductsInCart(productsInCart);
+        //cartRepository.save(cart);
+
+        // TODO: 26.08.2020 zmniejszenie wartości koszyka po usunięciu produktu
+        //return CartMapper.toDto(cart);
+        return CartDTO.builder().build();
     }
 
     public List<CartDTO> getAllUsersCarts(Long userId) {

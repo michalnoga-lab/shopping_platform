@@ -2,6 +2,7 @@ package com.app.controllersRest;
 
 import com.app.dto.CartDTO;
 import com.app.dto.ProductDTO;
+import com.app.dto.ProductsInCartDTO;
 import com.app.service.CartService;
 import com.app.service.CompanyService;
 import com.app.service.ProductService;
@@ -27,23 +28,25 @@ public class ProductRestController {
 
     @GetMapping("/all")
     public ResponseEntity<List<ProductDTO>> all(HttpServletRequest request) {
-
-        System.out.println("hit"); // TODO: 21.08.2020 remove
-
         return new ResponseEntity<>(productService.getProductsOfCompany(companyService.getCompanyOfUser(
                 securityService.getLoggedInUserId(request.getAttribute("username").toString())).getId()
         ), HttpStatus.OK);
     }
 
-    @PostMapping("/buy") // TODO: 13.08.2020 przesyłanie bez ID wszystko w body
+    @PostMapping("/buy")
     public ResponseEntity<CartDTO> buy(HttpServletRequest request, @RequestBody ProductDTO productDTO) {
         return new ResponseEntity<>(cartService.addProductToCart(productDTO,
                 securityService.getLoggedInUserId(request.getAttribute("username").toString())), HttpStatus.OK);
     }
 
-    @PostMapping("/remove/{id}")
-    public ResponseEntity<CartDTO> remove(@PathVariable Long id, HttpServletRequest request) {
-        return new ResponseEntity<>(cartService.removeProductFromCart(id,
-                securityService.getLoggedInUserId(request.getAttribute("username").toString())), HttpStatus.OK);
+    @DeleteMapping("/remove")
+    public ResponseEntity<CartDTO> remove(HttpServletRequest request, @RequestBody ProductsInCartDTO productsInCartDTO) {
+
+        // TODO: 26.08.2020 remove
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        System.out.println(productsInCartDTO);
+
+        return new ResponseEntity<>(cartService.removeProductFromCart(productsInCartDTO.getProductId(),
+                securityService.getLoggedInUserId("user@gmail.com")), HttpStatus.OK);
     }
 }

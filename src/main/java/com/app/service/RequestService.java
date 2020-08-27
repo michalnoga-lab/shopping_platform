@@ -2,10 +2,12 @@ package com.app.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class RequestService {
 

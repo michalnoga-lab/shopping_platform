@@ -3,7 +3,7 @@ package com.app.mappers;
 import com.app.dto.ProductCodeDTO;
 import com.app.model.ProductCode;
 
-public class ProductCodeMapper {
+public interface ProductCodeMapper {
 
     static ProductCodeDTO toDto(ProductCode productCode) {
         return productCode == null ? null : ProductCodeDTO.builder()
@@ -17,3 +17,5 @@ public class ProductCodeMapper {
                 .build();
     }
 }
+
+// TODO: 27.08.2020 czy ta klasa jest potrzebna ???
