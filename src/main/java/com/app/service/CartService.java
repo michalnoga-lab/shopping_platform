@@ -6,9 +6,8 @@ import com.app.dto.CartDTO;
 import com.app.dto.ProductDTO;
 import com.app.dto.ProductsInCartDTO;
 import com.app.exceptions.AppException;
-import com.app.mappers.ProductInCartMapper;
-import com.app.model.InfoCodes;
 import com.app.mappers.CartMapper;
+import com.app.mappers.ProductInCartMapper;
 import com.app.model.*;
 import com.app.parsers.XmlParserOptima;
 import com.app.repository.*;
@@ -19,7 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -100,7 +102,21 @@ public class CartService {
         productsInCartRepository.save(singleProductInCart);
         cart.setUser(user);
         cartRepository.save(cart);
-        return CartMapper.toDto(cart);
+
+        CartDTO cartDTO = CartMapper.toDto(cart);
+
+        // TODO: 30.08.2020 metoda w repo
+        Set<ProductsInCartDTO> productsInCartDTO = productsInCartRepository
+                .findAll()
+                .stream()
+                .filter(prod -> prod.getCart().getId().equals(cart.getId()))
+                .filter(prod -> prod.getHidden().equals(false))
+                .map(ProductInCartMapper::toDto)
+                .collect(Collectors.toSet());
+
+        cartDTO.setProductsInCartDTO(productsInCartDTO);
+
+        return cartDTO;
     }
 
     public BigDecimal calculateCartNettValue(BigDecimal price, Integer quantity) {
