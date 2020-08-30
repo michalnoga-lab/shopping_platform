@@ -3,6 +3,7 @@ package com.app.mappers;
 import com.app.dto.CartDTO;
 import com.app.model.Cart;
 import com.app.model.Product;
+import com.app.repository.ProductsInCartRepository;
 
 import java.util.HashSet;
 
@@ -20,6 +21,7 @@ public interface CartMapper {
                         null : DeliveryAddressMapper.toDto(cart.getDeliveryAddress()))
                 .purchaseTime(cart.getPurchaseTime())
                 .orderNumber(cart.getOrderNumber())
+                .productsInCartDTO(new HashSet<>())
                 .build();
     }
 

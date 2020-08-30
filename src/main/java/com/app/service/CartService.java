@@ -82,6 +82,7 @@ public class CartService {
                 .nettPrice(product.getNettPrice())
                 .vat(product.getVat())
                 .grossPrice(product.getGrossPrice())
+                .hidden(false)
                 .build();
 
         BigDecimal totalNettCartValue = calculateCartNettValue
@@ -119,13 +120,14 @@ public class CartService {
                 .findAll()
                 .stream()
                 .filter(product -> product.getCart().getId().equals(cartId))
+                .filter(product -> product.getHidden().equals(false))
                 .map(ProductInCartMapper::toDto)
                 .collect(Collectors.toList());
     }
 
     public CartDTO removeProductFromCart(Long productId, Long userId) {
-//        User user = userRepository.findById(userId)
-//                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "removeProductFromCart - no user with ID: " + userId));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "removeProductFromCart - no user with ID: " + userId));
 
         // TODO: 27.08.2020
         // nie rob filtrowania tylko metode w repo
@@ -134,6 +136,14 @@ public class CartService {
 //                .filter(c -> c.getCartClosed().equals(false))
 //                .findFirst()
 //                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "removeProductFromCart - no open cart for user with ID: " + userId));
+
+
+        // TODO: 27.08.2020 metoda w repo
+        Cart cart = cartRepository.findByUserId(userId)
+                .stream()
+                .filter(c -> c.getCartClosed().equals(false))
+                .findFirst()
+                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "removeProductFromCart - no cart for user with ID: " + userId));
 
 
         // TODO: 27.08.2020
@@ -163,21 +173,54 @@ public class CartService {
 //                .collect(Collectors.toSet());
 
 
-        System.out.println("%%%%%%%%%%%%%%%%%%%%%%");
         //System.out.println(productsInCartToRemove);
 
         //productsInCartRepository.delete(productsInCartToRemove);
-        productsInCartRepository.deleteAll();
-        productsInCartRepository.flush();
 
-        System.out.println("products in cart");
+        // TODO: 27.08.2020 metoda w repo
+        ProductsInCart productToRemove = productsInCartRepository
+                .findAll()
+                .stream()
+                .filter(productsInCart -> productsInCart.getCart().getId().equals(cart.getId()))
+                .filter(productsInCart -> productsInCart.getHidden().equals(false))
+                .filter(productsInCart -> productsInCart.getProductId().equals(productId))
+                .findFirst()
+                .get();
+
+
+        productToRemove.setHidden(true);
+        productsInCartRepository.save(productToRemove);
+
+        BigDecimal nettValue = calculateCartNettValue(productToRemove.getNettPrice(), productToRemove.getQuantity());
+        BigDecimal vatValue = calculateCartVatValue(nettValue, productToRemove.getVat());
+        BigDecimal grossValue = calculateTotalGrossValue(nettValue, vatValue);
+
+        cart.setTotalNetValue(cart.getTotalNetValue().subtract(nettValue));
+        cart.setTotalVatValue(cart.getTotalVatValue().subtract(vatValue));
+        cart.setTotalGrossValue(cart.getTotalGrossValue().subtract(grossValue));
+
 
         //cart.setProductsInCart(productsInCart);
-        //cartRepository.save(cart);
+        cartRepository.save(cart);
 
-        // TODO: 26.08.2020 zmniejszenie wartości koszyka po usunięciu produktu
+        // TODO: 27.08.2020 zwracamy produkty aktualnie znajdujące się w koszyku
+
+
         //return CartMapper.toDto(cart);
-        return CartDTO.builder().build();
+
+        CartDTO cartDTO = CartMapper.toDto(cart);
+
+
+        // TODO: 30.08.2020 metoda w repo
+        Set<ProductsInCartDTO> productsInCarts = productsInCartRepository
+                .findAll()
+                .stream()
+                .filter(prod -> prod.getCart().getId().equals(cart.getId()))
+                .map(ProductInCartMapper::toDto)
+                .collect(Collectors.toSet());
+
+        cartDTO.setProductsInCartDTO(productsInCarts);
+        return cartDTO;
     }
 
     public List<CartDTO> getAllUsersCarts(Long userId) {

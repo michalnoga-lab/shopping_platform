@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,4 +24,5 @@ public class CartDTO {
     private DeliveryAddressDTO deliveryAddressDTO;
     private UserDTO userDTO;
     private String orderNumber;
+    private Set<ProductsInCartDTO> productsInCartDTO;
 }

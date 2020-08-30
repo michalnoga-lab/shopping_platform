@@ -41,12 +41,7 @@ public class ProductRestController {
 
     @DeleteMapping("/remove")
     public ResponseEntity<CartDTO> remove(HttpServletRequest request, @RequestBody ProductsInCartDTO productsInCartDTO) {
-
-        // TODO: 26.08.2020 remove
-        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-        System.out.println(productsInCartDTO);
-
         return new ResponseEntity<>(cartService.removeProductFromCart(productsInCartDTO.getProductId(),
-                securityService.getLoggedInUserId("user@gmail.com")), HttpStatus.OK);
+                securityService.getLoggedInUserId(request.getAttribute("username").toString())), HttpStatus.OK);
     }
 }
