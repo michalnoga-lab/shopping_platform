@@ -5,6 +5,7 @@ import com.app.Utilities.FileManager;
 import com.app.dto.CartDTO;
 import com.app.dto.ProductDTO;
 import com.app.dto.ProductsInCartDTO;
+import com.app.dto.UserDTO;
 import com.app.exceptions.AppException;
 import com.app.mappers.CartMapper;
 import com.app.mappers.ProductInCartMapper;
@@ -241,14 +242,17 @@ public class CartService {
 
     public List<CartDTO> getAllUsersCarts(Long userId) {
         if (userId == null) {
-            throw new AppException(InfoCodes.SERVICE_CART, "getAllUsersCarts - ID is null");
+            throw new AppException(InfoCodes.SERVICE_CART, "getAllUsersCarts - user ID is null");
         }
         List<CartDTO> usersCarts = new ArrayList<>();
 
         cartRepository.findAllByUserId(userId)
                 .stream()
                 .map(CartMapper::toDto)
-                .forEach(usersCarts::add);
+                .forEach(cart -> {
+                    cart.setUserDTO(UserDTO.builder().build());
+                    usersCarts.add(cart);
+                });
 
         return usersCarts;
     }
