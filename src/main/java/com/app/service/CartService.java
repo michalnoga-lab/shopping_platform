@@ -49,7 +49,10 @@ public class CartService {
 
         return cartRepository.findById(cartId)
                 .stream()
-                .map(CartMapper::toDto)
+                .map(cart -> {
+                    cart.setUser(User.builder().build());
+                    return CartMapper.toDto(cart);
+                })
                 .findFirst()
                 .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "getCart - no cart with ID: " + cartId));
     }
