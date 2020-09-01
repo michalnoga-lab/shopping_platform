@@ -22,6 +22,7 @@ public class CartDTO {
     private Boolean cartClosed;
     private LocalDateTime purchaseTime;
     private DeliveryAddressDTO deliveryAddressDTO;
+    // TODO: 31.08.2020 nie wysylać użytownika
     private UserDTO userDTO;
     private String orderNumber;
     private Set<ProductsInCartDTO> productsInCartDTO;

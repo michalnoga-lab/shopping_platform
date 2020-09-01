@@ -6,6 +6,7 @@ import com.app.model.Product;
 import com.app.repository.ProductsInCartRepository;
 
 import java.util.HashSet;
+import java.util.stream.Collectors;
 
 public interface CartMapper {
 
@@ -21,7 +22,8 @@ public interface CartMapper {
                         null : DeliveryAddressMapper.toDto(cart.getDeliveryAddress()))
                 .purchaseTime(cart.getPurchaseTime())
                 .orderNumber(cart.getOrderNumber())
-                .productsInCartDTO(new HashSet<>())
+                .productsInCartDTO(cart.getProductsInCart() == null ? null : cart.getProductsInCart()
+                        .stream().map(ProductInCartMapper::toDto).collect(Collectors.toSet()))
                 .build();
     }
 

@@ -1,16 +1,12 @@
 package com.app.service;
 
-import com.app.dto.CompanyDTO;
-import com.app.dto.ProductDTO;
-import com.app.dto.ProductSearchDTO;
+import com.app.dto.*;
 import com.app.exceptions.AppException;
 import com.app.mappers.CompanyMapper;
+import com.app.mappers.ProductInCartMapper;
 import com.app.mappers.ProductMapper;
 import com.app.model.*;
-import com.app.repository.CartRepository;
-import com.app.repository.CompanyRepository;
-import com.app.repository.ProductCodeRepository;
-import com.app.repository.ProductRepository;
+import com.app.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +26,7 @@ public class ProductService {
     private final CartRepository cartRepository;
     private final CompanyRepository companyRepository;
     private final ProductCodeRepository productCodeRepository;
+    private final ProductsInCartRepository productsInCartRepository;
 
     public List<ProductDTO> findAll() {
         List<Product> products = productRepository.findAll();
@@ -70,7 +67,7 @@ public class ProductService {
                 .orElseThrow(() -> new AppException(InfoCodes.SERVICE_PRODUCT, "getOneProduct - no product with ID: " + id));
     }
 
-    public Set<ProductDTO> getProductsOfCart(Long cartId) {
+    public Set<ProductsInCartDTO> getProductsOfCart(Long cartId) {
         if (cartId == null) {
             throw new AppException(InfoCodes.SERVICE_PRODUCT, "getProductsOfCart - cartId is null");
         }
@@ -78,17 +75,42 @@ public class ProductService {
             throw new AppException(InfoCodes.SERVICE_PRODUCT, "getProductsOfCart - cartId less than zero");
         }
 
-        Optional<Cart> cartFromDb = cartRepository.findById(cartId);
+        return productsInCartRepository
+                .findAll()
+                .stream()
+                .filter(product -> product.getCart().getId().equals(cartId))
+                .map(ProductInCartMapper::toDto)
+                .collect(Collectors.toSet());
+    }
 
-        if (cartFromDb.isPresent()) {
-//            return cartFromDb.get().getProducts()
-//                    .stream()
-//                    .map(ProductMapper::toDto)
-//                    .collect(Collectors.toSet()); // TODO: 13.08.2020 zwracanie produktów >
-        } else {
-            throw new AppException(InfoCodes.SERVICE_PRODUCT, "getOneProduct - no cart with ID: " + cartId);
-        }
-        // TODO: 21.07.2020 do poprawy całość!
+//    public Set<ProductsInCartDTO> getProductsOfCart(Long cartId) {
+//        if (cartId == null) {
+//            throw new AppException(InfoCodes.SERVICE_PRODUCT, "getProductsOfCart - cartId is null");
+//        }
+//        if (cartId < 0) {
+//            throw new AppException(InfoCodes.SERVICE_PRODUCT, "getProductsOfCart - cartId less than zero");
+//        }
+//
+//
+//        // TODO: 31.08.2020 metoda w repo
+//        return productsInCartRepository
+//                .findAll()
+//                .stream()
+//                .filter(product -> product.getCart().getId().equals(cartId))
+//                .map(ProductInCartMapper::toDto)
+//                .collect(Collectors.toSet());
+
+//        Optional<Cart> cartFromDb = cartRepository.findById(cartId);
+//
+//        if (cartFromDb.isPresent()) {
+////            return cartFromDb.get().getProducts()
+////                    .stream()
+////                    .map(ProductMapper::toDto)
+////                    .collect(Collectors.toSet()); // TODO: 13.08.2020 zwracanie produktów >
+//        } else {
+//            throw new AppException(InfoCodes.SERVICE_PRODUCT, "getOneProduct - no cart with ID: " + cartId);
+//        }
+    // TODO: 21.07.2020 do poprawy całość!
 
 //        return Set.of(ProductDTO.builder().id(11L).name("nama").build(),
 //                ProductDTO.builder().id(12L).name("name_EXAMPLE").build(),
@@ -96,8 +118,8 @@ public class ProductService {
 //                ProductDTO.builder().id(14L).name("name_QUIT").build()
 //        );
 
-        return null; // TODO: 13.08.2020  
-    }
+    // return null; // TODO: 13.08.2020
+    //}
 
     public List<ProductDTO> search(ProductSearchDTO productSearchDTO) { // TODO: 16.04.2020 może zwrócimy tylko produkty danego użytkownika ????
 

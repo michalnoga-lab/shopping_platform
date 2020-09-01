@@ -1,6 +1,7 @@
 package com.app.controllersWeb;
 
 import com.app.dto.CartDTO;
+import com.app.dto.ProductsInCartDTO;
 import com.app.service.CartService;
 import com.app.service.ProductService;
 import com.app.service.SecurityService;
@@ -42,13 +43,15 @@ public class CartController {
 
     @GetMapping("/one")
     public String activeOne(Model model) {
-        Optional<CartDTO> cartDTOOptional = cartService.getActiveCart(securityService.getLoggedInUserId());
+        //CartDTO cartDTO = cartService.getActiveCart(securityService.getLoggedInUserId());
+        Optional<CartDTO> cartDTO = cartService
+                .getActiveCart(securityService.getLoggedInUserId("username"));
 
-        if (cartDTOOptional.isEmpty()) {
+        if (cartDTO.isEmpty()) {
             return "carts/noneActive";
         }
-        model.addAttribute("cart", cartDTOOptional.get());
-        model.addAttribute("products", productService.getProductsOfCart(cartDTOOptional.get().getId()));
+        model.addAttribute("cart", cartDTO);
+        model.addAttribute("products", productService.getProductsOfCart(cartDTO.get().getId()));
         return "carts/one";
     }
 

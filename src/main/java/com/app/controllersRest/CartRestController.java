@@ -2,6 +2,7 @@ package com.app.controllersRest;
 
 import com.app.dto.CartDTO;
 import com.app.dto.ProductDTO;
+import com.app.dto.ProductsInCartDTO;
 import com.app.service.CartService;
 import com.app.service.ProductService;
 import com.app.service.SecurityService;
@@ -38,14 +39,25 @@ public class CartRestController {
         return new ResponseEntity<>(cartService.getCart(id), HttpStatus.OK);
     }
 
+
+    // TODO: 31.08.2020
+//    public ResponseEntity<Set<ProductsInCartDTO>> getActiveOne(HttpServletRequest request) {
+//        Optional<CartDTO> cartDTOOptional = cartService.getActiveCart(
+//                securityService.getLoggedInUserId(request.getAttribute("username").toString()));
+//        if (cartDTOOptional.isEmpty()) {
+//            return new ResponseEntity<>(Set.of(), HttpStatus.OK);
+//        }
+//        return new ResponseEntity<>(productService.getProductsOfCart(cartDTOOptional.get().getId()), HttpStatus.OK)
+//    }
+
     @GetMapping("/active")
-    public ResponseEntity<Set<ProductDTO>> getActiveOne(HttpServletRequest request) {
-        Optional<CartDTO> cartDTOOptional = cartService.getActiveCart(
-                securityService.getLoggedInUserId(request.getAttribute("username").toString()));
-        if (cartDTOOptional.isEmpty()) {
-            return new ResponseEntity<>(Set.of(), HttpStatus.OK);
+    public ResponseEntity<CartDTO> getActiveCart(HttpServletRequest request) {
+        Optional<CartDTO> cartDTO = cartService.getActiveCart(securityService.getLoggedInUserId(
+                "username"));
+        if (cartDTO.isEmpty()) {
+            return new ResponseEntity<>(CartDTO.builder().build(), HttpStatus.OK);
         }
-        return new ResponseEntity<>(productService.getProductsOfCart(cartDTOOptional.get().getId()), HttpStatus.OK);
+        return new ResponseEntity<>(cartDTO.get(), HttpStatus.OK);
     }
 
     @GetMapping("/close")

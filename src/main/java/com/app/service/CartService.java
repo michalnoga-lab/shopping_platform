@@ -255,25 +255,65 @@ public class CartService {
 
     public Optional<CartDTO> getActiveCart(Long userId) {
         if (userId == null) {
-            throw new AppException(InfoCodes.SERVICE_CART, "getActiveCart - ID is null");
+            throw new AppException(InfoCodes.SERVICE_PRODUCT, "getActiveCart - user ID is null");
         }
-        if (userId <= 0) {
-            throw new AppException(InfoCodes.SERVICE_CART, "getActiveCart - ID less than zero");
+        if (userId < 0) {
+            throw new AppException(InfoCodes.SERVICE_PRODUCT, "getActiveCart - cart ID less than zero");
         }
-        List<CartDTO> allUserCarts = getAllUsersCarts(userId);
 
-        if (allUserCarts.size() > 0) {
-            List<CartDTO> notClosedCarts = allUserCarts
-                    .stream()
-                    .filter(cartDTO -> cartDTO.getCartClosed().equals(false))
-                    .collect(Collectors.toList());
+        // TODO: 31.08.2020 metoda w repo
+//        Cart cart = cartRepository
+//                .findByUserId(userId)
+//                .stream()
+//                .filter(c -> c.getCartClosed().equals(false))
+//                .findFirst()
+//                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_PRODUCT, "getActiveCart - no open cart for user with ID: " + userId));
 
-            if (notClosedCarts.size() > 0) {
-                return Optional.of(notClosedCarts.get(0));
-            }
-        }
-        return Optional.empty();
+        // TODO: 01.09.2020 metoda w repo
+        Optional<CartDTO> cartOptional = cartRepository
+                .findByUserId(userId)
+                .map(CartMapper::toDto);
+
+//        Set<ProductsInCartDTO> productsInCartDTOS = productsInCartRepository
+//                .findAll()
+//                .stream()
+//                .filter(p -> p.getCart().getId().equals(cart.getId()))
+//                .map(ProductInCartMapper::toDto)
+//                .collect(Collectors.toSet());
+
+//        CartDTO cartDTO = CartMapper.toDto(cart);
+//        cartDTO.setProductsInCartDTO(productsInCartDTOS);
+
+
+        return cartOptional;
+
+        // TODO: 31.08.2020 od tego zacząć -> zwracamy optional! 
+        //return cartDTO;
     }
+
+
+    // TODO: 31.08.2020
+//    public Optional<CartDTO> getActiveCart(Long userId) {
+//        if (userId == null) {
+//            throw new AppException(InfoCodes.SERVICE_CART, "getActiveCart - ID is null");
+//        }
+//        if (userId <= 0) {
+//            throw new AppException(InfoCodes.SERVICE_CART, "getActiveCart - ID less than zero");
+//        }
+//        List<CartDTO> allUserCarts = getAllUsersCarts(userId);
+//
+//        if (allUserCarts.size() > 0) {
+//            List<CartDTO> notClosedCarts = allUserCarts
+//                    .stream()
+//                    .filter(cartDTO -> cartDTO.getCartClosed().equals(false))
+//                    .collect(Collectors.toList());
+//
+//            if (notClosedCarts.size() > 0) {
+//                return Optional.of(notClosedCarts.get(0));
+//            }
+//        }
+//        return Optional.empty();
+//    }
 
     public CartDTO setAddressToCart(Long addressId, Long userId) {
         if (addressId == null) {
@@ -325,6 +365,8 @@ public class CartService {
         if (userId <= 0) {
             throw new AppException(InfoCodes.SERVICE_CART, "userHasOpenCart - cart ID less than zero");
         }
-        return getActiveCart(userId).isPresent();
+
+        // TODO: 31.08.2020 do poprawy return statement 
+        return Optional.of(getActiveCart(userId)).isPresent();
     }
 }
