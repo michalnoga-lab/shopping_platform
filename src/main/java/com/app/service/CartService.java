@@ -119,6 +119,7 @@ public class CartService {
                 .collect(Collectors.toSet());
 
         cartDTO.setProductsInCartDTO(productsInCartDTO);
+        cartDTO.setUserDTO(UserDTO.builder().build());
 
         return cartDTO;
     }
@@ -254,6 +255,12 @@ public class CartService {
                 .map(CartMapper::toDto)
                 .forEach(cart -> {
                     cart.setUserDTO(UserDTO.builder().build());
+                    Set<ProductsInCartDTO> products = cart
+                            .getProductsInCartDTO()
+                            .stream()
+                            .filter(p -> p.getHidden().equals(false))
+                            .collect(Collectors.toSet());
+                    cart.setProductsInCartDTO(products);
                     usersCarts.add(cart);
                 });
 
@@ -291,6 +298,9 @@ public class CartService {
 //        CartDTO cartDTO = CartMapper.toDto(cart);
 //        cartDTO.setProductsInCartDTO(productsInCartDTOS);
 
+        cartOptional.ifPresent(cartDTO -> {
+            cartDTO.setUserDTO(UserDTO.builder().build());
+        });
 
         return cartOptional;
 

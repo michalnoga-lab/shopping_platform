@@ -28,9 +28,6 @@ public class CartRestController {
     private final ProductService productService;
     private final SecurityService securityService;
 
-
-    // TODO: 01.09.2020 we wszystkich koszykach usunąć użytkownika
-
     @GetMapping("/all")
     public ResponseEntity<List<CartDTO>> all(HttpServletRequest request) {
         return new ResponseEntity<>(cartService.getAllUsersCarts(
@@ -42,21 +39,10 @@ public class CartRestController {
         return new ResponseEntity<>(cartService.getCart(id), HttpStatus.OK);
     }
 
-
-    // TODO: 31.08.2020
-//    public ResponseEntity<Set<ProductsInCartDTO>> getActiveOne(HttpServletRequest request) {
-//        Optional<CartDTO> cartDTOOptional = cartService.getActiveCart(
-//                securityService.getLoggedInUserId(request.getAttribute("username").toString()));
-//        if (cartDTOOptional.isEmpty()) {
-//            return new ResponseEntity<>(Set.of(), HttpStatus.OK);
-//        }
-//        return new ResponseEntity<>(productService.getProductsOfCart(cartDTOOptional.get().getId()), HttpStatus.OK)
-//    }
-
     @GetMapping("/active")
     public ResponseEntity<CartDTO> getActiveCart(HttpServletRequest request) {
         Optional<CartDTO> cartDTO = cartService.getActiveCart(securityService.getLoggedInUserId(
-                request.getAttribute("usrname").toString()));
+                request.getAttribute("username").toString()));
         if (cartDTO.isEmpty()) {
             return new ResponseEntity<>(CartDTO.builder().build(), HttpStatus.OK);
         }
