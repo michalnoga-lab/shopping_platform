@@ -1,7 +1,6 @@
 package com.app.controllersWeb;
 
 import com.app.dto.CartDTO;
-import com.app.dto.ProductsInCartDTO;
 import com.app.service.CartService;
 import com.app.service.ProductService;
 import com.app.service.SecurityService;
@@ -43,7 +42,6 @@ public class CartController {
 
     @GetMapping("/one")
     public String activeOne(Model model) {
-        //CartDTO cartDTO = cartService.getActiveCart(securityService.getLoggedInUserId());
         Optional<CartDTO> cartDTO = cartService
                 .getActiveCart(securityService.getLoggedInUserId("username"));
 

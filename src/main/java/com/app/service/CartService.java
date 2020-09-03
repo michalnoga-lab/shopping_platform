@@ -121,6 +121,9 @@ public class CartService {
         cartDTO.setProductsInCartDTO(productsInCartDTO);
         cartDTO.setUserDTO(UserDTO.builder().build());
 
+
+        // TODO: 03.09.2020 nazwa produktu!
+
         return cartDTO;
     }
 
@@ -267,6 +270,8 @@ public class CartService {
         return usersCarts;
     }
 
+
+    // TODO: 03.09.2020 getActiveCart - zwracamy cały koszyk
     public Optional<CartDTO> getActiveCart(Long userId) {
         if (userId == null) {
             throw new AppException(InfoCodes.SERVICE_PRODUCT, "getActiveCart - user ID is null");
@@ -275,28 +280,10 @@ public class CartService {
             throw new AppException(InfoCodes.SERVICE_PRODUCT, "getActiveCart - cart ID less than zero");
         }
 
-        // TODO: 31.08.2020 metoda w repo
-//        Cart cart = cartRepository
-//                .findByUserId(userId)
-//                .stream()
-//                .filter(c -> c.getCartClosed().equals(false))
-//                .findFirst()
-//                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_PRODUCT, "getActiveCart - no open cart for user with ID: " + userId));
-
         // TODO: 01.09.2020 metoda w repo
         Optional<CartDTO> cartOptional = cartRepository
                 .findByUserId(userId)
                 .map(CartMapper::toDto);
-
-//        Set<ProductsInCartDTO> productsInCartDTOS = productsInCartRepository
-//                .findAll()
-//                .stream()
-//                .filter(p -> p.getCart().getId().equals(cart.getId()))
-//                .map(ProductInCartMapper::toDto)
-//                .collect(Collectors.toSet());
-
-//        CartDTO cartDTO = CartMapper.toDto(cart);
-//        cartDTO.setProductsInCartDTO(productsInCartDTOS);
 
         cartOptional.ifPresent(cartDTO -> {
             cartDTO.setUserDTO(UserDTO.builder().build());
@@ -304,10 +291,27 @@ public class CartService {
 
         return cartOptional;
 
-        // TODO: 31.08.2020 od tego zacząć -> zwracamy optional! 
-        //return cartDTO;
     }
 
+
+    public List<ProductsInCartDTO> getProductsOfActiveCart(Long userId) {
+        if (userId == null) {
+            throw new AppException(InfoCodes.SERVICE_PRODUCT, "getProductsOfActiveCart - user ID is null");
+        }
+        if (userId < 0) {
+            throw new AppException(InfoCodes.SERVICE_PRODUCT, "getProductsOfActiveCart - cart ID less than zero");
+        }
+
+        Optional<Cart> cartInDB = cartRepository
+                .findByUserId(userId);
+
+        return cartInDB.map(cart -> cart.getProductsInCart()
+                .stream()
+                .map(ProductInCartMapper::toDto)
+                .filter(product -> product.getHidden().equals(false))
+                .collect(Collectors.toList()))
+                .orElseGet(List::of);
+    }
 
     // TODO: 31.08.2020
 //    public Optional<CartDTO> getActiveCart(Long userId) {
@@ -384,6 +388,6 @@ public class CartService {
         }
 
         // TODO: 31.08.2020 do poprawy return statement 
-        return Optional.of(getActiveCart(userId)).isPresent();
+        return Optional.of(getProductsOfActiveCart(userId)).isPresent();
     }
 }

@@ -1,7 +1,6 @@
 package com.app.controllersRest;
 
 import com.app.dto.CartDTO;
-import com.app.dto.ProductDTO;
 import com.app.dto.ProductsInCartDTO;
 import com.app.service.CartService;
 import com.app.service.ProductService;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor

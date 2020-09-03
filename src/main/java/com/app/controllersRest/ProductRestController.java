@@ -35,11 +35,6 @@ public class ProductRestController {
 
     @PostMapping("/buy")
     public ResponseEntity<CartDTO> buy(HttpServletRequest request, @RequestBody ProductDTO productDTO) {
-
-
-        // TODO: 31.08.2020
-        System.out.println(productDTO);
-
         return new ResponseEntity<>(cartService.addProductToCart(productDTO,
                 securityService.getLoggedInUserId(request.getAttribute("username").toString())), HttpStatus.OK);
     }
@@ -48,5 +43,11 @@ public class ProductRestController {
     public ResponseEntity<CartDTO> remove(HttpServletRequest request, @RequestBody ProductsInCartDTO productsInCartDTO) {
         return new ResponseEntity<>(cartService.removeProductFromCart(productsInCartDTO.getProductId(),
                 securityService.getLoggedInUserId(request.getAttribute("username").toString())), HttpStatus.OK);
+    }
+
+    @GetMapping("/activeCart")
+    public ResponseEntity<List<ProductsInCartDTO>> getProductsOfActiveCart(HttpServletRequest request) {
+        return new ResponseEntity<>(cartService.getProductsOfActiveCart(securityService.getLoggedInUserId(
+                request.getAttribute("username").toString())), HttpStatus.OK);
     }
 }
