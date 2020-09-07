@@ -8,6 +8,7 @@ public interface ProductInCartMapper {
     static ProductsInCartDTO toDto(ProductsInCart productsInCart) {
         return productsInCart == null ? null : ProductsInCartDTO.builder()
                 .id(productsInCart.getId())
+                .name(productsInCart.getName())
                 .productId(productsInCart.getProductId())
                 .quantity(productsInCart.getQuantity())
                 .nettPrice(productsInCart.getNettPrice())
@@ -20,6 +21,7 @@ public interface ProductInCartMapper {
     static ProductsInCart fromDto(ProductsInCartDTO productsInCartDTO) {
         return productsInCartDTO == null ? null : ProductsInCart.builder()
                 .id(productsInCartDTO.getId())
+                .name(productsInCartDTO.getName())
                 .productId(productsInCartDTO.getProductId())
                 .quantity(productsInCartDTO.getQuantity())
                 .nettPrice(productsInCartDTO.getNettPrice())

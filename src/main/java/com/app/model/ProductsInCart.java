@@ -17,6 +17,7 @@ public class ProductsInCart {
     @Id
     @GeneratedValue
     private Long id;
+    private String name;
     private Long productId;
     private Integer quantity;
     private BigDecimal nettPrice;

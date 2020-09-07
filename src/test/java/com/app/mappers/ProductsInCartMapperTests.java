@@ -19,6 +19,7 @@ public class ProductsInCartMapperTests {
 
         ProductsInCart productsInCart = ProductsInCart.builder()
                 .id(1L)
+                .name("name")
                 .productId(2L)
                 .quantity(10)
                 .nettPrice(BigDecimal.valueOf(10))
@@ -29,6 +30,7 @@ public class ProductsInCartMapperTests {
 
         ProductsInCartDTO expectedProduct = ProductsInCartDTO.builder()
                 .id(1L)
+                .name("name")
                 .productId(2L)
                 .quantity(10)
                 .nettPrice(BigDecimal.valueOf(10))
@@ -48,6 +50,7 @@ public class ProductsInCartMapperTests {
 
         ProductsInCartDTO productsInCartDTO = ProductsInCartDTO.builder()
                 .id(1L)
+                .name("name")
                 .productId(2L)
                 .quantity(10)
                 .nettPrice(BigDecimal.valueOf(10))
@@ -58,6 +61,7 @@ public class ProductsInCartMapperTests {
 
         ProductsInCart expectedProduct = ProductsInCart.builder()
                 .id(1L)
+                .name("name")
                 .productId(2L)
                 .quantity(10)
                 .nettPrice(BigDecimal.valueOf(10))
