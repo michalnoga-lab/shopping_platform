@@ -83,6 +83,7 @@ public class CartService {
 
         ProductsInCart singleProductInCart = ProductsInCart.builder()
                 .cart(cart)
+                .name(product.getName())
                 .productId(product.getId())
                 .quantity(productDTO.getQuantity())
                 .nettPrice(product.getNettPrice())
@@ -364,8 +365,9 @@ public class CartService {
         CartDTO cartDTO = cartDTOOptional.orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "closeCart - no cart for user with ID: " + userId));
         Cart cart = cartRepository.getOne(cartDTO.getId());
         cart.setCartClosed(true);
-        cart.setPurchaseTime(LocalDateTime.now());
-        String fileName = FileManager.generateFileName(cartDTO.getUserDTO().getCompanyDTO().getNip());
+        LocalDateTime purchaseTime = LocalDateTime.now();
+        cart.setPurchaseTime(purchaseTime);
+        String fileName = FileManager.generateFileName(cartDTO.getUserDTO().getCompanyDTO().getNip(), purchaseTime);
         cart.setOrderNumber(fileName);
 
         cartRepository.save(cart);

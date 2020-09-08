@@ -22,7 +22,7 @@ public class DeliveryAddressRestController {
     private final CartService cartService;
     private final SecurityService securityService;
 
-    @GetMapping("/all")
+    @GetMapping("/all") // TODO: 07.09.2020 zwracać adres bez usera 
     public ResponseEntity<List<DeliveryAddressDTO>> all(HttpServletRequest request) {
         return new ResponseEntity<>(deliveryAddressService.findAll(securityService.getLoggedInUserId(
                 request.getAttribute("username").toString())), HttpStatus.OK);

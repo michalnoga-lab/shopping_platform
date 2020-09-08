@@ -1,6 +1,7 @@
 package com.app.service;
 
 import com.app.dto.DeliveryAddressDTO;
+import com.app.dto.UserDTO;
 import com.app.exceptions.AppException;
 import com.app.model.InfoCodes;
 import com.app.mappers.DeliveryAddressMapper;
@@ -30,6 +31,8 @@ public class DeliveryAddressService {
         if (userId <= 0) {
             throw new AppException(InfoCodes.SERVICE_DELIVERY, "findAll - ID less than zero: " + userId);
         }
+
+        // TODO: 08.09.2020 metoda w repo
         return deliveryAddressRepository
                 .findAll()
                 .stream()

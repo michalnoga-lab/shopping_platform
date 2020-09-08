@@ -21,10 +21,8 @@ public interface FileManager {
                 + "_" + uuid.replaceAll("[-]+", "").substring(0, 12);
     }
 
-    static String generateFileName(String nip) {
-        LocalDateTime time = LocalDateTime.now();
+    static String generateFileName(String nip, LocalDateTime time) {
         String uuid = UUID.randomUUID().toString();
-
         return time.toString().replaceAll("[-T:.]+", "").substring(0, 14)
                 + "_" + nip
                 + "_" + uuid.replaceAll("[-]+", "").substring(0, 12)
