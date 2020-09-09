@@ -1,6 +1,7 @@
 package com.app.controllersRest;
 
 import com.app.dto.CartDTO;
+import com.app.dto.DeliveryAddressDTO;
 import com.app.dto.ProductsInCartDTO;
 import com.app.service.CartService;
 import com.app.service.ProductService;
@@ -8,10 +9,7 @@ import com.app.service.SecurityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -48,8 +46,14 @@ public class CartRestController {
     }
 
     @GetMapping("/close")
-    public ResponseEntity<CartDTO> closeActiveCart(HttpServletRequest request) {
-        return new ResponseEntity<>(cartService.closeCart(
-                securityService.getLoggedInUserId(request.getAttribute("username").toString())), HttpStatus.OK);
+    public ResponseEntity<CartDTO> closeActiveCartGET(@RequestBody CartDTO cartDTO, HttpServletRequest request) {
+        return new ResponseEntity<>(cartService.closeCart(securityService.getLoggedInUserId(
+                request.getAttribute("username").toString()), cartDTO.getDeliveryAddressDTO().getId()), HttpStatus.OK);
+    }
+
+    @PostMapping("/close") // TODO: 08.09.2020 do sprawdzenia
+    public ResponseEntity<CartDTO> closeActiveCartPOST(@RequestBody CartDTO cartDTO, HttpServletRequest request) {
+        return new ResponseEntity<>(cartService.closeCart(securityService.getLoggedInUserId(
+                request.getAttribute("username").toString()), cartDTO.getDeliveryAddressDTO().getId()), HttpStatus.OK);
     }
 }

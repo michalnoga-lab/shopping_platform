@@ -22,7 +22,7 @@ public interface FileManager {
     }
 
     static String generateFileName(String nip, LocalDateTime time) {
-        String uuid = UUID.randomUUID().toString();
+        String uuid = UUID.randomUUID().toString().toUpperCase();
         return time.toString().replaceAll("[-T:.]+", "").substring(0, 14)
                 + "_" + nip
                 + "_" + uuid.replaceAll("[-]+", "").substring(0, 12)
@@ -30,12 +30,11 @@ public interface FileManager {
     }
 
     static String saveFileToDisk(String fileContent, String fileName) {
-
-        byte[] fileContentInBytes = fileContent.getBytes(StandardCharsets.UTF_8);
+        File file = new File(CustomPaths.SAVED_ORDERS_PATH + fileName);
 
         try (FileOutputStream fileOutputStream = new FileOutputStream(CustomPaths.SAVED_ORDERS_PATH + fileName)) {
-            fileOutputStream.write(fileContentInBytes, 0, fileContentInBytes.length);
-
+            byte[] fileContentInBytes = fileContent.getBytes(StandardCharsets.UTF_8);
+            fileOutputStream.write(fileContentInBytes);
         } catch (Exception e) {
             throw new AppException(InfoCodes.FILE_UTILITIES, "saveToDisk - error saving file: " + fileName);
         }
