@@ -51,9 +51,9 @@ public class CartRestController {
                 request.getAttribute("username").toString()), cartDTO.getDeliveryAddressDTO().getId()), HttpStatus.OK);
     }
 
-    @PostMapping("/close") // TODO: 08.09.2020 do sprawdzenia
-    public ResponseEntity<CartDTO> closeActiveCartPOST(@RequestBody CartDTO cartDTO, HttpServletRequest request) {
+    @PostMapping("/close")
+    public ResponseEntity<CartDTO> closeActiveCartPOST(@RequestBody DeliveryAddressDTO deliveryAddressDTO, HttpServletRequest request) {
         return new ResponseEntity<>(cartService.closeCart(securityService.getLoggedInUserId(
-                request.getAttribute("username").toString()), cartDTO.getDeliveryAddressDTO().getId()), HttpStatus.OK);
+                request.getAttribute("username").toString()), deliveryAddressDTO.getId()), HttpStatus.OK);
     }
 }

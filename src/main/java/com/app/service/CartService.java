@@ -13,6 +13,7 @@ import com.app.model.*;
 import com.app.parsers.XmlParserOptima;
 import com.app.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.boot.model.source.spi.IdentifierSourceNonAggregatedComposite;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -353,48 +354,92 @@ public class CartService {
         return CartMapper.toDto(cart);
     }
 
-    public CartDTO closeCart(Long userId, Long cartID) {
+//    public CartDTO closeCart(Long userId, Long cartID) {
+//
+//        System.out.println("----------------------------- 1"); // TODO: 09.09.2020
+//        System.out.println(userId);
+//        System.out.println(cartID);
+//
+//        if (userId == null) {
+//            throw new AppException(InfoCodes.SERVICE_CART, "closeCart - cart ID is null");
+//        }
+//        if (userId <= 0) {
+//            throw new AppException(InfoCodes.SERVICE_CART, "closeCart - cart ID less than zero");
+//        }
+//
+//        Optional<CartDTO> cartDTOOptional = getActiveCart(userId);
+//        CartDTO cartDTO = cartDTOOptional.orElseThrow(
+//                () -> new AppException(InfoCodes.SERVICE_CART, "closeCart - no cart for user with ID: " + userId));
+//        DeliveryAddress deliveryAddress = deliveryAddressRepository
+//                .findById(cartID)
+//                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "closeCart - no delivery address with ID: " + cartID));
+//
+//        Cart cart = cartRepository.getOne(cartDTO.getId());
+//        cart.setCartClosed(true);
+//        LocalDateTime purchaseTime = LocalDateTime.now();
+//        cart.setPurchaseTime(purchaseTime);
+//
+//        // TODO: 09.09.2020 get real NIP
+////        String fileName = FileManager.generateFileName(cartDTO.getUserDTO().getCompanyDTO().getNip(), purchaseTime);
+//        String fileName = FileManager.generateFileName("000000000", purchaseTime);
+//
+//        cart.setOrderNumber(fileName.substring(0, fileName.length() - 4));
+//        cart.setDeliveryAddress(deliveryAddress);
+//
+//        cartRepository.save(cart);
+//
+//        //String orderInXml = xmlParserOptima.generateXmlFileContent(cartDTO, productsInCart);
+//        String orderInXml = "fjsdfjsdfkdsfkdskhkdsh";
+//        // TODO: 13.08.2020  genrownie pliku z zamówieniem
+//        String pathToFile = FileManager.saveFileToDisk(orderInXml, fileName);
+//        emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
+//
+//        return CartMapper.toDto(cart);
+//        //return CartDTO.builder().build();
+//    }
 
-        System.out.println("----------------------------- 1"); // TODO: 09.09.2020
-        System.out.println(userId);
-        System.out.println(cartID);
-
+    public CartDTO closeCart(Long userId, Long deliveryAddressId) {
         if (userId == null) {
             throw new AppException(InfoCodes.SERVICE_CART, "closeCart - cart ID is null");
         }
         if (userId <= 0) {
             throw new AppException(InfoCodes.SERVICE_CART, "closeCart - cart ID less than zero");
         }
+        if (deliveryAddressId == null) {
+            throw new AppException(InfoCodes.SERVICE_CART, "closeCart - cart ID is null");
+        }
+        if (deliveryAddressId < 0) {
+            throw new AppException(InfoCodes.SERVICE_CART, "closeCart - cart ID less than zero");
+        }
+
+        // TODO: 09.09.2020 check address id
 
         Optional<CartDTO> cartDTOOptional = getActiveCart(userId);
         CartDTO cartDTO = cartDTOOptional.orElseThrow(
                 () -> new AppException(InfoCodes.SERVICE_CART, "closeCart - no cart for user with ID: " + userId));
+
         DeliveryAddress deliveryAddress = deliveryAddressRepository
-                .findById(cartID)
-                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "closeCart - no delivery address with ID: " + cartID));
+                .findById(deliveryAddressId)
+                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "closeCart - no delivery address with ID: " + deliveryAddressId));
 
         Cart cart = cartRepository.getOne(cartDTO.getId());
         cart.setCartClosed(true);
         LocalDateTime purchaseTime = LocalDateTime.now();
         cart.setPurchaseTime(purchaseTime);
-
-        // TODO: 09.09.2020 get real NIP
-//        String fileName = FileManager.generateFileName(cartDTO.getUserDTO().getCompanyDTO().getNip(), purchaseTime);
-        String fileName = FileManager.generateFileName("000000000", purchaseTime);
-
-        cart.setOrderNumber(fileName.substring(0, fileName.length() - 4));
+        String fileName = FileManager.generateFileName(cart.getUser().getCompany().getNip(), purchaseTime);
+        cart.setOrderNumber(fileName);
         cart.setDeliveryAddress(deliveryAddress);
 
         cartRepository.save(cart);
 
-        //String orderInXml = xmlParserOptima.generateXmlFileContent(cartDTO, productsInCart);
-        String orderInXml = "fjsdfjsdfkdsfkdskhkdsh";
+        // TODO: 09.09.2020
+        // String orderInXml = xmlParserOptima.generateXmlFileContent(cartDTO, productsInCart);
+        String orderInXml = "ALALALALALA";
         // TODO: 13.08.2020  genrownie pliku z zamówieniem
         String pathToFile = FileManager.saveFileToDisk(orderInXml, fileName);
         emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
 
         return CartMapper.toDto(cart);
-        //return CartDTO.builder().build();
     }
 
     public CartDTO closeCart(Long userId) {
