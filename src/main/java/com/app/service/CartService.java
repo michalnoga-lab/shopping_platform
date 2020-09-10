@@ -258,6 +258,7 @@ public class CartService {
         cartRepository.findAllByUserId(userId)
                 .stream()
                 .map(CartMapper::toDto)
+                .filter(cartDTO -> cartDTO.getCartClosed().equals(true))
                 .forEach(cart -> {
                     cart.setUserDTO(UserDTO.builder().build());
                     Set<ProductsInCartDTO> products = cart
@@ -411,8 +412,6 @@ public class CartService {
         if (deliveryAddressId < 0) {
             throw new AppException(InfoCodes.SERVICE_CART, "closeCart - cart ID less than zero");
         }
-
-        // TODO: 09.09.2020 check address id
 
         Optional<CartDTO> cartDTOOptional = getActiveCart(userId);
         CartDTO cartDTO = cartDTOOptional.orElseThrow(
