@@ -46,16 +46,6 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
-
-//    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "products")
-//    private Set<Cart> carts;
-    // TODO: 13.08.2020 remove
-
-//    @ManyToOne(cascade = CascadeType.PERSIST)
-//    @JoinColumn(name = "product_id")
-//    private Cart cart;
-
-    //@Column(columnDefinition = "false") // TODO: 13.08.2020 czy to działa ???
     private Boolean hidden;
 
     @Override

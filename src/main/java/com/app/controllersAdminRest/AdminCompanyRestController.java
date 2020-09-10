@@ -32,7 +32,7 @@ public class AdminCompanyRestController {
     }
 
     @PostMapping("/edit/{id}")
-    public ResponseEntity<CompanyDTO> edit(@PathVariable Long id) { // TODO: 17.04.2020 jeszcze ModelAttribute z company DTO
+    public ResponseEntity<CompanyDTO> edit(@PathVariable Long id) {
         return new ResponseEntity<>(companyService.edit(id), HttpStatus.OK);
     }
 

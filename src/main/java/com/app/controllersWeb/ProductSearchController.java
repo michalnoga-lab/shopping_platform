@@ -55,9 +55,5 @@ public class ProductSearchController {
         }
         model.addAttribute("products", foundedProducts);
         return "products/founded";
-
-
-        // TODO: 07.02.2020 wyszukiwanie też po numerze pozycji z przetargu
-        // TODO: 2020-02-12 wyszukiwanie po indeksie przetargowym
     }
 }

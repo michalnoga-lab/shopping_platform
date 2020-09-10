@@ -41,18 +41,6 @@ public class Cart {
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "cart")
     private Set<ProductsInCart> productsInCart;
 
-//    @ManyToMany(cascade = CascadeType.PERSIST)
-//    @JoinTable(
-//            name = "cart_product",
-//            joinColumns = {@JoinColumn(name = "cart_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "product_id")}
-//    )
-//    private Set<Product> products;
-    // TODO: 13.08.2020 remove
-
-//    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "cart")
-//    private Set<Product> products;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -13,7 +13,6 @@ import com.app.model.*;
 import com.app.parsers.XmlParserOptima;
 import com.app.repository.*;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.boot.model.source.spi.IdentifierSourceNonAggregatedComposite;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -112,19 +111,24 @@ public class CartService {
         CartDTO cartDTO = CartMapper.toDto(cart);
 
         // TODO: 30.08.2020 metoda w repo
+//        Set<ProductsInCartDTO> productsInCartDTO = productsInCartRepository
+//                .findAll()
+//                .stream()
+//                .filter(prod -> prod.getCart().getId().equals(cart.getId()))
+//                .filter(prod -> prod.getHidden().equals(false))
+//                .map(ProductInCartMapper::toDto)
+//                .collect(Collectors.toSet());
+
+        // TODO: 10.09.2020 czy to działa tak samo jak to powyżej ???
         Set<ProductsInCartDTO> productsInCartDTO = productsInCartRepository
-                .findAll()
+                .findProductsInCartById(cart.getId())
                 .stream()
-                .filter(prod -> prod.getCart().getId().equals(cart.getId()))
                 .filter(prod -> prod.getHidden().equals(false))
                 .map(ProductInCartMapper::toDto)
                 .collect(Collectors.toSet());
 
         cartDTO.setProductsInCartDTO(productsInCartDTO);
         cartDTO.setUserDTO(UserDTO.builder().build());
-
-
-        // TODO: 03.09.2020 nazwa produktu!
 
         return cartDTO;
     }
@@ -155,63 +159,30 @@ public class CartService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "removeProductFromCart - no user with ID: " + userId));
 
-        // TODO: 27.08.2020
-        // nie rob filtrowania tylko metode w repo
-//        Cart cart = cartRepository.findAllByUserId(userId)
-//                .stream()
-//                .filter(c -> c.getCartClosed().equals(false))
-//                .findFirst()
-//                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "removeProductFromCart - no open cart for user with ID: " + userId));
-
-
-        // TODO: 27.08.2020 metoda w repo
         Cart cart = cartRepository.findByUserId(userId)
                 .stream()
                 .filter(c -> c.getCartClosed().equals(false))
                 .findFirst()
                 .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "removeProductFromCart - no cart for user with ID: " + userId));
 
-
-        // TODO: 27.08.2020
-//        Long cartId = cartRepository.findByUserId(userId)
-//                .stream()
-//                .filter(c -> c.getCartClosed().equals(false))
-//                .findFirst()
-//                .get()
-//                .getId();
-
-
         // TODO: 27.08.2020 metoda w repo
-//        Optional<ProductsInCart> productsInCartToRemove = productsInCartRepository
+//        ProductsInCart productToRemove = productsInCartRepository
 //                .findAll()
 //                .stream()
+//                .filter(productsInCart -> productsInCart.getCart().getId().equals(cart.getId()))
+//                .filter(productsInCart -> productsInCart.getHidden().equals(false))
 //                .filter(productsInCart -> productsInCart.getProductId().equals(productId))
-//                .findFirst();
-        //.orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "removeProductFromCart - no product with productID in cart: " + productId));
+//                .findFirst()
+//                .get();
 
-        // TODO: 27.08.2020
-        // przeciez tutaj mozna robic takie pobranie produktow za pomoca metody w repo
-//        Set<ProductsInCart> productsInCart = productsInCartRepository
-//                .findAll()
-//                .stream()
-//                .filter(product -> product.getCart().getId().equals(cartId))
-//                //        .filter(product -> !product.getProductId().equals(productId))
-//                .collect(Collectors.toSet());
-
-
-        //System.out.println(productsInCartToRemove);
-
-        //productsInCartRepository.delete(productsInCartToRemove);
-
-        // TODO: 27.08.2020 metoda w repo
+        // TODO: 10.09.2020 czy działa tak samo jak to powyżej ???
         ProductsInCart productToRemove = productsInCartRepository
-                .findAll()
+                .findProductsInCartById(cart.getId())
                 .stream()
-                .filter(productsInCart -> productsInCart.getCart().getId().equals(cart.getId()))
                 .filter(productsInCart -> productsInCart.getHidden().equals(false))
                 .filter(productsInCart -> productsInCart.getProductId().equals(productId))
                 .findFirst()
-                .get();
+                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "removeProductFromCart - no product with ID: " + productId));
 
 
         productToRemove.setHidden(true);
@@ -225,24 +196,22 @@ public class CartService {
         cart.setTotalVatValue(cart.getTotalVatValue().subtract(vatValue));
         cart.setTotalGrossValue(cart.getTotalGrossValue().subtract(grossValue));
 
-
-        //cart.setProductsInCart(productsInCart);
         cartRepository.save(cart);
-
-        // TODO: 27.08.2020 zwracamy produkty aktualnie znajdujące się w koszyku
-
-
-        //return CartMapper.toDto(cart);
-
         CartDTO cartDTO = CartMapper.toDto(cart);
 
 
         // TODO: 30.08.2020 metoda w repo
+//        Set<ProductsInCartDTO> productsInCarts = productsInCartRepository
+//                .findAll()
+//                .stream()
+//                .filter(prod -> prod.getCart().getId().equals(cart.getId()))
+//                .map(ProductInCartMapper::toDto)
+//                .collect(Collectors.toSet());
+
+        // TODO: 10.09.2020 czy to działa tak samo jak to powyżej ???
         Set<ProductsInCartDTO> productsInCarts = productsInCartRepository
-                .findAll()
-                .stream()
-                .filter(prod -> prod.getCart().getId().equals(cart.getId()))
-                .map(ProductInCartMapper::toDto)
+                .findProductsInCartById(cart.getId())
+                .stream().map(ProductInCartMapper::toDto)
                 .collect(Collectors.toSet());
 
         cartDTO.setProductsInCartDTO(productsInCarts);
@@ -281,7 +250,6 @@ public class CartService {
             throw new AppException(InfoCodes.SERVICE_PRODUCT, "getActiveCart - cart ID less than zero");
         }
 
-        // TODO: 01.09.2020 metoda w repo
         Optional<CartDTO> cartOptional = cartRepository
                 .findAllByUserId(userId)
                 .stream()
@@ -325,29 +293,6 @@ public class CartService {
         }
     }
 
-    // TODO: 31.08.2020
-//    public Optional<CartDTO> getActiveCart(Long userId) {
-//        if (userId == null) {
-//            throw new AppException(InfoCodes.SERVICE_CART, "getActiveCart - ID is null");
-//        }
-//        if (userId <= 0) {
-//            throw new AppException(InfoCodes.SERVICE_CART, "getActiveCart - ID less than zero");
-//        }
-//        List<CartDTO> allUserCarts = getAllUsersCarts(userId);
-//
-//        if (allUserCarts.size() > 0) {
-//            List<CartDTO> notClosedCarts = allUserCarts
-//                    .stream()
-//                    .filter(cartDTO -> cartDTO.getCartClosed().equals(false))
-//                    .collect(Collectors.toList());
-//
-//            if (notClosedCarts.size() > 0) {
-//                return Optional.of(notClosedCarts.get(0));
-//            }
-//        }
-//        return Optional.empty();
-//    }
-
     public CartDTO setAddressToCart(Long addressId, Long userId) {
         if (addressId == null) {
             throw new AppException(InfoCodes.SERVICE_CART, "setAddressToCart - ID is null");
@@ -363,50 +308,6 @@ public class CartService {
         cartRepository.save(cart);
         return CartMapper.toDto(cart);
     }
-
-//    public CartDTO closeCart(Long userId, Long cartID) {
-//
-//        System.out.println("----------------------------- 1"); // TODO: 09.09.2020
-//        System.out.println(userId);
-//        System.out.println(cartID);
-//
-//        if (userId == null) {
-//            throw new AppException(InfoCodes.SERVICE_CART, "closeCart - cart ID is null");
-//        }
-//        if (userId <= 0) {
-//            throw new AppException(InfoCodes.SERVICE_CART, "closeCart - cart ID less than zero");
-//        }
-//
-//        Optional<CartDTO> cartDTOOptional = getActiveCart(userId);
-//        CartDTO cartDTO = cartDTOOptional.orElseThrow(
-//                () -> new AppException(InfoCodes.SERVICE_CART, "closeCart - no cart for user with ID: " + userId));
-//        DeliveryAddress deliveryAddress = deliveryAddressRepository
-//                .findById(cartID)
-//                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "closeCart - no delivery address with ID: " + cartID));
-//
-//        Cart cart = cartRepository.getOne(cartDTO.getId());
-//        cart.setCartClosed(true);
-//        LocalDateTime purchaseTime = LocalDateTime.now();
-//        cart.setPurchaseTime(purchaseTime);
-//
-//        // TODO: 09.09.2020 get real NIP
-////        String fileName = FileManager.generateFileName(cartDTO.getUserDTO().getCompanyDTO().getNip(), purchaseTime);
-//        String fileName = FileManager.generateFileName("000000000", purchaseTime);
-//
-//        cart.setOrderNumber(fileName.substring(0, fileName.length() - 4));
-//        cart.setDeliveryAddress(deliveryAddress);
-//
-//        cartRepository.save(cart);
-//
-//        //String orderInXml = xmlParserOptima.generateXmlFileContent(cartDTO, productsInCart);
-//        String orderInXml = "fjsdfjsdfkdsfkdskhkdsh";
-//        // TODO: 13.08.2020  genrownie pliku z zamówieniem
-//        String pathToFile = FileManager.saveFileToDisk(orderInXml, fileName);
-//        emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
-//
-//        return CartMapper.toDto(cart);
-//        //return CartDTO.builder().build();
-//    }
 
     public CartDTO closeCart(Long userId, Long deliveryAddressId) {
         if (userId == null) {
@@ -488,8 +389,6 @@ public class CartService {
         if (userId <= 0) {
             throw new AppException(InfoCodes.SERVICE_CART, "userHasOpenCart - cart ID less than zero");
         }
-
-        // TODO: 31.08.2020 do poprawy return statement 
         return Optional.of(getProductsOfActiveCart(userId)).isPresent();
     }
 }

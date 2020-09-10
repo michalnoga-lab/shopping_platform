@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
-    public JWTAuthorizationFilter(AuthenticationManager authenticationManager) { // TODO: 24.03.2020 czy konstruktor jest aktywny ???
+    public JWTAuthorizationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
 
