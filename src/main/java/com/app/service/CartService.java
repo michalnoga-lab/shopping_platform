@@ -273,8 +273,6 @@ public class CartService {
         return usersCarts;
     }
 
-
-    // TODO: 03.09.2020 getActiveCart - zwracamy cały koszyk
     public Optional<CartDTO> getActiveCart(Long userId) {
         if (userId == null) {
             throw new AppException(InfoCodes.SERVICE_PRODUCT, "getActiveCart - user ID is null");
@@ -285,8 +283,11 @@ public class CartService {
 
         // TODO: 01.09.2020 metoda w repo
         Optional<CartDTO> cartOptional = cartRepository
-                .findByUserId(userId)
-                .map(CartMapper::toDto);
+                .findAllByUserId(userId)
+                .stream()
+                .filter(cart -> cart.getCartClosed().equals(false))
+                .map(CartMapper::toDto)
+                .findFirst();
 
         cartOptional.ifPresent(cartDTO -> {
             cartDTO.setUserDTO(UserDTO.builder().build());
@@ -306,14 +307,22 @@ public class CartService {
         }
 
         Optional<Cart> cartInDB = cartRepository
-                .findByUserId(userId);
-
-        return cartInDB.map(cart -> cart.getProductsInCart()
+                .findAllByUserId(userId)
                 .stream()
-                .map(ProductInCartMapper::toDto)
-                .filter(product -> product.getHidden().equals(false))
-                .collect(Collectors.toList()))
-                .orElseGet(List::of);
+                .filter(cart -> cart.getCartClosed().equals(false))
+                .findFirst();
+
+        if (cartInDB.isEmpty()) {
+            return new ArrayList<>();
+        } else {
+
+            return cartInDB.map(cart -> cart.getProductsInCart()
+                    .stream()
+                    .map(ProductInCartMapper::toDto)
+                    .filter(product -> product.getHidden().equals(false))
+                    .collect(Collectors.toList()))
+                    .orElseGet(List::of);
+        }
     }
 
     // TODO: 31.08.2020
@@ -458,7 +467,7 @@ public class CartService {
         LocalDateTime purchaseTime = LocalDateTime.now();
         cart.setPurchaseTime(purchaseTime);
         String fileName = FileManager.generateFileName(cartDTO.getUserDTO().getCompanyDTO().getNip(), purchaseTime);
-        cart.setOrderNumber(fileName);
+        cart.setOrderNumber(fileName.substring(0, fileName.length() - 4));
 
         cartRepository.save(cart);
 
