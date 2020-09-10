@@ -435,7 +435,7 @@ public class CartService {
         LocalDateTime purchaseTime = LocalDateTime.now();
         cart.setPurchaseTime(purchaseTime);
         String fileName = FileManager.generateFileName(cart.getUser().getCompany().getNip(), purchaseTime);
-        cart.setOrderNumber(fileName);
+        cart.setOrderNumber(fileName.substring(0, fileName.length() - 4));
         cart.setDeliveryAddress(deliveryAddress);
 
         cartRepository.save(cart);
