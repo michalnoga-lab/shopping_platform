@@ -346,7 +346,8 @@ public class CartService {
         String orderInXml = "ALALALALALA";
         // TODO: 13.08.2020  genrownie pliku z zamówieniem
         String pathToFile = FileManager.saveFileToDisk(orderInXml, fileName);
-        emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
+        //mailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
+        // TODO: 15.09.2020 enable email service
 
         return CartMapper.toDto(cart);
     }

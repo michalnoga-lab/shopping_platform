@@ -33,6 +33,11 @@ public class ProductRestController {
         ), HttpStatus.OK);
     }
 
+    @GetMapping("/one")
+    public ResponseEntity<ProductDTO> one(@RequestBody ProductDTO productDTO) {
+        return new ResponseEntity<>(productService.getOneProduct(productDTO.getId()), HttpStatus.OK);
+    }
+
     @PostMapping("/buy")
     public ResponseEntity<CartDTO> buy(HttpServletRequest request, @RequestBody ProductDTO productDTO) {
         return new ResponseEntity<>(cartService.addProductToCart(productDTO,

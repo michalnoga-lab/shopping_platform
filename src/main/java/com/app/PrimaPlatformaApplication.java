@@ -31,7 +31,6 @@ public class PrimaPlatformaApplication extends SpringBootServletInitializer {
 
     //--------------------------------------------------------------------------------------------
 
-
     // TODO: 2020-01-25 invalid login counter
     // TODO: 2020-01-25 http only and secure flags
 
