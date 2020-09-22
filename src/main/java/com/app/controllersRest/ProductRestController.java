@@ -33,7 +33,7 @@ public class ProductRestController {
         ), HttpStatus.OK);
     }
 
-    @GetMapping("/one")
+    @PostMapping("/one")
     public ResponseEntity<ProductDTO> one(@RequestBody ProductDTO productDTO) {
         return new ResponseEntity<>(productService.getOneProduct(productDTO.getId()), HttpStatus.OK);
     }
