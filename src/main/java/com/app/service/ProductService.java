@@ -83,45 +83,7 @@ public class ProductService {
                 .collect(Collectors.toSet());
     }
 
-//    public Set<ProductsInCartDTO> getProductsOfCart(Long cartId) {
-//        if (cartId == null) {
-//            throw new AppException(InfoCodes.SERVICE_PRODUCT, "getProductsOfCart - cartId is null");
-//        }
-//        if (cartId < 0) {
-//            throw new AppException(InfoCodes.SERVICE_PRODUCT, "getProductsOfCart - cartId less than zero");
-//        }
-//
-//
-//        // TODO: 31.08.2020 metoda w repo
-//        return productsInCartRepository
-//                .findAll()
-//                .stream()
-//                .filter(product -> product.getCart().getId().equals(cartId))
-//                .map(ProductInCartMapper::toDto)
-//                .collect(Collectors.toSet());
-
-//        Optional<Cart> cartFromDb = cartRepository.findById(cartId);
-//
-//        if (cartFromDb.isPresent()) {
-////            return cartFromDb.get().getProducts()
-////                    .stream()
-////                    .map(ProductMapper::toDto)
-////                    .collect(Collectors.toSet()); // TODO: 13.08.2020 zwracanie produktów >
-//        } else {
-//            throw new AppException(InfoCodes.SERVICE_PRODUCT, "getOneProduct - no cart with ID: " + cartId);
-//        }
-    // TODO: 21.07.2020 do poprawy całość!
-
-//        return Set.of(ProductDTO.builder().id(11L).name("nama").build(),
-//                ProductDTO.builder().id(12L).name("name_EXAMPLE").build(),
-//                ProductDTO.builder().id(13L).name("name_OOOOO").build(),
-//                ProductDTO.builder().id(14L).name("name_QUIT").build()
-//        );
-
-    // return null; // TODO: 13.08.2020
-    //}
-
-    public List<ProductDTO> search(ProductSearchDTO productSearchDTO) { // TODO: 16.04.2020 może zwrócimy tylko produkty danego użytkownika ????
+    public List<ProductDTO> search(ProductSearchDTO productSearchDTO) {
 
         if (productSearchDTO == null) {
             throw new AppException(InfoCodes.CONTROLLERS, "search - search is null");
@@ -178,23 +140,7 @@ public class ProductService {
             return ProductMapper.toDto(product);
         } else {
             throw new AppException(InfoCodes.SERVICE_PRODUCT, "setCode - no optima code in enum: " + userInput);
-        } // TODO: 17.04.2020 czy opis app exception jest ok ??? skąd idą kody ???
-
-//        Product product = productRepository.findById(productId)
-//                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_PRODUCT, "setCode - no product with ID: " + productId));
-//
-//        try {
-//            /*OptimaCode optimaCode = Arrays.stream(OptimaCode.values())
-//                    .filter(code -> code.getDescription().equals(userInput))
-//                    .findFirst()
-//                    .orElseThrow(() -> new AppException(InfoCodes.SERVICE_PRODUCT, "setCode - no optima code for enum"));
-//            product.setOptimaCode(optimaCode);*/ // TODO: 17.02.2020 set product code
-//            product.setProductCode(userInput);
-//            productRepository.save(product);
-//
-//        } catch (Exception e) {
-//            throw new AppException(InfoCodes.SERVICE_PRODUCT, "setCode - no optima code in enum: " + userInput);
-//        }
+        }
     }
 
     public ProductDTO removeCode(Long productId) {
@@ -206,7 +152,7 @@ public class ProductService {
         }
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new AppException(InfoCodes.SERVICE_PRODUCT, "removeCode - no product with ID: " + productId));
-        product.setProductCode(null); // TODO: 17.02.2020 tu był kiedyś enum
+        product.setProductCode(null); // tu był kiedyś enum
         productRepository.save(product);
         return ProductMapper.toDto(product);
     }

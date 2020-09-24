@@ -34,7 +34,7 @@ public class FileService {
 
     private final LoggerService loggerService;
 
-    // TODO: 23.04.2020 tu będą przychodziły produkty do wczytania do produktów firmowych w formacie JSON 
+    // only for web use
     public List<ProductDTO> getProductsFromFileUploadedByUser(MultipartFile file, Long companyId) {
         try {
             if (file == null || file.getBytes().length == 0) {
@@ -46,7 +46,7 @@ public class FileService {
             if (companyId <= 0) {
                 throw new AppException(InfoCodes.FILE_UPLOAD, "getProductsFromFile - company ID less than zero");
             }
-            
+
             String filename = FileManager.uploadFileFromUser(file);
 
             loggerService.add(LoggerInfo.builder()
@@ -110,15 +110,13 @@ public class FileService {
                         }
                     });
 
-            // TODO: 2020-02-15 kojarzenie produktów z kodami
-
             return productDTOS;
         } catch (Exception e) {
             throw new AppException(InfoCodes.FILE_UPLOAD, "getProductsFromFile - error during file upload");
         }
     }
 
-    // TODO: 23.04.2020 kasujemy ??? firmy będą dodawane przez JS 
+    // ony for web use
     public CompanyDTODetailsFromFile getCompanyDetailsFromFile(String nip) {
         if (nip == null) {
             throw new AppException(InfoCodes.SERVICE_FILES, "getCompanyDetailsFromFile - nip is null");
@@ -169,40 +167,4 @@ public class FileService {
             throw new AppException(InfoCodes.FILE_UPLOAD, "getCompanyDetailsFromFile - error reading file content");
         }
     }
-
-    // TODO: 23.04.2020 kasujemy ??? JSON z JS ???
-//    public List<ProductCodeDTO> getProductsCodeFromFile() {
-//        int character = 0;
-//        List<ProductCodeDTO> productCodeDTOS = new ArrayList<>();
-//
-//        try {
-//            InputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(Paths.get(CustomPaths.PRODUCTS_CODES_PATH)));
-//            Reader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-//
-//            StringBuilder stringBuilder = new StringBuilder();
-//
-//            while ((character = reader.read()) != -1) {
-//                if (String.valueOf((char) character).matches(CustomRegex.UPLOAD_FILES_ALLOWED_CHARS)) {
-//                    stringBuilder.append((char) character);
-//                }
-//            }
-//
-//            Arrays.stream(stringBuilder.toString().split("]"))
-//                    .forEach(line -> {
-//                        String[] lineSplit = line.split("}");
-//
-//                        productCodeDTOS.add(
-//                                ProductCodeDTO.builder()
-//                                        .codeFromOptima(lineSplit[0])
-//                                        .name(lineSplit[1])
-//                                        .keywords(Set.of(lineSplit[2].split("\\s")))
-//                                        .build()
-//                        );
-//                    });
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return productCodeDTOS;
-//    }
 }

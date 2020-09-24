@@ -52,16 +52,4 @@ public class FileServiceTests {
 
         Assertions.assertEquals(expectedResult, actualResult);
     }
-
-//    @DisplayName("getProductsCodeFromFile - read content of file")
-//    @ParameterizedTest
-//    @CsvFileSource(resources = "/tests/companies.csv")
-//    void test30() {
-//
-//        List<ProductCodeDTO> productsCodeFromFile = fileService.getProductsCodeFromFile();
-//
-//
-//
-//    }
-    // TODO: 23.04.2020 kasujemy ??? dane mają przychodzić z JS 
 }

@@ -1,6 +1,3 @@
-// TODO: 26.08.2020 enable
-
-
 //package com.app.controllerExceptions;
 //
 //import com.app.exceptions.AppException;

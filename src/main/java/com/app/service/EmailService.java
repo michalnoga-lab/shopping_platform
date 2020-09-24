@@ -53,7 +53,7 @@ public class EmailService {
 
             loggerService.add(LoggerInfo.builder()
                     .infoCode(InfoCodes.SERVICE_EMAIL)
-                    .message("email sent " + message.getFileName()) // TODO: 2020-02-15 czy nazwa pliku ok
+                    .message("email sent " + message.getFileName())
                     .build());
 
         } catch (Exception e) {

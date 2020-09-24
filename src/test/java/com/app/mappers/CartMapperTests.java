@@ -35,8 +35,6 @@ public class CartMapperTests {
                 .cartClosed(false)
                 .deliveryAddress(DeliveryAddress.builder().street("Address 1").build())
                 .purchaseTime(LocalDateTime.of(2019, 10, 22, 0, 0, 0))
-//                .products(Set.of(Product.builder().id(10L).build()))
-                // TODO: 13.08.2020  
                 .orderNumber("NUMBER")
                 .build();
 
@@ -81,8 +79,6 @@ public class CartMapperTests {
                 .cartClosed(false)
                 .deliveryAddress(DeliveryAddress.builder().street("Address 1").build())
                 .purchaseTime(LocalDateTime.of(2019, 10, 22, 0, 0, 0))
-//                .products(Set.of(Product.builder().id(10L).build()))
-                // TODO: 13.08.2020  
                 .orderNumber("NUMBER")
                 .build();
 

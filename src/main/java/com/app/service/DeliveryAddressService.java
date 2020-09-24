@@ -32,12 +32,10 @@ public class DeliveryAddressService {
             throw new AppException(InfoCodes.SERVICE_DELIVERY, "findAll - ID less than zero: " + userId);
         }
 
-        // TODO: 08.09.2020 metoda w repo
         return deliveryAddressRepository
-                .findAll()
+                .findAllByUserId(userId)
                 .stream()
                 .filter(address -> address.getHidden().equals(false))
-                .filter(address -> address.getUser().getId().equals(userId))
                 .map(DeliveryAddressMapper::toDto)
                 .collect(Collectors.toList());
     }

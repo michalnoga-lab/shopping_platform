@@ -110,16 +110,6 @@ public class CartService {
 
         CartDTO cartDTO = CartMapper.toDto(cart);
 
-        // TODO: 30.08.2020 metoda w repo
-//        Set<ProductsInCartDTO> productsInCartDTO = productsInCartRepository
-//                .findAll()
-//                .stream()
-//                .filter(prod -> prod.getCart().getId().equals(cart.getId()))
-//                .filter(prod -> prod.getHidden().equals(false))
-//                .map(ProductInCartMapper::toDto)
-//                .collect(Collectors.toSet());
-
-        // TODO: 10.09.2020 czy to działa tak samo jak to powyżej ???
         Set<ProductsInCartDTO> productsInCartDTO = productsInCartRepository
                 .findProductsInCartById(cart.getId())
                 .stream()
@@ -165,17 +155,6 @@ public class CartService {
                 .findFirst()
                 .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "removeProductFromCart - no cart for user with ID: " + userId));
 
-        // TODO: 27.08.2020 metoda w repo
-//        ProductsInCart productToRemove = productsInCartRepository
-//                .findAll()
-//                .stream()
-//                .filter(productsInCart -> productsInCart.getCart().getId().equals(cart.getId()))
-//                .filter(productsInCart -> productsInCart.getHidden().equals(false))
-//                .filter(productsInCart -> productsInCart.getProductId().equals(productId))
-//                .findFirst()
-//                .get();
-
-        // TODO: 10.09.2020 czy działa tak samo jak to powyżej ???
         ProductsInCart productToRemove = productsInCartRepository
                 .findProductsInCartById(cart.getId())
                 .stream()
@@ -199,16 +178,6 @@ public class CartService {
         cartRepository.save(cart);
         CartDTO cartDTO = CartMapper.toDto(cart);
 
-
-        // TODO: 30.08.2020 metoda w repo
-//        Set<ProductsInCartDTO> productsInCarts = productsInCartRepository
-//                .findAll()
-//                .stream()
-//                .filter(prod -> prod.getCart().getId().equals(cart.getId()))
-//                .map(ProductInCartMapper::toDto)
-//                .collect(Collectors.toSet());
-
-        // TODO: 10.09.2020 czy to działa tak samo jak to powyżej ???
         Set<ProductsInCartDTO> productsInCarts = productsInCartRepository
                 .findProductsInCartById(cart.getId())
                 .stream().map(ProductInCartMapper::toDto)

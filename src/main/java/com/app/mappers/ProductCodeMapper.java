@@ -17,5 +17,3 @@ public interface ProductCodeMapper {
                 .build();
     }
 }
-
-// TODO: 27.08.2020 czy ta klasa jest potrzebna ???

@@ -18,8 +18,8 @@ VALUES (6, 'user@gmail.com', true, 'user@gmail.com', 'name',
        (7, 'admin@gmail.com', true, 'admin@gmail.com', 'name',
         '{bcrypt}$2a$10$/HxZgKD8i8uVvtbyMcYPkeeybREyK72tEtVV25OxPvufeUSt9fFEa', 'USER', 'surname', 11);
 
-INSERT INTO delivery_addresses (id, hidden, phone, street, user_id)
-VALUES (10, false, '1121212121', 'street_1', 6);
+# INSERT INTO delivery_addresses (id, hidden, phone, street, user_id)
+# VALUES (10, false, '1121212121', 'street_1', 6);
 
 # INSERT INTO carts (id, cart_closed, order_number, purchase_time, total_gross_value, total_net_value, total_vat_value,
 #                    delivery_address_id, user_id)

@@ -72,8 +72,9 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//
-//                // TODO: 2020-03-29 enable for web use only
+
+//                 !!! ENABLE FOR WEB USE ONLY !!!
+
 //                .and()
 //                .formLogin()
 //                .loginPage("/security/login").permitAll()
