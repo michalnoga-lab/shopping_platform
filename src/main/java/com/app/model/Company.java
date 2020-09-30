@@ -35,6 +35,10 @@ public class    Company {
     @Enumerated(EnumType.STRING)
     private Price defaultPrice;
 
+    @OneToOne
+    @JoinColumn(name = "company_code_id")
+    private CompanyCode companyCode;
+
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "company")
     private Set<User> users;
 

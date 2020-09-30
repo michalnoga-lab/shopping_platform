@@ -23,4 +23,5 @@ public class ProductsInCartDTO {
     private BigDecimal grossPrice;
     private Boolean hidden;
     private Cart cart;
+    private ProductCodeDTO productCodeDTO;
 }

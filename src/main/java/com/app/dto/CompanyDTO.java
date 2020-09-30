@@ -23,4 +23,5 @@ public class CompanyDTO {
     private Boolean active;
     private Integer paymentInDays;
     private Price defaultPrice;
+    private CompanyCodeDTO companyCodeDTO;
 }

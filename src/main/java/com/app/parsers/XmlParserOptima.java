@@ -1,8 +1,6 @@
 package com.app.parsers;
 
-import com.app.dto.CartDTO;
-import com.app.dto.CompanyDTODetailsFromFile;
-import com.app.dto.ProductDTO;
+import com.app.dto.*;
 import com.app.service.FileService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -19,11 +17,12 @@ public class XmlParserOptima {
 
     private final FileService fileService;
 
-    public String generateXmlFileContent(CartDTO cartDTO, Set<ProductDTO> productsInCart) {
+    public String generateXmlFileContent(CartDTO cartDTO, Set<ProductsInCartDTO> productsInCart, CompanyDTO companyDTO) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        CompanyDTODetailsFromFile companyDTODetailsFromFile =
-                fileService.getCompanyDetailsFromFile(cartDTO.getUserDTO().getCompanyDTO().getNip());
+        // TODO: 28.09.2020 remove
+//        CompanyDTODetailsFromFile companyDTODetailsFromFile =
+//                fileService.getCompanyDetailsFromFile(cartDTO.getUserDTO().getCompanyDTO().getNip());
 
         stringBuilder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         stringBuilder.append("<ROOT xmlns=\"http://www.cdn.com.pl/optima/dokument\">");
@@ -50,7 +49,7 @@ public class XmlParserOptima {
         stringBuilder.append("<TYP_NETTO_BRUTTO>1</TYP_NETTO_BRUTTO>");
         stringBuilder.append("<RABAT>0.00</RABAT>");
         stringBuilder.append("<OPIS>");
-        stringBuilder.append(cartDTO.getDeliveryAddressDTO().getStreet());
+        stringBuilder.append(cartDTO.getDeliveryAddressDTO().getStreet());  // todo od tego zacząć
         stringBuilder.append("\ngit kontakt: ");
         stringBuilder.append(cartDTO.getUserDTO().getName());
         stringBuilder.append(" ");
@@ -60,7 +59,7 @@ public class XmlParserOptima {
         stringBuilder.append("</OPIS>");
         stringBuilder.append("<PLATNIK>");
         stringBuilder.append("<KOD>");
-        stringBuilder.append(companyDTODetailsFromFile.getCode());
+        stringBuilder.append(companyDTO.getCompanyCodeDTO());
         stringBuilder.append("</KOD>");
         stringBuilder.append("<NIP_KRAJ>PL</NIP_KRAJ>");
         stringBuilder.append("<NIP>");
@@ -68,42 +67,42 @@ public class XmlParserOptima {
         stringBuilder.append("</NIP>");
         stringBuilder.append("<GLN/>");
         stringBuilder.append("<NAZWA>");
-        stringBuilder.append(companyDTODetailsFromFile.getName());
+        stringBuilder.append(companyDTO.getName());
         stringBuilder.append("</NAZWA>");
         stringBuilder.append("<ADRES>");
         stringBuilder.append("<KOD_POCZTOWY>");
-        stringBuilder.append(companyDTODetailsFromFile.getPostalCode());
+        stringBuilder.append(companyDTO.getPostCode());
         stringBuilder.append("</KOD_POCZTOWY>");
         stringBuilder.append("<MIASTO>");
-        stringBuilder.append(companyDTODetailsFromFile.getCity());
+        stringBuilder.append(companyDTO.getCity());
         stringBuilder.append("</MIASTO>");
         stringBuilder.append("<ULICA>");
-        stringBuilder.append(companyDTODetailsFromFile.getStreet());
+        stringBuilder.append(companyDTO.getStreet());
         stringBuilder.append("</ULICA>");
         stringBuilder.append("<KRAJ>Polska</KRAJ>");
         stringBuilder.append("</ADRES>");
         stringBuilder.append("</PLATNIK>");
         stringBuilder.append("<ODBIORCA>");
         stringBuilder.append("<KOD>");
-        stringBuilder.append(companyDTODetailsFromFile.getCode());
+        stringBuilder.append(companyDTO.getCompanyCodeDTO());
         stringBuilder.append("</KOD>");
         stringBuilder.append("<NIP_KRAJ>PL</NIP_KRAJ>");
         stringBuilder.append("<NIP>");
-        stringBuilder.append(companyDTODetailsFromFile.getNip());
+        stringBuilder.append(companyDTO.getNip());
         stringBuilder.append("</NIP>");
         stringBuilder.append("<GLN/>");
         stringBuilder.append("<NAZWA>");
-        stringBuilder.append(companyDTODetailsFromFile.getName());
+        stringBuilder.append(companyDTO.getName());
         stringBuilder.append("</NAZWA>");
         stringBuilder.append("<ADRES>");
         stringBuilder.append("<KOD_POCZTOWY>");
-        stringBuilder.append(companyDTODetailsFromFile.getPostalCode());
+        stringBuilder.append(companyDTO.getPostCode());
         stringBuilder.append("</KOD_POCZTOWY>");
         stringBuilder.append("<MIASTO>");
-        stringBuilder.append(companyDTODetailsFromFile.getCity());
+        stringBuilder.append(companyDTO.getCity());
         stringBuilder.append("</MIASTO>");
         stringBuilder.append("<ULICA>");
-        stringBuilder.append(companyDTODetailsFromFile.getStreet());
+        stringBuilder.append(companyDTO.getStreet());
         stringBuilder.append("</ULICA>");
         stringBuilder.append("<KRAJ>Polska</KRAJ>");
         stringBuilder.append("</ADRES>");
@@ -163,79 +162,78 @@ public class XmlParserOptima {
         stringBuilder.append("</NAGLOWEK>");
         stringBuilder.append("<POZYCJE>");
 
-//        productsInCart
-//                .forEach(product -> {
-//                    stringBuilder.append("<POZYCJA>");
-//                    stringBuilder.append("<TOWAR>");
-//                    stringBuilder.append("<KOD>");
-//                    stringBuilder.append(product.getProductCodeDTO());
-//                    stringBuilder.append("</KOD>");
-//                    stringBuilder.append("<NAZWA>");
-//                    stringBuilder.append(product.getName());
-//                    stringBuilder.append("</NAZWA>");
-//                    stringBuilder.append("<OPIS/>");
-//                    stringBuilder.append("<EAN/>");
-//                    stringBuilder.append("<SWW/>");
-//                    stringBuilder.append("<NUMER_KATALOGOWY/>");
-//                    stringBuilder.append("</TOWAR>");
-//                    stringBuilder.append("<STAWKA_VAT>");
-//                    stringBuilder.append("<STAWKA>");
-//                    stringBuilder.append(product.getVat());
-//                    stringBuilder.append("</STAWKA>");
-//                    stringBuilder.append("<FLAGA>2</FLAGA>");
-//                    stringBuilder.append("<ZRODLOWA>0.00</ZRODLOWA>");
-//                    stringBuilder.append("</STAWKA_VAT>");
-//                    stringBuilder.append("<CENY>");
-//                    stringBuilder.append("<CENAZCZTEREMAMIEJSCAMI>0</CENAZCZTEREMAMIEJSCAMI>");
-//                    stringBuilder.append("<POCZATKOWA_WAL_CENNIKA>");
-//                    stringBuilder.append(product.getNettPrice());
-//                    stringBuilder.append("</POCZATKOWA_WAL_CENNIKA>");
-//                    stringBuilder.append("<POCZATKOWA_WAL_DOKUMENTU>");
-//                    stringBuilder.append(product.getNettPrice());
-//                    stringBuilder.append("</POCZATKOWA_WAL_DOKUMENTU>");
-//                    stringBuilder.append("<PO_RABACIE_WAL_CENNIKA>");
-//                    stringBuilder.append(product.getNettPrice());
-//                    stringBuilder.append("</PO_RABACIE_WAL_CENNIKA>");
-//                    stringBuilder.append("<PO_RABACIE_PLN>");
-//                    stringBuilder.append(product.getNettPrice());
-//                    stringBuilder.append("</PO_RABACIE_PLN>");
-//                    stringBuilder.append("<PO_RABACIE_WAL_DOKUMENTU>");
-//                    stringBuilder.append(product.getNettPrice());
-//                    stringBuilder.append("</PO_RABACIE_WAL_DOKUMENTU>");
-//                    stringBuilder.append("</CENY>");
-//                    stringBuilder.append("<WALUTA>");
-//                    stringBuilder.append("<SYMBOL>PLN</SYMBOL>");
-//                    stringBuilder.append("<KURS_L>1.00</KURS_L>");
-//                    stringBuilder.append("<KURS_M>1</KURS_M>");
-//                    stringBuilder.append("</WALUTA>");
-//                    stringBuilder.append("<RABAT>0.00</RABAT>");
-//                    stringBuilder.append("<WARTOSC_NETTO>");
-//                    stringBuilder.append(product.getNettPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
-//                    stringBuilder.append("</WARTOSC_NETTO>");
-//                    stringBuilder.append("<WARTOSC_BRUTTO>");
-//                    stringBuilder.append(product.getGrossPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
-//                    stringBuilder.append("</WARTOSC_BRUTTO>");
-//                    stringBuilder.append("<WARTOSC_NETTO_WAL>");
-//                    stringBuilder.append(product.getNettPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
-//                    stringBuilder.append("</WARTOSC_NETTO_WAL>");
-//                    stringBuilder.append("<WARTOSC_BRUTTO_WAL>");
-//                    stringBuilder.append(product.getGrossPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
-//                    stringBuilder.append("</WARTOSC_BRUTTO_WAL>");
-//                    stringBuilder.append("<ILOSC>");
-//                    stringBuilder.append(product.getQuantity());
-//                    stringBuilder.append("</ILOSC>");
-//                    stringBuilder.append("<JM>");
-//                    stringBuilder.append("</JM>");
-//                    stringBuilder.append("<JM_CALKOWITE>0.00</JM_CALKOWITE>");
-//                    stringBuilder.append("<JM_ZLOZONA>");
-//                    stringBuilder.append("<JMZ>");
-//                    stringBuilder.append("</JMZ>");
-//                    stringBuilder.append("<JM_PRZELICZNIK_L>1.00</JM_PRZELICZNIK_L>");
-//                    stringBuilder.append("<JM_PRZELICZNIK_M>1</JM_PRZELICZNIK_M>");
-//                    stringBuilder.append("</JM_ZLOZONA>");
-//                    stringBuilder.append("</POZYCJA>");
-//                });
-        // TODO: 14.08.2020 enable
+        productsInCart
+                .forEach(product -> {
+                    stringBuilder.append("<POZYCJA>");
+                    stringBuilder.append("<TOWAR>");
+                    stringBuilder.append("<KOD>");
+                    stringBuilder.append(product.getProductCodeDTO());
+                    stringBuilder.append("</KOD>");
+                    stringBuilder.append("<NAZWA>");
+                    stringBuilder.append(product.getName());
+                    stringBuilder.append("</NAZWA>");
+                    stringBuilder.append("<OPIS/>");
+                    stringBuilder.append("<EAN/>");
+                    stringBuilder.append("<SWW/>");
+                    stringBuilder.append("<NUMER_KATALOGOWY/>");
+                    stringBuilder.append("</TOWAR>");
+                    stringBuilder.append("<STAWKA_VAT>");
+                    stringBuilder.append("<STAWKA>");
+                    stringBuilder.append(product.getVat());
+                    stringBuilder.append("</STAWKA>");
+                    stringBuilder.append("<FLAGA>2</FLAGA>");
+                    stringBuilder.append("<ZRODLOWA>0.00</ZRODLOWA>");
+                    stringBuilder.append("</STAWKA_VAT>");
+                    stringBuilder.append("<CENY>");
+                    stringBuilder.append("<CENAZCZTEREMAMIEJSCAMI>0</CENAZCZTEREMAMIEJSCAMI>");
+                    stringBuilder.append("<POCZATKOWA_WAL_CENNIKA>");
+                    stringBuilder.append(product.getNettPrice());
+                    stringBuilder.append("</POCZATKOWA_WAL_CENNIKA>");
+                    stringBuilder.append("<POCZATKOWA_WAL_DOKUMENTU>");
+                    stringBuilder.append(product.getNettPrice());
+                    stringBuilder.append("</POCZATKOWA_WAL_DOKUMENTU>");
+                    stringBuilder.append("<PO_RABACIE_WAL_CENNIKA>");
+                    stringBuilder.append(product.getNettPrice());
+                    stringBuilder.append("</PO_RABACIE_WAL_CENNIKA>");
+                    stringBuilder.append("<PO_RABACIE_PLN>");
+                    stringBuilder.append(product.getNettPrice());
+                    stringBuilder.append("</PO_RABACIE_PLN>");
+                    stringBuilder.append("<PO_RABACIE_WAL_DOKUMENTU>");
+                    stringBuilder.append(product.getNettPrice());
+                    stringBuilder.append("</PO_RABACIE_WAL_DOKUMENTU>");
+                    stringBuilder.append("</CENY>");
+                    stringBuilder.append("<WALUTA>");
+                    stringBuilder.append("<SYMBOL>PLN</SYMBOL>");
+                    stringBuilder.append("<KURS_L>1.00</KURS_L>");
+                    stringBuilder.append("<KURS_M>1</KURS_M>");
+                    stringBuilder.append("</WALUTA>");
+                    stringBuilder.append("<RABAT>0.00</RABAT>");
+                    stringBuilder.append("<WARTOSC_NETTO>");
+                    stringBuilder.append(product.getNettPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
+                    stringBuilder.append("</WARTOSC_NETTO>");
+                    stringBuilder.append("<WARTOSC_BRUTTO>");
+                    stringBuilder.append(product.getGrossPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
+                    stringBuilder.append("</WARTOSC_BRUTTO>");
+                    stringBuilder.append("<WARTOSC_NETTO_WAL>");
+                    stringBuilder.append(product.getNettPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
+                    stringBuilder.append("</WARTOSC_NETTO_WAL>");
+                    stringBuilder.append("<WARTOSC_BRUTTO_WAL>");
+                    stringBuilder.append(product.getGrossPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
+                    stringBuilder.append("</WARTOSC_BRUTTO_WAL>");
+                    stringBuilder.append("<ILOSC>");
+                    stringBuilder.append(product.getQuantity());
+                    stringBuilder.append("</ILOSC>");
+                    stringBuilder.append("<JM>");
+                    stringBuilder.append("</JM>");
+                    stringBuilder.append("<JM_CALKOWITE>0.00</JM_CALKOWITE>");
+                    stringBuilder.append("<JM_ZLOZONA>");
+                    stringBuilder.append("<JMZ>");
+                    stringBuilder.append("</JMZ>");
+                    stringBuilder.append("<JM_PRZELICZNIK_L>1.00</JM_PRZELICZNIK_L>");
+                    stringBuilder.append("<JM_PRZELICZNIK_M>1</JM_PRZELICZNIK_M>");
+                    stringBuilder.append("</JM_ZLOZONA>");
+                    stringBuilder.append("</POZYCJA>");
+                });
 
         stringBuilder.append("</POZYCJE>");
         stringBuilder.append("<KAUCJE/>");

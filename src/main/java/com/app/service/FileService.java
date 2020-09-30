@@ -116,7 +116,6 @@ public class FileService {
         }
     }
 
-    // ony for web use
     public CompanyDTODetailsFromFile getCompanyDetailsFromFile(String nip) {
         if (nip == null) {
             throw new AppException(InfoCodes.SERVICE_FILES, "getCompanyDetailsFromFile - nip is null");

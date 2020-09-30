@@ -50,6 +50,9 @@ public class CartServiceTests {
     private CartService cartService;
 
     @Autowired
+    private CompanyRepository companyRepository;
+
+    @Autowired
     private XmlParserOptima xmlParserOptima;
 
     @Autowired
@@ -77,6 +80,9 @@ public class CartServiceTests {
         private ProductsInCartRepository productsInCartRepository;
 
         @MockBean
+        private CompanyRepository companyRepository;
+
+        @MockBean
         private XmlParserOptima xmlParserOptima;
 
         @MockBean
@@ -87,8 +93,8 @@ public class CartServiceTests {
 
         @Bean
         public CartService cartService() {
-            return new CartService(cartRepository, userRepository, productRepository,
-                    deliveryAddressRepository, productsInCartRepository, xmlParserOptima, emailService);
+            return new CartService(cartRepository, userRepository, productRepository, deliveryAddressRepository,
+                    productsInCartRepository, companyRepository, xmlParserOptima, emailService);
         }
     }
 
@@ -429,7 +435,7 @@ public class CartServiceTests {
 
         List<ProductsInCartDTO> productsBeforeRemove = cartService.getAllProductsFromCart(cart.getId());
 //        CartDTO cartAfterRemove = cartService.removeProductFromCart(productsInCart1.getProductId(), user.getId());
-      //  List<ProductsInCartDTO> productsAfterRemove = cartService.removeProductFromCart(productsInCart1.getId(), user.getId());
+        //  List<ProductsInCartDTO> productsAfterRemove = cartService.removeProductFromCart(productsInCart1.getId(), user.getId());
         //List<ProductsInCartDTO> productsAfterRemove = cartService.getAllProductsFromCart(cart.getId());
 
         Assertions.assertEquals(3, productsBeforeRemove.size());

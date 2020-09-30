@@ -15,6 +15,8 @@ public interface ProductInCartMapper {
                 .vat(productsInCart.getVat())
                 .grossPrice(productsInCart.getGrossPrice())
                 .hidden(productsInCart.getHidden())
+                .productCodeDTO(productsInCart.getProductCode() == null ? null :
+                        ProductCodeMapper.toDto(productsInCart.getProductCode()))
                 .build();
     }
 
@@ -28,6 +30,8 @@ public interface ProductInCartMapper {
                 .vat(productsInCartDTO.getVat())
                 .grossPrice(productsInCartDTO.getGrossPrice())
                 .hidden(productsInCartDTO.getHidden())
+                .productCode(productsInCartDTO.getProductCodeDTO() == null ? null :
+                        ProductCodeMapper.fromDto(productsInCartDTO.getProductCodeDTO()))
                 .build();
     }
 }

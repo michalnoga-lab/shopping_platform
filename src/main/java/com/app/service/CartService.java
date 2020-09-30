@@ -8,6 +8,8 @@ import com.app.dto.ProductsInCartDTO;
 import com.app.dto.UserDTO;
 import com.app.exceptions.AppException;
 import com.app.mappers.CartMapper;
+import com.app.mappers.CompanyMapper;
+import com.app.mappers.ProductCodeMapper;
 import com.app.mappers.ProductInCartMapper;
 import com.app.model.*;
 import com.app.parsers.XmlParserOptima;
@@ -35,6 +37,7 @@ public class CartService {
     private final ProductRepository productRepository;
     private final DeliveryAddressRepository deliveryAddressRepository;
     private final ProductsInCartRepository productsInCartRepository;
+    private final CompanyRepository companyRepository;
 
     private final XmlParserOptima xmlParserOptima;
     private final EmailService emailService;
@@ -60,7 +63,7 @@ public class CartService {
     public CartDTO addProductToCart(ProductDTO productDTO, Long userId) {
         if (productDTO == null) {
             throw new AppException(InfoCodes.SERVICE_CART, "addProductToCart - product is null");
-        }
+        } // TODO: 29.09.2020 od tego zacząć szukać null 
 
         User user = userRepository.getOne(userId);
         Optional<CartDTO> cartDTOOptional = getActiveCart(userId);
@@ -90,6 +93,7 @@ public class CartService {
                 .vat(product.getVat())
                 .grossPrice(product.getGrossPrice())
                 .hidden(false)
+                .productCode(ProductCodeMapper.fromDto(productDTO.getProductCodeDTO()))
                 .build();
 
         BigDecimal totalNettCartValue = calculateCartNettValue
@@ -300,6 +304,14 @@ public class CartService {
                 .findById(deliveryAddressId)
                 .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "closeCart - no delivery address with ID: " + deliveryAddressId));
 
+        User user = userRepository
+                .findById(userId)
+                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "closeCart - no user with ID: " + userId));
+
+        Company company = companyRepository
+                .findByUsers(user)
+                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "closeCart - no company for user with ID: " + user));
+
         Cart cart = cartRepository.getOne(cartDTO.getId());
         cart.setCartClosed(true);
         LocalDateTime purchaseTime = LocalDateTime.now();
@@ -311,11 +323,13 @@ public class CartService {
         cartRepository.save(cart);
 
         // TODO: 09.09.2020
-        // String orderInXml = xmlParserOptima.generateXmlFileContent(cartDTO, productsInCart);
-        String orderInXml = "ALALALALALA";
+        String orderInXml = xmlParserOptima.generateXmlFileContent(cartDTO,
+                cart.getProductsInCart().stream().map(ProductInCartMapper::toDto).collect(Collectors.toSet()),
+                CompanyMapper.toDto(company));
+        //String orderInXml = "ALALALALALA";
         // TODO: 13.08.2020  genrownie pliku z zamówieniem
         String pathToFile = FileManager.saveFileToDisk(orderInXml, fileName);
-        //mailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
+        emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
         // TODO: 15.09.2020 enable email service
 
         return CartMapper.toDto(cart);

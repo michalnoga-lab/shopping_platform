@@ -1,6 +1,8 @@
 package com.app.mappers;
 
+import com.app.dto.ProductCodeDTO;
 import com.app.dto.ProductsInCartDTO;
+import com.app.model.ProductCode;
 import com.app.model.ProductsInCart;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -26,6 +28,7 @@ public class ProductsInCartMapperTests {
                 .vat(23.00)
                 .grossPrice(BigDecimal.valueOf(12.30))
                 .hidden(false)
+                .productCode(ProductCode.builder().build())
                 .build();
 
         ProductsInCartDTO expectedProduct = ProductsInCartDTO.builder()
@@ -37,6 +40,7 @@ public class ProductsInCartMapperTests {
                 .vat(23.00)
                 .grossPrice(BigDecimal.valueOf(12.30))
                 .hidden(false)
+                .productCodeDTO(ProductCodeDTO.builder().build())
                 .build();
 
         ProductsInCartDTO actualProduct = ProductInCartMapper.toDto(productsInCart);
@@ -57,6 +61,7 @@ public class ProductsInCartMapperTests {
                 .vat(23.00)
                 .grossPrice(BigDecimal.valueOf(12.30))
                 .hidden(false)
+                .productCodeDTO(ProductCodeDTO.builder().build())
                 .build();
 
         ProductsInCart expectedProduct = ProductsInCart.builder()
@@ -68,6 +73,7 @@ public class ProductsInCartMapperTests {
                 .vat(23.00)
                 .grossPrice(BigDecimal.valueOf(12.30))
                 .hidden(false)
+                .productCode(ProductCode.builder().build())
                 .build();
 
         ProductsInCart actualProduct = ProductInCartMapper.fromDto(productsInCartDTO);

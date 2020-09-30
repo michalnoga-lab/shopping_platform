@@ -25,6 +25,10 @@ public class ProductsInCart {
     private BigDecimal grossPrice;
     private Boolean hidden;
 
+    @OneToOne
+    @JoinColumn(name = "product_code_id")
+    private ProductCode productCode;
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "cart_id")
     private Cart cart;
