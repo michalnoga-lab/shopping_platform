@@ -20,10 +20,6 @@ public class XmlParserOptima {
     public String generateXmlFileContent(CartDTO cartDTO, Set<ProductsInCartDTO> productsInCart, CompanyDTO companyDTO) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        // TODO: 28.09.2020 remove
-//        CompanyDTODetailsFromFile companyDTODetailsFromFile =
-//                fileService.getCompanyDetailsFromFile(cartDTO.getUserDTO().getCompanyDTO().getNip());
-
         stringBuilder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         stringBuilder.append("<ROOT xmlns=\"http://www.cdn.com.pl/optima/dokument\">");
         stringBuilder.append("<DOKUMENT>");

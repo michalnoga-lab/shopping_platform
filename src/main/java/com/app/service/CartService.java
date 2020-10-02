@@ -140,13 +140,25 @@ public class CartService {
     }
 
     public List<ProductsInCartDTO> getAllProductsFromCart(Long cartId) {
-        return productsInCartRepository
-                .findAll()
+
+        // TODO: 02.10.2020 czy to działa tak samo ???
+        Cart cart = cartRepository.findById(cartId)
+                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "getAllProductsFromCart - no cart with ID: " + cartId));
+
+        return cart
+                .getProductsInCart()
                 .stream()
-                .filter(product -> product.getCart().getId().equals(cartId))
-                .filter(product -> product.getHidden().equals(false))
                 .map(ProductInCartMapper::toDto)
                 .collect(Collectors.toList());
+
+        // TODO: 02.10.2020
+//        return productsInCartRepository
+//                .findAll()
+//                .stream()
+//                .filter(product -> product.getCart().getId().equals(cartId))
+//                .filter(product -> product.getHidden().equals(false))
+//                .map(ProductInCartMapper::toDto)
+//                .collect(Collectors.toList());
     }
 
     public CartDTO removeProductFromCart(Long productId, Long userId) {
@@ -322,15 +334,11 @@ public class CartService {
 
         cartRepository.save(cart);
 
-        // TODO: 09.09.2020
-        String orderInXml = xmlParserOptima.generateXmlFileContent(cartDTO,
+        String orderInXml = xmlParserOptima.generateXmlFileContent(CartMapper.toDto(cart),
                 cart.getProductsInCart().stream().map(ProductInCartMapper::toDto).collect(Collectors.toSet()),
                 CompanyMapper.toDto(company));
-        //String orderInXml = "ALALALALALA";
-        // TODO: 13.08.2020  genrownie pliku z zamówieniem
         String pathToFile = FileManager.saveFileToDisk(orderInXml, fileName);
         emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
-        // TODO: 15.09.2020 enable email service
 
         return CartMapper.toDto(cart);
     }
@@ -342,6 +350,10 @@ public class CartService {
         if (userId <= 0) {
             throw new AppException(InfoCodes.SERVICE_CART, "closeCart - cart ID less than zero");
         }
+
+        User user = userRepository
+                .findById(userId)
+                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "closeCart - no user with ID: " + userId));
 
         Optional<CartDTO> cartDTOOptional = getActiveCart(userId);
         CartDTO cartDTO = cartDTOOptional.orElseThrow(
@@ -356,10 +368,14 @@ public class CartService {
 
         cartRepository.save(cart);
 
-        // TODO: 09.09.2020
-        // String orderInXml = xmlParserOptima.generateXmlFileContent(cartDTO, productsInCart);
-        String orderInXml = "ALALALALALA";
-        // TODO: 13.08.2020  genrownie pliku z zamówieniem
+        Company company = companyRepository
+                .findByUsers(user)
+                .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "closeCart - no company for user with ID: " + user));
+
+        String orderInXml = xmlParserOptima.generateXmlFileContent(CartMapper.toDto(cart),
+                cart.getProductsInCart().stream().map(ProductInCartMapper::toDto).collect(Collectors.toSet()),
+                CompanyMapper.toDto(company));
+
         String pathToFile = FileManager.saveFileToDisk(orderInXml, fileName);
         emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
 
