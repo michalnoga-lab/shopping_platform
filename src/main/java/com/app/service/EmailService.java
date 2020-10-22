@@ -5,6 +5,7 @@ import com.app.exceptions.AppException;
 import com.app.model.InfoCodes;
 import com.app.model.LoggerInfo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -14,13 +15,22 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
-@Service
-@Transactional
 @RequiredArgsConstructor
-public class EmailService {
+public class EmailService implements Runnable {
 
-    private final LoggerService loggerService;
+    //private final LoggerService loggerService;
+
+    private final String to;
+    private final String subject;
+    private final String fileName;
+    private final String pathToAttachment;
+
+    @Override
+    public void run() {
+        sendEmail(to, subject, fileName, pathToAttachment);
+    }
 
     public void sendEmail(String to, String subject, String fileName, String pathToAttachment) {
         try {
@@ -51,12 +61,17 @@ public class EmailService {
 
             javaMailSender().send(message);
 
-            loggerService.add(LoggerInfo.builder()
-                    .infoCode(InfoCodes.SERVICE_EMAIL)
-                    .message("email sent " + message.getFileName())
-                    .build());
+            // // TODO: 07.10.2020 \https://www.baeldung.com/registration-verify-user-by-email
+
+            TimeUnit.SECONDS.sleep(10); //// TODO: 07.10.2020 remove
+
+//            loggerService.add(LoggerInfo.builder()
+//                    .infoCode(InfoCodes.SERVICE_EMAIL)
+//                    .message("email sent " + message.getFileName())
+//                    .build());
 
         } catch (Exception e) {
+            e.printStackTrace();
             throw new AppException(InfoCodes.SERVICE_EMAIL, "sendEmail - error sending email to: " + to);
         }
     }

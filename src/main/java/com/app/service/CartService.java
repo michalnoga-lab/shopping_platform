@@ -40,7 +40,8 @@ public class CartService {
     private final CompanyRepository companyRepository;
 
     private final XmlParserOptima xmlParserOptima;
-    private final EmailService emailService;
+    //private final EmailService emailService; todo zrobić logownaie
+    //private final LoggerService loggerService;
 
     public CartDTO getCart(Long cartId) {
         if (cartId == null) {
@@ -52,10 +53,7 @@ public class CartService {
 
         return cartRepository.findById(cartId)
                 .stream()
-                .map(cart -> {
-                    cart.setUser(User.builder().build());
-                    return CartMapper.toDto(cart);
-                })
+                .map(CartMapper::toDto)
                 .findFirst()
                 .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "getCart - no cart with ID: " + cartId));
     }
@@ -63,7 +61,7 @@ public class CartService {
     public CartDTO addProductToCart(ProductDTO productDTO, Long userId) {
         if (productDTO == null) {
             throw new AppException(InfoCodes.SERVICE_CART, "addProductToCart - product is null");
-        } // TODO: 29.09.2020 od tego zacząć szukać null 
+        }
 
         User user = userRepository.getOne(userId);
         Optional<CartDTO> cartDTOOptional = getActiveCart(userId);
@@ -141,7 +139,6 @@ public class CartService {
 
     public List<ProductsInCartDTO> getAllProductsFromCart(Long cartId) {
 
-        // TODO: 02.10.2020 czy to działa tak samo ???
         Cart cart = cartRepository.findById(cartId)
                 .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "getAllProductsFromCart - no cart with ID: " + cartId));
 
@@ -150,15 +147,6 @@ public class CartService {
                 .stream()
                 .map(ProductInCartMapper::toDto)
                 .collect(Collectors.toList());
-
-        // TODO: 02.10.2020
-//        return productsInCartRepository
-//                .findAll()
-//                .stream()
-//                .filter(product -> product.getCart().getId().equals(cartId))
-//                .filter(product -> product.getHidden().equals(false))
-//                .map(ProductInCartMapper::toDto)
-//                .collect(Collectors.toList());
     }
 
     public CartDTO removeProductFromCart(Long productId, Long userId) {
@@ -172,11 +160,7 @@ public class CartService {
                 .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "removeProductFromCart - no cart for user with ID: " + userId));
 
         ProductsInCart productToRemove = productsInCartRepository
-                .findProductsInCartById(cart.getId())
-                .stream()
-                .filter(productsInCart -> productsInCart.getHidden().equals(false))
-                .filter(productsInCart -> productsInCart.getProductId().equals(productId))
-                .findFirst()
+                .findById(productId)
                 .orElseThrow(() -> new AppException(InfoCodes.SERVICE_CART, "removeProductFromCart - no product with ID: " + productId));
 
 
@@ -209,20 +193,12 @@ public class CartService {
         }
         List<CartDTO> usersCarts = new ArrayList<>();
 
-        cartRepository.findAllByUserId(userId)
+        cartRepository.findAll()
                 .stream()
+                .filter(cart -> cart.getUser().getId().equals(userId))
                 .map(CartMapper::toDto)
                 .filter(cartDTO -> cartDTO.getCartClosed().equals(true))
-                .forEach(cart -> {
-                    cart.setUserDTO(UserDTO.builder().build());
-                    Set<ProductsInCartDTO> products = cart
-                            .getProductsInCartDTO()
-                            .stream()
-                            .filter(p -> p.getHidden().equals(false))
-                            .collect(Collectors.toSet());
-                    cart.setProductsInCartDTO(products);
-                    usersCarts.add(cart);
-                });
+                .forEach(usersCarts::add);
 
         return usersCarts;
     }
@@ -338,7 +314,16 @@ public class CartService {
                 cart.getProductsInCart().stream().map(ProductInCartMapper::toDto).collect(Collectors.toSet()),
                 CompanyMapper.toDto(company));
         String pathToFile = FileManager.saveFileToDisk(orderInXml, fileName);
-        emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
+
+        // TODO: 05.10.2020
+        //emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
+        //Thread t1 = new EmailService(loggerService);
+        //t1.start();
+
+        EmailService emailService = new EmailService(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
+        new Thread(emailService).start();
+
+        //emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
 
         return CartMapper.toDto(cart);
     }
@@ -377,7 +362,8 @@ public class CartService {
                 CompanyMapper.toDto(company));
 
         String pathToFile = FileManager.saveFileToDisk(orderInXml, fileName);
-        emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
+        // TODO: 07.10.2020  
+        //emailService.sendEmail(CustomAddresses.DEFAULT_DESTINATION_MAILBOX, "ZAMÓWIENIE", fileName, pathToFile);
 
         return CartMapper.toDto(cart);
     }

@@ -31,7 +31,7 @@ public class CartRestController {
     }
 
     @GetMapping("/one/{id}")
-    public ResponseEntity<CartDTO> one(@PathVariable Long id, HttpServletRequest request) {
+    public ResponseEntity<CartDTO> one(@PathVariable Long id) {
         return new ResponseEntity<>(cartService.getCart(id), HttpStatus.OK);
     }
 

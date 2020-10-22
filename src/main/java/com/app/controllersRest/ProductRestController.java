@@ -44,9 +44,9 @@ public class ProductRestController {
                 securityService.getLoggedInUserId(request.getAttribute("username").toString())), HttpStatus.OK);
     }
 
-    @DeleteMapping("/remove")
-    public ResponseEntity<CartDTO> remove(HttpServletRequest request, @RequestBody ProductsInCartDTO productsInCartDTO) {
-        return new ResponseEntity<>(cartService.removeProductFromCart(productsInCartDTO.getProductId(),
+    @DeleteMapping("/remove/{id}")
+    public ResponseEntity<CartDTO> remove(HttpServletRequest request, @PathVariable Long id) {
+        return new ResponseEntity<>(cartService.removeProductFromCart(id,
                 securityService.getLoggedInUserId(request.getAttribute("username").toString())), HttpStatus.OK);
     }
 

@@ -47,10 +47,13 @@ public class CartServiceTests {
     private ProductsInCartRepository productsInCartRepository;
 
     @Autowired
+    private CompanyRepository companyRepository;
+
+    @Autowired
     private CartService cartService;
 
     @Autowired
-    private CompanyRepository companyRepository;
+    private LoggerService loggerService;
 
     @Autowired
     private XmlParserOptima xmlParserOptima;
@@ -83,6 +86,9 @@ public class CartServiceTests {
         private CompanyRepository companyRepository;
 
         @MockBean
+        private LoggerService loggerService;
+
+        @MockBean
         private XmlParserOptima xmlParserOptima;
 
         @MockBean
@@ -94,7 +100,7 @@ public class CartServiceTests {
         @Bean
         public CartService cartService() {
             return new CartService(cartRepository, userRepository, productRepository, deliveryAddressRepository,
-                    productsInCartRepository, companyRepository, xmlParserOptima, emailService);
+                    productsInCartRepository, companyRepository, xmlParserOptima);
         }
     }
 

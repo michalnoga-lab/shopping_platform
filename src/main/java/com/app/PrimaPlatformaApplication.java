@@ -21,6 +21,8 @@ public class PrimaPlatformaApplication extends SpringBootServletInitializer {
         return builder.sources(PrimaPlatformaApplication.class);
     }
 
+    // todo zrobić porządnie testy !!!
+
     // TODO: 17.06.2020 find by session ID
 
     // TODO: 2020-02-15 cookies info
