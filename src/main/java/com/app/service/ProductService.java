@@ -54,6 +54,16 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    public ProductDTO addOneProduct(ProductDTO productDTO) {
+        if (productDTO == null) {
+            throw new AppException(InfoCodes.SERVICE_PRODUCT, "addOneProduct - productDTO is null");
+        }
+
+        Product product = ProductMapper.fromDto(productDTO);
+        productRepository.save(product);
+        return productDTO;
+    }
+
     public ProductDTO getOneProduct(Long id) {
         if (id == null) {
             throw new AppException(InfoCodes.SERVICE_PRODUCT, "getOneProduct - id is null");

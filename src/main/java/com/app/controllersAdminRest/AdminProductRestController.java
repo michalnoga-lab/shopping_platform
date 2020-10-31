@@ -28,6 +28,11 @@ public class AdminProductRestController {
         return new ResponseEntity<>(productService.getProductsOfCompany(id), HttpStatus.OK);
     }
 
+    @PostMapping("/addOne")
+    public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductDTO productDTO) {
+        return new ResponseEntity<>(productService.addOneProduct(productDTO), HttpStatus.OK);
+    }
+
     @PostMapping("/addCode/{id}")
     public ResponseEntity<ProductDTO> addCode(@PathVariable Long id, @ModelAttribute GeneralUserInputDTO generalUserInputDTO) {
         return new ResponseEntity<>(productService.setCode(id, generalUserInputDTO.getUserInput()), HttpStatus.OK);
