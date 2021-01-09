@@ -10,9 +10,9 @@ if (isset($_POST['submit'])) {
     $sql = "UPDATE users SET username='$username' WHERE id='$id';";
 
     if (mysqli_query($connection, $sql)) {
-        header('location: ../pages/account.php?error=name_updated');
+        header('location: ../address/account.php?error=name_updated');
     } else {
-        header('location: ../pages/account.php?error=connection');
+        header('location: ../address/account.php?error=connection');
     }
     exit();
 }

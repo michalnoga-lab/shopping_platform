@@ -15,7 +15,7 @@ class AddAddress extends Dbh
             $stmt = null;
             $logger->systemEvent('Delivery address added');
         } else {
-            header('location: ../pages/addresses.php?error=connection');
+            header('location: ../address/addresses.php?error=connection');
             exit();
         }
     }

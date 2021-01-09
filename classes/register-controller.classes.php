@@ -7,7 +7,7 @@ class RegisterController extends Register
     private string $email;
     private string $password;
     private string $passwordConfirmation;
-    private string $location = 'location: ../pages/register.php?error=';
+    private string $location = 'location: ../address/register.php?error=';
 
     public function __construct($username, $email, $password, $passwordConfirmation)
     {

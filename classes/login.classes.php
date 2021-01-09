@@ -12,14 +12,14 @@ class Login extends Dbh
 
         if (!$stmt->execute(array($email))) {
             $stmt = null;
-            header('location: ../pages/login.php?error=stmt_failed');
+            header('location: ../address/login.php?error=stmt_failed');
             exit();
         }
 
         if ($stmt->rowCount() == 0) {
             $stmt = null;
             $logger->systemEvent('Failed login attempt with nonexistent email: ' . $email);
-            header('location: ../pages/login.php?error=user_not_found');
+            header('location: ../address/login.php?error=user_not_found');
             exit();
         }
 
@@ -29,7 +29,7 @@ class Login extends Dbh
         if ($check_passwords == false) {
             $stmt = null;
             $logger->systemEvent('Failed login attempt with wrong password for email ' . $email);
-            header('location: ../pages/login.php?error=invalid_password');
+            header('location: ../address/login.php?error=invalid_password');
             exit();
         }
 

@@ -39,7 +39,7 @@ class Register extends Dbh
             }
         } else {
             $logger->systemEvent('Failed registration attempt with existing email ' . $email);
-            header('location: ../pages/register.php?error=email_in_db');
+            header('location: ../address/register.php?error=email_in_db');
             exit();
         }
         $stmt = null;
