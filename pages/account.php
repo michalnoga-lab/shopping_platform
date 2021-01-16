@@ -26,6 +26,8 @@ session_start();
             echo('<div class="alert alert-success text-center" role="alert">Nazwa użytkownika zaktualizowana</div>');
         } elseif ($errorCheck === 'password_updated') {
             echo('<div class="alert alert-success text-center" role="alert">Hasło zostało zaktualizowane</div>');
+        } elseif ($errorCheck === 'different_passwords') {
+            echo('<div class="alert alert-danger text-center" role="alert">Hasło i potwierdzenie hasła nie są takie same</div>');
         } elseif ($errorCheck === 'connection') {
             echo('<div class="alert alert-danger text-center" role="alert">Błąd połączenia</div>');
         }
