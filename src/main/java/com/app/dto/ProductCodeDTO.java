@@ -13,5 +13,6 @@ import java.util.Set;
 @Data
 public class ProductCodeDTO {
 
+    private Long id;
     private String codeFromOptima;
 }

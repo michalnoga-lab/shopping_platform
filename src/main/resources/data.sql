@@ -1,13 +1,15 @@
 INSERT INTO product_codes (id, code_from_optima)
-VALUES (1, 'example_optima_code');
+VALUES (1, 'example__code_1'),
+       (2, 'example_code_2'),
+       (3, 'example_code_3');
 
 INSERT INTO company_codes(id, code_from_optima)
-values (1, 'UJGO');
+values (1, 'CMPCODE');
 
 INSERT INTO companies (id, active, city, default_price, name, name_shortcut, nip, payment_in_days, post_code, street,
                        street_number, company_code_id)
-VALUES (2, true, 'krakow', 'NET', 'name_2', 'shortcut', '0000000000', 30, '00-000', 'street', 50, 1),
-       (11, true, 'krakow', 'NET', 'name_11', 'shortcut', '0000000000', 30, '00-000', 'street', 50, 1);
+VALUES (2, true, 'krakow', 'NET', 'name_1', 'shortcut', '0000000000', 30, '00-000', 'street', 50, 1),
+       (11, true, 'krakow', 'NET', 'name_2', 'shortcut', '0000000000', 30, '00-000', 'street', 50, 1);
 
 INSERT INTO products (id, auction_index, description, gross_price, hidden, name, nett_price, number_in_auction,
                       vat, company_id, product_code_id)
