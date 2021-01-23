@@ -8,14 +8,17 @@ session_start();
 <html lang="pl">
 <head>
     <?php include_once('../static/elements/head.inc.php'); ?>
+    <link href="/static/css/account.css" rel="stylesheet">
     <title>Prima Platforma</title>
 </head>
 
 <body>
+<script defer src="../static/js/account/account-password.validation.js"></script>
 
 <header>
     <?php include_once('../static/elements/header.php') ?>
 </header>
+
 
 <div class="container">
     <h3>Zmiana hasła</h3>
@@ -24,11 +27,13 @@ session_start();
         <div class="form-floating mb-3 input-control">
             <input type="password" class="form-control" id="password" name="password" placeholder="Podaj nowe hasło">
             <label for="password">Podaj nowe hasło</label>
+            <div class="error"></div>
         </div>
         <div class="form-floating mb-3 input-control">
             <input type="password" class="form-control" id="passwordConfirmation" name="passwordConfirmation"
                    placeholder="Powtórz nowe hasło">
             <label for="passwordConfirmation">Powtórz nowe hasło</label>
+            <div class="error"></div>
         </div>
         <button class="btn btn-primary btn-block" type="submit" id="submit" name="submit">Zmień hasło</button>
     </form>
