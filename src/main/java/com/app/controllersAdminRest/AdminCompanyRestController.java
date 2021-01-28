@@ -17,7 +17,7 @@ public class AdminCompanyRestController {
     private final CompanyService companyService;
 
     @PostMapping("/add")
-    public ResponseEntity<CompanyDTO> add(@ModelAttribute CompanyDTO companyDTO) {
+    public ResponseEntity<CompanyDTO> add(@RequestBody CompanyDTO companyDTO) {
         return new ResponseEntity<>(companyService.add(companyDTO), HttpStatus.OK);
     }
 

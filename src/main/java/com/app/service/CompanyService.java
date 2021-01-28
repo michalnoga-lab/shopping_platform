@@ -47,6 +47,7 @@ public class CompanyService {
         if (companyDTO == null) {
             throw new AppException(InfoCodes.SERVICE_COMPANY, "add - company dto is null");
         }
+
         Company company = CompanyMapper.fromDto(companyDTO);
         company.setActive(true);
         companyRepository.save(company);

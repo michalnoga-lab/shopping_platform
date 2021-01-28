@@ -18,7 +18,7 @@ public class AdminUserRestController {
     private final UserService userService;
 
     @PostMapping("/add")
-    public ResponseEntity<UserDTO> add(@ModelAttribute UserDTO userDTO) {
+    public ResponseEntity<UserDTO> add(@RequestBody UserDTO userDTO) {
         return new ResponseEntity<>(userService.addUser(userDTO, Role.USER), HttpStatus.OK);
     }
 
