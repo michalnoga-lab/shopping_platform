@@ -45,7 +45,7 @@ public class UserService {
             throw new AppException(InfoCodes.SERVICE_USER, "addUser - user is null");
         }
         User user = UserMapper.fromDto(userDTO);
-        user.setLogin(userDTO.getName() + "." + userDTO.getSurname());
+        user.setLogin(userDTO.getEmail());
         user.setEnabled(true);
         user.setRole(role);
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
@@ -54,7 +54,6 @@ public class UserService {
             Company company = companyRepository.findById(userDTO.getCompanyDTO().getId())
                     .orElseThrow(() -> new AppException(InfoCodes.SERVICE_USER, "addUser - no company with ID: " + userDTO.getCompanyDTO().getId()));
             user.setCompany(company);
-            user.setLogin(company.getNameShortcut() + "@" + userDTO.getName() + "." + userDTO.getSurname());
         }
         userRepository.save(user);
         return UserMapper.toDto(user);
