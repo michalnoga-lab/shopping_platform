@@ -61,7 +61,7 @@ public class ProductService {
 
         Product product = ProductMapper.fromDto(productDTO);
         productRepository.save(product);
-        return productDTO;
+        return ProductMapper.toDto(product);
     }
 
     public ProductDTO getOneProduct(Long id) {
