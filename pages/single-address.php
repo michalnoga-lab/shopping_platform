@@ -24,32 +24,33 @@ session_start();
             include_once '../classes/dbh.classes.php';
             $id = $_GET['id'];
 
-            $sql = ("SELECT * FROM products WHERE id = '$id';");
+            $sql = "SELECT * FROM addresses WHERE id='$id';";
             $result = mysqli_query($connection, $sql);
             $resultCheck = mysqli_num_rows($result);
 
             if ($resultCheck > 0) {
-                $product = mysqli_fetch_assoc($result); ?>
-                <form>
-                    <h3><?= $product['name'] ?></h3>
+                $address = mysqli_fetch_assoc($result); ?>
+                <form action="../includes/remove-address.inc.php" method="post" id="form">
+                    <h3>Szczegóły adresu</h3>
                     <hr>
-                    <p>Numer pozycji w przetargu: <?= $product['auction_number'] ?></p>
-                    <p>Cena netto: <?= $product['nett_price'] ?> PLN</p>
-                    <p>VAT: <?= $product['vat'] ?> %</p>
-                    <p>Cena brutto: <?= $product['gross_price'] ?> PLN</p>
-                    <hr>
-                    <!-- TODO JS walidacja wprowadzonej ilości -->
-                    <div class="form-group">
-                        <label for="quantity"></label>
-                        <input type="number" class="form-control" id="quantity" placeholder="Podaj ilość">
+                    <div class="form-floating mb-3 input-control">
+                        <input type="text" class="form-control" id="address" name="address" required hidden
+                               value="<?= $id ?>">
+                        <label for="address"></label>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">Dodaj do koszyka</button>
+                    <p><?= $address['street'] ?></p>
+                    <p><?= $address['phone'] ?></p>
+                    <hr>
+                    <button class="btn btn-primary btn-block" type="submit" id="submit" name="submit">Usuń adres
+                    </button>
                 </form>
-            <?php } else {
-                echo('<div class="alert alert-danger text-center" role="alert">Nie odnaleziono produktu</div>');
+                <?php
+            } else {
+                echo('<div class="alert alert-danger text-center" role="alert">Nie odnaleziono adresu</div>');
             }
         }
         ?>
+
     </div>
 </div>
 

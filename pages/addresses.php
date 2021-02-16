@@ -25,6 +25,8 @@ session_start();
 
             if ($errorCheck === 'address_added') {
                 echo('<div class="alert alert-success text-center" role="alert">Adres poprawnie dodany</div>');
+            } elseif ($errorCheck === 'removed') {
+                echo('<div class="alert alert-success text-center" role="alert">Adres poprawnie usunięty</div>');
             } elseif ($errorCheck === 'connection') {
                 echo('<div class="alert alert-danger text-center" role="alert">Błąd połączenia</div>');
             }
@@ -34,9 +36,8 @@ session_start();
             <thead>
             <tr>
                 <th scope="col" style="width: 10%">#</th>
-                <th scope="col" style="width: 60%">Adres</th>
-                <th scope="col" style="width: 25    %">Telefon</th>
-                <th scope="col" style="width: 5%">Usuń</th>
+                <th scope="col" style="width: 70%">Adres</th>
+                <th scope="col" style="width: 20%">Telefon</th>
             </tr>
             </thead>
             <tbody>
@@ -52,11 +53,10 @@ session_start();
                 $rowNumber = 0;
                 while ($row = mysqli_fetch_assoc($result)) {
                     $rowNumber += 1; ?>
-                    <tr>
+                    <tr onclick="window.location='single-address.php?id='+<?= $row['id'] ?>">
                         <td><?= $rowNumber ?></td>
                         <td><?= $row['street'] ?></td>
                         <td><?= $row['phone'] ?></td>
-                        <td><!-- TODO przycisk usuwania adresu --></td>
                     </tr>
                 <?php }
             } else {
