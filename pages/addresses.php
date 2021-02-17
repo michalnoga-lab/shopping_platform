@@ -53,7 +53,7 @@ session_start();
                 $rowNumber = 0;
                 while ($row = mysqli_fetch_assoc($result)) {
                     $rowNumber += 1; ?>
-                    <tr onclick="window.location='single-address.php?id='+<?= $row['id'] ?>">
+                    <tr onclick="window.location='address-single.php?id='+<?= $row['id'] ?>">
                         <td><?= $rowNumber ?></td>
                         <td><?= $row['street'] ?></td>
                         <td><?= $row['phone'] ?></td>
