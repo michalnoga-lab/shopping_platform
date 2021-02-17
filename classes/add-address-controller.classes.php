@@ -5,7 +5,7 @@ class AddAddressController extends AddAddress
 {
     private string $street;
     private string $phone;
-    private string $location = 'location: ../pages/add-address.php?error=';
+    private string $location = 'location: ../pages/address-single-add.php?error=';
 
     public function __construct($street, $phone)
     {

@@ -65,7 +65,7 @@ session_start();
             ?>
             </tbody>
         </table>
-        <a href="add-address.php" class="btn btn-primary btn-block" role="button">Dodaj adres</a>
+        <a href="address-single-add.php" class="btn btn-primary btn-block" role="button">Dodaj adres</a>
     </div>
 </div>
 

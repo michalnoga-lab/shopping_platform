@@ -33,8 +33,8 @@ session_start();
             <p>Nazwa użytkownika: <?= $user['username'] ?></p>
             <p>Email: <?= $user['email'] ?></p>
             <hr>
-            <button class="btn btn-primary btn block mb-2">Zmień nazwę</button>
-            <button class="btn btn-primary btn-block">Zmień hasło</button>
+            <button class="btn btn-primary btn block mb-2" onclick="window.location=''">Zmień nazwę</button>
+            <button class="btn btn-primary btn-block" onclick="window.location=''">Zmień hasło</button>
             <?php
         } else {
             echo('<div class="alert alert-danger text-center" role="alert">Nie odnaleziono danych użytkownika</div>');
