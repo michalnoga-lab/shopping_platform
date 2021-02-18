@@ -12,7 +12,7 @@ session_start();
             <a class="p-2 text-dark" href="/pages/products.php">Produkty</a>
             <a class="p-2 text-dark" href="/pages/addresses.php">Adresy</a>
             <!-- <a class="p-2 text-dark" href="#">Historia</a> TODO w przyszłości -->
-            <a class="p-2 text-dark" href="#">Konto</a>
+            <a class="p-2 text-dark" href="/pages/account.php">Konto</a>
             <a class="p-2 text-dark" href="#">Koszyk</a>
         </nav>
         <a class="btn btn-outline-danger header-btn" href="/pages/logout.php">Wyloguj</a>
