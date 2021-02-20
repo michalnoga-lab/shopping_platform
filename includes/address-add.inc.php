@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
     $phone = $_POST['phone'];
 
     include '../classes/dbh.classes.php';
-    include '../classes/add-address.classes.php';
+    include '../classes/address-add.classes.php';
     include '../classes/add-address-controller.classes.php';
 
     $address = new AddAddressController($street, $phone);
