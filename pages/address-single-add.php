@@ -33,7 +33,7 @@ session_start();
             }
         }
         ?>
-        <form action="/includes/add-address.inc.php" method="post" id="form">
+        <form action="/includes/address-add.inc.php" method="post" id="form">
             <div class="form-floating mb-3 input-control">
                 <input type="text" class="form-control" id="street" name="street" placeholder="Adres dostawy">
                 <label for="street">Adres dostawy</label>

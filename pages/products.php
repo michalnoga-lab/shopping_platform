@@ -38,7 +38,7 @@ session_start();
                 $rowNumber = 0;
                 while ($row = mysqli_fetch_assoc($result)) {
                     $rowNumber += 1; ?>
-                    <tr onclick="window.location='single-product.php?id='+<?= $row['id'] ?>">
+                    <tr onclick="window.location='product-single.php?id='+<?= $row['id'] ?>">
                         <td><?= $rowNumber ?></td>
                         <td><?= $row['name'] ?></td>
                         <td><?= $row['nett_price'] ?> PLN</td>
