@@ -9,7 +9,7 @@ if (isset($_POST['submit'])) {
 
     include '../classes/dbh.classes.php';
     include '../classes/address-add.classes.php';
-    include '../classes/add-address-controller.classes.php';
+    include '../classes/address-add-controller.classes.php';
 
     $address = new AddAddressController($street, $phone);
     $address->addAddress();
