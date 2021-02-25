@@ -39,6 +39,8 @@ public interface CompanyMapper {
                 .defaultPrice(companyDTO.getDefaultPrice())
                 .paymentInDays(companyDTO.getPaymentInDays())
                 .nameShortcut(companyDTO.getNameShortcut())
+                .companyCode(companyDTO.getCompanyCodeDTO() ==
+                        null ? null : CompanyCodeMapper.fromDto(companyDTO.getCompanyCodeDTO()))
                 .build();
     }
 }

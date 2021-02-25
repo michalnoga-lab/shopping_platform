@@ -48,6 +48,9 @@ public class CompanyService {
             throw new AppException(InfoCodes.SERVICE_COMPANY, "add - company dto is null");
         }
 
+        System.out.println("--------------------"); // TODO: 03.02.2021 REMOVE
+        System.out.println(companyDTO);
+
         Company company = CompanyMapper.fromDto(companyDTO);
         company.setActive(true);
         companyRepository.save(company);
