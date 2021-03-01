@@ -1,9 +1,9 @@
 <?php
 // error_reporting(0); // TODO
+session_start();
 
 if (isset($_POST['submit'])) {
     include_once '../classes/dbh.classes.php';
-
     $addressId = $_POST['address'];
 
     $sql = "DELETE FROM addresses WHERE id = '$addressId';";

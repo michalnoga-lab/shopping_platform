@@ -18,6 +18,17 @@ session_start();
 </header>
 
 <div class="container">
+    <?php
+    if (isset($_GET['error'])) {
+        $errorCheck = $_GET['error'];
+
+        if ($errorCheck === 'updated') {
+            echo('<div class="alert alert-success text-center" role="alert">Nazwa użytkownika zaktualizowana</div>');
+        } elseif ($errorCheck === 'connection') {
+            echo('<div class="alert alert-danger text-center" role="alert">Błąd połączenia</div>');
+        }
+    }
+    ?>
     <div class="row">
         <h3>Szczegóły konta</h3>
         <hr>
