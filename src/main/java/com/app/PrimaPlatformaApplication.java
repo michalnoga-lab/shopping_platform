@@ -21,6 +21,42 @@ public class PrimaPlatformaApplication extends SpringBootServletInitializer {
         return builder.sources(PrimaPlatformaApplication.class);
     }
 
+
+    /**
+     *
+     * package com.example;
+     *
+     * import java.io.IOException;
+     *
+     * import javax.ws.rs.container.ContainerRequestContext;
+     * import javax.ws.rs.container.ContainerResponseContext;
+     * import javax.ws.rs.container.ContainerResponseFilter;
+     * import javax.ws.rs.core.MultivaluedMap;
+     * import javax.ws.rs.ext.Provider;
+     *
+     * @Provider
+     * public class CORSFilter implements ContainerResponseFilter {
+     *
+     *     @Override
+     *     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext)
+     *             throws IOException {
+     *         System.out.println("FILTER HERE ");
+     *         MultivaluedMap<String, Object> headers = responseContext.getHeaders();
+     *         headers.add("Access-Control-Allow-Origin", "*"); // Allow Access from everywhere
+     *         headers.add("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
+     *         headers.add("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
+     *     }
+     *
+     * }
+     *
+     *
+     * https://stackoverflow.com/questions/59731603/how-to-handle-cors-error-with-an-angular-app-and-a-java-backend
+     *
+     *
+     * */
+
+
+
     // todo zrobić porządnie testy !!!
 
     // TODO: 17.06.2020 find by session ID
