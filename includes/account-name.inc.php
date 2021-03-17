@@ -6,13 +6,20 @@ if (isset($_POST['submit'])) {
     include_once '../classes/dbh.classes.php';
     $username = $_POST['name'];
     $id = $_SESSION['id'];
+    $location = 'location: ../pages/account.php?info=';
 
-    $sql = "UPDATE users SET username='$username' WHERE id='$id';";
+    if (strlen($username) < 1) {
+        header($location . 'short_name');
+        exit();
+    }
 
-    if (mysqli_query($connection, $sql)) {
-        header('location: ../pages/account.php?error=name_updated');
+    $stmt = $connection->prepare("UPDATE users SET username= ? WHERE id= ?;");
+    $stmt->bind_param('si', $username, $id);
+
+    if ($stmt->execute()) {
+        header($location . 'name_updated');
     } else {
-        header('location: ../pages/account.php?error=connection');
+        header($location . 'connection');
     }
     exit();
 }

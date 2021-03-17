@@ -19,8 +19,8 @@ session_start();
 
 <div class="container">
     <?php
-    if (isset($_GET['error'])) {
-        $errorCheck = $_GET['error'];
+    if (isset($_GET['info'])) {
+        $errorCheck = $_GET['info'];
 
         if ($errorCheck === 'name_updated') {
             echo('<div class="alert alert-success text-center" role="alert">Nazwa użytkownika zaktualizowana</div>');
