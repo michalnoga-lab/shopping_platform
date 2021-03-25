@@ -4,11 +4,12 @@ session_start();
 
 if (isset($_POST['submit'])) {
     include_once '../classes/dbh.classes.php';
-    $addressId = $_POST['address'];
+    $id = $_POST['address'];
 
-    $sql = "DELETE FROM addresses WHERE id = '$addressId';";
+    $stmt = $connection->prepare('DELETE FROM addresses WHERE id = ?;');
+    $stmt->bind_param('i', $id);
 
-    if ($result = mysqli_query($connection, $sql)) {
+    if ($stmt->execute()) {
         header('location: ../pages/addresses.php?info=removed');
     } else {
         header('location: ../pages/addresses.php?info=connection');
