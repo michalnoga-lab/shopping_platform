@@ -18,4 +18,4 @@ class Dbh
     }
 }
 
-$connection = mysqli_connect('localhost:3306', 'root', '', 'platform');
+return $connection = mysqli_connect('localhost:3306', 'root', '', 'platform');
