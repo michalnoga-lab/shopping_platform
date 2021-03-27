@@ -1,6 +1,5 @@
 <?php
 // error_reporting(0); TODO
-include_once '../includes/roles.inc.php';
 include_once '../includes/logger.inc.php';
 
 class Register extends Dbh
@@ -11,7 +10,7 @@ class Register extends Dbh
 
         if (!$stmt->execute(array($email))) {
             $stmt = null;
-            header("location: ../index.php?error=connection");
+            header("location: ../index.php?info=connection");
             exit();
         }
 
@@ -34,12 +33,12 @@ class Register extends Dbh
             if ($stmt->execute(array($username, $email, $hashed_password, 'USER'))) { // TODO enum zamiast na sztywno USER
                 $stmt = null;
                 $logger->systemEvent('Registration successful with email ' . $email . ' as ' . 'USER');
-                header('location: ../index.php?error=user_added');
+                header('location: ../index.php?info=user_added');
                 exit();
             }
         } else {
             $logger->systemEvent('Failed registration attempt with existing email ' . $email);
-            header('location: ../pages/register.php?error=email_in_db');
+            header('location: ../pages/register.php?info=email_in_db');
             exit();
         }
         $stmt = null;
