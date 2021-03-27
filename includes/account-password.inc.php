@@ -7,20 +7,21 @@ if (isset($_POST['submit'])) {
     $userId = $_SESSION['id'];
     $password = $_POST['password'];
     $passwordConfirmation = $_POST['passwordConfirmation'];
+    $location = 'location: ../pages/account.php?info=';
 
-    if($password!==$passwordConfirmation){
-        header('location: ../pages/account.php?error=different_passwords');
+    if ($password !== $passwordConfirmation) {
+        header($location . 'different_passwords');
         exit();
     }
-
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    $sql = "UPDATE users SET password = '$hashedPassword' WHERE id='$userId'";
+    $stmt = $connection->prepare('UPDATE users SET password = ? WHERE id= ?');
+    $stmt->bind_param('si', $hashedPassword, $userId);
 
-    if (mysqli_query($connection, $sql)) {
-        header('location: ../pages/account.php?error=password_updated');
+    if ($stmt->execute()) {
+        header($location . 'password_updated');
     } else {
-        header('location: ../pages/account.php?error=connection');
+        header($location . 'connection');
     }
     exit();
 }
