@@ -9,9 +9,9 @@ if (isset($_POST['submit'])) {
     $sql = "DELETE FROM addresses WHERE id = '$addressId';";
 
     if ($result = mysqli_query($connection, $sql)) {
-        header('location: ../pages/addresses.php?error=removed');
+        header('location: ../pages/addresses.php?info=removed');
     } else {
-        header('location: ../pages/addresses.php?error=connection');
+        header('location: ../pages/addresses.php?info=connection');
     }
     exit();
 }

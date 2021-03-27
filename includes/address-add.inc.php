@@ -14,5 +14,5 @@ if (isset($_POST['submit'])) {
     $address = new AddAddressController($street, $phone);
     $address->addAddress();
 
-    header('location: ../pages/addresses.php?error=address_added');
+    header('location: ../pages/addresses.php?info=address_added');
 }
