@@ -55,5 +55,6 @@ const validateInputs = () => {
     }
 
     // TODO maksymalne długości hasła komunikat
+    // TODO czy hasła są takie same walidacja
     // TODO ogólna podsumowująca wszystkie walidacje metoda dla wszystkich JS
 }

@@ -16,7 +16,7 @@ session_start();
 <header>
     <?php include_once('../static/elements/header.php') ?>
 </header>
-<script defer src="../static/js/address/address-add.validation.js"></script>
+<script defer src="../static/js/address/add.validation.js"></script>
 
 <div class="container">
     <div class="row">
