@@ -9,6 +9,9 @@ session_start();
 // TODO wyłączyć we wszystkich plikach raportowanie błędów
 // TODO specjalna biblioteka do sanitization danych rejestracji i logowania
 // TODO zamieniam wszystkie error na msg ???
+// TODO zrobić sortowanie produktów po kryteriach w JS
+// TODO przerobić wszystkie includes na PDO
+// zmniejszyć ilość plików CSS
 ?>
 
 <!doctype html>

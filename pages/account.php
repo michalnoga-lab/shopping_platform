@@ -20,15 +20,15 @@ session_start();
 <div class="container">
     <?php
     if (isset($_GET['info'])) {
-        $errorCheck = $_GET['info'];
+        $infoCheck = $_GET['info'];
 
-        if ($errorCheck === 'name_updated') {
+        if ($infoCheck === 'name_updated') {
             echo('<div class="alert alert-success text-center" role="alert">Nazwa użytkownika zaktualizowana</div>');
-        } elseif ($errorCheck === 'password_updated') {
+        } elseif ($infoCheck === 'password_updated') {
             echo('<div class="alert alert-success text-center" role="alert">Hasło zostało zaktualizowane</div>');
-        } elseif ($errorCheck === 'different_passwords') {
+        } elseif ($infoCheck === 'different_passwords') {
             echo('<div class="alert alert-danger text-center" role="alert">Hasło i potwierdzenie hasła nie są takie same</div>');
-        } elseif ($errorCheck === 'connection') {
+        } elseif ($infoCheck === 'connection') {
             echo('<div class="alert alert-danger text-center" role="alert">Błąd połączenia</div>');
         }
     }

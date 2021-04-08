@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4efbe8ea-b2dc-46dc-9231-fc5dac6e0773" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/includes/address-remove.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/address-remove.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +61,8 @@
       <workItem from="1640811001869" duration="2745000" />
       <workItem from="1640885124350" duration="14537000" />
       <workItem from="1640963469246" duration="8596000" />
-      <workItem from="1641049474698" duration="8251000" />
+      <workItem from="1641049474698" duration="8567000" />
+      <workItem from="1641064826403" duration="526000" />
     </task>
     <servers />
   </component>
