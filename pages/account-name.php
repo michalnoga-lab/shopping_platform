@@ -21,16 +21,18 @@ session_start();
 
 <div class="container">
     <h3>Zmiana nazwy</h3>
+    <!-- TODO walidacja nowej nazwy użytkownika -->
     <hr>
     <?php
     include_once '../classes/dbh.classes.php';
-    $id = $_SESSION['id'];
-    $sql = "SELECT * FROM users WHERE id='$id';";
-    $result = mysqli_query($connection, $sql);
-    $resultCheck = mysqli_num_rows($result);
 
-    if ($resultCheck > 0) {
-        $user = mysqli_fetch_assoc($result); ?>
+    $stmt = $connection->prepare('SELECT * from users WHERE id= ?;');
+    $stmt->bind_param('i', $_SESSION['id']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result > 0) {
+        $user = $result->fetch_assoc(); ?>
         <form action="/includes/account-name.inc.php" method="post" id="form">
             <div class="form-floating mb-3 input-control">
                 <input type="text" class="form-control" id="name" name="name" placeholder="Nowa nazwa użytkownika">
