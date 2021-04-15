@@ -38,13 +38,14 @@ session_start();
         <hr>
         <?php
         include_once '../classes/dbh.classes.php';
-        $id = $_SESSION['id'];
-        $sql = "SELECT * FROM users WHERE id='$id';";
-        $result = mysqli_query($connection, $sql);
-        $resultCheck = mysqli_num_rows($result);
 
-        if ($resultCheck > 0) {
-            $user = mysqli_fetch_assoc($result); ?>
+        $stmt = $connection->prepare('SELECT * from users WHERE id= ?;');
+        $stmt->bind_param('i', $_SESSION['id']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result > 0) {
+            $user = $result->fetch_assoc(); ?>
             <p>Nazwa użytkownika: <?= $user['username'] ?></p>
             <p>Email: <?= $user['email'] ?></p>
             <hr>
