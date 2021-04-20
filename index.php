@@ -28,6 +28,8 @@ session_start();
 
         if ($errorCheck === 'user_added') {
             echo('<div class="alert alert-success text-center" role="alert">Użytkownik poprawnie dodany do bazy danych</div>');
+        } elseif ($errorCheck === 'login_successful') {
+            echo('<div class="alert alert-success text-center" role="alert">Poprawne logowanie</div>');
         } elseif ($errorCheck === 'connection') {
             echo('<div class="alert alert-danger text-center" role="alert">Błąd połączenia</div>');
         } elseif ($errorCheck === 'logged_out') {
@@ -44,20 +46,6 @@ session_start();
         <p>Sprawdź naszą politykę <a href='/pages/cookies.php'>Cookies</a></p>
         <p>Sprawdź jak przetwarzamy dane <a href='/pages/rodo.php'>RODO</a></p>
     </div>
-    <!-- TODO https poniżej -->
-    <?php
-    $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    if (strpos($url, 'error=empty_input') == true) {
-//        echo("!!! BLAD !!!");
-//        exit();
-
-        if (!isset($_GET['error'])) {
-            exit();
-        } else {
-            $error_message = $_GET['error'];
-        }
-    }
-    ?>
 </div>
 
 
