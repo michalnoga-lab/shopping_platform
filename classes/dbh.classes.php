@@ -9,7 +9,6 @@ class Dbh
         try {
             $username = "root";
             $password = "";
-            #return new PDO('mysql:host=localhost:3306;dbname=platform', $username, $password);
             return new PDO('mysql:host=localhost:3306;dbname=platform', $username, $password);
         } catch (PDOException $e) {
             print "Error!: " . $e->getMessage() . "<br/>";

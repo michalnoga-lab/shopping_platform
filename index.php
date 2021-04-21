@@ -5,6 +5,7 @@ session_start();
 
 // TODO mail katywacyjny po rejestracji
 // TODO licznik odwiedzin poszczególnych stron
+// TODO readme.md zmienić na dockera
 ?>
 
 <!doctype html>

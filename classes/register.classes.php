@@ -9,8 +9,7 @@ class Register extends Dbh
 
         if (!$stmt->execute(array($email))) {
             $stmt = null;
-            header("location: ../index.php?error=connection");
-            // TODO zapisanie do logów
+            header("location: ../index.php?error=connection"); // TODO logs
             exit();
         }
 
@@ -34,7 +33,7 @@ class Register extends Dbh
                 exit();
             }
         } else {
-            header('location: ../pages/register.php?error=email_in_db');
+            header('location: ../pages/register.php?error=email_in_db'); // TODO zapisanie do logów
             exit();
         }
 

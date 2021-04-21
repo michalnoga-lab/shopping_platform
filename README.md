@@ -12,4 +12,4 @@ How to run project:
     login: user@gmail.com 
     password: useruser
     
-Now You can use all the avaliable functions of application.
+Now You can use all the available functions of application.
