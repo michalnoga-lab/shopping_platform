@@ -6,6 +6,8 @@ session_start();
 // TODO mail katywacyjny po rejestracji
 // TODO licznik odwiedzin poszczególnych stron
 // TODO readme.md zmienić na dockera
+// TODO wyłączyć we wszystkich plikach raportowanie błędów
+// TODO specjalna biblioteka do sanitization danych rejestracji i logowania
 ?>
 
 <!doctype html>

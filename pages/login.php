@@ -16,6 +16,21 @@ session_start();
 <script defer src="../static/js/login/input-validation.js"></script>
 <div class="container">
     <div class="row">
+        <?php
+        if (isset($_GET['error'])) {
+            $errorCheck = $_GET['error'];
+
+            if ($errorCheck === 'stmt_failed') {
+                echo('<div class="alert alert-danger text-center" role="alert">Błąd połączenia</div>');
+            } elseif ($errorCheck === 'user_not_found') {
+                echo('<div class="alert alert-danger text-center" role="alert">Nie odnaleziono użytkownika o takim adresie email</div>');
+            } elseif ($errorCheck === 'invalid_password') {
+                echo('<div class="alert alert-danger text-center" role="alert">Błędne hasło</div>');
+            } elseif ($errorCheck === 'empty_input') {
+                echo('<div class="alert alert-danger text-center" role="alert">Nie wszystkie pola są wypełnione</div>');
+            }
+        }
+        ?>
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card border-0 shadow rounded-3 my-5">
                 <div class="card-body p-4 p-sm-5">

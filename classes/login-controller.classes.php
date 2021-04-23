@@ -4,8 +4,8 @@
 class LoginController extends Login
 {
 
-    private $email;
-    private $password;
+    private string $email;
+    private string $password;
 
     public function __construct($email, $password)
     {
@@ -13,18 +13,18 @@ class LoginController extends Login
         $this->password = $password;
     }
 
-    public function doLogin() // TODO przekierowanie na stronę logowania
+    public function doLogin()
     {
         if ($this->areAllFieldsFilled() == false) {
-            header('location: ../index.php?error=empty_input'); // TODO komunikat walidujący
+            header('location: ../pages/login.php?error=empty_input');
             exit();
         }
         $this->loginUser($this->email, $this->password);
     }
 
-    private function areAllFieldsFilled()
+    private function areAllFieldsFilled(): bool
     {
-        if (empty(empty($this->email) || empty($this->password))) {
+        if (empty($this->email) || empty($this->password)) {
             return false;
         }
         return true;

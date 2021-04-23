@@ -1,5 +1,6 @@
 <?php
 // error_reporting(0); TODO
+include_once '../includes/roles.inc.php';
 
 class Register extends Dbh
 {
@@ -24,10 +25,10 @@ class Register extends Dbh
     {
         if ($this->isEmailNotInDb($email)) {
 
-            $stmt = $this->connect()->prepare('INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, 0);');
+            $stmt = $this->connect()->prepare('INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?);');
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-            if ($stmt->execute(array($username, $email, $hashed_password))) {
+            if ($stmt->execute(array($username, $email, $hashed_password, 'USER'))) { // TODO enum zamiast na sztywno USER
                 $stmt = null;
                 header('location: ../index.php?error=user_added'); // TODO zapisanie do logów
                 exit();

@@ -9,13 +9,13 @@ class Login extends Dbh
 
         if (!$stmt->execute(array($email))) {
             $stmt = null;
-            header('location: ../index.php?error=stmt_failed'); // TODO obsługa błędu
+            header('location: ../pages/login.php?error=stmt_failed');
             exit();
         }
 
         if ($stmt->rowCount() == 0) {
             $stmt = null;
-            header('location: ../index.php?error=user_not_found'); // TODO obsługa błędu
+            header('location: ../pages/login.php?error=user_not_found'); // TODO zapis do logów
             exit();
         }
 
@@ -24,7 +24,7 @@ class Login extends Dbh
 
         if ($check_passwords == false) {
             $stmt = null;
-            header('location: ../index.php?error=invalid_password'); // TODO obsługa błędu
+            header('location: ../pages/login.php?error=invalid_password'); // TODO zapis do logów
             exit();
         }
 
@@ -34,6 +34,6 @@ class Login extends Dbh
         $_SESSION['email'] = $user[2];
         $_SESSION['role'] = $user[4];
 
-        $stmt = null;
+        $stmt = null; // TODO zapis do logów, że poprawnie zalogowano
     }
 }
