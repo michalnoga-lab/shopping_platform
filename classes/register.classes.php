@@ -29,7 +29,7 @@ class Register extends Dbh
 
             if ($stmt->execute(array($username, $email, $hashed_password))) {
                 $stmt = null;
-                header('location: ../index.php?error=connection'); // TODO zapisanie do logów
+                header('location: ../index.php?error=user_added'); // TODO zapisanie do logów
                 exit();
             }
         } else {
