@@ -46,7 +46,7 @@ session_start();
             <hr>
             <button class="btn btn-primary btn block mb-2" onclick="window.location='account-name.php'">Zmień nazwę
             </button>
-            <button class="btn btn-primary btn-block" onclick="window.location=''">Zmień hasło</button>
+            <button class="btn btn-primary btn-block" onclick="window.location='account-password.php'">Zmień hasło</button>
             <?php
         } else {
             echo('<div class="alert alert-danger text-center" role="alert">Nie odnaleziono danych użytkownika</div>');
