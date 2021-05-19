@@ -20,7 +20,18 @@ session_start();
 <div class="container">
     <h3>Zmiana hasła</h3>
     <hr>
-
+    <form action="" method="post" id="form">
+        <div class="form-floating mb-3 input-control">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Podaj nowe hasło">
+            <label for="password">Podaj nowe hasło</label>
+        </div>
+        <div class="form-floating mb-3 input-control">
+            <input type="password" class="form-control" id="passwordConfirmation" name="passwordConfirmation"
+                   placeholder="Powtórz nowe hasło">
+            <label for="passwordConfirmation">Powtórz nowe hasło</label>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit" id="submit" name="submit">Zmień hasło</button>
+    </form>
 </div>
 
 <footer>
