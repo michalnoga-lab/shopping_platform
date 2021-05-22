@@ -22,8 +22,10 @@ session_start();
     if (isset($_GET['error'])) {
         $errorCheck = $_GET['error'];
 
-        if ($errorCheck === 'updated') {
+        if ($errorCheck === 'name_updated') {
             echo('<div class="alert alert-success text-center" role="alert">Nazwa użytkownika zaktualizowana</div>');
+        } elseif ($errorCheck === 'password_updated') {
+            echo('<div class="alert alert-success text-center" role="alert">Hasło zostało zaktualizowane</div>');
         } elseif ($errorCheck === 'connection') {
             echo('<div class="alert alert-danger text-center" role="alert">Błąd połączenia</div>');
         }
@@ -46,7 +48,8 @@ session_start();
             <hr>
             <button class="btn btn-primary btn block mb-2" onclick="window.location='account-name.php'">Zmień nazwę
             </button>
-            <button class="btn btn-primary btn-block" onclick="window.location='account-password.php'">Zmień hasło</button>
+            <button class="btn btn-primary btn-block" onclick="window.location='account-password.php'">Zmień hasło
+            </button>
             <?php
         } else {
             echo('<div class="alert alert-danger text-center" role="alert">Nie odnaleziono danych użytkownika</div>');
