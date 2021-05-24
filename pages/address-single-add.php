@@ -19,38 +19,36 @@ session_start();
 <script defer src="../static/js/address/add.validation.js"></script>
 
 <div class="container">
-    <div class="row">
-        <?php
-        if (isset($_GET['error'])) {
-            $errorCheck = $_GET['error'];
+    <?php
+    if (isset($_GET['info'])) {
+        $infoCheck = $_GET['info'];
 
-            if ($errorCheck == 'empty_input') {
-                echo('<div class="alert alert-danger text-center" role="alert">Nie wszystkie pola są wypełnione</div>');
-            } elseif ($errorCheck === 'invalid_street') {
-                echo('<div class="alert alert-danger text-center" role="alert">Pole adresu nie zostało prawidłowo wypełnione</div>');
-            } elseif ($errorCheck == 'invalid_phone') {
-                echo('<div class="alert alert-danger text-center" role="alert">Pole numeru telefonu nie zostało prawidłowo wypełnione</div>');
-            }
+        if ($infoCheck == 'empty_input') {
+            echo('<div class="alert alert-danger text-center" role="alert">Nie wszystkie pola są wypełnione</div>');
+        } elseif ($infoCheck === 'invalid_street') {
+            echo('<div class="alert alert-danger text-center" role="alert">Pole adresu nie zostało prawidłowo wypełnione</div>');
+        } elseif ($infoCheck == 'invalid_phone') {
+            echo('<div class="alert alert-danger text-center" role="alert">Pole numeru telefonu nie zostało prawidłowo wypełnione</div>');
         }
-        ?>
-        <form action="/includes/address-add.inc.php" method="post" id="form">
-            <div class="form-floating mb-3 input-control">
-                <input type="text" class="form-control" id="street" name="street" placeholder="Adres dostawy">
-                <label for="street">Adres dostawy</label>
-                <div class="error"></div>
-            </div>
-            <div class="form-floating mb-3 input-control">
-                <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefon kontaktowy">
-                <label for="phone">Telefon kontaktowy</label>
-                <div class="error"></div>
-            </div>
-            <div class="d-grid">
-                <button class="btn btn-primary btn-login" type="submit" name="submit" id="submit">
-                    Dodaj adres
-                </button>
-            </div>
-        </form>
-    </div>
+    }
+    ?>
+    <form action="/includes/address-add.inc.php" method="post" id="form">
+        <div class="form-floating mb-3 input-control">
+            <input type="text" class="form-control" id="street" name="street" placeholder="Adres dostawy">
+            <label for="street">Adres dostawy</label>
+            <div class="error"></div>
+        </div>
+        <div class="form-floating mb-3 input-control">
+            <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefon kontaktowy">
+            <label for="phone">Telefon kontaktowy</label>
+            <div class="error"></div>
+        </div>
+        <div class="d-grid">
+            <button class="btn btn-primary btn-login" type="submit" name="submit" id="submit">
+                Dodaj adres
+            </button>
+        </div>
+    </form>
 </div>
 
 <footer>
