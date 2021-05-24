@@ -23,12 +23,13 @@ session_start();
         include_once '../classes/dbh.classes.php';
         $id = $_GET['id'];
 
-        $sql = "SELECT * FROM addresses WHERE id='$id';";
-        $result = mysqli_query($connection, $sql);
-        $resultCheck = mysqli_num_rows($result);
+        $stmt = $connection->prepare('SELECT * FROM addresses WHERE id = ?;');
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        if ($resultCheck > 0) {
-            $address = mysqli_fetch_assoc($result); ?>
+        if ($result > 0) {
+            $address = $result->fetch_assoc(); ?>
             <form action="../includes/address-remove.inc.php" method="post" id="form">
                 <h3>Szczegóły adresu</h3>
                 <hr>
