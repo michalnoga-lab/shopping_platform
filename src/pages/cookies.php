@@ -47,7 +47,7 @@ session_start();
         <p> Operator Serwisu informuje, że zmiany ustawień w przeglądarce internetowej użytkownika mogą
             uniemożliwić poprawne działanie Stron Internetowych.</p>
 
-        <a href="../index.php" class="btn btn-outline-secondary" type="button">Powrót do strony głównej</a>
+        <a href="/index.php" class="btn btn-outline-secondary" type="button">Powrót do strony głównej</a>
     </div>
 </div>
 

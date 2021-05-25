@@ -42,7 +42,7 @@ session_start();
         <p>Jeśli chce Pani/Pan zmienić zakres przetwarzanych przez nas danych, w tym wnieść sprzeciw lub
             cofnąć swoją zgodę, prosimy o wysłanie wiadomości na adres e-mail: biuro@primakrakow.pl</p>
 
-        <a href="../index.php" class="btn btn-outline-secondary" type="button">Powrót do strony głównej</a>
+        <a href="/index.php" class="btn btn-outline-secondary" type="button">Powrót do strony głównej</a>
     </div>
 </div>
 
