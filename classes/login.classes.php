@@ -4,6 +4,8 @@ require_once '../includes/logger.inc.php';
 
 class Login extends Dbh
 {
+    private string $location = 'location: ../pages/login.php?info=';
+
     protected function loginUser($email, $password)
     {
         $logger = new Logger();
@@ -12,14 +14,14 @@ class Login extends Dbh
 
         if (!$stmt->execute(array($email))) {
             $stmt = null;
-            header('location: ../address/login.php?error=stmt_failed');
+            header($this->location . 'stmt_failed');
             exit();
         }
 
         if ($stmt->rowCount() == 0) {
             $stmt = null;
             $logger->systemEvent('Failed login attempt with nonexistent email: ' . $email);
-            header('location: ../address/login.php?error=user_not_found');
+            header($this->location . 'user_not_found');
             exit();
         }
 
@@ -29,7 +31,7 @@ class Login extends Dbh
         if ($check_passwords == false) {
             $stmt = null;
             $logger->systemEvent('Failed login attempt with wrong password for email ' . $email);
-            header('location: ../address/login.php?error=invalid_password');
+            header($this->location . 'invalid_password');
             exit();
         }
 
