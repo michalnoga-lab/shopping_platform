@@ -39,6 +39,20 @@ session_start();
         }
     }
     ?>
+
+    <?php
+    include_once 'includes/logger.inc.php';
+
+    $path = './logs/file.txt';
+
+
+//    $file = fopen($path, 'w+') or die('Unable to open file');
+//    fwrite($file, 'bla' . '\n');
+//    fclose($file);
+
+    (new Logger())->saveEvent('nnn');
+    ?>
+
     <div class="h-100 p-5 bg-light border rounded-3">
         <h2>O platformie</h2>
         <p>Platforma jest dostępna tylko dla klientów przetargowych, którzy mają podpisaną z nami umowę.</p>
