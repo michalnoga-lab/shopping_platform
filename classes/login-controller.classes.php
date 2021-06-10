@@ -16,7 +16,7 @@ class LoginController extends Login
     public function doLogin()
     {
         if ($this->areAllFieldsFilled() == false) {
-            header('location: ../address/login.php?error=empty_input');
+            header('location: ../pages/login.php?info=empty_input');
             exit();
         }
         $this->loginUser($this->email, $this->password);
