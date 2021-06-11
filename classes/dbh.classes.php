@@ -12,6 +12,7 @@ class Dbh
             return new PDO('mysql:host=localhost:3306;dbname=platform', $username, $password);
         } catch (PDOException $e) {
             print "Error!: " . $e->getMessage() . "<br/>";
+            (new Logger)->systemEvent('Database connection error: ' . $e);
             die();
         }
     }

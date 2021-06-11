@@ -15,7 +15,8 @@ class Login extends Dbh
 
         if ($stmt->rowCount() == 0) {
             $stmt = null;
-            header('location: ../pages/login.php?error=user_not_found'); // TODO zapis do logów
+            (new Logger)->systemEvent('Failed login attempt with nonexistent email: ' . $email);
+            header('location: ../pages/login.php?error=user_not_found');
             exit();
         }
 
