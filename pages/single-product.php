@@ -8,7 +8,6 @@ session_start();
 <html lang="pl">
 <head>
     <?php include_once('../static/elements/head.inc.php'); ?>
-    <link href="/static/css/login.css" rel="stylesheet"/>
     <title>Prima Platforma</title>
 </head>
 
@@ -19,7 +18,37 @@ session_start();
 </header>
 
 <div class="container">
-    adsfasdfdasfdas
+    <?php
+    if (isset($_GET['id'])) {
+        include_once '../classes/dbh.classes.php';
+        $id = $_GET['id'];
+
+        $sql = ("SELECT * FROM products WHERE id = '$id';");
+        $result = mysqli_query($connection, $sql);
+        $resultCheck = mysqli_num_rows($result);
+
+        if ($resultCheck > 0) {
+            $product = mysqli_fetch_assoc($result); ?>
+            <form>
+                <fieldset disabled>
+                    <legend><?= $product['name'] ?></legend>
+                    <hr>
+                    <p>Numer pozycji w przetargu: <?= $product['auction_number'] ?></p>
+                    <p>Cena netto: <?= $product['nett_price'] ?> PLN</p>
+                    <p>VAT: <?= $product['vat'] ?> %</p>
+                    <p>Cena brutto: <?= $product['gross_price'] ?> PLN</p>
+
+
+
+
+
+                </fieldset>
+            </form>
+        <?php } else {
+            echo('<div class="alert alert-danger text-center" role="alert">Nie odnaleziono produktu</div>');
+        }
+    }
+    ?>
 </div>
 
 <footer>

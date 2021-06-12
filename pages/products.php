@@ -7,7 +7,6 @@ session_start();
 <html lang="pl">
 <head>
     <?php include_once('../static/elements/head.inc.php'); ?>
-    <link href="/static/css/login.css" rel="stylesheet"/>
     <title>Prima Platforma</title>
 </head>
 
@@ -26,8 +25,6 @@ session_start();
             <th scope="col" style="width: 20%">Cena</th>
         </tr>
         </thead>
-        <!-- TODO wyświtlanie ceny netto/brutto w zależności od ustawienia -->
-
         <tbody>
         <?php
         include_once '../classes/dbh.classes.php';

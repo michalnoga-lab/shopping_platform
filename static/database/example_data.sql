@@ -17,7 +17,7 @@ CREATE TABLE `products`
     `id`             int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
     `auction_number` varchar(255)                       NOT NULL,
     `name`           varchar(255)                       NOT NULL,
-    `description`    varchar(255)                       NOT NULL,
+    `description`    varchar(1000)                      NOT NULL,
     `nett_price`     decimal(10, 2)                     NOT NULL,
     `vat`            int(11)                            NOT NULL,
     `gross_price`    decimal(10, 2)                     NOT NULL,
@@ -27,7 +27,9 @@ CREATE TABLE `products`
   COLLATE utf8_general_ci;
 
 INSERT INTO products (auction_number, name, description, nett_price, vat, gross_price, optima_code, ean)
-VALUES ('1a', 'Product 1', 'Product description 1', 10.00, 23, 12.30, 'code1', 123456);
+VALUES ('1a', 'Product 1',
+        'Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1',
+        10.00, 23, 12.30, 'code1', 123456);
 
 INSERT INTO products (auction_number, name, description, nett_price, vat, gross_price, optima_code, ean)
 VALUES ('2b', 'Product 2', 'Product description 2', 100.00, 23, 123.00, 'code2', 67890);
