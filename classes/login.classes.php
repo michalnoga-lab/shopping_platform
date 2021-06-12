@@ -15,7 +15,7 @@ class Login extends Dbh
 
         if ($stmt->rowCount() == 0) {
             $stmt = null;
-            (new Logger)->systemEvent('Failed login attempt with nonexistent email: ' . $email);
+            (new Logger)->systemEvent('Failed login attempt with nonexistent email: ' . $email); // TODO dane przeglądarki
             header('location: ../pages/login.php?error=user_not_found');
             exit();
         }
@@ -25,7 +25,8 @@ class Login extends Dbh
 
         if ($check_passwords == false) {
             $stmt = null;
-            header('location: ../pages/login.php?error=invalid_password'); // TODO zapis do logów
+            (new Logger())->systemEvent('Failed login attempt with wrong password for email ' . $email); // TODO dane przeglądarki i IP
+            header('location: ../pages/login.php?error=invalid_password');
             exit();
         }
 
@@ -35,6 +36,8 @@ class Login extends Dbh
         $_SESSION['email'] = $user[2];
         $_SESSION['role'] = $user[4];
 
-        $stmt = null; // TODO zapis do logów, że poprawnie zalogowano
+        (new Logger())->systemEvent('Login successful with email ' . $email); // TODO dane przeglądarki i IP
+
+        $stmt = null;
     }
 }
