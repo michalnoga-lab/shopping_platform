@@ -1,10 +1,13 @@
 <?php
 //error_reporting(0); // TODO
+require_once '../includes/logger.inc.php';
 
 class Login extends Dbh
 {
     protected function loginUser($email, $password)
     {
+        $logger = new Logger();
+
         $stmt = $this->connect()->prepare('SELECT * FROM users WHERE email = ?;');
 
         if (!$stmt->execute(array($email))) {
@@ -15,7 +18,8 @@ class Login extends Dbh
 
         if ($stmt->rowCount() == 0) {
             $stmt = null;
-            (new Logger)->systemEvent('Failed login attempt with nonexistent email: ' . $email); // TODO dane przeglądarki
+            //(new Logger)->systemEvent('Failed login attempt with nonexistent email: ' . $email); // TODO dane przeglądarki
+            $logger->systemEvent('Failed login attempt with nonexistent email: ' . $email);
             header('location: ../pages/login.php?error=user_not_found');
             exit();
         }

@@ -2,18 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4efbe8ea-b2dc-46dc-9231-fc5dac6e0773" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/logs/20211228" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c62ea75b-2fa0-4ac2-a174-2fd76f656e58.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c62ea75b-2fa0-4ac2-a174-2fd76f656e58/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c62ea75b-2fa0-4ac2-a174-2fd76f656e58/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c62ea75b-2fa0-4ac2-a174-2fd76f656e58/storage_v2/_src_/schema/mysql.osA4Bg.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c62ea75b-2fa0-4ac2-a174-2fd76f656e58/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c62ea75b-2fa0-4ac2-a174-2fd76f656e58/storage_v2/_src_/schema/tendering_platform.BBUsHw.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/dbh.classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/dbh.classes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/login.classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/login.classes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/logger.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/logger.inc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
+  <component name="ComposerSettings" doNotAsk="true">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -49,12 +55,6 @@
       <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform\includes" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="ComposerRunConfigurationType" factoryName="Composer Script">
-      <option name="pathToComposerJson" value="$PROJECT_DIR$/composer.json" />
-      <method v="2" />
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -64,6 +64,7 @@
       <option name="presentableId" value="Default" />
       <updated>1640595807059</updated>
       <workItem from="1640595812731" duration="10958000" />
+      <workItem from="1640683148192" duration="1719000" />
     </task>
     <servers />
   </component>

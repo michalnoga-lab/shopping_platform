@@ -424,3 +424,6 @@ composer.lock
 
 # configuration
 .vendor/
+
+# exclude log files
+/logs
