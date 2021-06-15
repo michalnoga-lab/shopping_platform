@@ -1,6 +1,7 @@
 <?php
 // error_reporting(0); TODO
 include_once '../includes/roles.inc.php';
+include_once '../includes/logger.inc.php';
 
 class Register extends Dbh
 {
@@ -10,7 +11,7 @@ class Register extends Dbh
 
         if (!$stmt->execute(array($email))) {
             $stmt = null;
-            header("location: ../index.php?error=connection"); // TODO logs
+            header("location: ../index.php?error=connection");
             exit();
         }
 
@@ -23,6 +24,8 @@ class Register extends Dbh
 
     public function saveUser($username, $email, $password)
     {
+        $logger = new Logger();
+
         if ($this->isEmailNotInDb($email)) {
 
             $stmt = $this->connect()->prepare('INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?);');
@@ -34,7 +37,8 @@ class Register extends Dbh
                 exit();
             }
         } else {
-            header('location: ../pages/register.php?error=email_in_db'); // TODO zapisanie do logów
+            $logger->systemEvent('Failed registration attempt with existing email ' . $email);
+            header('location: ../pages/register.php?error=email_in_db');
             exit();
         }
 
