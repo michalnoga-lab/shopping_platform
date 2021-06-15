@@ -39,8 +39,7 @@ class Login extends Dbh
         $_SESSION['email'] = $user[2];
         $_SESSION['role'] = $user[4];
 
-        (new Logger())->systemEvent('Login successful with email ' . $email); // TODO dane przeglądarki i IP
-
+        $logger->systemEvent('Login successful with email ' . $email);
         $stmt = null;
     }
 }
