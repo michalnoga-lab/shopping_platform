@@ -33,7 +33,8 @@ class Register extends Dbh
 
             if ($stmt->execute(array($username, $email, $hashed_password, 'USER'))) { // TODO enum zamiast na sztywno USER
                 $stmt = null;
-                header('location: ../index.php?error=user_added'); // TODO zapisanie do logów
+                $logger->systemEvent('Registration successful with email ' . $email . ' as ' . 'USER');
+                header('location: ../index.php?error=user_added');
                 exit();
             }
         } else {
