@@ -3,10 +3,11 @@
 
 include_once './logger.inc.php';
 
+session_start();
+
 $logger = new Logger();
 $logger->systemEvent('Logout successful with email ' . $_SESSION['email']);
 
-session_start();
 session_unset();
 session_destroy();
 
