@@ -18,39 +18,37 @@ session_start();
 </header>
 
 <div class="container">
-    <div class="row">
-        <?php
-        if (isset($_GET['id'])) {
-            include_once '../classes/dbh.classes.php';
-            $id = $_GET['id'];
+    <?php
+    if (isset($_GET['id'])) {
+        include_once '../classes/dbh.classes.php';
+        $id = $_GET['id'];
 
-            $sql = ("SELECT * FROM products WHERE id = '$id';");
-            $result = mysqli_query($connection, $sql);
-            $resultCheck = mysqli_num_rows($result);
+        $sql = ("SELECT * FROM products WHERE id = '$id';");
+        $result = mysqli_query($connection, $sql);
+        $resultCheck = mysqli_num_rows($result);
 
-            if ($resultCheck > 0) {
-                $product = mysqli_fetch_assoc($result); ?>
-                <form>
-                    <h3><?= $product['name'] ?></h3>
-                    <hr>
-                    <p>Numer pozycji w przetargu: <?= $product['auction_number'] ?></p>
-                    <p>Cena netto: <?= $product['nett_price'] ?> PLN</p>
-                    <p>VAT: <?= $product['vat'] ?> %</p>
-                    <p>Cena brutto: <?= $product['gross_price'] ?> PLN</p>
-                    <hr>
-                    <!-- TODO JS walidacja wprowadzonej ilości -->
-                    <div class="form-group">
-                        <label for="quantity"></label>
-                        <input type="number" class="form-control" id="quantity" placeholder="Podaj ilość">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Dodaj do koszyka</button>
-                </form>
-            <?php } else {
-                echo('<div class="alert alert-danger text-center" role="alert">Nie odnaleziono produktu</div>');
-            }
+        if ($resultCheck > 0) {
+            $product = mysqli_fetch_assoc($result); ?>
+            <form>
+                <h3><?= $product['name'] ?></h3>
+                <hr>
+                <p>Numer pozycji w przetargu: <?= $product['auction_number'] ?></p>
+                <p>Cena netto: <?= $product['nett_price'] ?> PLN</p>
+                <p>VAT: <?= $product['vat'] ?> %</p>
+                <p>Cena brutto: <?= $product['gross_price'] ?> PLN</p>
+                <hr>
+                <!-- TODO JS walidacja wprowadzonej ilości -->
+                <div class="form-group">
+                    <label for="quantity"></label>
+                    <input type="number" class="form-control" id="quantity" placeholder="Podaj ilość">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Dodaj do koszyka</button>
+            </form>
+        <?php } else {
+            echo('<div class="alert alert-danger text-center" role="alert">Nie odnaleziono produktu</div>');
         }
-        ?>
-    </div>
+    }
+    ?>
 </div>
 
 <footer>
