@@ -1,7 +1,6 @@
 <?php
 // error_reporting(0); TODO
 
-
 ?>
 
 <!doctype html>
@@ -13,6 +12,11 @@
 </head>
 
 <body>
+
+<header>
+    <?php include_once('../static/elements/header.php') ?>
+</header>
+
 <div class="container">
     <table class="table table-hover">
         <thead>
@@ -22,12 +26,26 @@
             <th scope="col" style="width: 20%">Cena</th>
         </tr>
         </thead>
+        <!-- TODO wyświtlanie ceny netto/brutto w zależności od ustawienia -->
+
         <tbody>
-        <tr>
-            <td>1</td>
-            <td></td>
-            <td>... PLN NETTO</td>
-        </tr>
+        <?php
+        include_once '../classes/dbh.classes.php';
+
+        $sql = "SELECT * FROM products;";
+        $result = mysqli_query($connection, $sql);
+        $resultCheck = mysqli_num_rows($result);
+
+        if ($resultCheck > 0) {
+            $rowNumber = 0;
+            while ($row = mysqli_fetch_assoc($result)) {
+                $rowNumber += 1;
+                echo('<tr>' . '<td>' . $rowNumber . '</td>' . '<td>' . $row['name'] . '</td>' . '<td>' . $row['nett_price'] . ' PLN' . '</td>' . '</tr>');
+            }
+        } else {
+            echo('<div class="alert alert-danger text-center" role="alert">Brak produktów do wyświetlenia</div>');
+        }
+        ?>
         </tbody>
     </table>
 </div>
