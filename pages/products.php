@@ -1,6 +1,6 @@
 <?php
 // error_reporting(0); TODO
-
+session_start();
 ?>
 
 <!doctype html>
@@ -39,9 +39,15 @@
         if ($resultCheck > 0) {
             $rowNumber = 0;
             while ($row = mysqli_fetch_assoc($result)) {
-                $rowNumber += 1;
-                echo('<tr>' . '<td>' . $rowNumber . '</td>' . '<td>' . $row['name'] . '</td>' . '<td>' . $row['nett_price'] . ' PLN' . '</td>' . '</tr>');
-            }
+                $rowNumber += 1; ?>
+                <tr onclick="window.location='single-product.php?id='+<?= $row['id'] ?>">
+                    <td><?= $rowNumber ?></td>
+                    <td><?= $row['name'] ?></td>
+                    <td><?= $row['nett_price'] ?> PLN</td>
+                    <!-- TODO w zależności od ustawień wyświetlamy cenę netto lub brutto -->
+                </tr>
+
+            <?php }
         } else {
             echo('<div class="alert alert-danger text-center" role="alert">Brak produktów do wyświetlenia</div>');
         }
