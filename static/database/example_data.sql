@@ -34,6 +34,12 @@ VALUES ('1a', 'Product 1',
 INSERT INTO products (auction_number, name, description, nett_price, vat, gross_price, optima_code, ean)
 VALUES ('2b', 'Product 2', 'Product description 2', 100.00, 23, 123.00, 'code2', 67890);
 
+INSERT INTO products (auction_number, name, description, nett_price, vat, gross_price, optima_code, ean)
+VALUES ('3c', 'Product 3', 'Product description 3', 100.00, 23, 123.00, 'code2', 67890);
+
+INSERT INTO products (auction_number, name, description, nett_price, vat, gross_price, optima_code, ean)
+VALUES ('4d', 'Product 4', 'Product description 4', 100.00, 23, 123.00, 'code2', 67890);
+
 # INSERT INTO users (username, email, password, role)
 # VALUES ('user', 'user@gmail.com', '$2y$10$DgPcQ1AGo..ZOR1b1w/KKup0U7/KFXJtjSAM5w3WT.hLGyJdeFp4i',
 #         'user'); # password = user user
