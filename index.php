@@ -8,7 +8,7 @@ session_start();
 // TODO readme.md zmienić na dockera
 // TODO wyłączyć we wszystkich plikach raportowanie błędów
 // TODO specjalna biblioteka do sanitization danych rejestracji i logowania
-// TODO zrobić sortowanie produktów po kryteriach w JS
+// TODO zrobić filtrowanie produktów po nazwach
 // TODO backup bazy danych ???
 ?>
 

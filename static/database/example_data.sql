@@ -44,6 +44,25 @@ CREATE TABLE company
     `default_price` varchar(255)                       NOT NULL
 );
 
+CREATE TABLE carts
+(
+    `id`          int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    `user_id`     int(11)                            NOT NULL,
+    `purchased`   datetime,
+    `nett_value`  decimal(10, 2)                     NOT NULL,
+    `vat_value`   decimal(10, 2)                     NOT NULL,
+    `gross_value` decimal(10, 2)                     NOT NULL,
+    `closed`      boolean DEFAULT false              NOT NULL
+);
+
+CREATE TABLE products_in_cart
+(
+    `id`         int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    `user_id`    int(11)                            NOT NULL,
+    `cart_id`    int(11)                            NOT NULL,
+    `product_id` int(11)                            NOT NULL,
+    `quantity`   int(11)                            NOT NULL
+);
 
 
 INSERT INTO products (auction_number, name, description, nett_price, vat, gross_price, optima_code, ean)

@@ -27,6 +27,9 @@ if (isset($_POST['submit'])) {
     $stmt->bind_param('si', $username, $id);
 
     if ($stmt->execute()) {
+        $logger = new Logger();
+        $logger->systemEvent('Name changed for ' . $username);
+
         header($location . 'name_updated');
     } else {
         header($location . 'connection');
