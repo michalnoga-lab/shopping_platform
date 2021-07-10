@@ -1,6 +1,7 @@
 <?php
 // error_reporting(0); // TODO
 session_start();
+include_once '../includes/logger.inc.php';
 
 if (isset($_POST['submit'])) {
     include_once '../classes/dbh.classes.php';
