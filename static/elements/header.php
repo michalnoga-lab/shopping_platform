@@ -11,9 +11,9 @@ session_start();
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="/pages/products.php">Produkty</a>
             <a class="p-2 text-dark" href="/pages/addresses.php">Adresy</a>
-            <!-- <a class="p-2 text-dark" href="#">Historia</a> TODO w przyszłości -->
             <a class="p-2 text-dark" href="/pages/account.php">Konto</a>
             <a class="p-2 text-dark" href="/pages/cart.php">Koszyk</a>
+            <a class="p-2 text-dark" href="/pages/history.php">Historia</a>
         </nav>
         <a class="btn btn-outline-danger header-btn" href="/pages/logout.php">Wyloguj</a>
         <?php
