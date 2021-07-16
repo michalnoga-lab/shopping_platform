@@ -1,6 +1,7 @@
 <?php
 // error_reporting(0); // TODO
 session_start();
+include_once '../includes/logger.inc.php';
 
 if (isset($_POST['submit'])) {
     include_once '../classes/dbh.classes.php';
@@ -30,6 +31,9 @@ if (isset($_POST['submit'])) {
     $stmt->bind_param('si', $hashedPassword, $id);
 
     if ($stmt->execute()) {
+        $logger = new Logger();
+        $logger->systemEvent('Password changed');
+
         header($location . 'password_updated');
     } else {
         header($location . 'connection');
