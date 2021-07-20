@@ -20,14 +20,14 @@ session_start();
 <div class="container">
     <div class="row">
         <?php
-        if (isset($_GET['error'])) {
-            $errorCheck = $_GET['error'];
+        if (isset($_GET['info'])) {
+            $infoCheck = $_GET['info'];
 
-            if ($errorCheck === 'address_added') {
+            if ($infoCheck === 'address_added') {
                 echo('<div class="alert alert-success text-center" role="alert">Adres poprawnie dodany</div>');
-            } elseif ($errorCheck === 'removed') {
+            } elseif ($infoCheck === 'removed') {
                 echo('<div class="alert alert-success text-center" role="alert">Adres poprawnie usunięty</div>');
-            } elseif ($errorCheck === 'connection') {
+            } elseif ($infoCheck === 'connection') {
                 echo('<div class="alert alert-danger text-center" role="alert">Błąd połączenia</div>');
             }
         }

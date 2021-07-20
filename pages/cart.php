@@ -21,6 +21,29 @@ session_start();
     <div class="row">
         <h3>Mój koszyk</h3>
         <hr>
+        <?php
+        if (isset($_GET['info'])) {
+            $infoCheck = $_GET['info'];
+
+            if ($infoCheck === 'empty') {
+                echo('<div class="alert alert-danger text-center" role="alert">Nie masz produktów w koszyku</div>');
+            }
+        }
+        ?>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col" style="width: 10%">#</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            include_once '../classes/dbh.classes.php';
+
+            $userId = $_SESSION['id'];
+            ?>
+            </tbody>
+        </table>
     </div>
 </div>
 
