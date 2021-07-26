@@ -33,9 +33,9 @@ session_start();
         $stmt->execute();
         $result = $stmt->get_result();
         $products = $result->fetch_all(MYSQLI_ASSOC);
-        $rowNumber = 0;
 
         if ($products > 0) {
+            $rowNumber = 0;
             foreach ($products as $product) {
                 $rowNumber += 1; ?>
                 <tr onclick="window.location='product-single.php?id='+<?= $product['id'] ?>">

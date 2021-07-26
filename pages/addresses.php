@@ -44,19 +44,21 @@ session_start();
             <?php
             include_once '../classes/dbh.classes.php';
 
-            $user_id = $_SESSION['id'];
-            $sql = "SELECT * FROM addresses WHERE user_id = '$user_id'";
-            $result = mysqli_query($connection, $sql);
-            $resultCheck = mysqli_num_rows($result);
+            $userId = $_SESSION['id'];
+            $stmt = $connection->prepare('SELECT * FROM addresses WHERE user_id = ?;');
+            $stmt->bind_param('i', $userId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $addresses = $result->fetch_all(MYSQLI_ASSOC);
 
-            if ($resultCheck > 0) {
+            if ($addresses > 0) {
                 $rowNumber = 0;
-                while ($row = mysqli_fetch_assoc($result)) {
+                foreach ($addresses as $address) {
                     $rowNumber += 1; ?>
-                    <tr onclick="window.location='address-single.php?id='+<?= $row['id'] ?>">
+                    <tr onclick="window.location='address-single.php?id='+<?= $address['id'] ?>">
                         <td><?= $rowNumber ?></td>
-                        <td><?= $row['street'] ?></td>
-                        <td><?= $row['phone'] ?></td>
+                        <td><?= $address['street'] ?></td>
+                        <td><?= $address['phone'] ?></td>
                     </tr>
                 <?php }
             } else {

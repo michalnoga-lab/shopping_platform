@@ -36,6 +36,7 @@ session_start();
                 <th scope="col" style="width: 10%">#</th>
             </tr>
             </thead>
+            <!-- TODO od tego zacząć !!! -->
             <tbody>
             <?php
             include_once '../classes/dbh.classes.php';
