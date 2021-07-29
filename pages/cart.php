@@ -32,16 +32,25 @@ session_start();
         ?>
         <table class="table table-hover">
             <thead>
-            <tr>
-                <th scope="col" style="width: 10%">#</th>
-            </tr>
             </thead>
-            <!-- TODO od tego zacząć !!! -->
             <tbody>
             <?php
             include_once '../classes/dbh.classes.php';
 
             $userId = $_SESSION['id'];
+            $stmt = $connection->prepare('SELECT * FROM carts WHERE user_id = ? AND closed = false;');
+            $stmt->bind_param('i', $userId);
+            $stmt->execute();
+            $stmt->store_result();
+
+            if ($stmt->num_rows > 0) {
+                $stmt->bind_result($cartId, $userId, $purchased, $nettValue, $vatVaue, $grossValue, $closed);
+                $stmt->fetch();
+                echo($nettValue );
+                // TODO od tego zacząć !!!
+            } else {
+                echo('<div class="alert alert-danger text-center" role="alert">Nie masz produktów w koszyku</div>');
+            }
             ?>
             </tbody>
         </table>

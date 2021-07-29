@@ -88,6 +88,9 @@ VALUES (1, 'Street 2', '123456');
 INSERT INTO addresses (user_id, street, phone)
 VALUES (2, 'Street for user 2', '123456');
 
+INSERT INTO carts (user_id, purchased, nett_value, vat_value, gross_value, closed)
+VALUES (1, null, 0, 0, 0, 0);
+
 # INSERT INTO users (username, email, password, role)
 # VALUES ('user', 'user@gmail.com', '$2y$10$DgPcQ1AGo..ZOR1b1w/KKup0U7/KFXJtjSAM5w3WT.hLGyJdeFp4i',
 #         'user'); # password = user user
