@@ -73,6 +73,7 @@ public class CartProduct {
      * @param updatedQuantity is a new quantity to save in CartProduct quantity filed
      * @return new CartProduct object with updated values
      */
+    // TODO nieużywana metoda
     public CartProduct withChangedValues(int updatedQuantity) {
         return CartProduct
                 .builder()
