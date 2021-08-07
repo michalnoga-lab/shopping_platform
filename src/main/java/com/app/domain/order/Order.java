@@ -4,6 +4,7 @@ import com.app.domain.cart_product.CartProduct;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @NoArgsConstructor
@@ -16,6 +17,8 @@ public class Order {
 
     Long id;
     List<CartProduct> productsInCart;
+    Long userId;
+    LocalDateTime cratedAt;
     BigDecimal nettValue;
     BigDecimal vatValue;
     BigDecimal grossValue;
@@ -28,6 +31,8 @@ public class Order {
                 .builder()
                 .id(id)
                 .productsInCart(updatedProductsInCart)
+                .userId(userId)
+                .cratedAt(cratedAt)
                 .nettValue(updatedProductsInCart.stream().map(CartProduct::getNettValue).reduce(BigDecimal.ZERO, BigDecimal::add))
                 .vatValue(updatedProductsInCart.stream().map(CartProduct::getVatValue).reduce(BigDecimal.ZERO, BigDecimal::add))
                 .grossValue(updatedProductsInCart.stream().map(CartProduct::getGrossValue).reduce(BigDecimal.ZERO, BigDecimal::add))
