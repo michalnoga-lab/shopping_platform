@@ -25,9 +25,10 @@ public class Order {
     Long id;
 
     /**
-     * All products currently user purchased in this order
+     * All products purchased in this order
+     * @see CartProduct
      */
-    List<CartProduct> productsInCart;
+    List<CartProduct> purchasedProducts;
 
     /**
      * Purchasing user ID
