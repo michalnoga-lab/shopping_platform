@@ -5,6 +5,9 @@ if (isset($_POST('submit'))) {
 
     $productId = $_POST['product-id'];
     $quantity = $_POST['quantity'];
+    $nettPrice = $_POST['nett-price'];
+    $vat = $_POST['vat'];
+    $grossPrice = $_POST['gross-price'];
 
     include '../classes/dbh.classes.php';
     include '../classes/cart.classes.php';

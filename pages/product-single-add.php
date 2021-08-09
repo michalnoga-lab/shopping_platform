@@ -43,6 +43,9 @@ session_start();
                     <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Podaj ilość">
                     <label for="quantity">Podaj ilość</label>
                     <input type="hidden" value="<?= $id ?>" id="product-id" name="product-id"/>
+                    <input type="hidden" value="<?= $product['nett_price'] ?>" id="nett-price" name="nett-price"/>
+                    <input type="hidden" value="<?= $product['vat'] ?>" id="vat" name="vat"/>
+                    <input type="hidden" value="<?= $product['gross_price'] ?>" id="gross-price" name="gross-price"/>
                     <div class="error"></div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Dodaj do koszyka</button>

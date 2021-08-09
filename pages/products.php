@@ -23,6 +23,8 @@ session_start();
 
         if ($infoCheck == 'cart_saved') {
             echo('<div class="alert alert-success text-center" role="alert">Produkt dodany do koszyka</div>');
+        } elseif ($infoCheck == 'connection') {
+            echo('<div class="alert alert-danger text-center" role="alert">Błąd połączenia</div>');
         }
     }
     ?>
