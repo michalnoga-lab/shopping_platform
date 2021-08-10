@@ -7,7 +7,7 @@ session_start();
 <!doctype html>
 <html lang="pl">
 <head>
-    <?php include_once('../static/elements/head.inc.php'); ?>
+    <?php include_once('src/static/elements/head.inc.php'); ?>
     <title>Prima Platforma</title>
 </head>
 

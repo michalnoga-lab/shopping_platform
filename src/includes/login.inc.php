@@ -13,5 +13,5 @@ if (isset($_POST['submit'])) {
     $login = new LoginController($email, $password);
     $login->doLogin();
 
-    header('location: ../index.php/info=login_successful');
+    header('location: /index.php/info=login_successful');
 }

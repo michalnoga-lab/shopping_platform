@@ -12,7 +12,7 @@ session_start();
 </head>
 
 <body>
-<script defer src="../static/js/login/validation.js"></script>
+<script defer src="/src/static/js/login/validation.js"></script>
 <div class="container">
     <?php
     if (isset($_GET['info'])) {
@@ -33,7 +33,7 @@ session_start();
         <div class="card border-0 shadow rounded-3 my-5">
             <div class="card-body p-4 p-sm-5">
                 <h5 class="card-title text-center mb-5 fw-light fs-5">Logowanie</h5>
-                <form action="/includes/login.inc.php" method="post" id="form">
+                <form action="/src/includes/login.inc.php" method="post" id="form">
                     <div class="form-floating mb-3 input-control">
                         <input type="email" class="form-control" id="email" name="email"
                                placeholder="Adres email">
@@ -59,7 +59,7 @@ session_start();
 </div>
 
 <footer>
-    <?php include_once('../static/elements/footer.php') ?>
+    <?php include_once('src/static/elements/footer.php') ?>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
