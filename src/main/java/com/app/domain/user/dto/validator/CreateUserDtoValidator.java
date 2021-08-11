@@ -9,6 +9,12 @@ import java.util.Map;
 import static com.app.domain.configs.regex.Regex.EMAIL_REGEX;
 import static com.app.domain.configs.regex.Regex.TEXT_REGEX;
 
+/**
+ * CreateUserDtoValidator class
+ * Validates values given by user at registration time
+ *
+ * @see CreateUserDto
+ */
 public class CreateUserDtoValidator implements Validator<CreateUserDto> {
 
     @Override

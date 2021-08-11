@@ -8,6 +8,7 @@ import com.app.domain.user.User;
  * Provides CRUD methods to use with User
  *
  * @see CrudRepository
+ * @see User
  */
 public interface UserRepository extends CrudRepository<User, Long> {
 }

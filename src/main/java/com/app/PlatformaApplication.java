@@ -11,3 +11,6 @@ public class PlatformaApplication {
     }
 
 }
+
+// TODO validacja w domenie
+// TODO testy

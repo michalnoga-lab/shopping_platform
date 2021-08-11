@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 /**
  * GetUserDto class
  * Returns User as DTO
+ *
+ * @see com.app.domain.user.User
  */
 @NoArgsConstructor
 @AllArgsConstructor
