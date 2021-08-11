@@ -1,22 +1,25 @@
-package com.app.domain.cart;
+package com.app.domain.cart.dto;
 
 import com.app.domain.cart_product.CartProduct;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * Cart class
- * Represents user's cart
+ * GetCartDto class
+ * Returns Cart as DTO
+ *
+ * @see com.app.domain.cart.Cart
  */
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
-@EqualsAndHashCode
-@ToString
-public class Cart {
+public class GetCartDto {
 
     /**
      * Cart ID
@@ -51,6 +54,4 @@ public class Cart {
      * Cart current gross value
      */
     BigDecimal grossPrice;
-
-    // TODO get cart dto
 }

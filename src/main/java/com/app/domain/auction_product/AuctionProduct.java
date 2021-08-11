@@ -61,4 +61,6 @@ public class AuctionProduct {
      * Product unique EAN code
      */
     String ean;
+
+     // TODO get auction product
 }

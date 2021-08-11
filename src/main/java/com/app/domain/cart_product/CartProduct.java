@@ -73,25 +73,26 @@ public class CartProduct {
      */
     String ean;
 
+    // TODO get cart product dto
+
     /***
      * Updates CartProduct nett value, VAT value and gross value based on new product quantity
-     * @param updatedQuantity is a new quantity to save in CartProduct quantity filed
+     * @param updatedSingleProductQuantity is a new quantity to save in CartProduct quantity filed
      * @return new CartProduct object with updated values
      */
-    // TODO nieużywana metoda
-    public CartProduct withChangedValues(int updatedQuantity) {
+    public CartProduct withChangedValues(int updatedSingleProductQuantity) {
         return CartProduct
                 .builder()
                 .id(id)
                 .originId(originId)
                 .name(name)
-                .quantity(updatedQuantity)
+                .quantity(updatedSingleProductQuantity)
                 .nettPrice(nettPrice)
                 .vat(vat)
                 .grossPrice(grossPrice)
-                .nettValue(nettPrice.multiply(BigDecimal.valueOf(updatedQuantity)))
-                .vatValue(nettPrice.multiply(BigDecimal.valueOf(updatedQuantity)).multiply(BigDecimal.valueOf(vat / 100)))
-                .grossValue(nettPrice.multiply(BigDecimal.valueOf(updatedQuantity)).multiply(BigDecimal.valueOf(1 + vat / 100)))
+                .nettValue(nettPrice.multiply(BigDecimal.valueOf(updatedSingleProductQuantity)))
+                .vatValue(nettPrice.multiply(BigDecimal.valueOf(updatedSingleProductQuantity)).multiply(BigDecimal.valueOf(vat / 100)))
+                .grossValue(nettPrice.multiply(BigDecimal.valueOf(updatedSingleProductQuantity)).multiply(BigDecimal.valueOf(1 + vat / 100)))
                 .ean(ean)
                 .build();
     }
