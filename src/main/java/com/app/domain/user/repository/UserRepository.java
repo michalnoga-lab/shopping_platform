@@ -1,6 +1,6 @@
 package com.app.domain.user.repository;
 
-import com.app.domain.repository.CrudRepository;
+import com.app.domain.configs.repository.CrudRepository;
 import com.app.domain.user.User;
 
 /**

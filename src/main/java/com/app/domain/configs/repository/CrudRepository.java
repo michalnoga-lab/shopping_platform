@@ -1,4 +1,4 @@
-package com.app.domain.repository;
+package com.app.domain.configs.repository;
 
 import java.util.Optional;
 
