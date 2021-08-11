@@ -1,4 +1,4 @@
-package com.app.domain.cart.dto;
+package com.app.domain.order.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,43 +6,43 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
-/**
- * GetCartDto class
- * Returns Cart as DTO
- *
- * @see com.app.domain.cart.Cart
- */
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
-public class GetCartDto {
+public class GetOrderDto {
 
     /**
-     * Cart ID
+     * Order ID
      */
     Long id;
 
     /**
-     * User's owning this cart ID
+     * Purchasing user ID
      *
      * @see com.app.domain.user.User
      */
     Long userId;
 
     /**
-     * Cart current nett value
+     * Date and time of purchase
+     */
+    LocalDateTime createdAt;
+
+    /**
+     * Order whole nett value
      */
     BigDecimal nettValue;
 
     /**
-     * Cart current vat value
+     * Order whole VAT value
      */
     BigDecimal vatValue;
 
     /**
-     * Cart current gross value
+     * Order whole gross value
      */
     BigDecimal grossValue;
 }

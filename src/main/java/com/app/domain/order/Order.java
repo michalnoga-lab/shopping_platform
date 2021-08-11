@@ -1,6 +1,7 @@
 package com.app.domain.order;
 
 import com.app.domain.cart_product.CartProduct;
+import com.app.domain.order.dto.GetOrderDto;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -41,7 +42,7 @@ public class Order {
     /**
      * Date and time of purchase
      */
-    LocalDateTime cratedAt;
+    LocalDateTime createdAt;
 
     /**
      * Order whole nett value
@@ -57,4 +58,21 @@ public class Order {
      * Order whole gross value
      */
     BigDecimal grossValue;
+
+    /**
+     * Converts Order to OrderDto
+     *
+     * @return GetOrderDto
+     */
+    public GetOrderDto toGetOrderDto() {
+        return GetOrderDto
+                .builder()
+                .id(id)
+                .userId(userId)
+                .createdAt(createdAt)
+                .nettValue(nettValue)
+                .vatValue(vatValue)
+                .grossValue(grossValue)
+                .build();
+    }
 }
