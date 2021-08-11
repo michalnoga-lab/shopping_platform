@@ -1,21 +1,21 @@
-package com.app.domain.user;
+package com.app.domain.user.dto;
 
-import com.app.domain.user.dto.GetUserDto;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 /**
- * User class
- * Represents user purchasing auction products
+ * GetUserDto class
+ * Returns User as DTO
  */
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
-@EqualsAndHashCode
-@ToString
-public class User {
+public class GetUserDto {
 
     /**
      * User ID
@@ -57,23 +57,4 @@ public class User {
      * IP address used for last log into application
      */
     String lastLoginIp;
-
-    /**
-     * Converts User to UserDto
-     *
-     * @return GetUserDto
-     */
-    public GetUserDto toGetUserDto() {
-        return GetUserDto
-                .builder()
-                .id(id)
-                .name(name)
-                .surname(surname)
-                .email(email)
-                .password(password)
-                .createdAt(createdAt)
-                .accountCreationIp(accountCreationIp)
-                .lastLoginIp(lastLoginIp)
-                .build();
-    }
 }

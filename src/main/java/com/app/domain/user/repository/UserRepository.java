@@ -5,7 +5,7 @@ import com.app.domain.user.User;
 
 /**
  * UserRepository interface
- * Provides all methods from CrudRepository to use with User
+ * Provides CRUD methods to use with User
  *
  * @see CrudRepository
  */

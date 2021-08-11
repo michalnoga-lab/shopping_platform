@@ -5,9 +5,9 @@ import lombok.*;
 import java.math.BigDecimal;
 
 /**
- * Create AuctionProduct class
- * This class represents exact product from purchaser auction
- * AuctionProduct values doesn't change during whole application lifetime
+ * AuctionProduct class
+ * Represents exact product from purchaser auction
+ * AuctionProduct values don't change during whole application lifetime
  */
 @NoArgsConstructor
 @AllArgsConstructor

@@ -7,8 +7,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * Create Cart class
- * This class represents user's cart
+ * Cart class
+ * Represents user's cart
  */
 @NoArgsConstructor
 @AllArgsConstructor

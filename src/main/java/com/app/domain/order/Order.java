@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * Create Order class
- * This class represents products purchased by user with quantity and whole order value
+ * Order class
+ * Represents products purchased by user with quantity and whole order value
  */
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,6 +26,7 @@ public class Order {
 
     /**
      * All products purchased in this order
+     *
      * @see CartProduct
      */
     List<CartProduct> purchasedProducts;

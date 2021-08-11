@@ -5,8 +5,8 @@ import lombok.*;
 import java.math.BigDecimal;
 
 /**
- * Create CartProduct class
- * This class represents product placed in user's cart
+ * CartProduct class
+ * Represents product placed in user's cart
  */
 @NoArgsConstructor
 @AllArgsConstructor
@@ -74,7 +74,7 @@ public class CartProduct {
     String ean;
 
     /***
-     * This method updates CartProduct nett value, VAT value and gross value based on new product quantity
+     * Updates CartProduct nett value, VAT value and gross value based on new product quantity
      * @param updatedQuantity is a new quantity to save in CartProduct quantity filed
      * @return new CartProduct object with updated values
      */
