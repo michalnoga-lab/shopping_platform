@@ -1,5 +1,6 @@
 package com.app.domain.cart_product;
 
+import com.app.domain.cart_product.dto.GetCartProductDto;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -73,11 +74,31 @@ public class CartProduct {
      */
     String ean;
 
-    // TODO get cart product dto
+    /**
+     * Converts CartProduct to CartProductDto
+     *
+     * @return GetCartProductDto
+     */
+    public GetCartProductDto toGetCartProductDto() {
+        return GetCartProductDto
+                .builder()
+                .id(id)
+                .originId(originId)
+                .name(name)
+                .quantity(quantity)
+                .nettPrice(nettPrice)
+                .vat(vat)
+                .grossPrice(grossPrice)
+                .nettValue(nettValue)
+                .vatValue(vatValue)
+                .grossValue(grossValue)
+                .ean(ean)
+                .build();
+    }
 
     /***
      * Updates CartProduct nett value, VAT value and gross value based on new product quantity
-     * @param updatedSingleProductQuantity is a new quantity to save in CartProduct quantity filed
+     * @param updatedSingleProductQuantity is a new product quantity to save in CartProduct quantity filed
      * @return new CartProduct object with updated values
      */
     public CartProduct withChangedValues(int updatedSingleProductQuantity) {

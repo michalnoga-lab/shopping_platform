@@ -1,5 +1,6 @@
 package com.app.domain.auction_product;
 
+import com.app.domain.auction_product.dto.GetAuctionProductDto;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -62,5 +63,23 @@ public class AuctionProduct {
      */
     String ean;
 
-     // TODO get auction product
+    /**
+     * Converts AuctionProduct to AuctionProductDto
+     *
+     * @return GetAuctionProductDto
+     */
+    public GetAuctionProductDto toGetAuctionProductDto() {
+        return GetAuctionProductDto
+                .builder()
+                .id(id)
+                .name(name)
+                .description(description)
+                .auctionIndex(auctionIndex)
+                .auctionConsecutiveNumber(auctionConsecutiveNumber)
+                .nettPrice(nettPrice)
+                .vat(vat)
+                .grossPrice(grossPrice)
+                .ean(ean)
+                .build();
+    }
 }

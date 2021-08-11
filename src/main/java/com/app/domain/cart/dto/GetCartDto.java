@@ -53,5 +53,5 @@ public class GetCartDto {
     /**
      * Cart current gross value
      */
-    BigDecimal grossPrice;
+    BigDecimal grossValue;
 }

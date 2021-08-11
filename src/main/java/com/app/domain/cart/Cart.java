@@ -1,5 +1,6 @@
 package com.app.domain.cart;
 
+import com.app.domain.cart.dto.GetCartDto;
 import com.app.domain.cart_product.CartProduct;
 import lombok.*;
 
@@ -50,7 +51,21 @@ public class Cart {
     /**
      * Cart current gross value
      */
-    BigDecimal grossPrice;
+    BigDecimal grossValue;
 
-    // TODO get cart dto
+    /**
+     * Converts Cart to CartDto
+     *
+     * @return GetCartDto
+     */
+    public GetCartDto toGetCartDto() {
+        return GetCartDto
+                .builder()
+                .id(id)
+                .userId(userId)
+                .nettValue(nettValue)
+                .vatValue(vatValue)
+                .grossValue(grossValue)
+                .build();
+    }
 }
