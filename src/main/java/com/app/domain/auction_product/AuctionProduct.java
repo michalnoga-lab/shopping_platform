@@ -56,4 +56,9 @@ public class AuctionProduct {
      * Product gross price from auction
      */
     BigDecimal grossPrice;
+
+    /**
+     * Product unique EAN code
+     */
+    String ean;
 }

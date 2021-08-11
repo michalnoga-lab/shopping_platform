@@ -68,6 +68,11 @@ public class CartProduct {
      */
     BigDecimal grossValue;
 
+    /**
+     * Product unique EAN code
+     */
+    String ean;
+
     /***
      * This method updates CartProduct nett value, VAT value and gross value based on new product quantity
      * @param updatedQuantity is a new quantity to save in CartProduct quantity filed
@@ -87,6 +92,7 @@ public class CartProduct {
                 .nettValue(nettPrice.multiply(BigDecimal.valueOf(updatedQuantity)))
                 .vatValue(nettPrice.multiply(BigDecimal.valueOf(updatedQuantity)).multiply(BigDecimal.valueOf(vat / 100)))
                 .grossValue(nettPrice.multiply(BigDecimal.valueOf(updatedQuantity)).multiply(BigDecimal.valueOf(1 + vat / 100)))
+                .ean(ean)
                 .build();
     }
 }
