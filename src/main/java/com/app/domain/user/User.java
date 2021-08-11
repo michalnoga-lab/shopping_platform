@@ -1,6 +1,10 @@
 package com.app.domain.user;
 
+import com.app.domain.user.dto.CreateUserResponseDto;
+import com.app.domain.user.dto.GetUserAuthentication;
+import com.app.domain.user.dto.GetUserAuthorization;
 import com.app.domain.user.dto.GetUserDto;
+import com.app.domain.user.type.Role;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -59,6 +63,62 @@ public class User {
     String lastLoginIp;
 
     /**
+     * User role in application
+     */
+    Role role;
+
+    /**
+     * Is user enabled to log in and use application
+     */
+    Boolean enabled;
+
+    /**
+     * Enables user to log in and use application
+     */
+    public void activate() {
+        enabled = true;
+    }
+
+    /**
+     * Converts User to CreateUserResponseDto
+     *
+     * @return CreateUserResponseDto
+     */
+    public CreateUserResponseDto toCreateUserResponseDto() {
+        return CreateUserResponseDto
+                .builder()
+                .id(id)
+                .build();
+    }
+
+    /**
+     * Converts User to AuthenticationDto
+     *
+     * @return GetUserAuthentication
+     */
+    public GetUserAuthentication toGetAuthenticationDto() {
+        return GetUserAuthentication
+                .builder()
+                .email(email)
+                .password(password)
+                .enabled(enabled)
+                .role(role)
+                .build();
+    }
+
+    /**
+     * Converts User to AuthorizationDto
+     *
+     * @return GetUserAuthorization
+     */
+    public GetUserAuthorization toGetAuthorizationDto() {
+        return GetUserAuthorization
+                .builder()
+                .email(email)
+                .build();
+    }
+
+    /**
      * Converts User to UserDto
      *
      * @return GetUserDto
@@ -74,6 +134,8 @@ public class User {
                 .createdAt(createdAt)
                 .accountCreationIp(accountCreationIp)
                 .lastLoginIp(lastLoginIp)
+                .role(role)
+                .enabled(enabled)
                 .build();
     }
 }

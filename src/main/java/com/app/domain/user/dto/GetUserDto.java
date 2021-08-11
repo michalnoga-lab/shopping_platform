@@ -1,5 +1,6 @@
 package com.app.domain.user.dto;
 
+import com.app.domain.user.type.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -59,4 +60,14 @@ public class GetUserDto {
      * IP address used for last log into application
      */
     String lastLoginIp;
+
+    /**
+     * User role in application
+     */
+    Role role;
+
+    /**
+     * Is user enabled to log in and use application
+     */
+    Boolean enabled;
 }

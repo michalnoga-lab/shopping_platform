@@ -1,5 +1,6 @@
 package com.app.domain.user.dto;
 
+import com.app.domain.user.type.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,5 +29,10 @@ public class GetUserAuthentication {
     /**
      * Is user enabled /default true/
      */
-    boolean enabled = true;
+    Boolean enabled = false;
+
+    /**
+     * User role in application
+     */
+    Role role;
 }
