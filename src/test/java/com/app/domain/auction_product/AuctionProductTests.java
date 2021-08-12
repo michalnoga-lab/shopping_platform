@@ -21,8 +21,6 @@ public class AuctionProductTests {
     @DisplayName("AuctionProduct to AuctionProductDto conversion")
     public void toGetAuctionProductDto() {
 
-        BigDecimal grossValue = BigDecimal.ONE.multiply(BigDecimal.valueOf(23 / 100)).add(BigDecimal.ONE);
-
         var auctionProduct = AuctionProduct
                 .builder()
                 .id(1L)
@@ -30,9 +28,9 @@ public class AuctionProductTests {
                 .description("description")
                 .auctionIndex("auctionIndex")
                 .auctionConsecutiveNumber("auctionConsecutiveNumber")
-                .nettPrice(BigDecimal.ONE)
+                .nettPrice(BigDecimal.ZERO)
                 .vat(23)
-                .grossPrice(grossValue)
+                .grossPrice(BigDecimal.ZERO)
                 .ean("1234567890")
                 .build();
 
@@ -43,9 +41,9 @@ public class AuctionProductTests {
                 .description("description")
                 .auctionIndex("auctionIndex")
                 .auctionConsecutiveNumber("auctionConsecutiveNumber")
-                .nettPrice(BigDecimal.ONE)
+                .nettPrice(BigDecimal.ZERO)
                 .vat(23)
-                .grossPrice(grossValue)
+                .grossPrice(BigDecimal.ZERO)
                 .ean("1234567890")
                 .build();
 
