@@ -9,5 +9,4 @@ class PlatformaApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }
