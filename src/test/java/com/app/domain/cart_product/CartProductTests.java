@@ -116,8 +116,8 @@ public class CartProductTests {
                 .vat(23)
                 .grossPrice(BigDecimal.valueOf(1.23))
                 .nettValue(BigDecimal.ONE.multiply(BigDecimal.valueOf(100)))
-                .vatValue(bigDecimalOf50)
-                .grossValue(bigDecimalOf50.add(BigDecimal.ONE.multiply(BigDecimal.valueOf(100))))
+                .vatValue(bigDecimalOf100)
+                .grossValue(bigDecimalOf100.add(BigDecimal.ONE.multiply(BigDecimal.valueOf(100))))
                 .ean("1234567890")
                 .build();
 

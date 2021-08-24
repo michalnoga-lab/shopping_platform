@@ -15,14 +15,5 @@ public class CreateAuctionProductDtoValidatorTests {
     void contextLoads() {
     }
 
-    // TODO testy
-//    @Test
-//    @DisplayName("when name is null")
-//    void test1() throws Exception {
-//
-//        CreateAuctionProductDto createAuctionProductDtoClass = new CreateAuctionProductDto();
-//        var nameIsNull = Whitebox.invokeMethod(createAuctionProductDtoClass, "hasIncorrectName", "");
-//
-//        assertThat(nameIsNull).isEqualTo(false);
-//    }
+    // TODO czy tutaj robi się testy
 }
