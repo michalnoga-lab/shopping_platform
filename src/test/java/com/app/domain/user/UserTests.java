@@ -5,6 +5,7 @@ import com.app.domain.user.dto.GetUserAuthentication;
 import com.app.domain.user.dto.GetUserAuthorization;
 import com.app.domain.user.dto.GetUserDto;
 import com.app.domain.user.type.Role;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -21,6 +22,7 @@ public class UserTests {
     }
 
     @Test
+    @DisplayName("User activation")
     void activate() {
 
         User user = User.builder()
@@ -55,6 +57,7 @@ public class UserTests {
     }
 
     @Test
+    @DisplayName("User to CreateUserResponseDto conversion")
     void toCreateUserResponseDto() {
 
         User user = User.builder()
@@ -80,6 +83,7 @@ public class UserTests {
     }
 
     @Test
+    @DisplayName("User to GetUserAuthenticationDto conversion")
     void toGetAuthenticationDto() {
 
         User user = User.builder()
@@ -108,6 +112,7 @@ public class UserTests {
     }
 
     @Test
+    @DisplayName("User to GetUserAuthorization conversion")
     void toGetUserAuthorization() {
 
         User user = User.builder()
@@ -134,6 +139,7 @@ public class UserTests {
     }
 
     @Test
+    @DisplayName("User to GetUserDto conversion")
     void toGetUserDto() {
 
         User user = User.builder()

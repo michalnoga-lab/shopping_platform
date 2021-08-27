@@ -7,6 +7,10 @@ import java.time.LocalDateTime;
 
 import static com.app.domain.user.UserUtil.toId;
 
+/**
+ * VerificationToken class
+ * Represents User's verification token
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -15,15 +19,43 @@ import static com.app.domain.user.UserUtil.toId;
 @ToString
 public class VerificationToken {
 
+    /**
+     * Token ID
+     */
     Long id;
+
+    /**
+     * Token string value
+     */
     String token;
-    LocalDateTime dateTime;
+
+    /**
+     * Token expiration time
+     */
+    LocalDateTime expirationTime;
+
+    /**
+     * User owning token
+     *
+     * @see User
+     */
     User user;
 
+    /**
+     * Check if token is valid
+     *
+     * @return true if token is valid or false if token has expired
+     */
     public boolean isValid() {
-        return LocalDateTime.now().isBefore(dateTime);
+        return LocalDateTime.now().isBefore(expirationTime);
     }
 
+    /**
+     * Returns ID of User, which has token
+     *
+     * @return User ID
+     * @see User
+     */
     public Long getUserId() {
         return toId.apply(user);
     }
