@@ -1,6 +1,7 @@
 <?php
 // error_reporting(0); TODO
 session_start();
+
 ?>
 
 <!doctype html>
@@ -21,15 +22,16 @@ session_start();
         <thead>
         <tr>
             <th scope="col" style="width: 10%">#</th>
-            <th scope="col" style="width 70%">Nazwa</th>
-            <th scope="col" style="width: 20%">Cena</th>
+            <th scope="col" style="width 70%">Adres</th>
+            <th scope="col" style="width: 20%">Telefon</th>
         </tr>
         </thead>
         <tbody>
         <?php
         include_once '../classes/dbh.classes.php';
 
-        $sql = "SELECT * FROM products;";
+        $user_id = $_SESSION['id'];
+        $sql = "SELECT * FROM addresses WHERE user_id = '$user_id'";
         $result = mysqli_query($connection, $sql);
         $resultCheck = mysqli_num_rows($result);
 
@@ -37,20 +39,19 @@ session_start();
             $rowNumber = 0;
             while ($row = mysqli_fetch_assoc($result)) {
                 $rowNumber += 1; ?>
-                <tr onclick="window.location='single-product.php?id='+<?= $row['id'] ?>">
+                <tr>
                     <td><?= $rowNumber ?></td>
-                    <td><?= $row['name'] ?></td>
-                    <td><?= $row['nett_price'] ?> PLN</td>
-                    <!-- TODO w zależności od ustawień wyświetlamy cenę netto lub brutto -->
+                    <td><?= $row['street'] ?> <?= $row['street_number'] ?>, pokój <?= $row['room_number'] ?></td>
+                    <td><?= $row['phone'] ?></td>
                 </tr>
-
             <?php }
         } else {
-            echo('<div class="alert alert-danger text-center" role="alert">Brak produktów do wyświetlenia</div>');
+            echo('<div class="alert alert-danger text-center" role="alert">Brak adresów do wyświetlenia</div>');
         }
         ?>
         </tbody>
     </table>
+    <a href="#link" class="btn btn-primary btn-block" role="button">Dodaj adres</a>
 </div>
 
 <footer>

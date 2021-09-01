@@ -10,7 +10,7 @@ session_start();
         ?>
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="/pages/products.php">Produkty</a>
-            <a class="p-2 text-dark" href="#">Adresy</a>
+            <a class="p-2 text-dark" href="/pages/addresses.php">Adresy</a>
             <!-- <a class="p-2 text-dark" href="#">Historia</a> TODO w przyszłości -->
             <a class="p-2 text-dark" href="#">Konto</a>
             <a class="p-2 text-dark" href="#">Koszyk</a>
