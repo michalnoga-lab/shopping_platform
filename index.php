@@ -8,6 +8,7 @@ session_start();
 // TODO readme.md zmienić na dockera
 // TODO wyłączyć we wszystkich plikach raportowanie błędów
 // TODO specjalna biblioteka do sanitization danych rejestracji i logowania
+// TODO zamieniam wszystkie error na msg ???
 ?>
 
 <!doctype html>

@@ -13,7 +13,7 @@ session_start();
 </head>
 
 <body>
-<script defer src="../static/js/register/input-validation.js"></script>
+<script defer src="../static/js/register/register.validation.js"></script>
 <div class="container">
     <div class="row">
         <?php

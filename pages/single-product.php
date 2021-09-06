@@ -37,6 +37,7 @@ session_start();
                 <p>VAT: <?= $product['vat'] ?> %</p>
                 <p>Cena brutto: <?= $product['gross_price'] ?> PLN</p>
                 <hr>
+                <!-- TODO JS walidacja wprowadzonej ilości -->
                 <div class="form-group">
                     <label for="quantity"></label>
                     <input type="number" class="form-control" id="quantity" placeholder="Podaj ilość">

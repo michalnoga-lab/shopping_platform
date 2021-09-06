@@ -26,12 +26,10 @@ CREATE TABLE `products`
 
 CREATE TABLE addresses
 (
-    `id`            int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `user_id`       int(11)                            NOT NULL,
-    `street`        varchar(255)                       NOT NULL,
-    `street_number` varchar(255)                       NOT NULL,
-    `room_number`   varchar(255)                       NOT NULL,
-    `phone`         varchar(255)                       NOT NULL
+    `id`      int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    `user_id` int(11)                            NOT NULL,
+    `street`  varchar(255)                       NOT NULL,
+    `phone`   varchar(255)                       NOT NULL
 );
 
 CREATE TABLE company
@@ -62,14 +60,14 @@ VALUES ('3c', 'Product 3', 'Product description 3', 100.00, 23, 123.00, 'code2',
 INSERT INTO products (auction_number, name, description, nett_price, vat, gross_price, optima_code, ean)
 VALUES ('4d', 'Product 4', 'Product description 4', 100.00, 23, 123.00, 'code2', 67890);
 
-INSERT INTO addresses (user_id, street, street_number, room_number, phone)
-VALUES (1, 'Street 1', '22a', 'room 1', '123456');
+INSERT INTO addresses (user_id, street, phone)
+VALUES (1, 'Street 1', '123456');
 
-INSERT INTO addresses (user_id, street, street_number, room_number, phone)
-VALUES (1, 'Street 2', '22a', 'room 2', '123456');
+INSERT INTO addresses (user_id, street, phone)
+VALUES (1, 'Street 2', '123456');
 
-INSERT INTO addresses (user_id, street, street_number, room_number, phone)
-VALUES (2, 'Street for user 2', 'user 2 data', 'room 2', '123456');
+INSERT INTO addresses (user_id, street, phone)
+VALUES (2, 'Street for user 2', '123456');
 
 # INSERT INTO users (username, email, password, role)
 # VALUES ('user', 'user@gmail.com', '$2y$10$DgPcQ1AGo..ZOR1b1w/KKup0U7/KFXJtjSAM5w3WT.hLGyJdeFp4i',

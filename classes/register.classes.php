@@ -42,7 +42,6 @@ class Register extends Dbh
             header('location: ../pages/register.php?error=email_in_db');
             exit();
         }
-
         $stmt = null;
     }
 }

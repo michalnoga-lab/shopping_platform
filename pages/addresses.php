@@ -18,40 +18,53 @@ session_start();
 </header>
 
 <div class="container">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col" style="width: 10%">#</th>
-            <th scope="col" style="width 70%">Adres</th>
-            <th scope="col" style="width: 20%">Telefon</th>
-        </tr>
-        </thead>
-        <tbody>
+    <div class="row">
         <?php
-        include_once '../classes/dbh.classes.php';
+        if (isset($_GET['error'])) {
+            $errorCheck = $_GET['error'];
 
-        $user_id = $_SESSION['id'];
-        $sql = "SELECT * FROM addresses WHERE user_id = '$user_id'";
-        $result = mysqli_query($connection, $sql);
-        $resultCheck = mysqli_num_rows($result);
-
-        if ($resultCheck > 0) {
-            $rowNumber = 0;
-            while ($row = mysqli_fetch_assoc($result)) {
-                $rowNumber += 1; ?>
-                <tr>
-                    <td><?= $rowNumber ?></td>
-                    <td><?= $row['street'] ?> <?= $row['street_number'] ?>, pokój <?= $row['room_number'] ?></td>
-                    <td><?= $row['phone'] ?></td>
-                </tr>
-            <?php }
-        } else {
-            echo('<div class="alert alert-danger text-center" role="alert">Brak adresów do wyświetlenia</div>');
+            if ($errorCheck === 'address_added') {
+                echo('<div class="alert alert-success text-center" role="alert">Adres poprawnie dodany</div>');
+            } elseif ($errorCheck === 'connection') {
+                echo('<div class="alert alert-danger text-center" role="alert">Błąd połączenia</div>');
+            }
         }
         ?>
-        </tbody>
-    </table>
-    <a href="#link" class="btn btn-primary btn-block" role="button">Dodaj adres</a>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col" style="width: 10%">#</th>
+                <th scope="col" style="width 70%">Adres</th>
+                <th scope="col" style="width: 20%">Telefon</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            include_once '../classes/dbh.classes.php';
+
+            $user_id = $_SESSION['id'];
+            $sql = "SELECT * FROM addresses WHERE user_id = '$user_id'";
+            $result = mysqli_query($connection, $sql);
+            $resultCheck = mysqli_num_rows($result);
+
+            if ($resultCheck > 0) {
+                $rowNumber = 0;
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $rowNumber += 1; ?>
+                    <tr>
+                        <td><?= $rowNumber ?></td>
+                        <td><?= $row['street'] ?></td>
+                        <td><?= $row['phone'] ?></td>
+                    </tr>
+                <?php }
+            } else {
+                echo('<div class="alert alert-danger text-center" role="alert">Brak adresów do wyświetlenia</div>');
+            }
+            ?>
+            </tbody>
+        </table>
+        <a href="add-address.php" class="btn btn-primary btn-block" role="button">Dodaj adres</a>
+    </div>
 </div>
 
 <footer>

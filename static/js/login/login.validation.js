@@ -33,6 +33,7 @@ const setSuccess = element => {
     inputControl.classList.remove('error');
 }
 
+// TODO rozpisać walidację np. zbyt długi wprowadzony ciąg itd
 const validateInputs = () => {
     const emailValue = email.value;
     const passwordValue = password.value;
