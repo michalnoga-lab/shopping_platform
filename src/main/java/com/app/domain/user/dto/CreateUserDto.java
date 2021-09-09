@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 /**
  * CreateUserDto class
  * Returns created user
@@ -44,20 +42,4 @@ public class CreateUserDto {
      * Current user password confirmation
      */
     String passwordConfirmation;
-
-    /**
-     * Date and time of account creation
-     */
-    LocalDateTime createdAt;
-
-    /**
-     * IP address used to crate account
-     */
-    String accountCreationIp;
-
-    /**
-     * IP address used for last log into application
-     * Same as accountCreationIP on user creation
-     */
-    String lastLoginIp;
 }

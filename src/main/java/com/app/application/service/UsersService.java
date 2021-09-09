@@ -1,5 +1,8 @@
 package com.app.application.service;
 
+import com.app.domain.user.dto.CreateUserDto;
+import com.app.domain.user.dto.CreateUserResponseDto;
+import com.app.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -7,6 +10,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UsersService {
 
+    private final UserRepository userRepository;
 
-    // TODO
+    public CreateUserResponseDto createUser(CreateUserDto createUserDto) {
+
+
+        // TODO
+        return CreateUserResponseDto.builder().build();
+    }
+
 }

@@ -58,7 +58,7 @@ public class User {
     String accountCreationIp;
 
     /**
-     * IP address used for last log into application
+     * IP address used for last login into application
      */
     String lastLoginIp;
 

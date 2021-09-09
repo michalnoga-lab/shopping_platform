@@ -14,11 +14,6 @@ import java.util.List;
 @Transactional
 public class CartService {
 
-    private final CartRepository cartRepository;
-    private final VerificationTokenRepository verificationTokenRepository;
 
-//    public List<GetCartDto> findAll() {
-//
-//    }
     // TODO
 }
