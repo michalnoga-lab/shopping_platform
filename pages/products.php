@@ -17,42 +17,40 @@ session_start();
 </header>
 
 <div class="container">
-    <div class="row">
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th scope="col" style="width: 10%">#</th>
-                <th scope="col" style="width 70%">Nazwa</th>
-                <th scope="col" style="width: 20%">Cena</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php
-            include_once '../classes/dbh.classes.php';
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col" style="width: 10%">#</th>
+            <th scope="col" style="width 70%">Nazwa</th>
+            <th scope="col" style="width: 20%">Cena</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        include_once '../classes/dbh.classes.php';
 
-            $sql = "SELECT * FROM products;";
-            $result = mysqli_query($connection, $sql);
-            $resultCheck = mysqli_num_rows($result);
+        $sql = "SELECT * FROM products;";
+        $result = mysqli_query($connection, $sql);
+        $resultCheck = mysqli_num_rows($result);
 
-            if ($resultCheck > 0) {
-                $rowNumber = 0;
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $rowNumber += 1; ?>
-                    <tr onclick="window.location='product-single.php?id='+<?= $row['id'] ?>">
-                        <td><?= $rowNumber ?></td>
-                        <td><?= $row['name'] ?></td>
-                        <td><?= $row['nett_price'] ?> PLN</td>
-                        <!-- TODO w zależności od ustawień wyświetlamy cenę netto lub brutto -->
-                    </tr>
+        if ($resultCheck > 0) {
+            $rowNumber = 0;
+            while ($row = mysqli_fetch_assoc($result)) {
+                $rowNumber += 1; ?>
+                <tr onclick="window.location='product-single.php?id='+<?= $row['id'] ?>">
+                    <td><?= $rowNumber ?></td>
+                    <td><?= $row['name'] ?></td>
+                    <td><?= $row['nett_price'] ?> PLN</td>
+                    <!-- TODO w zależności od ustawień wyświetlamy cenę netto lub brutto -->
+                </tr>
 
-                <?php }
-            } else {
-                echo('<div class="alert alert-danger text-center" role="alert">Brak produktów do wyświetlenia</div>');
-            }
-            ?>
-            </tbody>
-        </table>
-    </div>
+            <?php }
+        } else {
+            echo('<div class="alert alert-danger text-center" role="alert">Brak produktów do wyświetlenia</div>');
+        }
+        ?>
+        </tbody>
+    </table>
 </div>
 
 <footer>
