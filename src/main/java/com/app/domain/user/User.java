@@ -96,7 +96,7 @@ public class User {
      *
      * @return GetUserAuthentication
      */
-    public GetUserAuthentication toGetAuthenticationDto() {
+    public GetUserAuthentication toGetUserAuthentication() {
         return GetUserAuthentication
                 .builder()
                 .email(email)
@@ -111,7 +111,7 @@ public class User {
      *
      * @return GetUserAuthorization
      */
-    public GetUserAuthorization toGetAuthorizationDto() {
+    public GetUserAuthorization toGetAuthorization() {
         return GetUserAuthorization
                 .builder()
                 .email(email)

@@ -106,7 +106,7 @@ public class UserTests {
                 .enabled(false)
                 .build();
 
-        GetUserAuthentication userAfterChange = user.toGetAuthenticationDto();
+        GetUserAuthentication userAfterChange = user.toGetUserAuthentication();
 
         assertThat(userAfterChange).isEqualTo(expectedUser);
     }
@@ -133,7 +133,7 @@ public class UserTests {
                 .email("email")
                 .build();
 
-        GetUserAuthorization userAfterChange = user.toGetAuthorizationDto();
+        GetUserAuthorization userAfterChange = user.toGetAuthorization();
 
         assertThat(userAfterChange).isEqualTo(expectedUser);
     }
