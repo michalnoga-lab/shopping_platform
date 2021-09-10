@@ -1,7 +1,7 @@
 package com.app.infrastructure.security.service;
 
 import com.app.domain.user.repository.UserRepository;
-import com.app.infrastructure.exceptions.AppSecurityException;
+import com.app.infrastructure.security.exceptions.AppSecurityException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

@@ -1,4 +1,4 @@
-package com.app.infrastructure.exceptions;
+package com.app.infrastructure.security.exceptions;
 
 public class AppSecurityException extends RuntimeException {
 
