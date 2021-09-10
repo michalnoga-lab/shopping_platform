@@ -1,0 +1,7 @@
+tokens:
+  access-token:
+    expiration-time-ms: 30000 # TODO
+  refresh-token:
+    expiration-time-ms: 30000 #TODO
+
+
