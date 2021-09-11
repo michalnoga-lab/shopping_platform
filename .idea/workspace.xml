@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4efbe8ea-b2dc-46dc-9231-fc5dac6e0773" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/products.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/dbh.classes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/login-controller.classes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/login.classes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/register-controller.classes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/register.classes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/raw_page.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/login.inc.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +26,11 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ComposerRunConfigurationType" factoryName="Composer Script">
+      <method v="2" />
+    </configuration>
   </component>
   <component name="TaskManager">
     <servers />
