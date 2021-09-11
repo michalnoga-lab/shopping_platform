@@ -20,6 +20,19 @@ session_start();
 
 <div class="container">
     <div class="row">
+        <?php
+        if (isset($_GET['error'])) {
+            $errorCheck = $_GET['error'];
+
+            if ($errorCheck == 'empty_input') {
+                echo('<div class="alert alert-danger text-center" role="alert">Nie wszystkie pola są wypełnione</div>');
+            } elseif ($errorCheck === 'invalid_street') {
+                echo('<div class="alert alert-danger text-center" role="alert">Pole adresu nie zostało prawidłowo wypełnione</div>');
+            } elseif ($errorCheck == 'invalid_phone') {
+                echo('<div class="alert alert-danger text-center" role="alert">Pole numeru telefonu nie zostało prawidłowo wypełnione</div>');
+            }
+        }
+        ?>
         <form action="/includes/add-address.inc.php" method="post" id="form">
             <div class="form-floating mb-3 input-control">
                 <input type="text" class="form-control" id="street" name="street" placeholder="Adres dostawy">

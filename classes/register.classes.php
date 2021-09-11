@@ -22,7 +22,7 @@ class Register extends Dbh
         }
     }
 
-    public function saveUser($username, $email, $password)
+    protected function saveUser($username, $email, $password)
     {
         $logger = new Logger();
 

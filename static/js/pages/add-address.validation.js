@@ -13,7 +13,9 @@ form.addEventListener('submit', e => {
     if (!(isStreetValid && isPhoneValid)) {
         e.preventDefault();
     }
-})
+});
+
+// TODO wyciągnąć tą metodę do innej klasy
 
 const setError = (element, message) => {
     const inputControl = element.parentElement;
@@ -43,7 +45,7 @@ const validateInputs = () => {
         isStreetValid = false;
     } else {
         setSuccess(street);
-        isEmailValid = true;
+        isStreetValid = true;
     }
 
     if (phoneValue === '' || phoneValue.length < 1 || phoneValue.length > 250) {
