@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 /**
  * User class
- * Represents user purchasing auction products
+ * Represents User purchasing auction products
  */
 @NoArgsConstructor
 @AllArgsConstructor

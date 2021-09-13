@@ -20,6 +20,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
 
+/**
+ * App Web Configuration
+ */
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class AppWebConfig extends WebSecurityConfigurerAdapter {

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 /**
  * GetUserDto class
- * Returns User as DTO
+ * Represents User as DTO
  *
  * @see com.app.domain.user.User
  */

@@ -5,6 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Refresh token class
+ * Represents refresh token as DTO
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
