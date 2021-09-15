@@ -5,4 +5,4 @@ session_start();
 session_unset();
 session_destroy();
 
-header('location: ../index.php?error=logged_out'); // TODO komunikat wylogowania
+header('location: ../index.php?error=logged_out'); // TODO logs
