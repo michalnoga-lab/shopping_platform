@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4efbe8ea-b2dc-46dc-9231-fc5dac6e0773" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/classes/dbh.classes.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/login-controller.classes.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/login.classes.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/register-controller.classes.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/register.classes.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/raw_page.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/login.inc.php" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/includes/log.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/dbh.classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/dbh.classes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/database/example_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/static/database/example_data.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
