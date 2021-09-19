@@ -15,5 +15,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class RefreshTokenDto {
 
+    /**
+     * Token payload
+     */
     private String token;
 }
