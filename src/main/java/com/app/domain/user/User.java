@@ -115,6 +115,7 @@ public class User {
         return GetUserAuthorization
                 .builder()
                 .email(email)
+                .role(role)
                 .build();
     }
 
