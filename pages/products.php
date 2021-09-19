@@ -29,21 +29,21 @@ session_start();
         <?php
         include_once '../classes/dbh.classes.php';
 
-        $sql = "SELECT * FROM products;";
-        $result = mysqli_query($connection, $sql);
-        $resultCheck = mysqli_num_rows($result);
+        $stmt = $connection->prepare('SELECT * FROM products;');
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $products = $result->fetch_all(MYSQLI_ASSOC);
+        $rowNumber = 0;
 
-        if ($resultCheck > 0) {
-            $rowNumber = 0;
-            while ($row = mysqli_fetch_assoc($result)) {
+        if ($products > 0) {
+            foreach ($products as $product) {
                 $rowNumber += 1; ?>
-                <tr onclick="window.location='product-single.php?id='+<?= $row['id'] ?>">
+                <tr onclick="window.location='product-single.php?id='+<?= $product['id'] ?>">
                     <td><?= $rowNumber ?></td>
-                    <td><?= $row['name'] ?></td>
-                    <td><?= $row['nett_price'] ?> PLN</td>
+                    <td><?= $product['name'] ?></td>
+                    <td><?= $product['nett_price'] ?> PLN</td>
                     <!-- TODO w zależności od ustawień wyświetlamy cenę netto lub brutto -->
                 </tr>
-
             <?php }
         } else {
             echo('<div class="alert alert-danger text-center" role="alert">Brak produktów do wyświetlenia</div>');
