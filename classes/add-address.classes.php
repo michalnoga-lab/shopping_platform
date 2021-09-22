@@ -13,7 +13,7 @@ class AddAddress extends Dbh
         $stmt = $this->connect()->prepare('INSERT INTO addresses (user_id, street, phone) VALUES (?, ?, ?);');
         if ($stmt->execute(array($_SESSION['id'], $street, $phone))) {
             $stmt = null;
-            $logger->systemEvent('Address added by user with email ' . $_SESSION['email']);
+            $logger->systemEvent('Delivery address added');
         } else {
             header('location: ../pages/addresses.php?error=connection');
             exit();
