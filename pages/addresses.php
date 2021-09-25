@@ -34,8 +34,9 @@ session_start();
             <thead>
             <tr>
                 <th scope="col" style="width: 10%">#</th>
-                <th scope="col" style="width 70%">Adres</th>
-                <th scope="col" style="width: 20%">Telefon</th>
+                <th scope="col" style="width: 60%">Adres</th>
+                <th scope="col" style="width: 25    %">Telefon</th>
+                <th scope="col" style="width: 5%">Usuń</th>
             </tr>
             </thead>
             <tbody>
@@ -55,6 +56,7 @@ session_start();
                         <td><?= $rowNumber ?></td>
                         <td><?= $row['street'] ?></td>
                         <td><?= $row['phone'] ?></td>
+                        <td><!-- TODO przycisk usuwania adresu --></td>
                     </tr>
                 <?php }
             } else {
