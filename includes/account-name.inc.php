@@ -8,8 +8,18 @@ if (isset($_POST['submit'])) {
     $id = $_SESSION['id'];
     $location = 'location: ../pages/account.php?info=';
 
+    if (!preg_match('/^[a-zA-Z0-9\s_-]{0,200}$/', $username)) {
+        header($location . 'invalid_name');
+        exit();
+    }
+
     if (strlen($username) < 1) {
         header($location . 'short_name');
+        exit();
+    }
+
+    if (strlen($username) > 200) {
+        header($location . 'long_name');
         exit();
     }
 

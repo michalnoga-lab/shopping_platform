@@ -42,23 +42,34 @@ const validateInputs = () => {
     const emailValue = email.value.trim();
     const passwordValue = password.value;
     const passwordConfirmationValue = passwordConfirmation.value;
+    const usernamePattern = /[a-zA-Z0-9\s-_]{0,200}/;
+    const emailPattern = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
 
-    if (usernameValue === '' || usernameValue.length < 1 || usernameValue.length > 200) {
+    if (!usernamePattern.test(usernameValue)) {
+        setError(username, 'Dozwolone są tylko litery, cyfry i spacja');
+    }
+
+    if (usernameValue === '' || usernameValue.length < 1) {
         setError(username, 'Proszę wprowadzić nazwę użytkownika');
-        isUsernameValid = false;
-    } else {
-        setSuccess(username);
-        isUsernameValid = true;
     }
 
-    // TODO walidacja email pod konkretną firmę
-    if (!emailValue.match(/(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@[*[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+]*/) || emailValue.length > 200) {
-        setError(email, 'Proszę wprowadzić prawidłowy adres email');
-        isEmailValid = false;
-    } else {
-        setSuccess(email);
-        isEmailValid = true;
+    if (usernameValue.length > 200) {
+        setError(username, 'Maksymalna długość nazwy użytkownika to 200 znaków');
     }
+
+    if (!emailPattern.test(emailValue)) {
+        setError(email, 'Podano nieprawidłowy email');
+    }
+
+    if (emailValue === '' || emailValue.length < 1) {
+        setError(email, 'Proszę wprowadzić adres email');
+    }
+
+    if (emailValue.length > 200) {
+        setError(email, 'Maksymalna długość adresu email to 200 znaków');
+    }
+
+    // TODO zacząć od hasła
 
     if (passwordValue.length < 8 || passwordValue.length > 200) {
         setError(password, 'Minimalna długość hasła to 8 znaków');
@@ -82,5 +93,25 @@ const validateInputs = () => {
     } else {
         setSuccess(passwordConfirmation);
         isPasswordConfirmationValid = true;
+    }
+
+    if (!usernamePattern.test(usernameValue) ||
+        usernameValue === '' ||
+        usernameValue.length < 1 ||
+        usernameValue.length > 200) {
+        isUsernameValid = false;
+    } else {
+        isUsernameValid = true;
+        setSuccess(username);
+    }
+
+    if (!emailPattern.test(emailValue ||
+        emailValue === '' ||
+        emailValue.length < 1 ||
+        emailValue.length > 200)) {
+        isEmailValid = false;
+    } else {
+        isEmailValid = true;
+        setSuccess(email);
     }
 }

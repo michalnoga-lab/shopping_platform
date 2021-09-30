@@ -11,7 +11,6 @@ form.addEventListener('input', () => {
 
 form.addEventListener('submit', e => {
     if (!(isPasswordValid && isPasswordConfirmationValid)) {
-        alert(passwordConfirmation.value);
         e.preventDefault();
     }
 });

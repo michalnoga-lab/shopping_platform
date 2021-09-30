@@ -14,11 +14,9 @@ session_start();
 
 <body>
 <script defer src="../static/js/account/password-validation.js"></script>
-
 <header>
     <?php include_once('../static/elements/header.php') ?>
 </header>
-
 
 <div class="container">
     <h3>Zmiana hasła</h3>

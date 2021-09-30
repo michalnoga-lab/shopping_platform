@@ -8,16 +8,15 @@ session_start();
 <html lang="pl">
 <head>
     <?php include_once('../static/elements/head.inc.php'); ?>
+    <link href="../static/css/add-address.css" rel="stylesheet"/>
     <title>Prima Platforma</title>
 </head>
 
 <body>
-
+<script defer src="../static/js/account/name-validation.js"></script>
 <header>
     <?php include_once('../static/elements/header.php') ?>
 </header>
-
-<!-- TODO usunąć wszędzie row !!! -->
 
 <div class="container">
     <h3>Zmiana nazwy</h3>
@@ -37,6 +36,7 @@ session_start();
             <div class="form-floating mb-3 input-control">
                 <input type="text" class="form-control" id="name" name="name" placeholder="Nowa nazwa użytkownika">
                 <label for="name">Nowa nazwa użytkownika</label>
+                <div class="error"></div>
             </div>
             <button class="btn btn-primary btn-block" type="submit" id="submit" name="submit">Zmień nazwę użytkownika
             </button>

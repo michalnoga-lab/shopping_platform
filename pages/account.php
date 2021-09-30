@@ -28,6 +28,12 @@ session_start();
             echo('<div class="alert alert-success text-center" role="alert">Hasło zostało zaktualizowane</div>');
         } elseif ($infoCheck === 'different_passwords') {
             echo('<div class="alert alert-danger text-center" role="alert">Hasło i potwierdzenie hasła nie są takie same</div>');
+        } elseif ($infoCheck === 'invalid_name') {
+            echo('<div class="alert alert-danger text-center" role="alert">Dozwolone są tylko litery, cyfry i spacja</div>');
+        } elseif ($infoCheck === 'short_name') {
+            echo('<div class="alert alert-danger text-center" role="alert">Minimalna długość nazwy użytkownika to 1 znak</div>');
+        } elseif ($infoCheck === 'long_name') {
+            echo('<div class="alert alert-danger text-center" role="alert">Maksymalna długość nazwy użytkownika to 200 znaków</div>');
         } elseif ($infoCheck === 'connection') {
             echo('<div class="alert alert-danger text-center" role="alert">Błąd połączenia</div>');
         }
