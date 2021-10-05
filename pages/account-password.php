@@ -13,7 +13,7 @@ session_start();
 </head>
 
 <body>
-<script defer src="../static/js/account/password.validation.js"></script>
+<script defer src="../static/js/account/password-validation.js"></script>
 
 <header>
     <?php include_once('../static/elements/header.php') ?>

@@ -40,21 +40,42 @@ const validateInputs = () => {
 
     if (passwordValue.length < 8) {
         setError(password, 'Minimalna długość hasła to 8 znaków');
-        isPasswordValid = false;
-    } else {
-        setSuccess(password);
-        isPasswordValid = true;
     }
 
     if (passwordConfirmationValue.length < 8) {
         setError(passwordConfirmation, 'Minimalna długość hasła to 8 znaków');
-        isPasswordConfirmationValid = false;
-    } else {
-        setSuccess(passwordConfirmation);
-        isPasswordConfirmationValid = true;
     }
 
-    // TODO maksymalne długości hasła komunikat
-    // TODO czy hasła są takie same walidacja
-    // TODO ogólna podsumowująca wszystkie walidacje metoda dla wszystkich JS
+    if (passwordValue.length > 200) {
+        setError(password, 'Maksymalna długość hasła to 200 znaków');
+    }
+
+    if (passwordConfirmationValue.length > 200) {
+        setError(passwordConfirmation, 'Maksymalna długość hasła to 200 znaków');
+    } else {
+        setSuccess(passwordConfirmation);
+    }
+
+    if (passwordValue !== passwordConfirmationValue) {
+        setError(password, 'Hasło i potwierdzenie hasła nie są takie same');
+        setError(passwordConfirmation, 'Hasło i potwierdzenie hasła nie są takie same');
+    }
+
+    if (passwordValue.length < 8 ||
+        passwordValue.length > 200 ||
+        passwordValue !== passwordConfirmationValue) {
+        isPasswordValid = false;
+    } else {
+        isPasswordValid = true;
+        setSuccess(password);
+    }
+
+    if (passwordConfirmationValue.length < 8 ||
+        passwordConfirmationValue.length > 200 ||
+        passwordValue !== passwordConfirmationValue) {
+        isPasswordConfirmationValid = false;
+    } else {
+        isPasswordConfirmationValid = true;
+        setSuccess(passwordConfirmation);
+    }
 }
