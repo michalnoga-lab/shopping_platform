@@ -16,24 +16,24 @@ session_start();
 <script defer src="../static/js/register/validation.js"></script>
 <div class="container">
     <?php
-    if (isset($_GET['error'])) {
-        $errorCheck = $_GET['error'];
+    if (isset($_GET['info'])) {
+        $infoCheck = $_GET['info'];
 
-        if ($errorCheck === 'empty_input') {
+        if ($infoCheck === 'empty_input') {
             echo '<div class="alert alert-danger text-center" role="alert">Nie podano danych do rejestracji</div>';
-        } elseif ($errorCheck === 'invalid_username') {
+        } elseif ($infoCheck === 'invalid_username') {
             echo('<div class="alert alert-danger text-center" role="alert">Błędna nazwa użytkownika</div>');
-        } elseif ($errorCheck === 'invalid_email') {
+        } elseif ($infoCheck === 'invalid_email') {
             echo('<div class="alert alert-danger text-center" role="alert">Błędny adres email</div>');
-        } elseif ($errorCheck === 'invalid_password') {
+        } elseif ($infoCheck === 'invalid_password') {
             echo('<div class="alert alert-danger text-center" role="alert">Błędne hasło</div>');
-        } elseif ($errorCheck === 'invalid_confirmation') {
+        } elseif ($infoCheck === 'invalid_confirmation') {
             echo('<div class="alert alert-danger text-center" role="alert">Błędne potwierdzenie hasła</div>');
-        } elseif ($errorCheck === 'different_passwords') {
+        } elseif ($infoCheck === 'different_passwords') {
             echo('<div class="alert alert-danger text-center" role="alert">Podane hasła nie są takie same</div>');
-        } elseif ($errorCheck === 'email_in_db') {
+        } elseif ($infoCheck === 'email_in_db') {
             echo('<div class="alert alert-danger text-center" role="alert">Taki email jest już w użyciu. Proszę wybrać inny</div>');
-        } elseif ($errorCheck === 'connection') {
+        } elseif ($infoCheck === 'connection') {
             echo('<div class="alert alert-danger text-center" role="alert">Błąd połączenia</div>');
         }
     }
