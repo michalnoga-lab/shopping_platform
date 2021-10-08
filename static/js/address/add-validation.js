@@ -15,8 +15,6 @@ form.addEventListener('submit', e => {
     }
 });
 
-// TODO wyciągnąć tą metodę do innej klasy
-
 const setError = (element, message) => {
     const inputControl = element.parentElement;
     const errorDisplay = inputControl.querySelector('.error');
@@ -35,24 +33,52 @@ const setSuccess = element => {
     inputControl.classList.remove('error');
 }
 
-// TODO rozpisać walidację np. zbyt długi wprowadzony ciąg itd
 const validateInputs = () => {
     const streetValue = street.value;
     const phoneValue = phone.value;
+    const pattern = /^[a-zA-Z0-9\s-_]{0,200}$/;
 
-    if (streetValue === '' || streetValue.length < 1 || streetValue.length > 250) {
-        setError(street, 'Proszę wprowadzić adres dostawy');
-        isStreetValid = false;
-    } else {
-        setSuccess(street);
-        isStreetValid = true;
+    if (!pattern.test(streetValue)) {
+        setError(street, 'Dozwolone znaki do użycia to litery, cyfry i spacja');
     }
 
-    if (phoneValue === '' || phoneValue.length < 1 || phoneValue.length > 250) {
+    if (streetValue === '' || streetValue.length < 1) {
+        setError(street, 'Proszę wprowadzić adres dostawy');
+    }
+
+    if (streetValue.length > 200) {
+        setError(street, 'Maksymalna długość adresu to 200 znaków');
+    }
+
+    if (!pattern.test(phoneValue)) {
+        setError(phone, 'Dozwolone znaki do użycia to litery, cyfry i spacja');
+    }
+
+    if (phoneValue === '' || phoneValue.length < 1) {
         setError(phone, 'Proszę wprowadzić telefon kontaktowy');
+    }
+
+    if (phoneValue.length > 200) {
+        setError(phone, 'Maksymalna długość telefonu kontaktowego to 200 znaków');
+    }
+
+    if (streetValue === '' ||
+        streetValue.length < 1 ||
+        streetValue.length > 200 ||
+        !pattern.test(streetValue)) {
+        isStreetValid = false;
+    } else {
+        isStreetValid = true;
+        setSuccess(street);
+    }
+
+    if (phoneValue === '' ||
+        phoneValue.length < 1 ||
+        phoneValue.length > 250 ||
+        !pattern.test(phoneValue)) {
         isPhoneValid = false
     } else {
-        setSuccess(phone);
         isPhoneValid = true;
+        setSuccess(phone);
     }
 }

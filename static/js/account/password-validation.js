@@ -52,8 +52,6 @@ const validateInputs = () => {
 
     if (passwordConfirmationValue.length > 200) {
         setError(passwordConfirmation, 'Maksymalna długość hasła to 200 znaków');
-    } else {
-        setSuccess(passwordConfirmation);
     }
 
     if (passwordValue !== passwordConfirmationValue) {

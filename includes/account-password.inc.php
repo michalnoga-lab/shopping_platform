@@ -9,6 +9,9 @@ if (isset($_POST['submit'])) {
     $passwordConfirmation = $_POST['passwordConfirmation'];
     $location = 'location: ../pages/account.php?info=';
 
+    // TODO sprawdzanie długości haseł
+    // TODO PDO
+
     if ($password !== $passwordConfirmation) {
         header($location . 'different_passwords');
         exit();

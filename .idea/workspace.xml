@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="4efbe8ea-b2dc-46dc-9231-fc5dac6e0773" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/account-password.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/account-password.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/account/password.validation.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/account/password-validation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/account-password.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/account-password.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/address-single-add.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/address-single-add.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/account/password-validation.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/account/password-validation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/address/add.validation.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/address/add-validation.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +40,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last.edited.regexp" value="ada3   dasfs dfss" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
     <property name="vue.rearranger.settings.migration" value="true" />
