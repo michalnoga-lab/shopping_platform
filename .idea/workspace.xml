@@ -5,65 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db82517e-efb4-47a4-a000-d63f22f31c55" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TEMP-DELLLL/assets/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TEMP-DELLLL/css/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TEMP-DELLLL/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TEMP-DELLLL/js/scripts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/css/font-awesome.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/css/font-awesome.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/css/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/FontAwesome.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/fontawesome-webfont.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/fontawesome-webfont.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/fontawesome-webfont.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/fontawesome-webfont.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/fontawesome-webfont.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/bootstrap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/less/animated.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/less/bordered-pulled.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/less/core.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/less/fixed-width.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/less/font-awesome.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/less/icons.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/less/larger.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/less/list.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/less/mixins.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/less/path.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/less/rotated-flipped.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/less/screen-reader.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/less/stacked.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/less/variables.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/scss/_animated.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/scss/_bordered-pulled.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/scss/_core.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/scss/_fixed-width.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/scss/_icons.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/scss/_larger.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/scss/_list.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/scss/_mixins.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/scss/_path.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/scss/_rotated-flipped.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/scss/_screen-reader.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/scss/_stacked.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/scss/_variables.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/scss/font-awesome.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/tendering_platform_model.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/tendering_platform_model.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/CreateDb.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/component.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/header.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upload/product1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upload/product2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upload/product3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upload/product4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wget.exe" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +68,7 @@
       <workItem from="1633794689435" duration="1776000" />
       <workItem from="1633803954289" duration="1203000" />
       <workItem from="1633805320697" duration="664000" />
-      <workItem from="1633813419997" duration="3259000" />
+      <workItem from="1633813419997" duration="3574000" />
     </task>
     <servers />
   </component>
