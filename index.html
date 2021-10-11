@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,7 +42,7 @@
                     <li><a href="#cookies" class="smoothScroll">Cookies</a></li>
                     <li><a href="#rodo" class="smoothScroll">RODO</a></li>
                     <li><a href="#contact" class="smoothScroll">Kontakt</a></li>
-                    <li><a href="#login" class="smoothScroll">Logowanie</a></li>
+                    <li><a href="/login.php" class="smoothScroll">Logowanie</a></li>
 
                     <!--                    <li><a href="#portfolio" class="smoothScroll">COOKIES</a></li>-->
                 </ul>
@@ -59,7 +59,7 @@
                 <h1>Platforma zakupowa</h1>
                 <p>Zamawiaj towar rozkoszując się kawą ...</p>
                 <p>My zrobimy całą resztę</p>
-                <a href="#login" class="smoothScroll btn btn-lg">Zaczynamy!</a>
+                <a href="login.php" class="smoothScroll btn btn-lg">Zaczynamy!</a>
             </div>
         </header>
     </div>
@@ -306,17 +306,18 @@
 <!--</div>-->
 <!--&lt;!&ndash; container &ndash;&gt;-->
 
-<!-- ==== CONTACT ==== -->
 <div id="contact">
     <div class="container">
         <div class="row">
             <h2 class="centered">Kontakt</h2>
             <hr>
         </div>
+        <!-- TODO walidacja w JS -->
         <div class="row">
             <div class="col-md-7">
                 <p>Chcesz się z nami skontaktować?
                     <br>Nic prostszego - wypełnij poniższy formularz</p>
+                <!-- TODO podpiąć wysyłanie maila do formularza -->
                 <form id="contact-form" method="post" class="form" role="form">
                     <div class="row">
                         <div class="col-md-12 form-group">
