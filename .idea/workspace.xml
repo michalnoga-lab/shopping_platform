@@ -5,13 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db82517e-efb4-47a4-a000-d63f22f31c55" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/database/example_data.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/includes/db_config.inc.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/includes/login.inc.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/login.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/products.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/css/validation.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html_head.inc.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/includes/functions.inc.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/includes/register.inc.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/register.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c62ea75b-2fa0-4ac2-a174-2fd76f656e58.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c62ea75b-2fa0-4ac2-a174-2fd76f656e58.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/db_config.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/db_config.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/login.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/login.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/login.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +55,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect" value="MySQL" />
+    <property name="last.edited.regexp" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../tendering_malo_PHP_-DELLL" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="configurable.group.build" />
@@ -93,7 +97,10 @@
       <workItem from="1633875128662" duration="118000" />
       <workItem from="1633892426768" duration="4858000" />
       <workItem from="1633941161806" duration="7164000" />
-      <workItem from="1633981580110" duration="754000" />
+      <workItem from="1633981580110" duration="3012000" />
+      <workItem from="1634026930479" duration="5843000" />
+      <workItem from="1634063954328" duration="1844000" />
+      <workItem from="1634114533892" duration="5244000" />
     </task>
     <servers />
   </component>

@@ -1,4 +1,7 @@
 <?php
+// error_reporting(0);
+// TODO wyłączyć raportowanie błędów - wszystkie strony !!!
+
 //
 //include_once('includes/db_config.inc.php');
 //
@@ -37,23 +40,8 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Platforma zakupowa dla wybranych klientów">
-    <meta name="author" content="Michał Noga OBSIDO">
     <title>Platforma zakupowa | Logowanie</title>
-
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-
-    <link href="assets/css/styles.css" rel="stylesheet">
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/css/animate-custom.css" rel="stylesheet">
-    <script src="assets/js/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/js/modernizr.custom.js"></script>
-
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-
+    <?php include_once('html_head.inc.php'); ?>
 </head>
 
 <body>
@@ -63,22 +51,19 @@
             <h2 class="centered">Logowanie</h2>
             <hr>
         </div>
-        <script type="text/javascript">
-
-        </script>
         <div class="row centered">
             <div class="col-10">
                 <form id="login-form" method="post" class="form" role="form" action="includes/login.inc.php">
                     <div class="row">
                         <div class="col-md-12 form-group">
                             <label for="email"></label>
-                            <input class="form-control" id="email" name="email" placeholder="Podaj email" type="text"
-                                   required/> <!-- TODO regex -> pattern-->
+                            <input class="form-control input" id="email" name="email" placeholder="Podaj email"
+                                   type="text" required maxlength="200"/> <!-- TODO regex -> pattern-->
                         </div>
                         <div class="col-md-12 form-group">
                             <label for="password"></label>
                             <input class="form-control" id="password" name="password" placeholder="Podaj hasło"
-                                   type="password" required"/> <!-- TODO regex -->
+                                   type="password" required maxlength="200"/> <!-- TODO regex -->
                         </div>
                         <div class="col-md-12 form-group">
                             <button class="btn btn-lg" type="submit" name="submit">Logowanie</button>
