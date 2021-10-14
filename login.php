@@ -6,7 +6,7 @@
 <!doctype html>
 <html lang="pl">
 <head>
-    <?php include_once('static/head.inc.php') ?>
+    <?php include_once('includes/head.inc.php') ?>
     <title>Prima Platforma | Login</title>
     <link href="static/css/login.css" rel="stylesheet"/>
 </head>
@@ -61,7 +61,8 @@
                                     </div>
                                 </div>
                             </form>
-                            <form id="register-form" action="#" method="post" role="form" style="display: none;">
+                            <form id="register-form" action="includes/register/register.inc.php" method="post"
+                                  role="form" style="display: none;">
                                 <!-- TODO obsługa rejestracji -->
                                 <div class="form-group">
                                     <label for="username"></label>
