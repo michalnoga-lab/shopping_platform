@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
     $host = $_SERVER['HTTP_HOST'];
     // $uri = rtrim(dirname($_SERVER['PHP_SELF']), "/\\");
     // TODO kasujemy uri ???
-    $location = "location: http://" . $host . "/login.php?error=";
+    $location = "location: http://" . $host . "/index.php?error=";
     # TODO zrobić wszystkie header na HTTPS
 
     if (emptyInputEmail($email) !== false) {
@@ -63,7 +63,7 @@ if (isset($_POST['submit'])) {
     }
 
 } else {
-    header("location: ../login.php");
+    header("location: ../index.php");
     exit();
 }
  *

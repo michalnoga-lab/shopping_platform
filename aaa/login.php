@@ -25,7 +25,7 @@
 //        header("location:http://$host$uri/$extra");
 //        exit();
 //    } else {
-//        $extra = 'login.php';
+//        $extra = 'index.php';
 //        $user_ip = $_SERVER['REMOTE_ADDR'];
 //        $query = mysqli_query($connection, "INSERT INTO userlog(email,ip,event) VALUES ('$email','$user_ip',2)");
 //        $host = $_SERVER['HTTP_HOST'];

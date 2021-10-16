@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
     $host = $_SERVER['HTTP_HOST'];
     // $uri = rtrim(dirname($_SERVER['PHP_SELF']), "/\\");
     // TODO kasujemy uri ???
-    $location = "location: http://" . $host . "/login.php?error=";
+    $location = "location: http://" . $host . "/index.php?error=";
     # TODO zrobić wszystkie header na HTTPS
 
     if (emptyInputEmail($email) !== false) {
@@ -56,7 +56,7 @@ if (isset($_POST['submit'])) {
     }
 
 } else {
-    header("location: ../login.php");
+    header("location: ../index.php");
     exit();
 }
 
@@ -82,7 +82,7 @@ if (isset($_POST['submit'])) {
 //        header("location:http://$host$uri/$extra");
 //        exit();
 //    } else {
-//        $extra = 'login.php';
+//        $extra = 'index.php';
 //        $user_ip = $_SERVER['REMOTE_ADDR'];
 //        $query = mysqli_query($connection, "INSERT INTO userlog(email,ip,event) VALUES ('$email','$user_ip',2)");
 //        $host = $_SERVER['HTTP_HOST'];

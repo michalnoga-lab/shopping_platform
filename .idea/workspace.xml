@@ -5,12 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db82517e-efb4-47a4-a000-d63f22f31c55" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/includes/register/register.inc.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/security.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c62ea75b-2fa0-4ac2-a174-2fd76f656e58.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c62ea75b-2fa0-4ac2-a174-2fd76f656e58.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aaa/elements/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/static/elements/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aaa/elements/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/static/elements/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/head.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/head.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aaa/database/example_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/includes/database/example_data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aaa/includes/login.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/aaa/includes/login.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aaa/includes/register.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/aaa/includes/register.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aaa/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/aaa/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aaa/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/aaa/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/register/functions.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/register/functions.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/register/register.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/register/register.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/login.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +62,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect" value="MySQL" />
-    <property name="last.edited.regexp" value="" />
+    <property name="last.edited.regexp" value="Q11a12234wer23r423432" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="configurable.group.build" />
@@ -66,6 +73,7 @@
       <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\includes\database" />
       <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\includes" />
       <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\static" />
       <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\elements" />
@@ -73,7 +81,7 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="START" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/login.php">
+    <configuration name="START" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/index.php">
       <CommandLine>
         <PhpTestInterpreterSettings>
           <option name="interpreterName" value="PHP" />
@@ -107,7 +115,8 @@
       <workItem from="1634026930479" duration="5843000" />
       <workItem from="1634063954328" duration="1844000" />
       <workItem from="1634114533892" duration="7381000" />
-      <workItem from="1634197726605" duration="9642000" />
+      <workItem from="1634197726605" duration="9999000" />
+      <workItem from="1634408751100" duration="8042000" />
     </task>
     <servers />
   </component>
