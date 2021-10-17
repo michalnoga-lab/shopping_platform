@@ -5,14 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db82517e-efb4-47a4-a000-d63f22f31c55" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c62ea75b-2fa0-4ac2-a174-2fd76f656e58.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c62ea75b-2fa0-4ac2-a174-2fd76f656e58.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/includes/login/functions.inc.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/includes/login/login.inc.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/includes/register/responses.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/products.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/database/db_config.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/database/db_config.inc.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/database/example_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/includes/database/example_data.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/register/functions.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/register/functions.inc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/register/register.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/register/register.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +57,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect" value="MySQL" />
-    <property name="last.edited.regexp" value="Q11a12234wer23r423432" />
+    <property name="last.edited.regexp" value="adsfas@" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="configurable.group.build" />
@@ -112,7 +112,7 @@
       <workItem from="1634114533892" duration="7381000" />
       <workItem from="1634197726605" duration="9999000" />
       <workItem from="1634408751100" duration="8226000" />
-      <workItem from="1634492840994" duration="3349000" />
+      <workItem from="1634492840994" duration="7543000" />
     </task>
     <servers />
   </component>

@@ -10,18 +10,18 @@ CREATE TABLE `users`
     `password`      varchar(255)                       NOT NULL,
     `role`          varchar(255)                       NOT NULL,
     `created`       timestamp                          NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `updated`       timestamp                          NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `failed_logins` int(11)                                     DEFAULT 0
+    `created_ip`    varchar(255)                       NOT NULL,
+    `last_login_ip` varchar(255)                       NOT NULL,
+    `failed_logins` int(11)                            NOT NULL DEFAULT 0
 );
 
 CREATE TABLE `user_log`
 (
     `id`      int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `user_id` int(11)      DEFAULT NULL,
-    `ip`      varchar(255) DEFAULT NULL,
-    `login`   timestamp    DEFAULT CURRENT_TIMESTAMP,
-    `logout`  varchar(255) DEFAULT NULL,
-    `event`   int(11)      DEFAULT NULL
+    `user_id` int(11)                                     DEFAULT NULL,
+    `ip`      varchar(255)                                DEFAULT NULL,
+    `time`    timestamp                          NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `event`   int(11)                                     DEFAULT NULL
 );
 
 INSERT INTO users (username, email, password, role, created, updated)

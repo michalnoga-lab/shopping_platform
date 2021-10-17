@@ -14,7 +14,7 @@ function emptyInput($name, $email, $password, $passwordConfirmation)
 
 function invalidUsername($name)
 {
-    if (preg_match('/^[\s\p{L}]+$/', $name)) {
+    if (preg_match('/^[\s\p{L}]{1,200}$/', $name)) {
         return false;
     }
     return true;
@@ -22,7 +22,7 @@ function invalidUsername($name)
 
 function invalidEmail($email)
 {
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if (filter_var($email, FILTER_VALIDATE_EMAIL) && strlen($email) <= 200) {
         return false;
     }
     return true;
@@ -81,9 +81,11 @@ function createUser($connection, $name, $email, $password)
     $role = 'user';
     mysqli_stmt_bind_param($statement, 'ssss', $name, $email, $hashedPassword, $role);
     mysqli_stmt_execute($statement);
-    mysqli_stmt_close($statement);
+    mysqli_stmt_close($statement); // todo ip itd !!!!
 
     global $location;
     header($location . 'none');
     exit();
+
+    // TODO logs - register from with email when
 }

@@ -98,6 +98,8 @@
                     </div>
                 </div>
             </div>
+            <?php include_once('includes/register/responses.php');
+            displayResponseAlert($_GET['error']) ?>
         </div>
     </div>
 </div>
