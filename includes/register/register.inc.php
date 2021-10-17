@@ -12,6 +12,7 @@ if (isset($_POST['register-submit'])) {
     $password = $_POST['password'];
     $passwordConfirmation = $_POST['confirm-password'];
     $location = "location: http://" . $host . "/index.php?error=";    // TODO https
+    global $connection;
 
     if (emptyInput($name, $email, $password, $passwordConfirmation) !== false) {
         header($location . "empty_input");
@@ -43,9 +44,7 @@ if (isset($_POST['register-submit'])) {
         exit();
     }
 
-    createUser($connection, $name, $email, $password){
-
-    }
+    createUser($connection, $name, $email, $password);
 
 } else {
     header("location http://" . $host . "/index.php"); // TODO https

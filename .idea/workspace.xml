@@ -5,19 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db82517e-efb4-47a4-a000-d63f22f31c55" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/security.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/c62ea75b-2fa0-4ac2-a174-2fd76f656e58.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c62ea75b-2fa0-4ac2-a174-2fd76f656e58.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aaa/database/example_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/includes/database/example_data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aaa/includes/login.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/aaa/includes/login.inc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aaa/includes/register.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/aaa/includes/register.inc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aaa/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/aaa/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aaa/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/aaa/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/database/db_config.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/database/db_config.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/database/example_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/includes/database/example_data.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/register/functions.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/register/functions.inc.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/register/register.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/register/register.inc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/login.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +111,8 @@
       <workItem from="1634063954328" duration="1844000" />
       <workItem from="1634114533892" duration="7381000" />
       <workItem from="1634197726605" duration="9999000" />
-      <workItem from="1634408751100" duration="8042000" />
+      <workItem from="1634408751100" duration="8226000" />
+      <workItem from="1634492840994" duration="3349000" />
     </task>
     <servers />
   </component>

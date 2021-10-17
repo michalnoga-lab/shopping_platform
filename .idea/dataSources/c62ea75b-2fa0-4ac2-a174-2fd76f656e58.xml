@@ -165,7 +165,6 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <DefaultCasing>lower/lower</DefaultCasing>
     </root>
     <schema id="2" parent="1" name="information_schema">
-      <Current>1</Current>
       <Collation>utf8_general_ci</Collation>
     </schema>
     <schema id="3" parent="1" name="mysql">
@@ -178,6 +177,7 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <Collation>utf8_bin</Collation>
     </schema>
     <schema id="6" parent="1" name="platform">
+      <Current>1</Current>
       <Collation>utf8mb4_general_ci</Collation>
     </schema>
     <schema id="7" parent="1" name="shopping">
@@ -1351,7 +1351,7 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <SourceTextLength>4366</SourceTextLength>
       <Definer>root@localhost</Definer>
     </view>
-    <table id="366" parent="6" name="userlog"/>
+    <table id="366" parent="6" name="user_log"/>
     <table id="367" parent="6" name="users"/>
     <column id="368" parent="334" name="db_name">
       <Position>1</Position>
@@ -3074,7 +3074,12 @@ transaction_id</ColNames>
       <NotNull>1</NotNull>
       <DefaultExpression>current_timestamp()</DefaultExpression>
     </column>
-    <key id="687" parent="367" name="PRIMARY">
+    <column id="687" parent="367" name="failed_logins">
+      <Position>8</Position>
+      <DataType>int(11)|0s</DataType>
+      <DefaultExpression>0</DefaultExpression>
+    </column>
+    <key id="688" parent="367" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

@@ -1,6 +1,9 @@
 <?php
 // error_reporting(0); TODO enable
 
+$host = $_SERVER['HTTP_HOST'];
+$location = 'location: http://' . $host . '/index.php?error='; // TODO https
+
 function emptyInput($name, $email, $password, $passwordConfirmation)
 {
     if (empty($name) || empty($email) || empty($password) || empty($passwordConfirmation)) {
@@ -43,11 +46,12 @@ function passwordsMatch($password, $passwordConfirmation)
 
 function emailExists($connection, $email)
 {
-    $sql = "SELECT * FROM users WHERE username = ?;";
+    $sql = 'SELECT * FROM users WHERE email = ?;';
     $statement = mysqli_stmt_init($connection);
 
     if (!mysqli_stmt_prepare($statement, $sql)) {
-        header('location: http://' . $_SERVER["HTTP_HOST"] . 'index.php?error=db_connection_failed'); // TODO https
+        global $location;
+        header($location . 'db_connection_failed');
         exit();
     }
     mysqli_stmt_bind_param($statement, 's', $email);
@@ -65,5 +69,21 @@ function emailExists($connection, $email)
 
 function createUser($connection, $name, $email, $password)
 {
-// TODO
+    $sql = 'INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?);';
+    $statement = mysqli_stmt_init($connection);
+
+    if (!mysqli_stmt_prepare($statement, $sql)) {
+        global $location;
+        header($location . 'db_connection_failed');
+        exit();
+    }
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    $role = 'user';
+    mysqli_stmt_bind_param($statement, 'ssss', $name, $email, $hashedPassword, $role);
+    mysqli_stmt_execute($statement);
+    mysqli_stmt_close($statement);
+
+    global $location;
+    header($location . 'none');
+    exit();
 }
