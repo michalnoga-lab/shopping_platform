@@ -81,7 +81,9 @@ function createUser($connection, $name, $email, $password)
     $role = 'user';
     mysqli_stmt_bind_param($statement, 'ssss', $name, $email, $hashedPassword, $role);
     mysqli_stmt_execute($statement);
-    mysqli_stmt_close($statement); // todo ip itd !!!!
+    mysqli_stmt_close($statement);
+    // todo ip i data
+    // todo logs
 
     global $location;
     header($location . 'none');

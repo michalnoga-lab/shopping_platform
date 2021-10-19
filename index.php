@@ -9,6 +9,7 @@
     <?php include_once('includes/head.inc.php') ?>
     <title>Prima Platforma | Login</title>
     <link href="static/css/login.css" rel="stylesheet"/>
+    <link href="static/css/alert.css" rel="stylesheet"/>
 </head>
 <body>
 

@@ -4,15 +4,11 @@ CREATE DATABASE platform;
 
 CREATE TABLE `users`
 (
-    `id`            int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `username`      varchar(255)                       NOT NULL,
-    `email`         varchar(255)                       NOT NULL,
-    `password`      varchar(255)                       NOT NULL,
-    `role`          varchar(255)                       NOT NULL,
-    `created`       timestamp                          NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `created_ip`    varchar(255)                       NOT NULL,
-    `last_login_ip` varchar(255)                       NOT NULL,
-    `failed_logins` int(11)                            NOT NULL DEFAULT 0
+    `id`       int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    `username` varchar(255)                       NOT NULL,
+    `email`    varchar(255)                       NOT NULL,
+    `password` varchar(255)                       NOT NULL,
+    `role`     varchar(255)                       NOT NULL
 );
 
 CREATE TABLE `user_log`

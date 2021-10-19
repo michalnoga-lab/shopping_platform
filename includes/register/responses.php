@@ -39,6 +39,13 @@ function displayResponseAlert($response)
             <p>Wprowadzone hasła w polu hasło i powtórz hasło muszą być takie same.</p>
             </div>
             ';
+        } else if ($response === 'email_taken') {
+            echo '
+            <div class="alert alert-danger" role="alert">
+            <p>Zajęty adres!</p>
+            <p>Użytkownik o takim adresie email już istnieje. Proszę podać inny adres email.</p>
+            </div>
+            ';
         } else if ($response === 'none') {
             echo '
             <div class="alert alert-success" role="alert">
@@ -49,5 +56,3 @@ function displayResponseAlert($response)
         }
     }
 }
-
-// TODO https://getbootstrap.com/docs/4.0/components/alerts/ !!!

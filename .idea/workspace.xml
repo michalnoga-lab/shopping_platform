@@ -5,13 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db82517e-efb4-47a4-a000-d63f22f31c55" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/includes/login/functions.inc.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/includes/login/login.inc.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/includes/register/responses.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/products.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aaa/html_head.inc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aaa/includes/functions.inc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aaa/includes/login.inc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aaa/includes/register.inc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aaa/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aaa/login.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aaa/products.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aaa/register.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/database/example_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/includes/database/example_data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/head.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/head.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/login/functions.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/login/functions.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/login/login.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/login/login.inc.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/register/functions.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/register/functions.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/register/responses.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/register/responses.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -112,7 +120,8 @@
       <workItem from="1634114533892" duration="7381000" />
       <workItem from="1634197726605" duration="9999000" />
       <workItem from="1634408751100" duration="8226000" />
-      <workItem from="1634492840994" duration="7543000" />
+      <workItem from="1634492840994" duration="8837000" />
+      <workItem from="1634631413474" duration="3532000" />
     </task>
     <servers />
   </component>
