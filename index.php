@@ -84,8 +84,8 @@ session_start();
         <p>Coś nie działa, masz pomysł, sugestię co zmienić na platformie, potrzebujesz nowej
             funkcjonalności - napisz do nas - biuro@primakrakow.pl</p>
         <p>Kontakt telefoniczny: (12) 411 25 09, (12) 411 67 54</p>
-        <p>Sprawdź naszą politykę <a href='/pages/cookies.php'>Cookies</a></p>
-        <p>Sprawdź jak przetwarzamy dane <a href='/pages/rodo.php'>RODO</a></p>
+        <p>Sprawdź naszą politykę <a href='/src/pages/cookies.php'>Cookies</a></p>
+        <p>Sprawdź jak przetwarzamy dane <a href='/src/pages/rodo.php'>RODO</a></p>
     </div>
 </div>
 
