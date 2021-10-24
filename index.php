@@ -15,48 +15,15 @@
     <?php include_once('static/elements/header.php') ?>
 </header>
 
-<main class="info p-5 m-5">
-    <p>Platforma jest dostępna tylko dla klientów przetargowych, którzy mają podpisaną z nami umowę.</p>
-    <p>Coś nie działa, masz pomysł, sugestię co zmienić na platformie, potrzebujesz nowej
-        funkcjonalności - napisz do nas - biuro@primakrakow.pl</p>
-    <p>Kontakt telefoniczny: (12) 411 25 09, (12) 411 67 54</p>
-    <p>Sprawdź naszą politykę <a href='/pages/cookies.php'>Cookies</a></p>
-    <p>Sprawdź jak przetwarzamy dane <a href='/pages/rodo.php'>RODO</a></p>
-</main>
-
-
 <div class="col-12">
     <div class="h-100 p-5 bg-light border rounded-3">
-        <h2>Polityka RODO</h2>
-        <p> Informujemy, że administratorem Pani/Pana danych osobowych jest Firma Handlowa PRIMA z siedzibą
-            w Krakowie, ul. Półłanki 31G.</p>
-        <p> Pani/Pana dane osobowe będą przetwarzane w celu umożliwienia kontynuacji
-            współpracy pomiędzy Firmą Handlowa PRIMA a Panem/Panią oraz w celu marketingu bezpośredniego
-            realizowanego przez Firma Handlowa PRIMA. Przetwarzanie danych osobowych jest niezbędne do
-            realizacji wskazanych wyżej celów oraz odpowiadających tym celom prawnie uzasadnionych interesów
-            administratora. Podanie danych osobowych jest dobrowolne, jednak niezbędne do wykonywania w/w
-            czynności. Pomimo dobrowolności, konsekwencją niepodania danych osobowych będzie brak możliwości
-            wykonywania w/w czynności.</p>
-        <p> Podstawą prawną przetwarzania podanych przez Panią/Pana danych osobowych są przepisy art. 6 ust.
-            1 lit. b i f ROZPORZĄDZENIA PARLAMENTU EUROPEJSKIEGO I RADY (UE) 2016/679 z dnia 27 kwietnia
-            2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w
-            sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE, a w pozostałym
-            zakresie – udzielona przez Państwa zgoda.</p>
-        <p>Pani/Pan prawo do wniesienia skargi do organu nadzorczego w zakresie ochrony danych osobowych,
-            jeśli uzna Pani/Pan, że przetwarzanie danych osobowych przez Firmę Handlową PRIMA narusza
-            przepisy o ochronie danych osobowych. Przetwarzane przez nas Pani/Pana dane osobowe nie będą w
-            żadnym stopniu przekazywane do osób/Państw trzecich.</p>
-        <p>Przysługuje Pani/Panu prawo dostępu do treści swoich danych osobowych oraz prawo do ich
-            sprostowania, usunięcia lub ograniczenia przetwarzania, prawo do przenoszenia danych oraz prawo
-            do wniesienia sprzeciwu wobec ich przetwarzania w dowolnym momencie bez wpływu na zgodność z
-            prawem przetwarzania, którego dokonano na podstawie zgody przed jej cofnięciem. W zakresie, w
-            jakim wykorzystanie podanych przez Panią/Pana informacji opiera się na udzielonej przez
-            Panią/Pana zgodzie, ma Pani/Pan prawo do cofnięcia zgody w dowolnym momencie bez wpływu na
-            zgodność z prawem przetwarzania, którego dokonano na podstawie zgody przed jej cofnięciem.</p>
-        <p>Jeśli chce Pani/Pan zmienić zakres przetwarzanych przez nas danych, w tym wnieść sprzeciw lub
-            cofnąć swoją zgodę, prosimy o wysłanie wiadomości na adres e-mail: biuro@primakrakow.pl</p>
-
-        <a href="../index.php" class="btn btn-outline-secondary" type="button">Powrót do strony głównej</a>
+        <h2>O platformie</h2>
+        <p>Platforma jest dostępna tylko dla klientów przetargowych, którzy mają podpisaną z nami umowę.</p>
+        <p>Coś nie działa, masz pomysł, sugestię co zmienić na platformie, potrzebujesz nowej
+            funkcjonalności - napisz do nas - biuro@primakrakow.pl</p>
+        <p>Kontakt telefoniczny: (12) 411 25 09, (12) 411 67 54</p>
+        <p>Sprawdź naszą politykę <a href='/pages/cookies.php'>Cookies</a></p>
+        <p>Sprawdź jak przetwarzamy dane <a href='/pages/rodo.php'>RODO</a></p>
     </div>
 </div>
 
