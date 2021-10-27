@@ -5,17 +5,14 @@
 // todo if not logged in
 ?>
 
-<a href="/index.php" class="header-brand">prima</a>
-<nav>
-    <ul>
-        <li><a href="#">Produkty</a></li> <!-- TODO linki uaktywynić -->
-        <li><a href="#">Adresy</a></li>
-        <li><a href="#">Konto</a></li>
-        <!--        <li><a href="#" class="header-search">Szukaj</a></li>-->
-        <!--        <li><a href="#" class="header-cart">Koszyk</a></li>-->
-        <!--        <li><a href="#" class="header-login">Logowanie</a> </li>-->
-        <!--        <li><a href="#" class="header-register">Rejestracja</a></li>-->
-        <!--        <li><a href="#" class="header-logout">Wylogowanie</a></li>-->
-        <!-- TODO logowanie i wylogowywanie -->
-    </ul>
-</nav>
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <h5 class="my-0 mr-md-auto font-weight-normal">PRIMA</h5>
+    <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="#">Produkty</a>
+        <a class="p-2 text-dark" href="#">Adresy</a>
+        <a class="p-2 text-dark" href="#">Historia</a>
+        <a class="p-2 text-dark" href="#">Konto</a>
+    </nav>
+    <a class="btn btn-outline-success header-btn" href="/includes/login.php">Logowanie</a>
+    <a class="btn btn-outline-primary header-btn" href="#">Rejestracja</a>
+</div>

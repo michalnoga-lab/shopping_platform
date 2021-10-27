@@ -1,4 +1,0 @@
-<?php
-
-// TODO tutaj stopka ...
-

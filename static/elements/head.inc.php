@@ -10,18 +10,12 @@ error_reporting(0);
 
 <link href="/static/css/reset.css" rel="stylesheet"/>
 
-<link href='https://fonts.googleapis.com/css?family=Catamaran' rel='stylesheet'>
-
-<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
-<link href="/static/css/body.css" rel="stylesheet"/>
-<link href="/static/css/header.css" rel="stylesheet"/>
 <link href="/static/css/main.css" rel="stylesheet"/>
+<link href="/static/css/header.css" rel="stylesheet"/>
+<link href="/static/css/index.css" rel="stylesheet"/>
 <link href="/static/css/login.css" rel="stylesheet"/>
 <link href="/static/css/footer.css" rel="stylesheet"/>
 
