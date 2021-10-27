@@ -1,0 +1,17 @@
+main {
+    width: 100%;
+    height: calc(100vh - 100px);
+}
+
+main .products {
+    display: block;
+    vertical-align: middle;
+    width: 100%;
+}
+
+main .product-details {
+    margin: 16px 16px 0;
+    width: calc(100% - 32px);
+    height: 100px;
+    background-color: #888888; /* TODO uwaga na kolor tła */
+}

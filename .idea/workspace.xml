@@ -5,22 +5,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db82517e-efb4-47a4-a000-d63f22f31c55" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/PHP_PP/includes/login/functions.inc.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PHP_PP/includes/login/login.inc.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PHP_PP/includes/login/responses.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PHP_PP/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PHP_PP/login.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PHP_PP/register.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PHP_PP/static/css/login.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PHP_PP/static/css/registration.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PHP_PP/static/elements/footer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PHP_PP/static/elements/header.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/raw_page.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/body.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/footer.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/header.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/reset.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/elements/body.inc.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/elements/head.inc.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/includes/login.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/includes/logout.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/includes/products.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c62ea75b-2fa0-4ac2-a174-2fd76f656e58.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c62ea75b-2fa0-4ac2-a174-2fd76f656e58.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/tendering_platform_model.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/tendering_platform_model.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aaa/html_head.inc.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aaa/includes/functions.inc.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aaa/includes/login.inc.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aaa/includes/register.inc.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aaa/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aaa/login.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aaa/products.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aaa/register.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/database/example_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/includes/database/example_data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/head.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/head.inc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/login/functions.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/login/functions.inc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/login/login.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/login/login.inc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/register/functions.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/register/functions.inc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/register/responses.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/register/responses.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/database/db_config.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_PP/includes/database/db_config.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/database/example_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_PP/includes/database/example_data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/head.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_PP/includes/head.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/login/functions.inc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/login/login.inc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/register/functions.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_PP/includes/register/functions.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/register/register.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_PP/includes/register/register.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/register/responses.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_PP/includes/register/responses.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/products.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_PP/products.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/elements/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/static/elements/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/elements/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/static/elements/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_PP/static/js/login.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,20 +90,22 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect" value="MySQL" />
     <property name="last.edited.regexp" value="adsfas@" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/css" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="configurable.group.build" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\static\css" />
+      <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\includes\login" />
       <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\includes\database" />
-      <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\includes" />
+      <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\static\elements" />
+      <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\static\includes" />
+      <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\static\sass" />
       <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\static" />
-      <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\elements" />
       <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model" />
     </key>
   </component>
@@ -121,7 +147,11 @@
       <workItem from="1634197726605" duration="9999000" />
       <workItem from="1634408751100" duration="8226000" />
       <workItem from="1634492840994" duration="8837000" />
-      <workItem from="1634631413474" duration="3532000" />
+      <workItem from="1634631413474" duration="7640000" />
+      <workItem from="1634718780906" duration="8360000" />
+      <workItem from="1634730901240" duration="565000" />
+      <workItem from="1634843187444" duration="1687000" />
+      <workItem from="1635004838608" duration="12442000" />
     </task>
     <servers />
   </component>

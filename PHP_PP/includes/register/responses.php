@@ -1,7 +1,7 @@
 <?php
 // error_reporting(0) TODO
 
-function displayResponseAlert($response)
+function displayRegistrationResponseAlert($response)
 {
     if (isset($_GET['error'])) {
         if ($response === 'empty_input') {

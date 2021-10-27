@@ -16,5 +16,6 @@
     <orderEntry type="library" name="html5shiv" level="application" />
     <orderEntry type="library" name="respond" level="application" />
     <orderEntry type="library" name="jquery-1.11.1" level="application" />
+    <orderEntry type="library" name="bootstrap-combined.no-icons" level="application" />
   </component>
 </module>
