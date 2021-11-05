@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db82517e-efb4-47a4-a000-d63f22f31c55" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/rodo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/cookies.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cookies.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +59,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\pages" />
       <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\static\css" />
       <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\includes\login" />
       <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model" />
