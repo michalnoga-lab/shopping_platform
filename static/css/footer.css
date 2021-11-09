@@ -1,3 +1,13 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
 .footer {
     background-color: #0b2e13;
     /*TODO odsunąć od brzegów ekranu*/

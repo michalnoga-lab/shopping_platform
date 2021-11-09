@@ -1,3 +1,13 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
 .header-btn {
     margin: 3px;
 }

@@ -15,10 +15,13 @@
     <?php include_once('static/elements/header.php') ?>
 </header>
 
-<main class="main">
-
-    <p>tutaj tekst wprowadzajacy</p>
-    <!-- TODO  -->
+<main class="info p-5 m-5">
+    <p>Platforma jest dostępna tylko dla klientów przetargowych, którzy mają podpisaną z nami umowę.</p>
+    <p>Coś nie działa, masz pomysł, sugestię co zmienić na platformie, potrzebujesz nowej
+        funkcjonalności - napisz do nas - biuro@primakrakow.pl</p>
+    <p>Kontakt telefoniczny: (12) 411 25 09, (12) 411 67 54</p>
+    <p>Sprawdź naszą politykę <a href='/pages/cookies.php'>Cookies</a></p>
+    <p>Sprawdź jak przetwarzamy dane <a href='/pages/rodo.php'>RODO</a></p>
 </main>
 
 <footer>
