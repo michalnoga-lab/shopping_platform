@@ -13,6 +13,7 @@
         <a class="p-2 text-dark" href="#">Historia</a>
         <a class="p-2 text-dark" href="#">Konto</a>
     </nav>
-    <a class="btn btn-outline-success header-btn" href="/includes/login.php">Logowanie</a>
-    <a class="btn btn-outline-primary header-btn" href="#">Rejestracja</a>
+    <a class="btn btn-outline-success header-btn" href="/pages/login.php">Logowanie</a>
+    <a class="btn btn-outline-primary header-btn" href="/pages/register.php">Rejestracja</a>
+    <a class="btn btn-outline-danger header-btn" href="/pages/logout.php">Wyloguj</a>
 </div>

@@ -8,66 +8,53 @@
 <head>
     <?php include_once('includes/head.inc.php') ?>
     <title>Prima Platforma | Login</title>
-    <link href="static/css/login.css" rel="stylesheet"/>
+    <link href="/static/css/login.css" rel="stylesheet"/>
 </head>
 <body>
 
 <div class="container">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="panel panel-login">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <a href="#" class="active">Logowanie</a>
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card border-0 shadow rounded-3 my-5">
+                <div class="card-body p-4 p-sm-5">
+                    <h5 class="card-title text-center mb-5 fw-light fs-5">Sign In</h5>
+                    <form>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                            <label for="floatingInput">Email address</label>
                         </div>
-                        <div class="col-xs-6">
-                            <a href="register.php">Rejestracja</a>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                            <label for="floatingPassword">Password</label>
                         </div>
-                    </div>
-                    <hr>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <form id="login-form" action="#" method="post" role="form" style="display: block;">
-                                <div class="form-group">
-                                    <label for="email"></label>
-                                    <input type="email" name="email" id="email" class="form-control"
-                                           placeholder="Podaj email" value="">
-                                </div>
-                                <div class="form-group">
-                                    <label for="password"></label>
-                                    <input type="password" name="password" id="password"
-                                           class="form-control" placeholder="Podaj hasło" value="">
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-sm-offset-3">
-                                            <input type="submit" name="login-submit" id="login-submit" tabindex="4"
-                                                   class="form-control btn btn-login" value="Logowanie">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <!-- <div class="text-center">
-                                                <a href="#" tabindex="5" class="forgot-password">Przypomnienie hasła</a>
-                                            </div> -->
-                                            <!-- TODO funkcja przypominania hasła -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck">
+                            <label class="form-check-label" for="rememberPasswordCheck">
+                                Remember password
+                            </label>
                         </div>
-                    </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Sign
+                                in</button>
+                        </div>
+                        <hr class="my-4">
+                        <div class="d-grid mb-2">
+                            <button class="btn btn-google btn-login text-uppercase fw-bold" type="submit">
+                                <i class="fab fa-google me-2"></i> Sign in with Google
+                            </button>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-facebook btn-login text-uppercase fw-bold" type="submit">
+                                <i class="fab fa-facebook-f me-2"></i> Sign in with Facebook
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <script type="text/javascript" src="static/js/login.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

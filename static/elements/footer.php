@@ -4,15 +4,6 @@
 ?>
 
 <div class="pt-4 my-md-5 pt-md-5 border-top footer">
-
-    <script>
-        Holder.addTheme('thumb', {
-            bg: '#55595c',
-            fg: '#eceeef',
-            text: 'Thumbnail'
-        });
-    </script> <!-- TODO -->
-
     <div class="row">
         <div class="col-12 col-md">
             <img class="mb-2" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt=""
