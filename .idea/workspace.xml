@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4efbe8ea-b2dc-46dc-9231-fc5dac6e0773" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/static/css/password.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/account-name.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/account-name.inc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/address-remove.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/address-remove.inc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/account-name.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/account-name.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/account-password.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/account-password.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/account.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/account.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/account/name-validation.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/account/name-validation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/account/password-validation.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/account/password-validation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/register/validation.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/register/validation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/product-single.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/product-single.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/product/add-validation.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/product/add-validation.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +38,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last.edited.regexp" value="" />
+    <property name="last.edited.regexp" value="123436" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -72,7 +65,7 @@
       <workItem from="1640963469246" duration="8596000" />
       <workItem from="1641049474698" duration="8567000" />
       <workItem from="1641064826403" duration="3518000" />
-      <workItem from="1641144340064" duration="2771000" />
+      <workItem from="1641144340064" duration="5088000" />
     </task>
     <servers />
   </component>

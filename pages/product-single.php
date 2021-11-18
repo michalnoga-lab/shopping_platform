@@ -8,11 +8,12 @@ session_start();
 <html lang="pl">
 <head>
     <?php include_once('../static/elements/head.inc.php'); ?>
+    <link href="/static/css/add-address.css" rel="stylesheet"/>
     <title>Prima Platforma</title>
 </head>
 
 <body>
-
+<script defer src="../static/js/product/add-validation.js"></script>
 <header>
     <?php include_once('../static/elements/header.php') ?>
 </header>
@@ -30,7 +31,7 @@ session_start();
 
         if ($result > 0) {
             $product = $result->fetch_assoc(); ?>
-            <form>
+            <form action="" method="post" id="form"> <!-- TODO action -->
                 <h3><?= $product['name'] ?></h3>
                 <hr>
                 <p>Numer pozycji w przetargu: <?= $product['auction_number'] ?></p>
@@ -38,10 +39,10 @@ session_start();
                 <p>VAT: <?= $product['vat'] ?> %</p>
                 <p>Cena brutto: <?= $product['gross_price'] ?> PLN</p>
                 <hr>
-                <!-- TODO JS walidacja wprowadzonej ilości -->
-                <div class="form-group">
-                    <label for="quantity"></label>
-                    <input type="number" class="form-control" id="quantity" placeholder="Podaj ilość">
+                <div class="form-floating mb-3 input-control">
+                    <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Podaj ilość">
+                    <label for="quantity">Podaj ilość</label>
+                    <div class="error"></div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Dodaj do koszyka</button>
             </form>
