@@ -16,23 +16,26 @@
             <div class="card border-0 shadow rounded-3 my-5">
                 <div class="card-body p-4 p-sm-5">
                     <h5 class="card-title text-center mb-5 fw-light fs-5">Rejestracja</h5>
-                    <form>
+                    <!--  TODO sanityzacja danych rejestracji i logowania -->
+                    <form action="/includes/register.inc.php" method="post">
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="Adres email">
+                            <input type="email" class="form-control" id="floatingInput" name="email"
+                                   placeholder="Adres email">
                             <label for="floatingInput">Adres email</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Hasło">
+                            <input type="password" class="form-control" id="floatingPassword" name="password"
+                                   placeholder="Hasło">
                             <label for="floatingPassword">Hasło</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control" id="floatingPasswordConfirmation"
-                                   placeholder="Powtórz hasło">
+                                   name="passwordConfirmation" placeholder="Powtórz hasło">
                             <label for="floatingPasswordConfirmation">Powtórz hasło</label>
                         </div>
                         <div class="d-grid">
-                            <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Zarejestruj
-                                konto
+                            <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit" id="submit"
+                                    name="submit">Zarejestruj konto
                             </button>
                         </div>
                         <hr class="my-4">

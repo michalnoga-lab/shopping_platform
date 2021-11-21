@@ -5,7 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db82517e-efb4-47a4-a000-d63f22f31c55" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/classes/dbh.classes.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/classes/login.classes.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/classes/register.classes.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/includes/login.inc.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/includes/register.inc.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/database/db_config.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/database/example_data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/register.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,14 +60,15 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect" value="MySQL" />
-    <property name="last.edited.regexp" value="adsfas@" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pages" />
+    <property name="last.edited.regexp" value="michal@gmai.com.1111" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/database" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="configurable.group.build" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\static\database" />
       <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\pages" />
       <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\static\css" />
       <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\includes\login" />
@@ -119,6 +130,7 @@
       <workItem from="1636824938122" duration="31000" />
       <workItem from="1636825038959" duration="2786000" />
       <workItem from="1636828166005" duration="610000" />
+      <workItem from="1637522706419" duration="5433000" />
     </task>
     <servers />
   </component>
