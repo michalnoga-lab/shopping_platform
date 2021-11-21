@@ -17,6 +17,15 @@ session_start();
 </header>
 
 <div class="container">
+    <?php
+    if (isset($_GET['info'])) {
+        $infoCheck = $_GET['info'];
+
+        if ($infoCheck == 'cart_saved') {
+            echo('<div class="alert alert-success text-center" role="alert">Produkt dodany do koszyka</div>');
+        }
+    }
+    ?>
     <div class="row">
         <h3>Moje produkty</h3>
         <hr>

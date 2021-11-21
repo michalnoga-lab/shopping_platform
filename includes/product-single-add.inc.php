@@ -1,0 +1,17 @@
+<?php
+// error_reporting(0); // TODO enable
+
+if (isset($_POST('submit'))) {
+
+    $productId = $_POST['product-id'];
+    $quantity = $_POST['quantity'];
+
+    include '../classes/dbh.classes.php';
+    include '../classes/cart.classes.php';
+    include '../classes/cart.controller.classes.php';
+
+    $cart = new CartController();
+    $cart->update();
+
+    header('location: ../pages/products.php?info=cart_saved');
+}

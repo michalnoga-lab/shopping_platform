@@ -42,6 +42,7 @@ session_start();
                 <div class="form-floating mb-3 input-control">
                     <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Podaj ilość">
                     <label for="quantity">Podaj ilość</label>
+                    <input type="hidden" value="<?= $id ?>" id="product-id" name="product-id"/>
                     <div class="error"></div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Dodaj do koszyka</button>
