@@ -7,7 +7,7 @@ if (isset($_POST['submit'])) {
     $password = $_POST['password'];
     $passwordConfirmation = $_POST['passwordConfirmation'];
 
-    include '../classes/register.classes.php';
+    include '../classes/register-controller.classes.php';
     $register = new RegisterController($email, $password, $passwordConfirmation);
 
 

@@ -1,59 +1,24 @@
 <?php
 // error_reporting(0); TODO
 
-class RegisterController
+class Register extends Dbh
 {
-    private $email;
-    private $password;
-    private $passwordConfirmation;
-
-    public function __construct($email, $password, $passwordConfirmation)
+    protected function isEmailNotInDb($email)
     {
-        $this->email = $email;
-        $this->password = $password;
-        $this->passwordConfirmation = $passwordConfirmation;
-    }
+        $stmt = $this->connect()->prepare('SELECT email FROM users WHERE email = ?;');
 
-    private function isInputNotEmpty()
-    {
-        $result = false;
+        if (!$stmt->execute(array($email))) {
+            $stmt = null;
+            header("location: ../index.php?error=stmt_failed"); // TODO przekazywanie błędu
+            exit();
+        }
 
-        // TODO czy z dolarkami ???
-        // TODO osobne metody dla każdego pola ???
-        if (empty($this->email) || empty($this->password) || empty($this->passwordConfirmation)) {
+        $result = null; // TODO do poprawy
+        if ($stmt->rowCount() > 0) {
             $result = false;
+        } else {
+            $result = true;
         }
-        $result = true;
-
-        // TODO do poprawy!
-        return result;
-    }
-
-    // TODO do poprawy !!!
-    private function isEmailValid()
-    {
-        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            $result = false;
-        }
-        return true;
-    }
-
-    // TODO do poprawy !!!
-    private function isPasswordValid()
-    {
-        $result = false;
-
-        if (!preg_match('/^[a-zA-Z0-9@\.]+$/', $this->password)) {
-            $result = false;
-        }
-        return true;
-    }
-
-    private function arePasswordsEqual()
-    {
-        if ($this->password !== $this->passwordConfirmation) {
-            return false;
-        }
-        return true;
+        return $result;
     }
 }

@@ -3,7 +3,7 @@
 
 class Dbh
 {
-    private function connect()
+    protected function connect()
     {
         try {
             $username = "root";
