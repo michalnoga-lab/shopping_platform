@@ -29,13 +29,6 @@ session_start();
                                    placeholder="Hasło">
                             <label for="floatingPassword">Hasło</label>
                         </div>
-
-                        <!--
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck">
-                            <label class="form-check-label" for="rememberPasswordCheck">Zapamiętaj mnie</label>
-                        </div> TODO zapamiętaj mnie !!!
-                        -->
                         <div class="d-grid">
                             <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit" name="submit"
                                     id="submit">Logowanie

@@ -1,6 +1,5 @@
 <?php
 // error_reporting(0); // TODO
-// TODO walidacja czy pola nie są puste i mają jakiś tekst
 
 class LoginController extends Login
 {
@@ -16,15 +15,18 @@ class LoginController extends Login
 
     public function doLogin()
     {
-        if ($this->emptyInput() == false) { // TODO do poprawy
-            header('location: ../index.php?error=empty_input');
+        if ($this->areAllFieldsFilled() == false) {
+            header('location: ../index.php?error=empty_input'); // TODO komunikat walidujący
             exit();
         }
         $this->loginUser($this->email, $this->password);
     }
 
-    private function emptyInput()
+    private function areAllFieldsFilled()
     {
+        if (empty(empty($this->email) || empty($this->password))) {
+            return false;
+        }
         return true;
     }
 }

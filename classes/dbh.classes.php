@@ -4,7 +4,7 @@
 class Dbh
 {
     protected function connect()
-        // TODO tworzenie bazy jeżeli nie istnieje
+        // TODO tworzenie bazy jeżeli nie istnieje i dodawanie admina
     {
         try {
             $username = "root";
