@@ -24,6 +24,11 @@ class RegisterController extends Register
             exit();
         }
 
+        if ($this->isUsernameValid() == false) {
+            header($this->location . 'invalid_username'); // TODO obsłużyć ten komunikat na stronie głównej
+            exit();
+        }
+
         if ($this->isEmailValid() == false) {
             header($this->location . 'invalid_email'); // TODO obsłużyć ten komunikat na stronie głównej
             exit();
@@ -42,8 +47,6 @@ class RegisterController extends Register
         $this->saveUser($this->username, $this->email, $this->password);
     }
 
-    // TODO czy robię inne metody walidujące ???
-
     private function areAllFieldsFilled()
     {
         if (empty($this->username) | empty($this->email) || empty($this->password) || empty($this->passwordConfirmation)) {
@@ -54,7 +57,10 @@ class RegisterController extends Register
 
     private function isUsernameValid()
     {
-        // TODO całe
+        if (!preg_match('/^[a-zA-Z0-9\s_-]{0,200}$/', $this->username)) {
+            return false;
+        }
+        return true;
     }
 
     private function isEmailValid()
@@ -67,7 +73,7 @@ class RegisterController extends Register
 
     private function isPasswordValid()
     {
-        if (strlen($this->password) < 8 | strlen($this->password) > 256) {
+        if (strlen($this->password) < 8 | strlen($this->password) > 200) {
             return false;
         }
         return true;
