@@ -19,6 +19,11 @@
                     <!--  TODO sanityzacja danych rejestracji i logowania -->
                     <form action="/includes/register.inc.php" method="post">
                         <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" name="username"
+                                   placeholder="Imię i nazwisko">
+                            <label for="floatingInput">Imię i Nazwisko</label>
+                        </div>
+                        <div class="form-floating mb-3">
                             <input type="email" class="form-control" id="floatingInput" name="email"
                                    placeholder="Adres email">
                             <label for="floatingInput">Adres email</label>

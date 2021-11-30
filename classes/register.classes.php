@@ -21,4 +21,18 @@ class Register extends Dbh
         }
         return $result;
     }
+
+    protected function saveUser($username, $email, $password)
+    {
+        $stmt = $this->connect()->prepare('INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, 0);');
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+        if ($stmt->execute(array($username, $email, $hashed_password))) {
+            $stmt = null;
+            header('location: ../index.php?error=stmt_failed'); // TODO czy kod błedu poprawny i obsłużony ???
+            exit();
+        }
+
+        $stmt = null;
+    }
 }

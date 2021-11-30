@@ -4,17 +4,22 @@
 class RegisterController
 {
     private $email;
+    private $username;
     private $password;
     private $passwordConfirmation;
+    private $location = 'location: ../index.php?error=';
 
-    public function __construct($email, $password, $passwordConfirmation)
+    public function __construct($email, $username, $password, $passwordConfirmation)
     {
         $this->email = $email;
+        $this->username = $username;
         $this->password = $password;
         $this->passwordConfirmation = $passwordConfirmation;
     }
 
-    private function isInputNotEmpty()
+    // TODO czy robię inne metody walidujące ???
+
+    private function isInputEmpty()
     {
         $result = false;
 
@@ -25,8 +30,13 @@ class RegisterController
         }
         $result = true;
 
-        // TODO do poprawy!
-        return result;
+        // TODO do poprawy bo jest zmiana nazwy metody!
+        return $result;
+    }
+
+    private function isUsernameValid()
+    {
+        // TODO całe
     }
 
     // TODO do poprawy !!!
@@ -43,7 +53,8 @@ class RegisterController
     {
         $result = false;
 
-        if (!preg_match('/^[a-zA-Z0-9@\.]+$/', $this->password)) {
+        // TODO może ważna jest tylko długość, a nie jakie znaki ???
+        if (!preg_match('/^[a-zA-Z0-9@\\.]+$/', $this->password)) {
             $result = false;
         }
         return true;
@@ -56,4 +67,31 @@ class RegisterController
         }
         return true;
     }
+
+    private function registerUser()
+    {
+        if ($this->isInputEmpty() == false) {
+            header($this->location . 'empty_input'); // TODO obsłużyć ten komunikat na stronie głównej
+            exit();
+        }
+
+        if ($this->isEmailValid() == false) {
+            header($this->location . 'invalid_email'); // TODO obsłużyć ten komunikat na stronie głównej
+            exit();
+        }
+
+        if ($this->isPasswordValid() == false) {
+            header($this->location . 'invalid_password'); // TODO obsłużyć ten komunikat na stronie głównej
+            exit();
+        }
+
+        if ($this->arePasswordsEqual() == false) {
+            header($this->location . 'different_passwords'); // TODO obsłużyć ten komunikat na stronie głównej
+            exit();
+        }
+
+        $this->saveUser($this->username, $this->email, $this->password);
+        // TODO nie znajduje metody !!!
+    }
+
 }

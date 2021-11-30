@@ -3,13 +3,17 @@
 
 if (isset($_POST['submit'])) {
 
+    $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $passwordConfirmation = $_POST['passwordConfirmation'];
 
+    include '../classes/dbh.classes.php';
+    include '../classes/register.classes.php';
     include '../classes/register-controller.classes.php';
-    $register = new RegisterController($email, $password, $passwordConfirmation);
 
+    $register = new RegisterController($username, $email, $password, $passwordConfirmation);
+    $register->saveUser();
 
-
+    header('location: ../index.php?error=none');
 }
