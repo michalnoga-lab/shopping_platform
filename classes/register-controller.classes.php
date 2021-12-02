@@ -59,20 +59,16 @@ class RegisterController extends Register
 
     private function isEmailValid()
     {
-        if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             return false;
         }
         return true;
     }
 
-    // TODO do poprawy !!!
     private function isPasswordValid()
     {
-        $result = false;
-
-        // TODO może ważna jest tylko długość, a nie jakie znaki ???
-        if (!preg_match('/^[a-zA-Z0-9@\\.]+$/', $this->password)) {
-            $result = false;
+        if (strlen($this->password) < 8 | strlen($this->password) > 256) {
+            return false;
         }
         return true;
     }
