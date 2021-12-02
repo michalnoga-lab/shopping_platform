@@ -19,7 +19,7 @@ class RegisterController extends Register
 
     public function registerUser()
     {
-        if ($this->isInputEmpty() == false) {
+        if ($this->areAllFieldsFilled() == false) {
             header($this->location . 'empty_input'); // TODO obsłużyć ten komunikat na stronie głównej
             exit();
         }
@@ -44,19 +44,12 @@ class RegisterController extends Register
 
     // TODO czy robię inne metody walidujące ???
 
-    private function isInputEmpty()
+    private function areAllFieldsFilled()
     {
-        $result = false;
-
-        // TODO czy z dolarkami ???
-        // TODO osobne metody dla każdego pola ???
-        if (empty($this->email) || empty($this->password) || empty($this->passwordConfirmation)) {
-            $result = false;
+        if (empty($this->username) | empty($this->email) || empty($this->password) || empty($this->passwordConfirmation)) {
+            return false;
         }
-        $result = true;
-
-        // TODO do poprawy bo jest zmiana nazwy metody!
-        return $result;
+        return true;
     }
 
     private function isUsernameValid()
@@ -64,11 +57,10 @@ class RegisterController extends Register
         // TODO całe
     }
 
-    // TODO do poprawy !!!
     private function isEmailValid()
     {
-        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            $result = false;
+        if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            return false;
         }
         return true;
     }
