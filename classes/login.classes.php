@@ -7,7 +7,7 @@ class Login extends Dbh
     {
         $stmt = $this->connect()->prepare('SELECT password FROM users WHERE email = ?;');
 
-        if (!$stmt->execute(array($email, $password))) {
+        if (!$stmt->execute(array($email))) {
             $stmt = null;
             header('location: ../index.php?error=stmt_failed'); // TODO obsługa błedu
             exit();
