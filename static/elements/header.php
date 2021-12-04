@@ -1,6 +1,6 @@
 <?php
 // error_reporting(0); TODO
-
+session_start();
 // todo if logged in
 // todo if not logged in
 ?>

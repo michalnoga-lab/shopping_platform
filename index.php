@@ -1,6 +1,7 @@
 <?php
 // error_reporting(0);
 // TODO
+session_start();
 ?>
 
 <!doctype html>

@@ -1,5 +1,6 @@
 <?php
 // TODO errors
+session_start();
 ?>
 
 <!doctype html>
