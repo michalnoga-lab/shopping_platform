@@ -8,7 +8,7 @@ class Dbh
     {
         try {
             $username = "root";
-            $password = "root";
+            $password = "";
             return new PDO('mysql:host=localhost;dbname=platform', $username, $password);
         } catch (PDOException $e) {
             print "Error!: " . $e->getMessage() . "<br/>";

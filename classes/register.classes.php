@@ -22,7 +22,7 @@ class Register extends Dbh
         return $result;
     }
 
-    protected function saveUser($username, $email, $password)
+    public function saveUser($username, $email, $password)
     {
         $stmt = $this->connect()->prepare('INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, 0);');
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);

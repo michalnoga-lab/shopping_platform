@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
     include '../classes/register-controller.classes.php';
 
     $register = new RegisterController($username, $email, $password, $passwordConfirmation);
-    $register->saveUser();
+    $register->registerUser();
 
     header('location: ../index.php?error=none');
 }
