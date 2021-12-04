@@ -1,4 +1,5 @@
 <?php
+// error_reporting(0); // TODO
 // TODO walidacja czy pola nie są puste i mają jakiś tekst
 
 class LoginController extends Login
@@ -13,13 +14,13 @@ class LoginController extends Login
         $this->password = $password;
     }
 
-    public function loginUser()
+    public function doLogin()
     {
         if ($this->emptyInput() == false) { // TODO do poprawy
             header('location: ../index.php?error=empty_input');
             exit();
         }
-        $this->login($this->email, $this->password);
+        $this->loginUser($this->email, $this->password);
     }
 
     private function emptyInput()
