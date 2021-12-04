@@ -17,26 +17,28 @@ session_start();
             <div class="card border-0 shadow rounded-3 my-5">
                 <div class="card-body p-4 p-sm-5">
                     <h5 class="card-title text-center mb-5 fw-light fs-5">Rejestracja</h5>
+
                     <!--  TODO sanityzacja danych rejestracji i logowania -->
+
                     <form action="/includes/register.inc.php" method="post">
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="floatingInput" name="username"
-                                   placeholder="Imię i nazwisko">
+                                   placeholder="Imię i nazwisko" required>
                             <label for="floatingInput">Imię i Nazwisko</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control" id="floatingInput" name="email"
-                                   placeholder="Adres email">
+                                   placeholder="Adres email" required>
                             <label for="floatingInput">Adres email</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control" id="floatingPassword" name="password"
-                                   placeholder="Hasło">
+                                   placeholder="Hasło" required>
                             <label for="floatingPassword">Hasło</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control" id="floatingPasswordConfirmation"
-                                   name="passwordConfirmation" placeholder="Powtórz hasło">
+                                   name="passwordConfirmation" placeholder="Powtórz hasło" required>
                             <label for="floatingPasswordConfirmation">Powtórz hasło</label>
                         </div>
                         <div class="d-grid">

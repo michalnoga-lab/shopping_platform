@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
 
     include '../classes/dbh.classes.php';
     include '../classes/login.classes.php';
-    include '../classes/login-controller. classes.php';
+    include '../classes/login-controller.classes.php';
 
     $login = new LoginController($email, $password);
     $login->doLogin();

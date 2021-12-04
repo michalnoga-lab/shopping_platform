@@ -19,13 +19,7 @@ class Login extends Dbh
             exit();
         }
 
-        //$password_hashed = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $user = $stmt->fetch();
-
-        // TODO del
-        $stmt2 = $this->connect()->prepare('INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, 0);');
-        $stmt2->execute(array('qqqqqq', $user[0], 'after password check'));
-
         $check_passwords = password_verify($password, $user[3]);
 
         if ($check_passwords == false) {
