@@ -69,30 +69,25 @@ const validateInputs = () => {
         setError(email, 'Maksymalna długość adresu email to 200 znaków');
     }
 
-    // TODO zacząć od hasła
-
-    if (passwordValue.length < 8 || passwordValue.length > 200) {
+    if (passwordValue.length < 8) {
         setError(password, 'Minimalna długość hasła to 8 znaków');
-        isPasswordValid = false;
-    } else {
-        setSuccess(password);
-        isPasswordValid = true;
     }
 
-    if (passwordConfirmationValue.length < 8 || passwordConfirmationValue.length > 200) {
+    if (passwordValue.length > 200) {
+        setError(password, 'Maksymalna długość hasła to 200 znaków');
+    }
+
+    if (passwordConfirmationValue.length < 8) {
         setError(passwordConfirmation, 'Minimalna długość hasła to 8 znaków');
-        isPasswordConfirmationValid = false;
-    } else {
-        setSuccess(passwordConfirmation);
-        isPasswordConfirmationValid = true;
     }
 
-    if (passwordValue !== passwordConfirmationValue) {
-        setError(passwordConfirmation, 'Wprowadzone hasła muszą być takie same');
-        isPasswordConfirmationValid = false;
-    } else {
-        setSuccess(passwordConfirmation);
-        isPasswordConfirmationValid = true;
+    if (passwordConfirmationValue.length > 200) {
+        setError(passwordConfirmation, 'Maksymalna długość hasła to 200 znaków');
+    }
+
+    if (passwordValue.length > 8 && passwordConfirmationValue.length > 8 && (passwordValue !== passwordConfirmationValue)) {
+        setError(password, 'Hasło i potwierdzenie hasła muszą być takie same');
+        setError(passwordConfirmation, 'Hasło i potwierdzenie hasła muszą być takie same');
     }
 
     if (!usernamePattern.test(usernameValue) ||
@@ -113,5 +108,29 @@ const validateInputs = () => {
     } else {
         isEmailValid = true;
         setSuccess(email);
+    }
+
+    if (passwordValue.length < 8 ||
+        passwordValue.length > 200 ||
+        passwordValue !== passwordConfirmationValue) {
+        isPasswordValid = false;
+        isPasswordConfirmationValid = false;
+    } else {
+        isPasswordValid = true;
+        isPasswordConfirmationValid = true;
+        setSuccess(password);
+        setSuccess(passwordConfirmation);
+    }
+
+    if (passwordConfirmationValue.length < 8 ||
+        passwordConfirmationValue.length > 200 ||
+        passwordValue !== passwordConfirmationValue) {
+        isPasswordValid = false;
+        isPasswordConfirmationValid = false;
+    } else {
+        isPasswordValid = true;
+        isPasswordConfirmationValid = true;
+        setSuccess(password);
+        setSuccess(passwordConfirmation);
     }
 }
