@@ -15,9 +15,6 @@ error_reporting(0);
 
 <link href="/static/css/main.css" rel="stylesheet"/>
 <link href="/static/css/header.css" rel="stylesheet"/>
-<link href="/static/css/index.css" rel="stylesheet"/>
-<link href="/static/css/login.css" rel="stylesheet"/>
-<link href="/static/css/register.css" rel="stylesheet"/>
 <link href="/static/css/footer.css" rel="stylesheet"/>
 
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>

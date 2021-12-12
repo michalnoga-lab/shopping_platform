@@ -11,3 +11,8 @@ html {
 .header-btn {
     margin: 3px;
 }
+
+.plain {
+    text-decoration: none;
+    background: #1d2124;
+}
