@@ -5,8 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db82517e-efb4-47a4-a000-d63f22f31c55" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/static/css/register.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/register/input-validation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c62ea75b-2fa0-4ac2-a174-2fd76f656e58.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c62ea75b-2fa0-4ac2-a174-2fd76f656e58.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/login-controller.classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/login-controller.classes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/register-controller.classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/register-controller.classes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/register.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/elements/head.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/static/elements/head.inc.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +43,9 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
   <component name="ProjectId" id="1yxm82mCNGJSDDAUBmHrEYfXrXn" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -51,17 +63,17 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect" value="MySQL" />
-    <property name="last.edited.regexp" value="aA1asdfasCC   ___----+-0$$$$" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/database" />
+    <property name="last.edited.regexp" value="adafasAadfads4544646    __---11!" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/css" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="configurable.group.build" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\static\css" />
       <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\static\database" />
       <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\pages" />
-      <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\static\css" />
       <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model\includes\login" />
       <recent name="C:\Users\Michal\Documents\commercial\prima\platforma\tendering_platform_model" />
     </key>
@@ -124,7 +136,12 @@
       <workItem from="1637522706419" duration="5705000" />
       <workItem from="1637695033740" duration="2450000" />
       <workItem from="1638290218566" duration="5752000" />
-      <workItem from="1638644644023" duration="12249000" />
+      <workItem from="1638644644023" duration="12859000" />
+      <workItem from="1638904236607" duration="148000" />
+      <workItem from="1638904478930" duration="56000" />
+      <workItem from="1638905165206" duration="2653000" />
+      <workItem from="1639074752528" duration="6651000" />
+      <workItem from="1639319409810" duration="3494000" />
     </task>
     <servers />
   </component>
@@ -141,7 +158,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

@@ -7,7 +7,7 @@ class RegisterController extends Register
     private $email;
     private $password;
     private $passwordConfirmation;
-    private $location = 'location: ../index.php?error=';
+    private $location = 'location: ../index.php?error='; // TODO przekierowanie na stronę rejestracji
 
     public function __construct($username, $email, $password, $passwordConfirmation)
     {
@@ -36,6 +36,7 @@ class RegisterController extends Register
 
         if ($this->isPasswordValid() == false) {
             header($this->location . 'invalid_password'); // TODO obsłużyć ten komunikat na stronie głównej
+                                                                // TODO &email=email itd
             exit();
         }
 

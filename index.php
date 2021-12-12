@@ -26,6 +26,20 @@ session_start();
         <p>Sprawdź naszą politykę <a href='/pages/cookies.php'>Cookies</a></p>
         <p>Sprawdź jak przetwarzamy dane <a href='/pages/rodo.php'>RODO</a></p>
     </div>
+    <!-- TODO https poniżej -->
+    <?php
+    $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    if (strpos($url, 'error=empty_input') == true) {
+//        echo("!!! BLAD !!!");
+//        exit();
+
+        if (!isset($_GET['error'])) {
+            exit();
+        } else {
+            $error_message = $_GET['error'];
+        }
+    }
+    ?>
 </div>
 
 

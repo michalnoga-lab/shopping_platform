@@ -13,7 +13,7 @@ class LoginController extends Login
         $this->password = $password;
     }
 
-    public function doLogin()
+    public function doLogin() // TODO przekierowanie na stronę logowania
     {
         if ($this->areAllFieldsFilled() == false) {
             header('location: ../index.php?error=empty_input'); // TODO komunikat walidujący

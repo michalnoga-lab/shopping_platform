@@ -1,5 +1,6 @@
 <?php
 // TODO errors
+// error_reporting(0);
 session_start();
 ?>
 
@@ -11,6 +12,7 @@ session_start();
 </head>
 
 <body>
+<script defer src="../static/js/register/input-validation.js"></script>
 <div class="container">
     <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -19,27 +21,30 @@ session_start();
                     <h5 class="card-title text-center mb-5 fw-light fs-5">Rejestracja</h5>
 
                     <!--  TODO sanityzacja danych rejestracji i logowania -->
+                    <!--  TODO JS sprawdzający na bieżąco pola -->
 
-                    <form action="/includes/register.inc.php" method="post">
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" name="username"
-                                   placeholder="Imię i nazwisko" required>
-                            <label for="floatingInput">Imię i Nazwisko</label>
+                    <form action="/includes/register.inc.php" method="post" id="form">
+                        <div class="form-floating mb-3 input-control">
+                            <input type="text" class="form-control" id="username" placeholder="Imię i nazwisko"
+                                   required>
+                            <label for="username">Imię i Nazwisko</label>
+                            <div class="error"></div>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" name="email"
-                                   placeholder="Adres email" required>
-                            <label for="floatingInput">Adres email</label>
+                        <div class="form-floating mb-3 input-control">
+                            <input type="email" class="form-control" id="email" placeholder="Adres email" required>
+                            <label for="email">Adres email</label>
+                            <div class="error"></div>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPassword" name="password"
-                                   placeholder="Hasło" required>
-                            <label for="floatingPassword">Hasło</label>
+                        <div class="form-floating mb-3 input-control">
+                            <input type="password" class="form-control" id="password" placeholder="Hasło" required>
+                            <label for="password">Hasło</label>
+                            <div class="error"></div>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPasswordConfirmation"
-                                   name="passwordConfirmation" placeholder="Powtórz hasło" required>
-                            <label for="floatingPasswordConfirmation">Powtórz hasło</label>
+                        <div class="form-floating mb-3 input-control">
+                            <input type="password" class="form-control" id="password-confirmation"
+                                   placeholder="Powtórz hasło" required>
+                            <label for="password-confirmation">Powtórz hasło</label>
+                            <div class="error"></div>
                         </div>
                         <div class="d-grid">
                             <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit" id="submit"

@@ -18,16 +18,16 @@ session_start();
             <div class="card border-0 shadow rounded-3 my-5">
                 <div class="card-body p-4 p-sm-5">
                     <h5 class="card-title text-center mb-5 fw-light fs-5">Logowanie</h5>
-                    <form action="/includes/login.inc.php" method="post">
+                    <form action="/includes/login.inc.php" method="post" id="form">
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" name="email"
+                            <input type="email" class="form-control" id="email" name="email"
                                    placeholder="Adres email">
-                            <label for="floatingInput">Adres email</label>
+                            <label for="email">Adres email</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPassword" name="password"
+                            <input type="password" class="form-control" id="password" name="password"
                                    placeholder="Hasło">
-                            <label for="floatingPassword">Hasło</label>
+                            <label for="password">Hasło</label>
                         </div>
                         <div class="d-grid">
                             <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit" name="submit"
