@@ -9,7 +9,7 @@ let isEmailValid = false;
 let isPasswordValid = false;
 let isPasswordConfirmationValid = false;
 
-form.addEventListener('input', e => {
+form.addEventListener('input', () => {
     validateInputs();
 });
 
@@ -28,7 +28,7 @@ const setError = (element, message) => {
     inputControl.classList.remove('success');
 }
 
-const setSuccess = (element) => {
+const setSuccess = element => {
     const inputControl = element.parentElement;
     const errorDisplay = inputControl.querySelector('.error');
 

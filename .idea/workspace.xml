@@ -5,17 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db82517e-efb4-47a4-a000-d63f22f31c55" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/static/css/register.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/register/input-validation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c62ea75b-2fa0-4ac2-a174-2fd76f656e58.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c62ea75b-2fa0-4ac2-a174-2fd76f656e58.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/login/input-validation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/login-controller.classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/login-controller.classes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/register-controller.classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/register-controller.classes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/elements/head.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/static/elements/head.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/register/input-validation.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/register/input-validation.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,7 +135,7 @@
       <workItem from="1638904478930" duration="56000" />
       <workItem from="1638905165206" duration="2653000" />
       <workItem from="1639074752528" duration="6651000" />
-      <workItem from="1639319409810" duration="3494000" />
+      <workItem from="1639319409810" duration="4840000" />
     </task>
     <servers />
   </component>

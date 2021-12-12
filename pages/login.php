@@ -12,6 +12,7 @@ session_start();
 </head>
 
 <body>
+<script defer src="../static/js/login/input-validation.js"></script>
 <div class="container">
     <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -19,15 +20,17 @@ session_start();
                 <div class="card-body p-4 p-sm-5">
                     <h5 class="card-title text-center mb-5 fw-light fs-5">Logowanie</h5>
                     <form action="/includes/login.inc.php" method="post" id="form">
-                        <div class="form-floating mb-3">
+                        <div class="form-floating mb-3 input-control">
                             <input type="email" class="form-control" id="email" name="email"
                                    placeholder="Adres email">
                             <label for="email">Adres email</label>
+                            <div class="error"></div>
                         </div>
-                        <div class="form-floating mb-3">
+                        <div class="form-floating mb-3 input-control">
                             <input type="password" class="form-control" id="password" name="password"
                                    placeholder="Hasło">
                             <label for="password">Hasło</label>
+                            <div class="error"></div>
                         </div>
                         <div class="d-grid">
                             <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit" name="submit"
