@@ -60,7 +60,7 @@ class RegisterController extends Register
         return true;
     }
 
-    private function isUsernameValid()
+    private function isUsernameValid(): bool
     {
         if (!preg_match('/^[a-zA-Z0-9\s_-]{0,200}$/', $this->username)) {
             return false;
@@ -68,7 +68,7 @@ class RegisterController extends Register
         return true;
     }
 
-    private function isEmailValid()
+    private function isEmailValid(): bool
     {
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             return false;
@@ -76,7 +76,7 @@ class RegisterController extends Register
         return true;
     }
 
-    private function isPasswordValid()
+    private function isPasswordValid(): bool
     {
         if (strlen($this->password) < 8 | strlen($this->password) > 200) {
             return false;
@@ -84,7 +84,7 @@ class RegisterController extends Register
         return true;
     }
 
-    private function isPasswordConfirmationValid()
+    private function isPasswordConfirmationValid(): bool
     {
         if (strlen($this->passwordConfirmation) < 8 | strlen($this->passwordConfirmation) > 200) {
             return false;
@@ -92,7 +92,7 @@ class RegisterController extends Register
         return true;
     }
 
-    private function arePasswordsEqual()
+    private function arePasswordsEqual(): bool
     {
         if ($this->password !== $this->passwordConfirmation) {
             return false;
