@@ -15,5 +15,5 @@ if (isset($_POST['submit'])) {
     $register = new RegisterController($username, $email, $password, $passwordConfirmation);
     $register->registerUser();
 
-    header('location: ../index.php?error=none');
+    header('location: ../index.php?error=user_added');
 }

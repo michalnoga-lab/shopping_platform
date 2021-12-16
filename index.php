@@ -2,6 +2,9 @@
 // error_reporting(0);
 // TODO
 session_start();
+
+// TODO mail katywacyjny po rejestracji
+// TODO licznik odwiedzin poszczególnych stron
 ?>
 
 <!doctype html>
@@ -18,6 +21,17 @@ session_start();
 </header>
 
 <div class="col-12">
+    <?php
+    if (isset($_GET['error'])) {
+        $errorCheck = $_GET['error'];
+
+        if ($errorCheck === 'user_added') {
+            echo('<div class="alert alert-success text-center" role="alert">Użytkownik poprawnie dodany do bazy danych</div>');
+        }elseif($errorCheck==='connection'){
+            echo('<div class="alert alert-danger text-center" role="alert">Błąd połączenia</div>');
+        }
+    }
+    ?>
     <div class="h-100 p-5 bg-light border rounded-3">
         <h2>O platformie</h2>
         <p>Platforma jest dostępna tylko dla klientów przetargowych, którzy mają podpisaną z nami umowę.</p>

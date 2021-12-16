@@ -9,27 +9,32 @@ class Register extends Dbh
 
         if (!$stmt->execute(array($email))) {
             $stmt = null;
-            header("location: ../index.php?error=stmt_failed"); // TODO przekazywanie błędu
+            header("location: ../index.php?error=connection");
+            // TODO zapisanie do logów
             exit();
         }
 
-        $result = null; // TODO do poprawy
         if ($stmt->rowCount() > 0) {
-            $result = false;
+            return false;
         } else {
-            $result = true;
+            return true;
         }
-        return $result;
     }
 
     public function saveUser($username, $email, $password)
     {
-        $stmt = $this->connect()->prepare('INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, 0);');
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        if ($this->isEmailNotInDb($email)) {
 
-        if ($stmt->execute(array($username, $email, $hashed_password))) {
-            $stmt = null;
-            header('location: ../index.php?error=stmt_failed'); // TODO czy kod błedu poprawny i obsłużony ???
+            $stmt = $this->connect()->prepare('INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, 0);');
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+            if ($stmt->execute(array($username, $email, $hashed_password))) {
+                $stmt = null;
+                header('location: ../index.php?error=connection'); // TODO zapisanie do logów
+                exit();
+            }
+        } else {
+            header('location: ../pages/register.php?error=email_in_db');
             exit();
         }
 

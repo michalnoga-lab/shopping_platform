@@ -24,7 +24,7 @@ class Login extends Dbh
 
         if ($check_passwords == false) {
             $stmt = null;
-            header('location: ../index.php?error=invalid_password'); // TODO obsłouga błędu
+            header('location: ../index.php?error=invalid_password'); // TODO obsługa błędu
             exit();
         }
 

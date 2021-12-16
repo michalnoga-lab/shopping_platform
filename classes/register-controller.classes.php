@@ -3,11 +3,11 @@
 
 class RegisterController extends Register
 {
-    private $username;
-    private $email;
-    private $password;
-    private $passwordConfirmation;
-    private $location = 'location: ../index.php?error='; // TODO przekierowanie na stronę rejestracji
+    private string $username;
+    private string $email;
+    private string $password;
+    private string $passwordConfirmation;
+    private string $location = 'location: ../pages/register.php?error=';
 
     public function __construct($username, $email, $password, $passwordConfirmation)
     {
@@ -17,38 +17,42 @@ class RegisterController extends Register
         $this->passwordConfirmation = $passwordConfirmation;
     }
 
-    public function registerUser()
+    public function registerUser(): void
     {
         if ($this->areAllFieldsFilled() == false) {
-            header($this->location . 'empty_input'); // TODO obsłużyć ten komunikat na stronie głównej
+            header($this->location . 'empty_input');
             exit();
         }
 
         if ($this->isUsernameValid() == false) {
-            header($this->location . 'invalid_username'); // TODO obsłużyć ten komunikat na stronie głównej
+            header($this->location . 'invalid_username');
             exit();
         }
 
         if ($this->isEmailValid() == false) {
-            header($this->location . 'invalid_email'); // TODO obsłużyć ten komunikat na stronie głównej
+            header($this->location . 'invalid_email');
             exit();
         }
 
         if ($this->isPasswordValid() == false) {
-            header($this->location . 'invalid_password'); // TODO obsłużyć ten komunikat na stronie głównej
-                                                                // TODO &email=email itd
+            header($this->location . 'invalid_password');
+            exit();
+        }
+
+        if ($this->isPasswordConfirmationValid() == false) {
+            header($this->location . 'invalid_confirmation');
             exit();
         }
 
         if ($this->arePasswordsEqual() == false) {
-            header($this->location . 'different_passwords'); // TODO obsłużyć ten komunikat na stronie głównej
+            header($this->location . 'different_passwords');
             exit();
         }
 
         $this->saveUser($this->username, $this->email, $this->password);
     }
 
-    private function areAllFieldsFilled()
+    private function areAllFieldsFilled(): bool
     {
         if (empty($this->username) | empty($this->email) || empty($this->password) || empty($this->passwordConfirmation)) {
             return false;
@@ -75,6 +79,14 @@ class RegisterController extends Register
     private function isPasswordValid()
     {
         if (strlen($this->password) < 8 | strlen($this->password) > 200) {
+            return false;
+        }
+        return true;
+    }
+
+    private function isPasswordConfirmationValid()
+    {
+        if (strlen($this->passwordConfirmation) < 8 | strlen($this->passwordConfirmation) > 200) {
             return false;
         }
         return true;
