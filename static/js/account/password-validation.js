@@ -39,10 +39,14 @@ const validateInputs = () => {
 
     if (passwordValue.length < 8) {
         setError(password, 'Minimalna długość hasła to 8 znaków');
+    } else {
+        setSuccess(password)
     }
 
     if (passwordConfirmationValue.length < 8) {
         setError(passwordConfirmation, 'Minimalna długość hasła to 8 znaków');
+    } else {
+        setSuccess(passwordConfirmation)
     }
 
     if (passwordValue.length > 200) {
@@ -53,7 +57,7 @@ const validateInputs = () => {
         setError(passwordConfirmation, 'Maksymalna długość hasła to 200 znaków');
     }
 
-    if (passwordValue !== passwordConfirmationValue) {
+    if (passwordValue.length >= 8 && passwordConfirmationValue.length >= 8 && (passwordValue !== passwordConfirmationValue)) {
         setError(password, 'Hasło i potwierdzenie hasła nie są takie same');
         setError(passwordConfirmation, 'Hasło i potwierdzenie hasła nie są takie same');
     }
