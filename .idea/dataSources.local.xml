@@ -2,22 +2,8 @@
 <project version="4">
   <component name="dataSourceStorageLocal" created-in="PS-213.5744.279">
     <data-source name="MySQL - @localhost" uuid="c62ea75b-2fa0-4ac2-a174-2fd76f656e58">
-      <database-info product="MariaDB" version="10.4.21-MariaDB" jdbc-version="4.2" driver-name="MariaDB Connector/J" driver-version="2.7.3" dbms="MARIADB" exact-version="10.4.21" exact-driver-version="2.7">
-        <extra-name-characters>#@</extra-name-characters>
-        <identifier-quote-string>`</identifier-quote-string>
-      </database-info>
-      <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
-      <secret-storage>master_key</secret-storage>
-      <user-name>root</user-name>
-      <schema-mapping>
-        <introspection-scope>
-          <node kind="schema">
-            <name qname="mysql" />
-            <name qname="tendering_platform" />
-            <name qname="platform" />
-          </node>
-        </introspection-scope>
-      </schema-mapping>
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MARIADB" exact-version="0" />
+      <schema-mapping />
     </data-source>
   </component>
 </project>
