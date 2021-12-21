@@ -5,7 +5,7 @@ include_once '../includes/logger.inc.php';
 
 class Cart extends Dbh
 {
-    private $cartId = null;
+    private int $cartId = 0;
 
     protected function userHasCart($userId): bool
     {
@@ -42,8 +42,6 @@ class Cart extends Dbh
         if (!$this->userHasCart($userId)) {
             $this->createEmptyCart($userId);
         }
-        // TODO prod in carts
-        // TODO art update
         $stmt_product = $this->connect()->prepare('INSERT INTO products_in_cart(user_id, cart_id, product_id, user_comment, quantity, nett_value, vat_value, gross_value) 
                                                         VALUES (?, ?, ?, ?, ?, ?, ?, ?);');
         $nettValue = $nettPrice * $quantity;

@@ -1,7 +1,7 @@
 <?php
 // error_reporting(0); // TODO enable
 
-if (isset($_POST('submit'))) {
+if ($_POST('submit') !== null) {
 
     $productId = $_POST['product-id'];
     $quantity = $_POST['quantity'];
