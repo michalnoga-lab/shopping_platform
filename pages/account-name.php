@@ -8,7 +8,7 @@ session_start();
 <html lang="pl">
 <head>
     <?php include_once('../static/elements/head.inc.php'); ?>
-    <link href="../static/css/add-address.css" rel="stylesheet"/>
+    <link href="../static/css/validation.css" rel="stylesheet"/>
     <title>Prima Platforma</title>
 </head>
 
