@@ -20,7 +20,6 @@ session_start();
 
 <div class="container">
     <h3>Zmiana nazwy</h3>
-    <!-- TODO walidacja nowej nazwy użytkownika -->
     <hr>
     <?php
     include_once '../classes/dbh.classes.php';

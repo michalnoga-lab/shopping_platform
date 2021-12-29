@@ -3,15 +3,13 @@
 // TODO
 session_start();
 
-// TODO mail katywacyjny po rejestracji
+// TODO mail aktywacyjny po rejestracji
 // TODO licznik odwiedzin poszczególnych stron
 // TODO readme.md zmienić na dockera
 // TODO wyłączyć we wszystkich plikach raportowanie błędów
 // TODO specjalna biblioteka do sanitization danych rejestracji i logowania
-// TODO zamieniam wszystkie error na msg ???
 // TODO zrobić sortowanie produktów po kryteriach w JS
-// TODO przerobić wszystkie includes na PDO
-// zmniejszyć ilość plików CSS
+// TODO backup bazy danych ???
 ?>
 
 <!doctype html>

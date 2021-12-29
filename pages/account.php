@@ -34,6 +34,10 @@ session_start();
             echo('<div class="alert alert-danger text-center" role="alert">Minimalna długość nazwy użytkownika to 1 znak</div>');
         } elseif ($infoCheck === 'long_name') {
             echo('<div class="alert alert-danger text-center" role="alert">Maksymalna długość nazwy użytkownika to 200 znaków</div>');
+        } elseif ($infoCheck === 'short_password') {
+            echo('<div class="alert alert-danger text-center" role="alert">Minimalna długość hasła to 8 znaków</div>');
+        } elseif ($infoCheck === 'long_password') {
+            echo('<div class="alert alert-danger text-center" role="alert">Maksymalna długość hasła to 200 znaków</div>');
         } elseif ($infoCheck === 'connection') {
             echo('<div class="alert alert-danger text-center" role="alert">Błąd połączenia</div>');
         }
