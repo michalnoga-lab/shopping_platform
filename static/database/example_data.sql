@@ -57,40 +57,53 @@ CREATE TABLE carts
 
 CREATE TABLE products_in_cart
 (
-    `id`         int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `user_id`    int(11)                            NOT NULL,
-    `cart_id`    int(11)                            NOT NULL,
-    `product_id` int(11)                            NOT NULL,
-    `quantity`   int(11)                            NOT NULL
+    `id`          int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    `user_id`     int(11)                            NOT NULL,
+    `cart_id`     int(11)                            NOT NULL,
+    `product_id`  int(11)                            NOT NULL,
+    `name`        varchar(255)                       NOT NULL,
+    `description` varchar(1000)                      NOT NULL,
+    `nett_price`  decimal(10, 2)                     NOT NULL,
+    `vat`         int(11)                            NOT NULL,
+    `gross_price` decimal(10, 2)                     NOT NULL,
+    `optima_code` varchar(255),
+    `ean`         varchar(255),
+    `quantity`    int(11)                            NOT NULL,
+    `nett_value`  decimal(10, 2)                     NOT NULL,
+    `vat_value`   decimal(10, 2)                     NOT NULL,
+    `gross_value` decimal(10, 2)                     NOT NULL
 );
 
+INSERT INTO users (id, username, email, password, role)
+VALUES (1, 'user', 'user@gmail.com', '$2y$10$DgPcQ1AGo..ZOR1b1w/KKup0U7/KFXJtjSAM5w3WT.hLGyJdeFp4i',
+        'user'); # password = user user
 
-INSERT INTO products (auction_number, name, description, nett_price, vat, gross_price, optima_code, ean)
-VALUES ('1a', 'Product 1',
-        'Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1 Product description 1',
-        10.00, 23, 12.30, 'code1', 123456);
+INSERT INTO products (id, auction_number, name, description, nett_price, vat, gross_price, optima_code, ean)
+VALUES (2, '1a', 'Product 1',
+        'Product description 1 Product description 1 Product description 1 Product description 1',
+        10.00, 0.23, 12.30, 'code1', '123456');
 
-INSERT INTO products (auction_number, name, description, nett_price, vat, gross_price, optima_code, ean)
-VALUES ('2b', 'Product 2', 'Product description 2', 100.00, 23, 123.00, 'code2', 67890);
+INSERT INTO products (id, auction_number, name, description, nett_price, vat, gross_price, optima_code, ean)
+VALUES (3, '2b', 'Product 2', 'Product description 2', 100.00, 0.23, 123.00, 'code2', 67890);
 
-INSERT INTO products (auction_number, name, description, nett_price, vat, gross_price, optima_code, ean)
-VALUES ('3c', 'Product 3', 'Product description 3', 100.00, 23, 123.00, 'code2', 67890);
+INSERT INTO products (id, auction_number, name, description, nett_price, vat, gross_price, optima_code, ean)
+VALUES (4, '3c', 'Product 3', 'Product description 3', 100.00, 0.23, 123.00, 'code2', 67890);
 
-INSERT INTO products (auction_number, name, description, nett_price, vat, gross_price, optima_code, ean)
-VALUES ('4d', 'Product 4', 'Product description 4', 100.00, 23, 123.00, 'code2', 67890);
+INSERT INTO products (id, auction_number, name, description, nett_price, vat, gross_price, optima_code, ean)
+VALUES (5, '4d', 'Product 4', 'Product description 4', 100.00, 0.23, 123.00, 'code2', 67890);
 
-INSERT INTO addresses (user_id, street, phone)
-VALUES (1, 'Street 1', '123456');
+INSERT INTO addresses (id, user_id, street, phone)
+VALUES (6, 1, 'Street 1', '123456');
 
-INSERT INTO addresses (user_id, street, phone)
-VALUES (1, 'Street 2', '123456');
+INSERT INTO addresses (id, user_id, street, phone)
+VALUES (7, 1, 'Street 2', '123456');
 
 INSERT INTO addresses (user_id, street, phone)
 VALUES (2, 'Street for user 2', '123456');
 
-INSERT INTO carts (user_id, purchased, nett_value, vat_value, gross_value, closed)
-VALUES (1, null, 0, 0, 0, 0);
+INSERT INTO carts (id, user_id, purchased, nett_value, vat_value, gross_value, closed)
+VALUES (8, 1, null, 0, 0, 0, 0);
 
-# INSERT INTO users (username, email, password, role)
-# VALUES ('user', 'user@gmail.com', '$2y$10$DgPcQ1AGo..ZOR1b1w/KKup0U7/KFXJtjSAM5w3WT.hLGyJdeFp4i',
-#         'user'); # password = user user
+INSERT INTO products_in_cart (id, user_id, cart_id, product_id, name, description, nett_price, vat, gross_price,
+                              optima_code, ean, quantity, nett_value, vat_value, gross_value)
+VALUES (10, 1, 8, 2, 'prod 1', 'desc', 10, 0.23, 12.30, 'optima_code_2', '123456', 100, 200, 20, 220);

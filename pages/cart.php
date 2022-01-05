@@ -45,9 +45,30 @@ session_start();
 
             if ($stmt->num_rows > 0) {
                 $stmt->bind_result($cartId, $userId, $purchased, $nettValue, $vatVaue, $grossValue, $closed);
-                $stmt->fetch();
-                echo($nettValue );
-                // TODO od tego zacząć !!!
+                $stmt->fetch(); ?>
+                <p>Wartość netto: <?= $nettValue ?> PLN</p>
+                <p>Wartość VAT: <?= $vatVaue ?> PLN</p>
+                <p>Wartość brutto: <?= $grossValue ?> PLN</p>
+                <?php
+                $stmt = $connection->prepare('SELECT * FROM products_in_cart WHERE cart_id = ?;');
+                $stmt->bind_param('i', $cartId);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $products = $result->fetch_all(MYSQLI_ASSOC);
+
+                if ($products > 0) {
+                    $rowNumber = 0;
+
+                    foreach ($products as $product) {
+                        $rowNumber += 1; ?>
+                        <tr>
+                            <td><?= $rowNumber ?>. <?= $product['name']?></td>
+                        </tr>
+                        <?php
+                    }
+                } else {
+                    echo('<div class="alert alert-danger text-center" role="alert">Nie masz produktów w koszyku</div>');
+                }
             } else {
                 echo('<div class="alert alert-danger text-center" role="alert">Nie masz produktów w koszyku</div>');
             }
