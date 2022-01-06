@@ -41,7 +41,7 @@ session_start();
                 $rowNumber = 0;
                 foreach ($products as $product) {
                     $rowNumber += 1; ?>
-                    <tr onclick="window.location='product-single.php?id='+<?= $product['id'] ?>">
+                    <tr onclick="window.location='product-single-add.php?id='+<?= $product['id'] ?>">
                         <td><?= $rowNumber ?></td>
                         <td><?= $product['name'] ?></td>
                         <td><?= $product['nett_price'] ?> PLN</td>
