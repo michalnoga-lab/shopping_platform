@@ -31,7 +31,9 @@ session_start();
             $result = $stmt->get_result();
             $carts = $result->fetch_all(MYSQLI_ASSOC);
 
-            if ($carts > 0) {
+            if (count($carts) == 0) {
+                echo('<div class="alert alert-danger text-center" role="alert">Nie masz jeszcze żadnych zrealizowanych zamówień</div>');
+            } elseif ($carts > 0) {
                 $rowNumber = 0;
                 foreach ($carts as $cart) {
                     $rowNumber += 1; ?>
