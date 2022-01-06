@@ -21,8 +21,6 @@ session_start();
     <div class="row">
         <h3>Mój koszyk</h3>
         <hr>
-        <button class="btn btn-success btn-block mb-3">Prześlij zamówienie do realizacji</button>
-        <hr>
         <?php
         if (isset($_GET['info'])) {
             $infoCheck = $_GET['info'];
@@ -45,7 +43,10 @@ session_start();
             $stmt->execute();
             $stmt->store_result();
 
-            if ($stmt->num_rows > 0) {
+            if ($stmt->num_rows > 0) { ?>
+                <button class="btn btn-success btn-block mb-3">Prześlij zamówienie do realizacji</button>
+                <hr>
+                <?php
                 $stmt->bind_result($cartId, $userId, $purchased, $nettValue, $vatVaue, $grossValue, $closed);
                 $stmt->fetch(); ?>
                 <p>Wartość netto: <?= $nettValue ?> PLN</p>
@@ -78,8 +79,6 @@ session_start();
                         </tr>
                         <?php
                     }
-                } else {
-                    echo('<div class="alert alert-danger text-center" role="alert">Nie masz produktów w koszyku</div>');
                 }
             } else {
                 echo('<div class="alert alert-danger text-center" role="alert">Nie masz produktów w koszyku</div>');

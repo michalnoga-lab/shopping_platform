@@ -52,6 +52,8 @@ CREATE TABLE carts
     `nett_value`  decimal(10, 2)                     NOT NULL,
     `vat_value`   decimal(10, 2)                     NOT NULL,
     `gross_value` decimal(10, 2)                     NOT NULL,
+    `address_id`  int(11),
+    `address`     varchar(255),
     `closed`      boolean DEFAULT false              NOT NULL
 );
 
@@ -101,8 +103,8 @@ VALUES (7, 1, 'Street 2', '123456');
 INSERT INTO addresses (user_id, street, phone)
 VALUES (2, 'Street for user 2', '123456');
 
-INSERT INTO carts (id, user_id, purchased, nett_value, vat_value, gross_value, closed)
-VALUES (8, 1, null, 0, 0, 0, 0);
+INSERT INTO carts (id, user_id, purchased, nett_value, vat_value, gross_value, address_id, address, closed)
+VALUES (8, 1, null, 100, 23, 123, 6, 'street aaa', 0);
 
 INSERT INTO products_in_cart (id, user_id, cart_id, product_id, name, description, nett_price, vat, gross_price,
                               optima_code, ean, quantity, nett_value, vat_value, gross_value)
