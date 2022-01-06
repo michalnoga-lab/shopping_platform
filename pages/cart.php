@@ -53,10 +53,10 @@ session_start();
                 <p>Wartość VAT: <?= $vatVaue ?> PLN</p>
                 <p>Wartość brutto: <?= $grossValue ?> PLN</p>
                 <?php
-                $stmt = $connection->prepare('SELECT * FROM products_in_cart WHERE cart_id = ?;');
-                $stmt->bind_param('i', $cartId);
-                $stmt->execute();
-                $result = $stmt->get_result();
+                $stmt2 = $connection->prepare('SELECT * FROM products_in_cart WHERE cart_id = ?;');
+                $stmt2->bind_param('i', $cartId);
+                $stmt2->execute();
+                $result = $stmt2->get_result();
                 $products = $result->fetch_all(MYSQLI_ASSOC);
 
                 if ($products > 0) {
