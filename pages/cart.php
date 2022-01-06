@@ -21,6 +21,8 @@ session_start();
     <div class="row">
         <h3>Mój koszyk</h3>
         <hr>
+        <button class="btn btn-success btn-block mb-3">Prześlij zamówienie do realizacji</button>
+        <hr>
         <?php
         if (isset($_GET['info'])) {
             $infoCheck = $_GET['info'];
@@ -62,7 +64,16 @@ session_start();
                     foreach ($products as $product) {
                         $rowNumber += 1; ?>
                         <tr>
-                            <td><?= $rowNumber ?>. <?= $product['name']?></td>
+                            <td><?= $rowNumber ?>. <?= $product['name'] ?></td>
+                            <td>Cena netto: <?= $product['nett_price'] ?> PLN</td>
+                            <td>VAT: <?= $product['vat'] ?>%</td>
+                            <td>Cena brutto: <?= $product['gross_price'] ?> PLN</td>
+                            <td>Ilość: <?= $product['quantity'] ?></td>
+                            <td>Wartość netto: <?= $product['nett_price'] * $product['quantity'] ?> PLN</td>
+                            <td>Wartość
+                                brutto: <?= $product['nett_price'] * $product['quantity'] * (1 + $product['vat'] / 100) ?>
+                                PLN
+                            </td>
                         </tr>
                         <?php
                     }

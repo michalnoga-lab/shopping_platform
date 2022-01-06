@@ -81,16 +81,16 @@ VALUES (1, 'user', 'user@gmail.com', '$2y$10$DgPcQ1AGo..ZOR1b1w/KKup0U7/KFXJtjSA
 INSERT INTO products (id, auction_number, name, description, nett_price, vat, gross_price, optima_code, ean)
 VALUES (2, '1a', 'Product 1',
         'Product description 1 Product description 1 Product description 1 Product description 1',
-        10.00, 0.23, 12.30, 'code1', '123456');
+        10.00, 23, 12.30, 'code1', '123456');
 
 INSERT INTO products (id, auction_number, name, description, nett_price, vat, gross_price, optima_code, ean)
-VALUES (3, '2b', 'Product 2', 'Product description 2', 100.00, 0.23, 123.00, 'code2', 67890);
+VALUES (3, '2b', 'Product 2', 'Product description 2', 100.00, 23, 123.00, 'code2', 67890);
 
 INSERT INTO products (id, auction_number, name, description, nett_price, vat, gross_price, optima_code, ean)
-VALUES (4, '3c', 'Product 3', 'Product description 3', 100.00, 0.23, 123.00, 'code2', 67890);
+VALUES (4, '3c', 'Product 3', 'Product description 3', 100.00, 23, 123.00, 'code2', 67890);
 
 INSERT INTO products (id, auction_number, name, description, nett_price, vat, gross_price, optima_code, ean)
-VALUES (5, '4d', 'Product 4', 'Product description 4', 100.00, 0.23, 123.00, 'code2', 67890);
+VALUES (5, '4d', 'Product 4', 'Product description 4', 100.00, 23, 123.00, 'code2', 67890);
 
 INSERT INTO addresses (id, user_id, street, phone)
 VALUES (6, 1, 'Street 1', '123456');
@@ -106,4 +106,8 @@ VALUES (8, 1, null, 0, 0, 0, 0);
 
 INSERT INTO products_in_cart (id, user_id, cart_id, product_id, name, description, nett_price, vat, gross_price,
                               optima_code, ean, quantity, nett_value, vat_value, gross_value)
-VALUES (10, 1, 8, 2, 'prod 1', 'desc', 10, 0.23, 12.30, 'optima_code_2', '123456', 100, 200, 20, 220);
+VALUES (10, 1, 8, 2, 'prod 1', 'desc', 10, 23, 12.30, 'optima_code_2', '123456', 100, 200, 20, 220);
+
+INSERT INTO products_in_cart (id, user_id, cart_id, product_id, name, description, nett_price, vat, gross_price,
+                              optima_code, ean, quantity, nett_value, vat_value, gross_value)
+VALUES (11, 1, 8, 3, 'prod 2', 'desc', 11, 23, 13.30, 'optima_code_2', '123456', 100, 200, 20, 220);
