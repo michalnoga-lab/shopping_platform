@@ -10,6 +10,7 @@ session_start();
 // TODO specjalna biblioteka do sanitization danych rejestracji i logowania
 // TODO zrobić filtrowanie produktów po nazwach
 // TODO backup bazy danych ???
+// TODO sprawdzanie typów przed wyszukaniem w bazie, np. czy id to int ???
 ?>
 
 <!doctype html>

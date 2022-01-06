@@ -74,6 +74,7 @@ session_start();
                                 brutto: <?= $product['nett_price'] * $product['quantity'] * (1 + $product['vat'] / 100) ?>
                                 PLN
                             </td>
+                            <!-- TODO strona ze zmianą ilości produktu lub jego usunięciem -->
                         </tr>
                         <?php
                     }
