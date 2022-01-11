@@ -37,15 +37,13 @@ session_start();
                 $rowNumber = 0;
                 foreach ($carts as $cart) {
                     $rowNumber += 1; ?>
-                    <tr>
+                    <tr onclick="window.location='history-single.php?id='+<?= $cart['id'] ?>">
                         <td><?= $rowNumber ?> - zamówienie z dnia: <?= explode(' ', $cart['purchased'])[0] ?>
                             godzina <?= substr_replace(explode(' ', $cart['purchased'])[1], "", -3) ?></td>
                         <td>Wartość netto: <?= $cart['nett_value'] ?> PLN</td>
                         <td>Wartość VAT: <?= $cart['vat_value'] ?> PLN</td>
                         <td>Wartość brutto: <?= $cart['gross_value'] ?> PLN</td>
-                        <td>Adres dostawy: <?= $cart['address'] ?></td>
                     </tr>
-                    <!-- TODO kliknięcie powoduje wyświetlenie szczegółów zamówienia -->
                     <?php
                 }
             } else {
