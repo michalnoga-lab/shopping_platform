@@ -32,56 +32,44 @@ session_start();
         ?>
         <table class="table table-hover">
             <thead>
+            <?php
+            include_once '../classes/dbh.classes.php';
+            $stmt_cart = $connection->prepare('SELECT * FROM carts WHERE user_id = ? AND closed=false;');
+            $stmt_cart->bind_param('i', $_SESSION['id']);
+            $stmt_cart->execute();
+            $result = $stmt_cart->get_result();
+            $carts = $result->fetch_all(MYSQLI_ASSOC);
+
+            if (count($carts) == 0) {
+                echo('<div class="alert alert-danger text-center" role="alert">Nie masz jeszcze żadnych produktów w koszyku</div>');
+            } elseif (count($carts) == 1) { ?>
+            <div>
+                <p>Wartość zamówienia netto: <?= $carts[0]['nett_value'] ?> PLN</p>
+                <p>Wartość VAT: <?= $carts[0]['vat_value'] ?> PLN</p>
+                <p>Wartość brutto: <?= $carts[0]['gross_value'] ?> PLN</p>
+            </div>
             </thead>
             <tbody>
             <?php
-            include_once '../classes/dbh.classes.php';
+            $cartId = $carts[0]['id'];
+            $stmt_products = $connection->prepare('SELECT * FROM products_in_cart INNER JOIN products ON products_in_cart.product_id=products.id WHERE cart_id = ?;');
+            $stmt_products->bind_param('i', $cartId);
+            $stmt_products->execute();
+            $result = $stmt_products->get_result();
+            $products = $result->fetch_all(MYSQLI_ASSOC);
+            $rowNumber = 0;
 
-            $userId = $_SESSION['id'];
-            $stmt = $connection->prepare('SELECT * FROM carts WHERE user_id = ? AND closed = false;');
-            $stmt->bind_param('i', $userId);
-            $stmt->execute();
-            $stmt->store_result();
-
-            if ($stmt->num_rows > 0) { ?>
-                <button class="btn btn-success btn-block mb-3">Prześlij zamówienie do realizacji</button>
-                <hr>
+            foreach ($products as $product) {
+                $rowNumber += 1; ?>
+                <tr>
+                    <td style="width 10%"><?= $rowNumber ?></td>
+                    <td style="width 70%"><?= $product['name'] ?></td>
+                    <td style="width 20%"><?= $product['quantity'] ?> sztuk</td>
+                </tr>
                 <?php
-                $stmt->bind_result($cartId, $userId, $purchased, $nettValue, $vatVaue, $grossValue, $closed);
-                $stmt->fetch(); ?>
-                <p>Wartość netto: <?= $nettValue ?> PLN</p>
-                <p>Wartość VAT: <?= $vatVaue ?> PLN</p>
-                <p>Wartość brutto: <?= $grossValue ?> PLN</p>
-                <?php
-                $stmt2 = $connection->prepare('SELECT * FROM products_in_cart WHERE cart_id = ?;');
-                $stmt2->bind_param('i', $cartId);
-                $stmt2->execute();
-                $result = $stmt2->get_result();
-                $products = $result->fetch_all(MYSQLI_ASSOC);
-
-                if ($products > 0) {
-                    $rowNumber = 0;
-
-                    foreach ($products as $product) {
-                        $rowNumber += 1; ?>
-                        <tr>
-                            <td><?= $rowNumber ?>. <?= $product['name'] ?></td>
-                            <td>Cena netto: <?= $product['nett_price'] ?> PLN</td>
-                            <td>VAT: <?= $product['vat'] ?>%</td>
-                            <td>Cena brutto: <?= $product['gross_price'] ?> PLN</td>
-                            <td>Ilość: <?= $product['quantity'] ?></td>
-                            <td>Wartość netto: <?= $product['nett_price'] * $product['quantity'] ?> PLN</td>
-                            <td>Wartość
-                                brutto: <?= $product['nett_price'] * $product['quantity'] * (1 + $product['vat'] / 100) ?>
-                                PLN
-                            </td>
-                            <!-- TODO strona ze zmianą ilości produktu lub jego usunięciem -->
-                        </tr>
-                        <?php
-                    }
-                }
+            }
             } else {
-                echo('<div class="alert alert-danger text-center" role="alert">Nie masz produktów w koszyku</div>');
+                echo('<div class="alert alert-danger text-center" role="alert">Błąd wczytywania koszyka</div>');
             }
             ?>
             </tbody>

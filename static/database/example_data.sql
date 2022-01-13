@@ -46,34 +46,28 @@ CREATE TABLE company
 
 CREATE TABLE carts
 (
-    `id`          int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `user_id`     int(11)                            NOT NULL,
-    `purchased`   datetime,
-    `nett_value`  decimal(10, 2)                     NOT NULL,
-    `vat_value`   decimal(10, 2)                     NOT NULL,
-    `gross_value` decimal(10, 2)                     NOT NULL,
-    `address_id`  int(11),
-    `address`     varchar(255),
-    `closed`      boolean DEFAULT false              NOT NULL
+    `id`           int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    `user_id`      int(11)                            NOT NULL,
+    `purchased`    datetime,
+    `nett_value`   decimal(10, 2)                     NOT NULL,
+    `vat_value`    decimal(10, 2)                     NOT NULL,
+    `gross_value`  decimal(10, 2)                     NOT NULL,
+    `address_id`   int(11),
+    `user_comment` varchar(255),
+    `closed`       boolean DEFAULT false              NOT NULL
 );
 
 CREATE TABLE products_in_cart
 (
-    `id`          int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `user_id`     int(11)                            NOT NULL,
-    `cart_id`     int(11)                            NOT NULL,
-    `product_id`  int(11)                            NOT NULL,
-    `name`        varchar(255)                       NOT NULL,
-    `description` varchar(1000)                      NOT NULL,
-    `nett_price`  decimal(10, 2)                     NOT NULL,
-    `vat`         int(11)                            NOT NULL,
-    `gross_price` decimal(10, 2)                     NOT NULL,
-    `optima_code` varchar(255),
-    `ean`         varchar(255),
-    `quantity`    int(11)                            NOT NULL,
-    `nett_value`  decimal(10, 2)                     NOT NULL,
-    `vat_value`   decimal(10, 2)                     NOT NULL,
-    `gross_value` decimal(10, 2)                     NOT NULL
+    `id`           int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    `user_id`      int(11)                            NOT NULL,
+    `cart_id`      int(11)                            NOT NULL,
+    `product_id`   int(11)                            NOT NULL,
+    `user_comment` varchar(255)                       NOT NULL,
+    `quantity`     int(11)                            NOT NULL,
+    `nett_value`   decimal(10, 2)                     NOT NULL,
+    `vat_value`    decimal(10, 2)                     NOT NULL,
+    `gross_value`  decimal(10, 2)                     NOT NULL
 );
 
 INSERT INTO users (id, username, email, password, role)
@@ -103,13 +97,14 @@ VALUES (7, 1, 'Street 2', '123456');
 INSERT INTO addresses (user_id, street, phone)
 VALUES (2, 'Street for user 2', '123456');
 
-INSERT INTO carts (id, user_id, purchased, nett_value, vat_value, gross_value, address_id, address, closed)
-VALUES (8, 1, null, 100, 23, 123, 6, 'street aaa', 0);
+INSERT INTO carts (id, user_id, purchased, nett_value, vat_value, gross_value, address_id, user_comment,
+                   closed)
+VALUES (8, 1, null, 100, 23, 123, 6, 'comment', 0);
 
-INSERT INTO products_in_cart (id, user_id, cart_id, product_id, name, description, nett_price, vat, gross_price,
-                              optima_code, ean, quantity, nett_value, vat_value, gross_value)
-VALUES (10, 1, 8, 2, 'prod 1', 'desc', 10, 23, 12.30, 'optima_code_2', '123456', 100, 200, 20, 220);
+INSERT INTO products_in_cart (id, user_id, cart_id, product_id, user_comment, quantity, nett_value, vat_value,
+                              gross_value)
+VALUES (10, 1, 8, 2, 'comment to product posted by user', 100, 200, 20, 220);
 
-INSERT INTO products_in_cart (id, user_id, cart_id, product_id, name, description, nett_price, vat, gross_price,
-                              optima_code, ean, quantity, nett_value, vat_value, gross_value)
-VALUES (11, 1, 8, 3, 'prod 2', 'desc', 11, 23, 13.30, 'optima_code_2', '123456', 100, 200, 20, 220);
+INSERT INTO products_in_cart (id, user_id, cart_id, product_id, user_comment, quantity, nett_value, vat_value,
+                              gross_value)
+VALUES (11, 1, 8, 3, 'no user comment', 100, 200, 20, 220);
