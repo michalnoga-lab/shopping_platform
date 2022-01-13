@@ -17,40 +17,44 @@ session_start();
 </header>
 
 <div class="container">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col" style="width: 10%">#</th>
-            <th scope="col" style="width 70%">Nazwa</th>
-            <th scope="col" style="width: 20%">Cena</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php
-        include_once '../classes/dbh.classes.php';
+    <div class="row">
+        <h3>Moje produkty</h3>
+        <hr>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col" style="width: 10%">#</th>
+                <th scope="col" style="width 70%">Nazwa</th>
+                <th scope="col" style="width: 20%">Cena</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            include_once '../classes/dbh.classes.php';
 
-        $stmt = $connection->prepare('SELECT * FROM products;');
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $products = $result->fetch_all(MYSQLI_ASSOC);
+            $stmt = $connection->prepare('SELECT * FROM products;');
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $products = $result->fetch_all(MYSQLI_ASSOC);
 
-        if ($products > 0) {
-            $rowNumber = 0;
-            foreach ($products as $product) {
-                $rowNumber += 1; ?>
-                <tr onclick="window.location='product-single.php?id='+<?= $product['id'] ?>">
-                    <td><?= $rowNumber ?></td>
-                    <td><?= $product['name'] ?></td>
-                    <td><?= $product['nett_price'] ?> PLN</td>
-                    <!-- TODO w zależności od ustawień wyświetlamy cenę netto lub brutto -->
-                </tr>
-            <?php }
-        } else {
-            echo('<div class="alert alert-danger text-center" role="alert">Brak produktów do wyświetlenia</div>');
-        }
-        ?>
-        </tbody>
-    </table>
+            if ($products > 0) {
+                $rowNumber = 0;
+                foreach ($products as $product) {
+                    $rowNumber += 1; ?>
+                    <tr onclick="window.location='product-single.php?id='+<?= $product['id'] ?>">
+                        <td><?= $rowNumber ?></td>
+                        <td><?= $product['name'] ?></td>
+                        <td><?= $product['nett_price'] ?> PLN</td>
+                        <!-- TODO w zależności od ustawień wyświetlamy cenę netto lub brutto -->
+                    </tr>
+                <?php }
+            } else {
+                echo('<div class="alert alert-danger text-center" role="alert">Brak produktów do wyświetlenia</div>');
+            }
+            ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <footer>
