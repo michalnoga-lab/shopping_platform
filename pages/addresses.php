@@ -19,6 +19,8 @@ session_start();
 
 <div class="container">
     <div class="row">
+        <h3>Moje adresy</h3>
+        <hr>
         <?php
         if (isset($_GET['info'])) {
             $infoCheck = $_GET['info'];
