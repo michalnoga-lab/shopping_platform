@@ -24,6 +24,25 @@ session_start();
 
         $stmt = $connection->prepare('SELECT * FROM carts WHERE id = ?;');
         $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result > 0) {
+            $cart = $result->fetch_assoc(); ?>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <td>#</td>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+            <?php
+        } else {
+            echo('<div class="alert alert-danger text-center" role="alert">Nie odnaleziono koszyka</div>');
+        }
     }
     ?>
 </div>

@@ -44,7 +44,7 @@ session_start();
     }
     ?>
     <div class="row">
-        <h3>Szczegóły konta</h3>
+        <h3>Moje konto</h3>
         <hr>
         <?php
         include_once '../classes/dbh.classes.php';
