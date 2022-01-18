@@ -17,8 +17,15 @@ session_start();
 </header>
 
 <div class="container">
+    <?php
+    if (isset($_GET['id'])) {
+        include_once '../classes/dbh.classes.php';
+        $id = $_GET['id'];
 
-    
+        $stmt = $connection->prepare('SELECT * FROM carts WHERE id = ?;');
+        $stmt->bind_param('i', $id);
+    }
+    ?>
 </div>
 
 <footer>
