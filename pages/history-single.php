@@ -17,34 +17,58 @@ session_start();
 </header>
 
 <div class="container">
-    <?php
-    if (isset($_GET['id'])) {
-        include_once '../classes/dbh.classes.php';
-        $id = $_GET['id'];
+    <div class="row">
+        <h3>Szczegóły zamówienia</h3>
+        <hr>
+        <?php
+        if (isset($_GET['id'])) {
+            include_once '../classes/dbh.classes.php';
+            $cartId = $_GET['id'];
 
-        $stmt = $connection->prepare('SELECT * FROM carts WHERE id = ?;');
-        $stmt->bind_param('i', $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
+            $stmt_cart = $connection->prepare('SELECT * FROM carts INNER JOIN addresses on carts.address_id = addresses.id WHERE carts.id = ?;');
+            $stmt_cart->bind_param('i', $cartId);
+            $stmt_cart->execute();
+            $result = $stmt_cart->get_result();
 
-        if ($result > 0) {
-            $cart = $result->fetch_assoc(); ?>
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <td>#</td>
-                </tr>
-                </thead>
-                <tbody>
+            if ($result > 0) {
+                $cart = $result->fetch_assoc(); ?>
+                <div>
+                    <p class="col-12">Wartość zamówienia netto: <?= $cart['nett_value'] ?> PLN</p>
+                    <p class="col-12">Wartość VAT: <?= $cart['vat_value'] ?> PLN</p>
+                    <p class="col-12">Wartość brutto: <?= $cart['gross_value'] ?> PLN</p>
+                    <p class="col-12">Adres dostawy: <?= $cart['street'] ?></p>
+                    <p class="col-12">Zamówienie z dnia: <?= $cart['purchased'] ?></p>
+                </div>
+                <hr>
+                <table class="table table-hover">
+                    <tbody>
+                    <?php
+                    $stmt_products = $connection->prepare('SELECT * FROM products_in_cart INNER JOIN products on products_in_cart.product_id = products.id WHERE products_in_cart.cart_id = ?;');
+                    $stmt_products->bind_param('i', $cartId);
+                    $stmt_products->execute();
+                    $result = $stmt_products->get_result();
+                    $products = $result->fetch_all(MYSQLI_ASSOC);
+                    $rowNumber = 0;
 
-                </tbody>
-            </table>
-            <?php
-        } else {
-            echo('<div class="alert alert-danger text-center" role="alert">Nie odnaleziono koszyka</div>');
+                    foreach ($products as $product) {
+                        $rowNumber += 1; ?>
+                        <tr>
+                            <td style="width 10%"><?= $rowNumber ?></td>
+                            <td style="width 70%"><?= $product['name'] ?></td>
+                            <td style="width 20%"><?= $product['quantity'] ?> SZT</td>
+                        </tr>
+                        <!-- TODO duplikowanie koszyka / zamów to samo jeszcze raz -->
+                    <?php }
+                    ?>
+                    </tbody>
+                </table>
+                <?php
+            } else {
+                echo('<div class="alert alert-danger text-center" role="alert">Błąd wczytywania koszyka</div>');
+            }
         }
-    }
-    ?>
+        ?>
+    </div>
 </div>
 
 <footer>
