@@ -35,7 +35,7 @@ session_start();
                 <div>
                     <p class="col-12">Wartość zamówienia netto: <?= $cart['nett_value'] ?> PLN</p>
                     <p class="col-12">Wartość VAT: <?= $cart['vat_value'] ?> PLN</p>
-                    <p class="col-12">Wartość brutto: <?= $cart['gross_value'] ?> PLN</p>
+                    <p class="col-12">Wartość zamówienia brutto: <?= $cart['gross_value'] ?> PLN</p>
                     <p class="col-12">Adres dostawy: <?= $cart['street'] ?></p>
                     <p class="col-12">Zamówienie z dnia: <?= $cart['purchased'] ?></p>
                 </div>

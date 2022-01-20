@@ -46,7 +46,7 @@ session_start();
             <div>
                 <p>Wartość zamówienia netto: <?= $carts[0]['nett_value'] ?> PLN</p>
                 <p>Wartość VAT: <?= $carts[0]['vat_value'] ?> PLN</p>
-                <p>Wartość brutto: <?= $carts[0]['gross_value'] ?> PLN</p>
+                <p>Wartość zamówienia brutto: <?= $carts[0]['gross_value'] ?> PLN</p>
             </div>
             </thead>
             <tbody>
