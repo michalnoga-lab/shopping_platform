@@ -13,7 +13,7 @@ if ($_POST('submit') !== null) {
     include '../classes/cart.classes.php';
     include '../classes/cart.controller.classes.php';
 
-    $cart = new CartController();
+    $cart = new CartController($_SESSION['id'], null, );
     $cart->update();
 
     header('location: ../pages/products.php?info=cart_saved');

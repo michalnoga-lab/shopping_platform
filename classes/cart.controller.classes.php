@@ -3,10 +3,30 @@
 
 class CartController extends Cart
 {
-    // TODO walidacja ilości
+    private int $userId;
+    private string $purchased;
+    private float $nettValue;
+    private float $vatValue;
+    private float $grossValue;
+    private int $addressId;
+    private string $userComment;
+    private bool $closed;
 
-    public function update()
+    public function __construct($userId, $purchased, $nettValue, $vatValue, $grossValue, $addressId, $userComment, $closed)
     {
+        $this->userId = $userId;
+        $this->purchased = $purchased;
+        $this->nettValue = $nettValue;
+        $this->vatValue = $vatValue;
+        $this->grossValue = $grossValue;
+        $this->addressId = $addressId;
+        $this->userComment = $userComment;
+        $this->closed = $closed;
+    }
 
+    public function update(): void
+    {
+        $this->createEmptyCartIfNecessary($this->userId);
+        // TODO pobieranie i zapisywanie całego koszyka
     }
 }
