@@ -46,6 +46,8 @@ session_start();
                     <input type="hidden" value="<?= $product['nett_price'] ?>" id="nett-price" name="nett-price"/>
                     <input type="hidden" value="<?= $product['vat'] ?>" id="vat" name="vat"/>
                     <input type="hidden" value="<?= $product['gross_price'] ?>" id="gross-price" name="gross-price"/>
+                    <input type="hidden" value="" id="comment" name="comment"/>
+                    <!-- TODO aktywować pole komentarza tak, żeby można było dodawać np rozmiar do produktu -->
                     <div class="error"></div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Dodaj do koszyka</button>

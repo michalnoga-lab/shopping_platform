@@ -16,6 +16,8 @@ class Cart extends Dbh
         }
 
         if ($stmt->rowCount() > 0) {
+            $stmt->execute();
+            $_SESSION['cart-id'] = $this->connect()->lastInsertId();
             return true;
         } else {
             return false;
@@ -27,6 +29,7 @@ class Cart extends Dbh
         $stmt = $this->connect()->prepare('INSERT INTO  carts (user_id, purchased, nett_value, vat_value, gross_value, address_id, user_comment, closed) 
                                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?);');
         if ($stmt->execute(array($userId, null, 0, 0, 0, 0, null, false))) {
+            $_SESSION['cart-id'] = $this->connect()->lastInsertId();
         } else {
             header('location ../pages/products.php?info=cart_error');
         }

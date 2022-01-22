@@ -21,8 +21,12 @@ session_start();
     if (isset($_GET['info'])) {
         $infoCheck = $_GET['info'];
 
-        if ($infoCheck == 'cart_saved') {
+        if ($infoCheck == 'cart_saved') { // TODO czy to wo połączeniu z cart classes jest ok ???
             echo('<div class="alert alert-success text-center" role="alert">Produkt dodany do koszyka</div>');
+        } elseif ($infoCheck == 'product_saved') {
+            echo('<div class="alert alert-success text-center" role="alert">Produkt dodany do koszyka</div>');
+        } elseif ($infoCheck == 'product_error') {
+            echo('<div class="alert alert-danger text-center" role="alert">Błąd dodawania produktu do koszyka</div>');
         } elseif ($infoCheck == 'connection') {
             echo('<div class="alert alert-danger text-center" role="alert">Błąd połączenia</div>');
         }
