@@ -10,7 +10,7 @@ class ProductSingleAddController extends ProductSingleAdd
     private int $quantity;
     private float $nettPrice;
     private float $vat;
-    private float $grossPrice; // TODO czy to nie powinno być grossValue ???
+    private float $grossPrice;
 
     public function __construct(int $userId, int $cartId, int $productId, string $userComment, int $quantity, float $nettPrice, float $vat, float $grossPrice)
     {
