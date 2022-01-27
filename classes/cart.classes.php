@@ -38,18 +38,4 @@ class Cart extends Dbh
         }
         return $_SESSION['cart-id'];
     }
-
-    protected function createEmptyCartIfNecessary($userId): void
-    {
-
-
-
-        if (!$this->userHasCart($userId) > 0) {
-
-
-
-            $this->createEmptyCart($userId);
-        }
-
-    }
 }
