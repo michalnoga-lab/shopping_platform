@@ -12,13 +12,11 @@ class Cart extends Dbh
         $array = $stmt->fetch();
 
         if (sizeof($array) > 0) {
-            // TODO czy z array można usunąć pozostałe zmienne ???
-            list($cartId, $userIdFromDb, $purchased, $nettValue, $vatValue, $grossValue, $addressId, $userComment, $closed) = $array;
+            list($cartId) = $array;
             $_SESSION['cart-id'] = $cartId;
             $stmt = null;
             return $cartId;
         }
-
         $stmt = null;
         return 0;
     }
