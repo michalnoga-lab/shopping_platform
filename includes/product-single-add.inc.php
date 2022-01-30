@@ -19,6 +19,6 @@ if (isset($_POST['submit'])) {
     $cart->createEmptyCart($_SESSION['id']);
     $productToAddToCart = new ProductSingleAddController($_SESSION['id'], $_SESSION['cart-id'], $productId, $userComment, $quantity, $nettPrice, $vat, $grossPrice);
     $productToAddToCart->addProduct();
-    
-    header('location: ../pages/products.php?info=cart_saved');
+
+    header('location: ../pages/products.php?info=product_saved');
 }
