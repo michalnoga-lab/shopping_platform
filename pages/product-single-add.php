@@ -50,7 +50,8 @@ session_start();
                     <!-- TODO aktywować pole komentarza tak, żeby można było dodawać np rozmiar do produktu -->
                     <div class="error"></div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Dodaj do koszyka</button>
+                <button type="submit" id="submit" name="submit" class="btn btn-primary btn-block">Dodaj do koszyka
+                </button>
             </form>
         <?php } else {
             echo('<div class="alert alert-danger text-center" role="alert">Nie odnaleziono produktu</div>');

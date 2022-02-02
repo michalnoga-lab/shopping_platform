@@ -26,7 +26,7 @@ class CartController extends Cart
 
     public function prepareCartToAddProducts(): void
     {
-        $this->createEmptyCartIfNecessary($this->userId);
+        //$this->createEmptyCartIfNecessary($this->userId);
         // TODO pobieranie i zapisywanie całego koszyka
     }
 }

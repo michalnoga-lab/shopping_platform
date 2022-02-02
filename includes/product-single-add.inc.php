@@ -12,13 +12,28 @@ if (isset($_POST['submit'])) {
 
     include '../classes/dbh.classes.php';
     include '../classes/cart.classes.php';
+
+
+
+    include '../classes/product-single-add.classes.php';
+
+
+
+
     include '../classes/product-single-add.controller.classes.php';
+
+
+
 
     $cart = new Cart();
     $cart->createEmptyCart($_SESSION['id']);
+
+
+
+
     $productToAddToCart = new ProductSingleAddController($_SESSION['id'], $_SESSION['cart-id'], $productId, $userComment, $quantity, $nettPrice, $vat, $grossPrice);
     $productToAddToCart->addProduct();
 
     // TODO czy to jest potrzebne ???
-    // header('location: ../pages/products.php?info=cart_saved');
+    header('location: ../pages/products.php?info=cart_saved');
 }

@@ -16,8 +16,16 @@ class Cart extends Dbh
         $array = $stmt->fetch();
 
         if (sizeof($array) > 0) {
+
+
+
+
             // TODO czy z array można usunąć pozostałe zmienne ???
-            list($cartId, $userId, $purchased, $nettValue, $vatValue, $grossValue, $addressId, $userComment, $closed) = $array;
+            list($cartId, $userIdFromDb, $purchased, $nettValue, $vatValue, $grossValue, $addressId, $userComment, $closed) = $array;
+
+
+
+
             $_SESSION['cart-id'] = $cartId;
             $stmt = null;
             return $cartId;
@@ -61,7 +69,13 @@ class Cart extends Dbh
 
     public function createEmptyCart($userId): int
     {
-        if (!$this->userHasCart($userId)) {
+
+
+
+        if (!$this->userHasCart($userId)>0) {
+
+
+
 
             $stmt = $this->connect()->prepare('INSERT INTO  carts (user_id, purchased, nett_value, vat_value, gross_value, address_id, user_comment, closed) 
                                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?);');
@@ -74,14 +88,26 @@ class Cart extends Dbh
                 header('location ../pages/products.php?info=cart_error');
             }
             $stmt = null;
+
+
+
+
         }
+
         return $_SESSION['cart-id'];
     }
 
     protected function createEmptyCartIfNecessary($userId): void
     {
+
+
+
         if (!$this->userHasCart($userId) > 0) {
+
+
+
             $this->createEmptyCart($userId);
         }
+
     }
 }
