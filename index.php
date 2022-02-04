@@ -12,6 +12,7 @@ session_start();
 // TODO backup bazy danych ???
 // TODO sprawdzanie typów przed wyszukaniem w bazie, np. czy id to int ???
 // TODO To prevent leaking your password, here's what your php.ini file should look like in production: do both display_errors = Off and log_errors = On. Then restart Apache or Ngnix
+// TODO logowanie każdej czynności do pliku
 ?>
 
 <!doctype html>
