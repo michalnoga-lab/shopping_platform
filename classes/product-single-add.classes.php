@@ -9,6 +9,7 @@ class ProductSingleAdd extends Dbh
                               nett_value, vat_value, gross_value) VALUES (?, ?, ?, ?, ?, ?, ?, ?);');
         if ($stmt->execute(array($userId, $cartId, $productId, $userComment, $quantity, $nettValue, $vatValue, $grossValue))) {
             header('location ../pages/products.php?info=product_saved');
+            exit();
         } else {
             header('location ../pages/products.php?info=product_error');
         }

@@ -1,7 +1,7 @@
 <?php
 // error_reporting(0); // TODO enable
 
-if ($_POST('submit') !== null) {
+if (isset($_POST['submit'])) {
 
     $productId = $_POST['product-id'];
     $userComment = $_POST['comment'];
@@ -12,14 +12,13 @@ if ($_POST('submit') !== null) {
 
     include '../classes/dbh.classes.php';
     include '../classes/cart.classes.php';
-    include '../classes/cart.controller.classes.php';
-    include '../classes/product-single-add.classes.php';
     include '../classes/product-single-add.controller.classes.php';
 
-    $cart = new CartController($_SESSION['id'], null, null, null, null, null, null, null);
-    $cart->prepareCartToAddProducts();
+    $cart = new Cart();
+    $cart->createEmptyCart($_SESSION['id']);
     $productToAddToCart = new ProductSingleAddController($_SESSION['id'], $_SESSION['cart-id'], $productId, $userComment, $quantity, $nettPrice, $vat, $grossPrice);
     $productToAddToCart->addProduct();
 
-    header('location: ../pages/products.php?info=cart_saved');
+    // TODO czy to jest potrzebne ???
+    // header('location: ../pages/products.php?info=cart_saved');
 }

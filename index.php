@@ -11,6 +11,7 @@ session_start();
 // TODO zrobić filtrowanie produktów po nazwach
 // TODO backup bazy danych ???
 // TODO sprawdzanie typów przed wyszukaniem w bazie, np. czy id to int ???
+// TODO To prevent leaking your password, here's what your php.ini file should look like in production: do both display_errors = Off and log_errors = On. Then restart Apache or Ngnix
 ?>
 
 <!doctype html>
