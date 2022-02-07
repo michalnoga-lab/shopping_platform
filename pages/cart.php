@@ -72,6 +72,7 @@ session_start();
             ?>
             </tbody>
         </table>
+        <button class="btn btn-block btn-primary">Złóż zamówienie</button>
     </div>
 </div>
 
