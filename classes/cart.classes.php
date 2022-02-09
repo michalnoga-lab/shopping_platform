@@ -21,13 +21,6 @@ class Cart extends Dbh
         return false;
     }
 
-//    protected function userHasCart(): bool
-//    {
-//        echo('ggggggggggggggggg');
-//        echo($_SESSION['cart-id']);
-//        return $_SESSION['cart-id'] > 0;
-//    }
-
     public function createEmptyCart(): void
     {
         if (!$this->userHasCart()) {

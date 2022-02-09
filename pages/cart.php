@@ -40,9 +40,9 @@ session_start();
             $result = $stmt_cart->get_result();
             $carts = $result->fetch_all(MYSQLI_ASSOC);
 
-            if (count($carts) == 0) {
+            if ($carts[0]['nett_value'] == 0) {
                 echo('<div class="alert alert-danger text-center" role="alert">Nie masz jeszcze żadnych produktów w koszyku</div>');
-            } elseif (count($carts) == 1) { ?>
+            } else { ?>
             <div>
                 <p>Wartość zamówienia netto: <?= $carts[0]['nett_value'] ?> PLN</p>
                 <p>Wartość VAT: <?= $carts[0]['vat_value'] ?> PLN</p>
@@ -68,8 +68,6 @@ session_start();
                 </tr>
                 <?php
             }
-            } else {
-                echo('<div class="alert alert-danger text-center" role="alert">Błąd wczytywania koszyka</div>');
             }
             ?>
             </tbody>
