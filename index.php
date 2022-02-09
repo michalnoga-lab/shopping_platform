@@ -13,6 +13,8 @@ session_start();
 // TODO sprawdzanie typów przed wyszukaniem w bazie, np. czy id to int ???
 // TODO To prevent leaking your password, here's what your php.ini file should look like in production: do both display_errors = Off and log_errors = On. Then restart Apache or Ngnix
 // TODO logowanie każdej czynności do pliku
+// TODO sprawdzamy czy każde ID jest int ??? wychodzi jako string!
+// TODO walidacja jako regex wszystkiego co ma być dodane do bazy danych
 ?>
 
 <!doctype html>
