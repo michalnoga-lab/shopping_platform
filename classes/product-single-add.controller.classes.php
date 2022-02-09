@@ -27,7 +27,7 @@ class ProductSingleAddController extends ProductSingleAdd
     public function addProduct(): void
     {
         $nettValue = $this->quantity * $this->nettPrice;
-        $vatValue = $nettValue * $this->vat;
+        $vatValue = $nettValue * $this->vat / 100;
         $grossValue = $nettValue + $vatValue;
 
         $this->saveProduct($this->userId, $this->cartId, $this->productId, $this->userComment, $this->quantity, $nettValue, $vatValue, $grossValue);

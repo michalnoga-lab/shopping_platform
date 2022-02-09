@@ -5,37 +5,57 @@ include_once '../includes/logger.inc.php';
 
 class Cart extends Dbh
 {
-    protected function userHasCart($userId): int
+    protected function userHasCart(): bool
     {
         $stmt = $this->connect()->prepare('SELECT * FROM carts WHERE user_id = ? AND closed = false;');
-        $stmt->execute([$userId]);
+        $stmt->execute(array($_SESSION['id']));
         $array = $stmt->fetch();
 
-        if (sizeof($array) > 0) {
+        if ($array) {
             list($cartId) = $array;
             $_SESSION['cart-id'] = $cartId;
             $stmt = null;
-            return $cartId;
+            return true;
         }
         $stmt = null;
-        return 0;
+        return false;
     }
 
-    public function createEmptyCart($userId): int
+//    protected function userHasCart(): bool
+//    {
+//        echo('ggggggggggggggggg');
+//        echo($_SESSION['cart-id']);
+//        return $_SESSION['cart-id'] > 0;
+//    }
+
+    public function createEmptyCart(): void
     {
-        if (!$this->userHasCart($userId)>0) {
+        if (!$this->userHasCart()) {
             $stmt = $this->connect()->prepare('INSERT INTO  carts (user_id, purchased, nett_value, vat_value, gross_value, address_id, user_comment, closed) 
                                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?);');
 
-            if ($stmt->execute(array($userId, null, 0, 0, 0, 0, null, false))) {
+            if ($stmt->execute(array($_SESSION['id'], null, 0, 0, 0, 0, null, false))) {
                 $cartId = $this->connect()->lastInsertId();
                 $_SESSION['cart-id'] = $cartId;
-                return $cartId;
             } else {
-                header('location ../pages/products.php?info=cart_error');
+                header('location: ../pages/products.php?info=cart_error');
             }
             $stmt = null;
         }
-        return $_SESSION['cart-id'];
+    }
+
+    public function updateCartValue($productNettPrice, $productVat, $productGrossPrice, $productQuantity): void
+    {
+        $stmt = $this->connect()->prepare('SELECT * FROM carts WHERE id = ?;');
+        $stmt->execute([$_SESSION['cart-id']]);
+        $cart = $stmt->fetch();
+        list($cartId, $userId, $purchased, $nettValueFromDb, $vatValueFromDb, $grossValueFromDb, $addressId, $userComment, $closed) = $cart;
+        $updatedNettValue = $nettValueFromDb + $productNettPrice * $productQuantity;
+        $updatedVatValue = $vatValueFromDb + $productNettPrice * $productVat / 100;
+        $updatedGrossValue = $grossValueFromDb + $productNettPrice * (1 + $productVat / 100);
+
+        $stmt = $this->connect()->prepare('UPDATE carts SET nett_value = ?, vat_value = ?, gross_value = ? WHERE id = ?;');
+        $stmt->execute(array($updatedNettValue, $updatedVatValue, $updatedGrossValue, $_SESSION['cart-id']));
+        $stmt = null;
     }
 }
