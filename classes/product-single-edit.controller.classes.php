@@ -22,6 +22,8 @@ class ProductSingleEditController extends ProductSingleEdit
 
     public function updateProduct(): void
     {
+        // TODO sprawdzenie czy ilość nie jest zero lub mniej
+
         $nettValue = $this->quantity * $this->nettPrice;
         $vatValue = $nettValue * $this->vat / 100;
         $grossValue = $nettValue + $vatValue;
