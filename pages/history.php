@@ -51,6 +51,7 @@ session_start();
             }
             ?>
         </table>
+        <!-- TODO skopiowanie koszyka do zamówienia -->
     </div>
 </div>
 

@@ -12,7 +12,6 @@ session_start();
 </head>
 
 <body>
-<script defer src="../static/js/product/add-validation.js"></script>
 <header>
     <?php include_once('../static/elements/header.php') ?>
 </header>

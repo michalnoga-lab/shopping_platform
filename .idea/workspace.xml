@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4efbe8ea-b2dc-46dc-9231-fc5dac6e0773" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/pages/product-single-edit.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/product-single-add.controller.classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/product-single-add.controller.classes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/product-single-add.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/product-single-add.inc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/product-single-add.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/product-single-add.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/products.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/products.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/history.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/history.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/elements/head.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/static/elements/head.inc.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +88,7 @@
       <workItem from="1644423848450" duration="1420000" />
       <workItem from="1644425444515" duration="369000" />
       <workItem from="1644427964676" duration="7365000" />
-      <workItem from="1645284106045" duration="4429000" />
+      <workItem from="1645284106045" duration="5533000" />
     </task>
     <servers />
   </component>
