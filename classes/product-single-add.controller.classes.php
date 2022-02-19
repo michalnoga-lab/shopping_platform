@@ -26,6 +26,15 @@ class ProductSingleAddController extends ProductSingleAdd
 
     public function addProduct(): void
     {
+        try {
+            if ($this->quantity <= 0) {
+                throw new Exception('Invalid quantity');
+            }
+        } catch (Exception $e) {
+            header("location: ../pages/products.php?info=quantity");
+            exit();
+        }
+
         $nettValue = $this->quantity * $this->nettPrice;
         $vatValue = $nettValue * $this->vat / 100;
         $grossValue = $nettValue + $vatValue;
