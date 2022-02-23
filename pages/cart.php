@@ -67,8 +67,9 @@ session_start();
                 $rowNumber += 1; ?>
                 <tr onclick="window.location='product-single-edit.php?id='+<?= $product['id'] ?>">
                     <td style=" width 10%"><?= $rowNumber ?></td>
-                    <td style="width 70%"><?= $product['name'] ?></td>
-                    <td style="width 20%"><?= $product['quantity'] ?> sztuk</td>
+                    <td style="width 55%"><?= $product['name'] ?></td>
+                    <td style="width 15%"><?= $product['quantity'] ?> sztuk</td>
+                    <td style="width 20%"><?= $product['gross_value'] ?> PLN</td>
                 </tr>
                 <?php
             }
