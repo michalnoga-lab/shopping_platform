@@ -9,7 +9,6 @@ if (isset($_POST['submit'])) {
     $nettPrice = $_POST['nett-price'];
     $vat = $_POST['vat'];
     $grossPrice = $_POST['gross-price'];
-    $intQuantity = 0; // TODO czy ta zmienna jest potrzebna ???
 
     include '../classes/dbh.classes.php';
     include '../classes/cart.classes.php';

@@ -50,5 +50,7 @@ class Cart extends Dbh
         $stmt = $this->connect()->prepare('UPDATE carts SET nett_value = ?, vat_value = ?, gross_value = ? WHERE id = ?;');
         $stmt->execute(array($updatedNettValue, $updatedVatValue, $updatedGrossValue, $_SESSION['cart-id']));
         $stmt = null;
+
+        // TODO update na podstawie danych w koszyku zrobić !!!
     }
 }

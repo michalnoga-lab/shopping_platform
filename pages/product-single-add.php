@@ -39,7 +39,7 @@ session_start();
                 <p>Cena brutto: <?= $product['gross_price'] ?> PLN</p>
                 <hr>
                 <div class="form-floating mb-3 input-control">
-                    <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Podaj ilość">
+                    <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Podaj ilość"/>
                     <label for="quantity">Podaj ilość</label>
                     <input type="hidden" value="<?= $id ?>" id="product-id" name="product-id"/>
                     <input type="hidden" value="<?= $product['nett_price'] ?>" id="nett-price" name="nett-price"/>

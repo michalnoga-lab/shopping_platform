@@ -15,6 +15,8 @@ session_start();
 // TODO logowanie każdej czynności do pliku
 // TODO sprawdzamy czy każde ID jest int ??? wychodzi jako string!
 // TODO walidacja jako regex wszystkiego co ma być dodane do bazy danych
+// TODO zrobić walidację przychodzących danych we wszystkich kontrolerach
+// TODO jeżeli dodawana ilość produktu to zero zrobić walidację w JS i czerwoną ramkę pola wprowadzania wartośći
 ?>
 
 <!doctype html>

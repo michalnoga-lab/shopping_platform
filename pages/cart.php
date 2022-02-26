@@ -27,6 +27,10 @@ session_start();
 
             if ($infoCheck === 'empty') {
                 echo('<div class="alert alert-danger text-center" role="alert">Nie masz produktów w koszyku</div>');
+            } elseif ($infoCheck == 'product_updated') {
+                echo('<div class="alert alert-success text-center" role="alert">Koszyk zaktuallizowany</div>');
+            } elseif ($infoCheck == 'product_error') {
+                echo('<div class="alert alert-danger text-center" role="alert">Błąd aktualizacji koszyka</div>');
             }
         }
         ?>
@@ -61,8 +65,8 @@ session_start();
 
             foreach ($products as $product) {
                 $rowNumber += 1; ?>
-                <tr>
-                    <td style="width 10%"><?= $rowNumber ?></td>
+                <tr onclick="window.location='product-single-edit.php?id='+<?= $product['id'] ?>">
+                    <td style=" width 10%"><?= $rowNumber ?></td>
                     <td style="width 70%"><?= $product['name'] ?></td>
                     <td style="width 20%"><?= $product['quantity'] ?> sztuk</td>
                 </tr>
