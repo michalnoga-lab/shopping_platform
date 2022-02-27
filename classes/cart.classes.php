@@ -37,20 +37,40 @@ class Cart extends Dbh
         }
     }
 
-    public function updateCartValue($productNettPrice, $productVat, $productGrossPrice, $productQuantity): void
+//    public function updateCartValue($productNettPrice, $productVat, $productGrossPrice, $productQuantity): void
+//    {
+//        $stmt = $this->connect()->prepare('SELECT * FROM carts WHERE id = ?;');
+//        $stmt->execute([$_SESSION['cart-id']]);
+//        $cart = $stmt->fetch();
+//        list($cartId, $userId, $purchased, $nettCartValueFromDb, $vatCartValueFromDb, $grossCartValueFromDb, $addressId, $userComment, $closed) = $cart;
+//        $updatedNettValue = $nettCartValueFromDb + $productNettPrice * $productQuantity;
+//        $updatedVatValue = $vatCartValueFromDb + $productNettPrice * $productVat / 100;
+//        $updatedGrossValue = $grossCartValueFromDb + $productNettPrice * (1 + $productVat / 100);
+//
+//        $stmt = $this->connect()->prepare('UPDATE carts SET nett_value = ?, vat_value = ?, gross_value = ? WHERE id = ?;');
+//        $stmt->execute(array($updatedNettValue, $updatedVatValue, $updatedGrossValue, $_SESSION['cart-id']));
+//        $stmt = null;
+//
+//        // TODO update na podstawie danych w koszyku zrobić !!!
+//    }
+
+    public function updateCartValue()
     {
-        $stmt = $this->connect()->prepare('SELECT * FROM carts WHERE id = ?;');
+        $stmt = $this->connect()->prepare('SELECT * FROM products_in_cart where cart_id = ?;');
         $stmt->execute([$_SESSION['cart-id']]);
-        $cart = $stmt->fetch();
-        list($cartId, $userId, $purchased, $nettValueFromDb, $vatValueFromDb, $grossValueFromDb, $addressId, $userComment, $closed) = $cart;
-        $updatedNettValue = $nettValueFromDb + $productNettPrice * $productQuantity;
-        $updatedVatValue = $vatValueFromDb + $productNettPrice * $productVat / 100;
-        $updatedGrossValue = $grossValueFromDb + $productNettPrice * (1 + $productVat / 100);
+        $productsInCart = $stmt->fetchAll();
+        $productsNettValue = 0;
+        $productsVatValue = 0;
+        $productsGrossValue = 0;
+
+        foreach ($productsInCart as $product) {
+            $productsNettValue = $productsNettValue + $product['nett_value'];
+            $productsVatValue = $productsVatValue + $product['vat_value'];
+            $productsGrossValue = $productsGrossValue + $product['gross_value'];
+        }
 
         $stmt = $this->connect()->prepare('UPDATE carts SET nett_value = ?, vat_value = ?, gross_value = ? WHERE id = ?;');
-        $stmt->execute(array($updatedNettValue, $updatedVatValue, $updatedGrossValue, $_SESSION['cart-id']));
+        $stmt->execute(array($productsNettValue, $productsVatValue, $productsGrossValue, $_SESSION['cart-id']));
         $stmt = null;
-
-        // TODO update na podstawie danych w koszyku zrobić !!!
     }
 }

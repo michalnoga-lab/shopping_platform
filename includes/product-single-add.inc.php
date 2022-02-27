@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
     $cart = new Cart();
     $productToAddToCart = new ProductSingleAddController($_SESSION['id'], $_SESSION['cart-id'], $productId, $userComment, $quantity, $nettPrice, $vat, $grossPrice);
     $productToAddToCart->addProduct();
-    $cart->updateCartValue($nettPrice, $vat, $grossPrice, $quantity);
+    $cart->updateCartValue();
 
     header('location: ../pages/products.php?info=product_saved');
 }

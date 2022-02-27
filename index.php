@@ -17,6 +17,7 @@ session_start();
 // TODO walidacja jako regex wszystkiego co ma być dodane do bazy danych
 // TODO zrobić walidację przychodzących danych we wszystkich kontrolerach
 // TODO jeżeli dodawana ilość produktu to zero zrobić walidację w JS i czerwoną ramkę pola wprowadzania wartośći
+// TODO sprawdzanie czy w koszyku coś jest po długości listy
 ?>
 
 <!doctype html>
