@@ -38,13 +38,13 @@ session_start();
             <thead>
             <?php
             include_once '../classes/dbh.classes.php';
-            $stmt_cart = $connection->prepare('SELECT * FROM carts WHERE user_id = ? AND closed=false;');
+            $stmt_cart = $connection->prepare('SELECT * FROM carts WHERE user_id = ? AND closed = false;');
             $stmt_cart->bind_param('i', $_SESSION['id']);
             $stmt_cart->execute();
             $result = $stmt_cart->get_result();
             $carts = $result->fetch_all(MYSQLI_ASSOC);
 
-            if ($carts[0]['nett_value'] == 0) { // TODO zmienić jeżeli nie ma produktów a nie netto
+            if ($carts[0]['nett_value'] == 0) {
                 echo('<div class="alert alert-danger text-center" role="alert">Nie masz jeszcze żadnych produktów w koszyku</div>');
             } else { ?>
             <div>

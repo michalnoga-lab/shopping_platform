@@ -23,10 +23,4 @@ class CartController extends Cart
         $this->userComment = $userComment;
         $this->closed = $closed;
     }
-
-    public function prepareCartToAddProducts(): void
-    {
-        //$this->createEmptyCartIfNecessary($this->userId);
-        // TODO pobieranie i zapisywanie całego koszyka
-    }
 }
