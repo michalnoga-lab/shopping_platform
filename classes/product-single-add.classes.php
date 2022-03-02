@@ -5,7 +5,7 @@ class ProductSingleAdd extends Dbh
 {
     private string $location = 'location: ../pages/products.php?info=';
 
-    protected function saveProduct($userId, $cartId, $productId, $userComment, $quantity, $nettValue, $vatValue, $grossValue): void
+    protected function saveProduct($userId, $cartId, $productId, $userComment, $quantity, $nettPrice, $vat, $grossPrice): void
     {
         $stmt = $this->connect()->prepare('SELECT * FROM products_in_cart WHERE cart_id = ? AND product_id = ?;');
 
@@ -16,6 +16,11 @@ class ProductSingleAdd extends Dbh
         }
 
         if ($stmt->rowCount() == 0) {
+
+            $nettValue = $quantity * $nettPrice;
+            $vatValue = $nettValue * $vat / 100;
+            $grossValue = $nettValue + $vatValue;
+
             $insert_stmt = $this->connect()->prepare('INSERT INTO products_in_cart (user_id, cart_id, product_id, user_comment, quantity,
                               nett_value, vat_value, gross_value) VALUES (?, ?, ?, ?, ?, ?, ?, ?);');
 
@@ -27,7 +32,11 @@ class ProductSingleAdd extends Dbh
             }
         } else {
             $product = $stmt->fetch();
+
             $quantity = $product['quantity'] + $quantity;
+            $nettValue = $quantity * $nettPrice;
+            $vatValue = $nettValue * $vat / 100;
+            $grossValue = $nettValue + $vatValue;
 
             $stmt_update = $this->connect()->prepare('UPDATE products_in_cart SET quantity = ?, nett_value = ?, vat_value = ?, gross_value = ?
                            WHERE product_id = ?;');
@@ -38,7 +47,6 @@ class ProductSingleAdd extends Dbh
                 header($this->location . 'error');
                 exit();
             }
-
             $stmt = null;
         }
     }

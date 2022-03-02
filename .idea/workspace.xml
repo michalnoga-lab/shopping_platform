@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4efbe8ea-b2dc-46dc-9231-fc5dac6e0773" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/product-single-add.classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/product-single-add.classes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/product-single-add.controller.classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/product-single-add.controller.classes.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +97,7 @@
       <workItem from="1645903060541" duration="1482000" />
       <workItem from="1646335543953" duration="4761000" />
       <workItem from="1646583706977" duration="2182000" />
-      <workItem from="1646585925178" duration="8224000" />
+      <workItem from="1646585925178" duration="8582000" />
     </task>
     <servers />
   </component>

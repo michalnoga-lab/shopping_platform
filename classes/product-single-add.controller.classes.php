@@ -33,12 +33,7 @@ class ProductSingleAddController extends ProductSingleAdd
         } catch (Exception $e) {
             header("location: ../pages/products.php?info=quantity");
             exit();
-        }
-
-        $nettValue = $this->quantity * $this->nettPrice;
-        $vatValue = $nettValue * $this->vat / 100;
-        $grossValue = $nettValue + $vatValue;
-
-        $this->saveProduct($this->userId, $this->cartId, $this->productId, $this->userComment, $this->quantity, $nettValue, $vatValue, $grossValue);
+        } // TODO spróbować bez try/catch
+        $this->saveProduct($this->userId, $this->cartId, $this->productId, $this->userComment, $this->quantity, $this->nettPrice, $this->vat, $this->grossPrice);
     }
 }
