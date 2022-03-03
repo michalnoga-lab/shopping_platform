@@ -30,6 +30,7 @@ class ProductSingleEdit extends Dbh
 
 
         // TODO działa update, usunąć zakomentowany kod
+        // TODO zrobić aktualizowanie wartości koszyka przy zmianie ilości
 
         if ($stmt->execute(array($quantity, $nettValue, $vatValue, $grossValue, $productId))) {
             $stmt = null;
