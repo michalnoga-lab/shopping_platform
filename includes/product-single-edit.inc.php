@@ -15,8 +15,7 @@ if (isset($_POST['submit'])) {
     include '../classes/product-single-edit.controller.classes.php';
 
     $cart = new Cart();
-    //$productToEditInCart = new ProductSingleEditController($productId, $quantity, $nettPrice, $vat, $grossPrice);
-    $productToEditInCart = new ProductSingleEditController($productId, $quantity, $nettPrice, $vat, $grossPrice); // TODO tutaj zacząć
+    $productToEditInCart = new ProductSingleEditController($productId, $quantity, $nettPrice, $vat, $grossPrice);
     $productToEditInCart->updateProduct();
     $cart->updateCartValue();
 

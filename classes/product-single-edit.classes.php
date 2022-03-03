@@ -16,7 +16,5 @@ class ProductSingleEdit extends Dbh
         }
 
         $stmt = null;
-        header($this->location . 'product_updated');
-        exit();
     }
 }
