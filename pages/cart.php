@@ -28,7 +28,7 @@ session_start();
             if ($infoCheck === 'empty') {
                 echo('<div class="alert alert-danger text-center" role="alert">Nie masz produktów w koszyku</div>');
             } elseif ($infoCheck == 'product_updated') {
-                echo('<div class="alert alert-success text-center" role="alert">Koszyk zaktuallizowany</div>');
+                echo('<div class="alert alert-success text-center" role="alert">Produkt zaktualizowany</div>');
             } elseif ($infoCheck == 'product_error') {
                 echo('<div class="alert alert-danger text-center" role="alert">Błąd aktualizacji koszyka</div>');
             }

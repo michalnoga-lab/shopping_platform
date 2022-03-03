@@ -4,11 +4,11 @@
     <list default="true" id="4efbe8ea-b2dc-46dc-9231-fc5dac6e0773" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/cart.classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/cart.classes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/product-single-add.classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/product-single-add.classes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/product-single-edit.classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/product-single-edit.classes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/product-single-edit.controller.classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/product-single-edit.controller.classes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/product-single-add.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/product-single-add.inc.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/product-single-edit.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/product-single-edit.inc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/products.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/products.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +21,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -92,6 +100,7 @@
       <workItem from="1644427964676" duration="7365000" />
       <workItem from="1645284106045" duration="5533000" />
       <workItem from="1645903060541" duration="1482000" />
+      <workItem from="1646335543953" duration="4495000" />
     </task>
     <servers />
   </component>

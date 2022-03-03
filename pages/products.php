@@ -23,6 +23,8 @@ session_start();
 
         if ($infoCheck == 'cart_saved') { // TODO czy to w połączeniu z cart classes jest ok ???
             echo('<div class="alert alert-success text-center" role="alert">Produkt dodany do koszyka</div>');
+        } elseif ($infoCheck == 'product_updated') {
+            echo('<div class="alert alert-success text-center" role="alert">Produkt zaktualizowany</div>');
         } elseif ($infoCheck == 'product_saved') {
             echo('<div class="alert alert-success text-center" role="alert">Produkt dodany do koszyka</div>');
         } elseif ($infoCheck == 'quantity') {

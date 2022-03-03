@@ -37,23 +37,6 @@ class Cart extends Dbh
         }
     }
 
-//    public function updateCartValue($productNettPrice, $productVat, $productGrossPrice, $productQuantity): void
-//    {
-//        $stmt = $this->connect()->prepare('SELECT * FROM carts WHERE id = ?;');
-//        $stmt->execute([$_SESSION['cart-id']]);
-//        $cart = $stmt->fetch();
-//        list($cartId, $userId, $purchased, $nettCartValueFromDb, $vatCartValueFromDb, $grossCartValueFromDb, $addressId, $userComment, $closed) = $cart;
-//        $updatedNettValue = $nettCartValueFromDb + $productNettPrice * $productQuantity;
-//        $updatedVatValue = $vatCartValueFromDb + $productNettPrice * $productVat / 100;
-//        $updatedGrossValue = $grossCartValueFromDb + $productNettPrice * (1 + $productVat / 100);
-//
-//        $stmt = $this->connect()->prepare('UPDATE carts SET nett_value = ?, vat_value = ?, gross_value = ? WHERE id = ?;');
-//        $stmt->execute(array($updatedNettValue, $updatedVatValue, $updatedGrossValue, $_SESSION['cart-id']));
-//        $stmt = null;
-//
-//        // TODO update na podstawie danych w koszyku zrobić !!!
-//    }
-
     public function updateCartValue()
     {
         $stmt = $this->connect()->prepare('SELECT * FROM products_in_cart where cart_id = ?;');

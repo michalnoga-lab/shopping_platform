@@ -14,9 +14,6 @@ if (isset($_POST['submit'])) {
     include '../classes/product-single-edit.classes.php';
     include '../classes/product-single-edit.controller.classes.php';
 
-
-    echo(gettype($nettPrice));
-
     $cart = new Cart();
     //$productToEditInCart = new ProductSingleEditController($productId, $quantity, $nettPrice, $vat, $grossPrice);
     $productToEditInCart = new ProductSingleEditController($productId, $quantity, $nettPrice, $vat, $grossPrice); // TODO tutaj zacząć
