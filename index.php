@@ -10,7 +10,6 @@ session_start();
 // TODO zrobić filtrowanie produktów po nazwach
 // TODO backup bazy danych ???
 // TODO To prevent leaking your password, here's what your php.ini file should look like in production: do both display_errors = Off and log_errors = On. Then restart Apache or Ngnix
-// TODO jeżeli dodawana ilość produktu to zero zrobić walidację w JS i czerwoną ramkę pola wprowadzania wartośći
 // TODO możliwość kopiowania koszyka
 
 //$stmt = $this->mysqli->prepare("UPDATE datadump SET content=? WHERE id=?"); TODO !!!!!

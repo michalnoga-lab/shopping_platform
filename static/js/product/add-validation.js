@@ -46,7 +46,7 @@ const validateInputs = () => {
     if (quantityValue.length > 6) {
         setError(quantity, 'Maksymalna ilość cyfr to 6');
     }
-    
+
     if (!pattern.test(quantityValue) ||
         quantityValue === '' ||
         quantityValue.length < 1 ||
