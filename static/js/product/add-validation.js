@@ -39,19 +39,21 @@ const validateInputs = () => {
         setError(quantity, 'Dozwolone są tylko cyfry');
     }
 
-    if (quantityValue === 0) {
+    if ( quantityValue === 0 || quantityValue === '0') {
         setError(quantity, 'Ilość musi być większa od zera');
     }
 
     if (quantityValue.length > 6) {
         setError(quantity, 'Maksymalna ilość cyfr to 6');
     }
-
-    if (!pattern.test(quantityValue ||
+    
+    if (!pattern.test(quantityValue) ||
         quantityValue === '' ||
         quantityValue.length < 1 ||
+        quantityValue < 1 ||
         quantityValue === 0 ||
-        quantityValue.length > 6)) {
+        quantityValue === '0' ||
+        quantityValue.length > 6) {
         isQuantityValid = false;
     } else {
         isQuantityValid = true;

@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4efbe8ea-b2dc-46dc-9231-fc5dac6e0773" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/classes/cart.controller.classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/cart.controller.classes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/product-single-add.controller.classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/product-single-add.controller.classes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/product-single-edit.controller.classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/product-single-edit.controller.classes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/product/add-validation.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/product/add-validation.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
