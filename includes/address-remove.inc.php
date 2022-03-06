@@ -12,7 +12,6 @@ if (isset($_POST['submit'])) {
     $stmt->bind_param('i', $id);
 
     if ($stmt->execute()) {
-        // TODO zapisanie do logów
         header('location: ../pages/addresses.php?info=removed');
     } else {
         header('location: ../pages/addresses.php?info=connection');

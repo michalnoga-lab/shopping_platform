@@ -28,7 +28,7 @@ class ProductSingleEditController extends ProductSingleEdit
             header('location: ../pages/cart.php?info=product_error');
             exit();
         }
-        
+
         $nettValue = $this->quantity * $this->nettPrice;
         $vatValue = $nettValue * $this->vat / 100;
         $grossValue = $nettValue + $vatValue;

@@ -4,18 +4,12 @@
 session_start();
 
 // TODO mail aktywacyjny po rejestracji
-// TODO licznik odwiedzin poszczególnych stron /zapisywanie do pliku/
 // TODO readme.md zmienić na dockera
 // TODO wyłączyć we wszystkich plikach raportowanie błędów
 // TODO specjalna biblioteka do sanitization danych rejestracji i logowania
 // TODO zrobić filtrowanie produktów po nazwach
 // TODO backup bazy danych ???
-// TODO sprawdzanie typów przed wyszukaniem w bazie, np. czy id to int ???
 // TODO To prevent leaking your password, here's what your php.ini file should look like in production: do both display_errors = Off and log_errors = On. Then restart Apache or Ngnix
-// TODO logowanie każdej czynności do pliku
-// TODO sprawdzamy czy każde ID jest int ??? wychodzi jako string!
-// TODO walidacja jako regex wszystkiego co ma być dodane do bazy danych
-// TODO zrobić walidację przychodzących danych we wszystkich kontrolerach
 // TODO jeżeli dodawana ilość produktu to zero zrobić walidację w JS i czerwoną ramkę pola wprowadzania wartośći
 // TODO możliwość kopiowania koszyka
 
