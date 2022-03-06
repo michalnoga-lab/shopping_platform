@@ -18,6 +18,40 @@ session_start();
 // TODO zrobić walidację przychodzących danych we wszystkich kontrolerach
 // TODO jeżeli dodawana ilość produktu to zero zrobić walidację w JS i czerwoną ramkę pola wprowadzania wartośći
 // TODO sprawdzanie czy w koszyku coś jest po długości listy
+
+//$stmt = $this->mysqli->prepare("UPDATE datadump SET content=? WHERE id=?"); TODO !!!!!
+///* BK: always check whether the prepare() succeeded */
+//if ($stmt === false) {
+//    trigger_error($this->mysqli->error, E_USER_ERROR);
+//    return;
+//}
+
+
+//$stmt = $this->mysqli->prepare("UPDATE datadump SET content=? WHERE id=?"); TODO przykład operacji na bazie danych !!!
+///* BK: always check whether the prepare() succeeded */
+//if ($stmt === false) {
+//    trigger_error($this->mysqli->error, E_USER_ERROR);
+//    return;
+//}
+//$id = 1;
+///* Bind our params */
+///* BK: variables must be bound in the same order as the params in your SQL.
+// * Some people prefer PDO because it supports named parameter. */
+//$stmt->bind_param('si', $content, $id);
+//
+///* Set our params */
+///* BK: No need to use escaping when using parameters, in fact, you must not,
+// * because you'll get literal '\' characters in your content. */
+//$content = $_POST['content'] ?: '';
+//
+///* Execute the prepared Statement */
+//$status = $stmt->execute();
+///* BK: always check whether the execute() succeeded */
+//if ($status === false) {
+//    trigger_error($stmt->error, E_USER_ERROR);
+//}
+//printf("%d Row inserted.\n", $stmt->affected_rows);
+
 ?>
 
 <!doctype html>

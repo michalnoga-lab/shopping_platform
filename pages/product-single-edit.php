@@ -21,8 +21,10 @@ session_start();
     if (isset($_GET['id'])) {
         include_once('../classes/dbh.classes.php');
 
-        $stmt = $connection->prepare('SELECT * FROM products_in_cart WHERE cart_id = ? AND product_id = ?;');
-        $stmt->bind_param('ii', $_SESSION['cart-id'], $_GET['id']);
+        // $stmt = $connection->prepare('SELECT * FROM products_in_cart WHERE cart_id = ? AND product_id = ?;'); // TODO powinien być JOIN ???
+        $stmt = $connection->prepare('SELECT * FROM products_in_cart INNER JOIN products ON products_in_cart.product_id=products.id WHERE cart_id = ? AND product_id = ?;');
+        //$stmt->bind_param('ii', $_SESSION['cart-id'], $_GET['id']); // TODO czy id jest poprawne ???
+        $stmt->bind_param('ii', $_SESSION['cart-id'], $_GET['id']); // TODO czy id jest poprawne ???
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -41,9 +43,9 @@ session_start();
                            placeholder="<?= $product['quantity'] ?>"
                            value="<?= $product['quantity'] ?>"/>
                     <input type="hidden" value="<?= $product['id'] ?>" id="product-id" name="product-id"/>
-                    <input type="hidden" value="<?= $product['nett-price'] ?>" id="nett-price" name="nett-price"/>
+                    <input type="hidden" value="<?= $product['nett_price'] ?>" id="nett-price" name="nett-price"/>
                     <input type="hidden" value="<?= $product['vat'] ?>" id="vat" name="vat"/>
-                    <input type="hidden" value="<?= $product['gross-price'] ?>" id="gross-price" name="gross-price"/>
+                    <input type="hidden" value="<?= $product['gross_price'] ?>" id="gross-price" name="gross-price"/>
                     <label for="quantity">Podaj ilość</label>
                 </div>
                 <button type="submit" id="submit" name="submit" class="btn btn-primary btn-block mb-3">Zmień ilość

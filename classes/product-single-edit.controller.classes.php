@@ -9,7 +9,7 @@ class ProductSingleEditController extends ProductSingleEdit
     private int $vat;
     private float $grossPrice;
 
-    public function __construct(int $productId, int $quantity, string $nettPrice, string $vat, $grossPrice)
+    public function __construct(int $productId, int $quantity, string $nettPrice, string $vat, string $grossPrice)
     {
         $this->productId = $productId;
         $this->quantity = $quantity;

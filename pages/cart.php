@@ -44,7 +44,7 @@ session_start();
             $result = $stmt_cart->get_result();
             $carts = $result->fetch_all(MYSQLI_ASSOC);
 
-            if ($carts[0]['nett_value'] == 0) {
+            if ($carts[0]['nett_value'] == 0) { // TODO zmienić jeżeli nie ma produktów a nie netto
                 echo('<div class="alert alert-danger text-center" role="alert">Nie masz jeszcze żadnych produktów w koszyku</div>');
             } else { ?>
             <div>
