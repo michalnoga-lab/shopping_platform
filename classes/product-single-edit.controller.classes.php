@@ -16,14 +16,19 @@ class ProductSingleEditController extends ProductSingleEdit
         $this->nettPrice = floatval($nettPrice);
         $this->vat = intval($vat);
         $this->grossPrice = floatval($grossPrice);
-
-        // TODO validation
     }
 
     public function updateProduct(): void
     {
-        // TODO sprawdzenie czy ilość nie jest zero lub mniej
-
+        try {
+            if ($this->quantity <= 0) {
+                throw new Exception('Invalid quantity');
+            }
+        } catch (Exception $e) {
+            header('location: ../pages/cart.php?info=product_error');
+            exit();
+        }
+        
         $nettValue = $this->quantity * $this->nettPrice;
         $vatValue = $nettValue * $this->vat / 100;
         $grossValue = $nettValue + $vatValue;

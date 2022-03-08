@@ -24,3 +24,4 @@ class CartController extends Cart
         $this->closed = $closed;
     }
 }
+// TODO czy tą klasę kasujemy ???
