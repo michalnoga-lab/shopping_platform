@@ -71,11 +71,9 @@ class Cart extends Dbh
 
     public function closeCart()
     {
-        $dateTime = new DateTime();
-        $currentTime = $dateTime->format('Y-m-d H:m:s');
-        $stmt = $this->connect()->prepare('UPDATE carts SET purchased = ?, closed = 1 WHERE user_id = ? AND closed = 0;');
+        $stmt = $this->connect()->prepare('UPDATE carts SET purchased = NOW(), closed = 1 WHERE user_id = ? ORDER BY id DESC LIMIT 1;');
 
-        if (!$stmt->execute(array($currentTime, $_SESSION['id']))) {
+        if (!$stmt->execute(array($_SESSION['id']))) {
             $stmt = null;
             header('location: ../pages/cart-submit-done.php?info=submit_error');
             exit();
