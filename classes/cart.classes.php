@@ -78,6 +78,8 @@ class Cart extends Dbh
             header('location: ../pages/cart-submit-done.php?info=submit_error');
             exit();
         }
+        $logger = new Logger();
+        $logger->systemEvent('Cart submitted');
         $_SESSION['cart-id'] = null;
         $stmt = null;
     }
