@@ -33,8 +33,10 @@ session_start();
                 echo('<div class="alert alert-danger text-center" role="alert">Błąd aktualizacji koszyka</div>');
             } elseif ($infoCheck == 'product_delete_error') {
                 echo('<div class="alert alert-danger text-center" role="alert">Błąd usuwania produktu z koszyka</div>');
-            } elseif ($infoCheck = 'product_deleted') {
+            } elseif ($infoCheck == 'product_deleted') {
                 echo('<div class="alert alert-success text-center" role="alert">Produkt usunięty z koszyka</div>');
+            } elseif ($infoCheck == 'address_assign_error') {
+                echo('<div class="alert alert-danger text-center" role="alert">Błąd zapisywania adresu</div>');
             }
         }
         ?>

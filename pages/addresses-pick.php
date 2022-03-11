@@ -44,8 +44,7 @@ session_start();
                 $rowNumber = 0;
                 foreach ($addresses as $address) {
                     $rowNumber += 1; ?>
-                    <tr onclick="window.location='address-single.php?id='+<?= $address['id'] ?>">
-                        <!-- TODO formularz i zapisanie ID do bazy -->
+                    <tr onclick="window.location='cart-submit.php?id='+<?= $address['id'] ?>">
                         <td><?= $rowNumber ?></td>
                         <td><?= $address['street'] ?></td>
                         <td><?= $address['phone'] ?></td>

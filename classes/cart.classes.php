@@ -56,4 +56,21 @@ class Cart extends Dbh
         $stmt->execute(array($productsNettValue, $productsVatValue, $productsGrossValue, $_SESSION['cart-id']));
         $stmt = null;
     }
+
+    public function assignAddressToCart($addressId)
+    {
+        $stmt = $this->connect()->prepare('UPDATE carts SET address_id = ? WHERE user_id = ? AND closed = 0;');
+
+        if (!$stmt->execute(array($addressId, $_SESSION['id']))) {
+            $stmt = null;
+            header('location: ../pages/cart.php?info=address_assign_error');
+            exit();
+        }
+        $stmt = null;
+    }
+
+    public function closeCart()
+    {
+
+    }
 }
