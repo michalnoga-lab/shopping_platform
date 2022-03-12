@@ -85,7 +85,7 @@ session_start();
         </table>
         <?php
         if ($hidden) { ?>
-            <button class="btn btn-block btn-primary" id="submit" name="submit" hidden>Złóż zamówienie</button>
+            <button class="btn btn-block btn-primary" hidden>Złóż zamówienie</button>
             <?php
         } else {
             ?>
