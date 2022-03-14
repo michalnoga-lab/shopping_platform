@@ -50,7 +50,9 @@ session_start();
 
             if ($carts[0]['nett_value'] == 0) {
                 echo('<div class="alert alert-danger text-center" role="alert">Nie masz jeszcze żadnych produktów w koszyku</div>');
-            } else { ?>
+                $hidden = true;
+            } else {
+            $hidden = false; ?>
             <div>
                 <p>Wartość zamówienia netto: <?= $carts[0]['nett_value'] ?> PLN</p>
                 <p>Wartość VAT: <?= $carts[0]['vat_value'] ?> PLN</p>
@@ -81,7 +83,16 @@ session_start();
             ?>
             </tbody>
         </table>
-        <button class="btn btn-block btn-primary">Złóż zamówienie</button>
+        <?php
+        if ($hidden) { ?>
+            <button class="btn btn-block btn-primary" id="submit" name="submit" hidden>Złóż zamówienie</button>
+            <?php
+        } else {
+            ?>
+            <button class="btn btn-block btn-primary" id="submit" name="submit">Złóż zamówienie</button>
+            <?php
+        }
+        ?>
     </div>
 </div>
 
