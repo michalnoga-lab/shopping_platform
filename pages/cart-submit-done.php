@@ -18,8 +18,9 @@ session_start();
 </header>
 
 <div class="container">
-    bla
-    TODO info cart submitted
+    cart_submitted
+    submit_error
+
 </div>
 
 <footer>

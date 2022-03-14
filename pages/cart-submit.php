@@ -25,7 +25,7 @@ session_start();
         $addressId = 0;
     }
     ?>
-    <form action="../includes/address-set.inc.php" method="post" id="form" name="form">
+    <form action="../includes/cart-submit.inc.php" method="post" id="form" name="form">
         <input type="hidden" value="<?= $addressId ?>" name="address-id" id="address-id"/>
         <button class="btn btn-block btn-success">Prześlij zamówienie do realizacji</button>
     </form>

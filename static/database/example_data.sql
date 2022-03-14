@@ -1,25 +1,27 @@
-DROP DATABASE IF EXISTS platform;
+DROP
+DATABASE IF EXISTS platform;
 
-CREATE DATABASE platform;
+CREATE
+DATABASE platform;
 
 CREATE TABLE `users`
 (
     `id`       int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `username` varchar(255)                       NOT NULL,
-    `email`    varchar(255)                       NOT NULL,
-    `password` varchar(255)                       NOT NULL,
-    `role`     varchar(255)                       NOT NULL
+    `username` varchar(255) NOT NULL,
+    `email`    varchar(255) NOT NULL,
+    `password` varchar(255) NOT NULL,
+    `role`     varchar(255) NOT NULL
 );
 
 CREATE TABLE `products`
 (
     `id`             int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `auction_number` varchar(255)                       NOT NULL,
-    `name`           varchar(255)                       NOT NULL,
-    `description`    varchar(1000)                      NOT NULL,
-    `nett_price`     decimal(10, 2)                     NOT NULL,
-    `vat`            int(11)                            NOT NULL,
-    `gross_price`    decimal(10, 2)                     NOT NULL,
+    `auction_number` varchar(255)   NOT NULL,
+    `name`           varchar(255)   NOT NULL,
+    `description`    varchar(1000)  NOT NULL,
+    `nett_price`     decimal(10, 2) NOT NULL,
+    `vat`            int(11) NOT NULL,
+    `gross_price`    decimal(10, 2) NOT NULL,
     `optima_code`    varchar(255),
     `ean`            varchar(255)
 );
@@ -27,52 +29,54 @@ CREATE TABLE `products`
 CREATE TABLE addresses
 (
     `id`      int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `user_id` int(11)                            NOT NULL,
-    `street`  varchar(255)                       NOT NULL,
-    `phone`   varchar(255)                       NOT NULL
+    `user_id` int(11) NOT NULL,
+    `street`  varchar(255) NOT NULL,
+    `phone`   varchar(255) NOT NULL
 );
 
 CREATE TABLE company
 (
     `id`            int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `name`          varchar(255)                       NOT NULL,
-    `nip`           varchar(255)                       NOT NULL,
-    `street`        varchar(255)                       NOT NULL,
-    `street_number` varchar(255)                       NOT NULL,
-    `city`          varchar(255)                       NOT NULL,
-    `post_code`     varchar(255)                       NOT NULL,
-    `default_price` varchar(255)                       NOT NULL
+    `name`          varchar(255) NOT NULL,
+    `nip`           varchar(255) NOT NULL,
+    `street`        varchar(255) NOT NULL,
+    `street_number` varchar(255) NOT NULL,
+    `city`          varchar(255) NOT NULL,
+    `post_code`     varchar(255) NOT NULL,
+    `default_price` varchar(255) NOT NULL
 );
 
 CREATE TABLE carts
 (
     `id`           int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `user_id`      int(11)                            NOT NULL,
-    `purchased`    datetime,
-    `nett_value`   decimal(10, 2)                     NOT NULL,
-    `vat_value`    decimal(10, 2)                     NOT NULL,
-    `gross_value`  decimal(10, 2)                     NOT NULL,
+    `user_id`      int(11) NOT NULL,
+    `purchased`    timestamp,
+    `nett_value`   decimal(10, 2)        NOT NULL,
+    `vat_value`    decimal(10, 2)        NOT NULL,
+    `gross_value`  decimal(10, 2)        NOT NULL,
     `address_id`   int(11),
     `user_comment` varchar(255),
-    `closed`       boolean DEFAULT false              NOT NULL
+    `closed`       boolean DEFAULT false NOT NULL
 );
 
 CREATE TABLE products_in_cart
 (
     `id`           int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `user_id`      int(11)                            NOT NULL,
-    `cart_id`      int(11)                            NOT NULL,
-    `product_id`   int(11)                            NOT NULL,
-    `user_comment` varchar(255)                       NOT NULL,
-    `quantity`     int(11)                            NOT NULL,
-    `nett_value`   decimal(10, 2)                     NOT NULL,
-    `vat_value`    decimal(10, 2)                     NOT NULL,
-    `gross_value`  decimal(10, 2)                     NOT NULL
+    `user_id`      int(11) NOT NULL,
+    `cart_id`      int(11) NOT NULL,
+    `product_id`   int(11) NOT NULL,
+    `user_comment` varchar(255)   NOT NULL,
+    `quantity`     int(11) NOT NULL,
+    `nett_value`   decimal(10, 2) NOT NULL,
+    `vat_value`    decimal(10, 2) NOT NULL,
+    `gross_value`  decimal(10, 2) NOT NULL
 );
 
 INSERT INTO users (id, username, email, password, role)
 VALUES (1, 'user', 'user@gmail.com', '$2y$10$DgPcQ1AGo..ZOR1b1w/KKup0U7/KFXJtjSAM5w3WT.hLGyJdeFp4i',
-        'user'); # password = user user
+        'user');
+#
+password = user user
 
 INSERT INTO products (id, auction_number, name, description, nett_price, vat, gross_price, optima_code, ean)
 VALUES (2, '1a', 'Product 1',
