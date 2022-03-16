@@ -74,6 +74,8 @@ session_start();
                         <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit" id="submit"
                                 name="submit">Zarejestruj konto
                         </button>
+                        <!-- TODO spinner + informacja o utworzeniu konta -->
+                        <!--  TODO poprawić walidację rejestracji -->
                     </div>
                     <hr class="my-4">
                 </form>

@@ -11,7 +11,7 @@ if (isset($_POST['address-id'])) {
     $cart = new Cart();
     $cart->assignAddressToCart($addressId);
     $cart->closeCart();
-    $mailFunction = new MailFunction();
+    $mailFunction = new MailBot();
     $mailFunction->sendEmail('biuro@primakrakow.pl', 'Zamówienie', 'Treść wiadomości', '', '');
 }
 

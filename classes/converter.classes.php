@@ -3,8 +3,8 @@
 
 class Converter
 {
-    public function convertToOptimaFormat()
+    public function convertToOptimaFormat(string $order)
     {
-
+        // TODO
     }
 }

@@ -1,8 +1,19 @@
 {
-    "require-dev": {
-        "phpunit/phpunit": "^9.5"
+    "name": "michal/tendering_platform",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Michal\\TenderingPlatform\\": "src/"
+        }
     },
-  "require": {
-    "ext-mysqli": "*"
-  }
+    "authors": [
+        {
+            "name": "Michal",
+            "email": "michalnoga.poczta@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/mailer": "^6.0",
+        "symfony/google-mailer": "^6.0"
+    }
 }

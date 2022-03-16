@@ -1,6 +1,7 @@
 <?php
 // error_reporting(0); TODO
 include_once '../includes/logger.inc.php';
+include_once 'mail.classes.php';
 
 class Register extends Dbh
 {
@@ -32,7 +33,9 @@ class Register extends Dbh
 
             if ($stmt->execute(array($username, $email, $hashed_password, 'USER'))) { // TODO enum zamiast na sztywno USER
                 $stmt = null;
-                $logger->systemEvent('Registration successful with email ' . $email . ' as ' . 'USER');
+                //$logger->systemEvent('Registration successful with email ' . $email . ' as ' . 'USER');
+                $mail = new MailBot();
+                $mail->sendEmail($email, ''); // TODO path to attachment
                 header('location: ../index.php?info=user_added');
                 exit();
             }
