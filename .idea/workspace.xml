@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4efbe8ea-b2dc-46dc-9231-fc5dac6e0773" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/includes/product-single-delete.inc.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/classes/product-single-delete.classes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/product-single-delete.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/product-single-delete.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cart.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/product-single-delete.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/product-single-delete.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +103,7 @@
       <workItem from="1646585925178" duration="8803000" />
       <workItem from="1647549971299" duration="294000" />
       <workItem from="1647631868121" duration="385000" />
-      <workItem from="1647634833047" duration="824000" />
+      <workItem from="1647634833047" duration="2778000" />
     </task>
     <servers />
   </component>
