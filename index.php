@@ -4,7 +4,7 @@
 session_start();
 
 // TODO mail aktywacyjny po rejestracji
-// TODO licznik odwiedzin poszczególnych stron
+// TODO licznik odwiedzin poszczególnych stron /zapisywanie do pliku/
 // TODO readme.md zmienić na dockera
 // TODO wyłączyć we wszystkich plikach raportowanie błędów
 // TODO specjalna biblioteka do sanitization danych rejestracji i logowania
@@ -19,6 +19,7 @@ session_start();
 // TODO jeżeli dodawana ilość produktu to zero zrobić walidację w JS i czerwoną ramkę pola wprowadzania wartośći
 // TODO sprawdzanie czy w koszyku coś jest po długości listy
 // TODO możliwość kopiowania koszyka
+// TODO aktywacja na email
 
 //$stmt = $this->mysqli->prepare("UPDATE datadump SET content=? WHERE id=?"); TODO !!!!!
 ///* BK: always check whether the prepare() succeeded */
