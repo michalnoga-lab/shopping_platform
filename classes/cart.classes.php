@@ -77,11 +77,10 @@ class Cart extends Dbh
 
         if (!$stmt->execute(array($currentTime, $_SESSION['id']))) {
             $stmt = null;
-            // TODO session cart id
-            $_SESSION['cart-id'] = null;
             header('location: ../pages/cart-submit-done.php?info=submit_error');
             exit();
         }
+        $_SESSION['cart-id'] = null;
         $stmt = null;
     }
 }

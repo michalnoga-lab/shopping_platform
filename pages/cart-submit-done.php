@@ -18,9 +18,17 @@ session_start();
 </header>
 
 <div class="container">
-    cart_submitted
-    submit_error
+    <?php
+    if (isset($_GET['info'])) {
+        $infoCheck = $_GET['info'];
 
+        if ($infoCheck == 'cart_submitted') {
+            echo('<div class="alert alert-success text-center" role="alert">Zamówienie poprawnie złożone</div>');
+        } elseif ($infoCheck == 'submit_error') {
+            echo('<div class="alert alert-danger text-center" role="alert">Błąd zapisywania zamówienia</div>');
+        }
+    }
+    ?>
 </div>
 
 <footer>
