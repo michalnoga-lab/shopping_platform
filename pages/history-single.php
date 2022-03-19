@@ -52,7 +52,7 @@ session_start();
 
                     foreach ($products as $product) {
                         $rowNumber += 1; ?>
-                        <tr onclick="window.location='product-single-add.php?id=+<?= $product['id'] ?>'">
+                        <tr>
                             <td style="width 10%"><?= $rowNumber ?></td>
                             <td style="width 70%"><?= $product['name'] ?></td>
                             <td style="width 20%"><?= $product['quantity'] ?> SZT</td>
