@@ -89,7 +89,9 @@ session_start();
             <?php
         } else {
             ?>
-            <button class="btn btn-block btn-primary" id="submit" name="submit">Złóż zamówienie</button>
+            <button class="btn btn-block btn-primary" id="submit" name="submit"
+                    onclick="window.location='addresses-pick.php'">Złóż zamówienie
+            </button>
             <?php
         }
         ?>
