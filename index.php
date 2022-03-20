@@ -17,9 +17,7 @@ session_start();
 // TODO walidacja jako regex wszystkiego co ma być dodane do bazy danych
 // TODO zrobić walidację przychodzących danych we wszystkich kontrolerach
 // TODO jeżeli dodawana ilość produktu to zero zrobić walidację w JS i czerwoną ramkę pola wprowadzania wartośći
-// TODO sprawdzanie czy w koszyku coś jest po długości listy
 // TODO możliwość kopiowania koszyka
-// TODO aktywacja na email
 
 //$stmt = $this->mysqli->prepare("UPDATE datadump SET content=? WHERE id=?"); TODO !!!!!
 ///* BK: always check whether the prepare() succeeded */
