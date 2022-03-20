@@ -12,7 +12,7 @@ session_start();
 </head>
 
 <body>
-
+<script defer src="../static/js/common/spinner.js"></script>
 <header>
     <?php include_once('../static/elements/header.php') ?>
 </header>
@@ -23,8 +23,13 @@ session_start();
     ?>
     <form action="../includes/cart-submit.inc.php" method="post" id="form" name="form">
         <input type="hidden" value="<?= $addressId ?>" name="address-id" id="address-id"/>
-        <button class="btn btn-block btn-success">Prześlij zamówienie do realizacji</button>
+        <button class="btn btn-block btn-success" name="submit" id="submit">Prześlij zamówienie do realizacji</button>
     </form>
+</div>
+<div class="loader" style="visibility: hidden" id="spinner">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Przetwarzanie zamówienia ...</span>
+    </div>
 </div>
 
 <footer>
