@@ -19,11 +19,7 @@ session_start();
 
 <div class="container">
     <?php
-    if (isset($_GET['id'])) {
-        $addressId = $_GET['id'];
-    } else {
-        $addressId = 0;
-    }
+    $addressId = $_GET['id'] ?? 0;
     ?>
     <form action="../includes/cart-submit.inc.php" method="post" id="form" name="form">
         <input type="hidden" value="<?= $addressId ?>" name="address-id" id="address-id"/>

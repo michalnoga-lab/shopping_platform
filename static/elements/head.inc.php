@@ -18,6 +18,7 @@ error_reporting(0);
 <link href="/static/css/header.css" rel="stylesheet"/>
 <link href="/static/css/footer.css" rel="stylesheet"/>
 <link href="/static/css/validation.css" rel="stylesheet"/>
+<link href="/static/css/spinner.css" rel="sytlesheet"/>
 
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>

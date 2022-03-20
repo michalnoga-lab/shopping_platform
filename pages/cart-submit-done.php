@@ -26,6 +26,8 @@ session_start();
             echo('<div class="alert alert-success text-center" role="alert">Zamówienie poprawnie złożone</div>');
         } elseif ($infoCheck == 'submit_error') {
             echo('<div class="alert alert-danger text-center" role="alert">Błąd zapisywania zamówienia</div>');
+        } elseif ($infoCheck == 'mail_error') {
+            echo('<div class="alert alert-danger text-center" role="alert">Błąd przesyłania zamówienia do realizacji</div>');
         }
     }
     ?>
