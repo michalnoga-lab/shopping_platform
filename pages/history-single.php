@@ -41,6 +41,13 @@ session_start();
                 </div>
                 <hr>
                 <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col" style="width: 10%">#</th>
+                        <th scope="col" style="width: 70%">Nazwa produktu</th>
+                        <th scope="col" style="width: 20%">Ilość</th>
+                    </tr>
+                    </thead>
                     <tbody>
                     <?php
                     $stmt_products = $connection->prepare('SELECT * FROM products_in_cart INNER JOIN products on products_in_cart.product_id = products.id WHERE products_in_cart.cart_id = ?;');
