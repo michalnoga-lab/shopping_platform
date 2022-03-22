@@ -34,15 +34,25 @@ session_start();
             if (count($carts) == 0) {
                 echo('<div class="alert alert-danger text-center" role="alert">Nie masz jeszcze żadnych zrealizowanych zamówień</div>');
             } elseif ($carts > 0) {
+                ?>
+                <thead>
+                <tr>
+                    <th scope="col" style="width: 10%">#</th>
+                    <th scope="col" style="width: 50%">Data zamówienia</th>
+                    <th scope="col" style="width: 20%">Wartość netto</th>
+                    <th scope="col" style="width: 20%">Wartość brutto</th>
+                </tr>
+                </thead>
+                <?php
                 $rowNumber = 0;
                 foreach ($carts as $cart) {
                     $rowNumber += 1; ?>
                     <tr onclick="window.location='history-single.php?id='+<?= $cart['id'] ?>">
-                        <td><?= $rowNumber ?> - zamówienie z dnia: <?= explode(' ', $cart['purchased'])[0] ?>
+                        <td><?= $rowNumber ?></td>
+                        <td><?= explode(' ', $cart['purchased'])[0] ?>
                             godzina <?= substr_replace(explode(' ', $cart['purchased'])[1], "", -3) ?></td>
-                        <td>Wartość netto: <?= $cart['nett_value'] ?> PLN</td>
-                        <td>Wartość VAT: <?= $cart['vat_value'] ?> PLN</td>
-                        <td>Wartość brutto: <?= $cart['gross_value'] ?> PLN</td>
+                        <td><?= $cart['nett_value'] ?> PLN</td>
+                        <td><?= $cart['gross_value'] ?> PLN</td>
                     </tr>
                     <?php
                 }
