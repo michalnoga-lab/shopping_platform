@@ -60,6 +60,12 @@ session_start();
                 <p>Wartość VAT: <?= $carts[0]['vat_value'] ?> PLN</p>
                 <p>Wartość zamówienia brutto: <?= $carts[0]['gross_value'] ?> PLN</p>
             </div>
+            <tr>
+                <th scope="col" style="width: 10%">#</th>
+                <th scope="col" style="width: 50%">Nazwa produktu</th>
+                <th scope="col" style="width:20%">Ilość</th>
+                <th scope="col" style="width: 20%">Wartość netto</th>
+            </tr>
             </thead>
             <tbody>
             <?php
@@ -74,10 +80,10 @@ session_start();
             foreach ($products as $product) {
                 $rowNumber += 1; ?>
                 <tr onclick="window.location='product-single-edit.php?id='+<?= $product['id'] ?>">
-                    <td style=" width 10%"><?= $rowNumber ?></td>
-                    <td style="width 55%"><?= $product['name'] ?></td>
-                    <td style="width 15%"><?= $product['quantity'] ?> sztuk</td>
-                    <td style="width 20%"><?= $product['gross_value'] ?> PLN</td>
+                    <td><?= $rowNumber ?></td>
+                    <td><?= $product['name'] ?></td>
+                    <td><?= $product['quantity'] ?> sztuk</td>
+                    <td><?= $product['nett_value'] ?> PLN</td>
                 </tr>
                 <?php
             }
