@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4efbe8ea-b2dc-46dc-9231-fc5dac6e0773" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/tendering_platform_model.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/tendering_platform_model.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/register-confirm.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/converter.classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/converter.classes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/mail.classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/mail.classes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/register.classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/register.classes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/cart-submit.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/cart-submit.inc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/register.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +47,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/mailer" />
       <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/symfony/google-mailer" />
     </include_path>
   </component>
   <component name="ProjectId" id="22rVfYD0Gf9rKS43EW85tVyvqhg" />
@@ -135,7 +130,7 @@
       <workItem from="1647978432840" duration="1863000" />
       <workItem from="1648309849475" duration="5015000" />
       <workItem from="1648389467144" duration="5143000" />
-      <workItem from="1649518685304" duration="1652000" />
+      <workItem from="1649518685304" duration="5995000" />
     </task>
     <servers />
   </component>

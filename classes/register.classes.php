@@ -33,9 +33,8 @@ class Register extends Dbh
 
             if ($stmt->execute(array($username, $email, $hashed_password, 'USER'))) { // TODO enum zamiast na sztywno USER
                 $stmt = null;
-                //$logger->systemEvent('Registration successful with email ' . $email . ' as ' . 'USER');
                 $mail = new MailBot();
-                $mail->sendEmail($email, ''); // TODO path to attachment
+                $mail->sendEmail($email);
                 header('location: ../index.php?info=user_added');
                 exit();
             }
