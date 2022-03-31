@@ -1,33 +1,35 @@
 <?php
-// error_reporting(0);
+// error_reporting(0); // TODO
 
-use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mime\Email;
 
-//include_once '../vendor/autoload.php';
+//include_once '../includes/logger.inc.php';
 
+//use Symfony\Component\Mime\Email;
+//use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+//use Symfony\Component\HttpFoundation\Response;
+//use Symfony\Component\Mailer\MailerInterface;
+//use Symfony\Component\Routing\Annotation\Route;
+
+
+//class MailBot extends AbstractController
 class MailBot
 {
-    public function sendEmail($to): void
+    public function sendEmail($to)
     {
-        try {
-            $email = (new \Symfony\Component\Mime\Email())
-                ->from('biuro@primakrakow.pl')
-                ->to($to)
-                ->addBcc('biuro@primakrakow.pl')
-                ->subject('Rejestracja')
-                ->html('
-                <p>Kliknij <a></a> aby potwierdzić rejestrację na platformie</p>
-                ');
+        $text = 'HELLO';
 
-            $dsn = 'gmail+smtp://pocztazamowienauto:zaq12wsxcde3@default';
-            $transport = Transport::fromDsn($dsn);
-            $mailer = new Mailer($transport);
-            $mailer->send($email);
-        } catch (Exception $e) {
-            // TODO handle exception
-        } catch (\Symfony\Component\Mailer\Exception\TransportExceptionInterface $e) {
-            // TODO handle exception
-        }
+        $email = (new Email())
+            ->from('pocztazamowienauto@gmail.com')
+            ->to('biuro@primakrakow.pl')
+            ->subject('Potwierdzenie rejestracji')
+            ->text($text);
+
+        $transport = Transport::fromDsn('gmail+smtp://pocztazamowienauto:zaq12wsxcde3@default');
+
+        $mailer = new \Symfony\Component\Mailer\Mailer($transport);
+
+        $mailer->send($email);
     }
 }

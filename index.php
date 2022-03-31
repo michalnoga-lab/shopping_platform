@@ -62,8 +62,8 @@ session_start();
 
 <div class="col-12">
     <?php
-    if (isset($_GET['error'])) {
-        $errorCheck = $_GET['error'];
+    if (isset($_GET['info'])) {
+        $errorCheck = $_GET['info'];
 
         if ($errorCheck === 'user_added') {
             echo('<div class="alert alert-success text-center" role="alert">Użytkownik poprawnie dodany do bazy danych</div>');

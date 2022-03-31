@@ -35,6 +35,8 @@ session_start();
             echo('<div class="alert alert-danger text-center" role="alert">Taki email jest już w użyciu. Proszę wybrać inny</div>');
         } elseif ($infoCheck === 'connection') {
             echo('<div class="alert alert-danger text-center" role="alert">Błąd połączenia</div>');
+        } elseif ($infoCheck == 'email_error') {
+            echo('<div class="alert alert-danger text-center" role="alert">Błąd wysyłania potwierdzenia rejestracji</div>');
         }
     }
     ?>
