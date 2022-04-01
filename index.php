@@ -12,6 +12,7 @@ session_start();
 // TODO To prevent leaking your password, here's what your php.ini file should look like in production: do both display_errors = Off and log_errors = On. Then restart Apache or Ngnix
 // TODO możliwość kopiowania koszyka
 // TODO composer namespaces autoload -> https://www.youtube.com/watch?v=xWgtKALpx9E
+// TODO namespace App\nazwa_klasy ---i potem: use App\nazwa_klasy as ... i importy
 
 //$stmt = $this->mysqli->prepare("UPDATE datadump SET content=? WHERE id=?"); TODO !!!!!
 ///* BK: always check whether the prepare() succeeded */
@@ -51,8 +52,8 @@ session_start();
 <!doctype html>
 <html lang="pl">
 <head>
-    <?php include_once('static/elements/head.inc.php'); ?>
-    <link href="/static/css/index.css" rel="stylesheet"/>
+    <?php include_once('src/static/elements/head.inc.php'); ?>
+    <link href="src/static/css/index.css" rel="stylesheet"/>
     <title>Prima Platforma</title>
 </head>
 <body>

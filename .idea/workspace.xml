@@ -2,14 +2,81 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4efbe8ea-b2dc-46dc-9231-fc5dac6e0773" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/tendering_platform_model.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/tendering_platform_model.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/mail.classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/mail.classes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/address-add-controller.classes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/address-add.classes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/cart.classes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/cart.controller.classes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/converter.classes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/dbh.classes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/login-controller.classes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/login.classes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/mail.classes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/product-single-add.classes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/product-single-add.controller.classes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/product-single-delete.classes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/product-single-edit.classes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/product-single-edit.controller.classes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/register-controller.classes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/register.classes.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/account-name.inc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/account-password.inc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/address-add.inc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/address-remove.inc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/cart-submit.inc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/cart.inc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/logger.inc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/login.inc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/logout.inc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/product-single-add.inc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/product-single-delete.inc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/product-single-edit.inc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/register.inc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/roles.inc.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/account-name.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/account-password.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/account.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/address-single-add.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/address-single.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/addresses-pick.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/addresses.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/cart-submit-done.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/cart-submit.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/cart.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/cookies.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/history-single.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/history.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/login.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/logout.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/product-single-add.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/product-single-delete.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/product-single-edit.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/products.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/register-confirm.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/register.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/rodo.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/footer.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/header.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/reset.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/spinner.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/validation.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/database/example_data.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/elements/footer.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/elements/head.inc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/elements/header.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/icons/trash.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/account/name-validation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/account/password-validation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/address/add-validation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/common/spinner.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/login/validation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/product/add-validation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/register/validation.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +138,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last.edited.regexp" value="123436" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pages" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
@@ -138,6 +205,7 @@
       <workItem from="1649518685304" duration="8848000" />
       <workItem from="1649527738556" duration="4095000" />
       <workItem from="1649532714356" duration="2591000" />
+      <workItem from="1649603234084" duration="365000" />
     </task>
     <servers />
   </component>
