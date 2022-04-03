@@ -9,20 +9,19 @@ session_start();
     <?php if (isset($_SESSION['id'])) {
         ?>
         <nav class="my-2 my-md-0 mr-md-3">
-            <a class="p-2 text-dark" href="/pages/products.php">Produkty</a>
-            <a class="p-2 text-dark" href="/pages/addresses.php">Adresy</a>
-            <a class="p-2 text-dark" href="/pages/account.php">Konto</a>
-            <a class="p-2 text-dark" href="/pages/cart.php">Koszyk</a>
-            <a class="p-2 text-dark" href="/pages/history.php">Historia</a>
+            <a class="p-2 text-dark" href="/src/pages/products.php">Produkty</a>
+            <a class="p-2 text-dark" href="/src/pages/addresses.php">Adresy</a>
+            <a class="p-2 text-dark" href="/src/pages/account.php">Konto</a>
+            <a class="p-2 text-dark" href="/src/pages/cart.php">Koszyk</a>
+            <a class="p-2 text-dark" href="/src/pages/history.php">Historia</a>
         </nav>
-        <a class="btn btn-outline-danger header-btn" href="/pages/logout.php">Wyloguj</a>
+        <a class="btn btn-outline-danger header-btn" href="/src/pages/logout.php">Wyloguj</a>
         <?php
     } else {
         ?>
-        <a class="btn btn-outline-success header-btn" href="/pages/login.php">Logowanie</a>
-        <a class="btn btn-outline-primary header-btn" href="/pages/register.php">Rejestracja</a>
+        <a class="btn btn-outline-success header-btn" href="/src/pages/login.php">Logowanie</a>
+        <a class="btn btn-outline-primary header-btn" href="/src/pages/register.php">Rejestracja</a>
         <?php
     }
     ?>
-
 </div>

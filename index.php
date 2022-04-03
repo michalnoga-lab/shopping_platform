@@ -59,7 +59,7 @@ session_start();
 <body>
 
 <header>
-    <?php include_once('static/elements/header.php') ?>
+    <?php include_once('src/static/elements/header.php') ?>
 </header>
 
 <div class="col-12">
