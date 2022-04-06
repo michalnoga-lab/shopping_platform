@@ -412,7 +412,7 @@ gradle-app.setting
 composer.phar
 /vendor/
 
-composer.lock
+composer.lock-DELL
 
 /wpcs/*
 

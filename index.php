@@ -11,6 +11,7 @@ session_start();
 // TODO backup bazy danych ???
 // TODO To prevent leaking your password, here's what your php.ini file should look like in production: do both display_errors = Off and log_errors = On. Then restart Apache or Ngnix
 // TODO możliwość kopiowania koszyka
+// TODO composer namespaces autoload -> https://www.youtube.com/watch?v=xWgtKALpx9E
 
 //$stmt = $this->mysqli->prepare("UPDATE datadump SET content=? WHERE id=?"); TODO !!!!!
 ///* BK: always check whether the prepare() succeeded */
