@@ -30,7 +30,7 @@ session_start();
 
         if ($result > 0) {
             $product = $result->fetch_assoc(); ?>
-            <form action="/includes/product-single-add.inc.php" method="post" id="form">
+            <form action="/src/includes/product-single-add.inc.php" method="post" id="form">
                 <h3><?= $product['name'] ?></h3>
                 <hr>
                 <p>Numer pozycji w przetargu: <?= $product['auction_number'] ?></p>

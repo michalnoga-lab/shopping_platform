@@ -11,7 +11,7 @@ class Register extends Dbh
 
         if (!$stmt->execute(array($email))) {
             $stmt = null;
-            header("location: ../index.php?info=connection");
+            header("location: /index.php?info=connection");
             exit();
         }
 
@@ -35,12 +35,12 @@ class Register extends Dbh
                 $stmt = null;
                 $mail = new MailBot();
                 $mail->sendEmail($email);
-                header('location: ../index.php?info=user_added');
+                header('location: /index.php?info=user_added');
                 exit();
             }
         } else {
             $logger->systemEvent('Failed registration attempt with existing email ' . $email);
-            header('location: ../pages/register.php?info=email_in_db');
+            header('location: /src/pages/register.php?info=email_in_db');
             exit();
         }
         $stmt = null;

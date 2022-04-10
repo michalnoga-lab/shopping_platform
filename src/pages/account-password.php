@@ -20,7 +20,7 @@ session_start();
 <div class="container">
     <h3>Zmiana hasła</h3>
     <hr>
-    <form action="../includes/account-password.inc.php" method="post" id="form">
+    <form action="/src/includes/account-password.inc.php" method="post" id="form">
         <div class="form-floating mb-3 input-control">
             <input type="password" class="form-control" id="password" name="password" placeholder="Podaj nowe hasło">
             <label for="password">Podaj nowe hasło</label>

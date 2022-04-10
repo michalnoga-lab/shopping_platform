@@ -15,7 +15,7 @@ session_start();
 <header>
     <?php include_once('../static/elements/header.php') ?>
 </header>
-<script defer src="../static/js/address/add-validation.js"></script>
+<script defer src="/src/static/js/address/add-validation.js"></script>
 
 <div class="container">
     <?php
@@ -31,7 +31,7 @@ session_start();
         }
     }
     ?>
-    <form action="/includes/address-add.inc.php" method="post" id="form">
+    <form action="/src/includes/address-add.inc.php" method="post" id="form">
         <div class="form-floating mb-3 input-control">
             <input type="text" class="form-control" id="street" name="street" placeholder="Adres dostawy">
             <label for="street">Adres dostawy</label>

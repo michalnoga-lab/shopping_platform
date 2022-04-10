@@ -8,7 +8,7 @@ session_start();
 <html lang="pl">
 <head>
     <?php include_once('../static/elements/head.inc.php'); ?>
-    <link href="/static/css/validation.css" rel="stylesheet"/>
+    <link href="/src/static/css/validation.css" rel="stylesheet"/>
     <title>Prima Platforma</title>
 </head>
 
@@ -45,7 +45,7 @@ session_start();
         <div class="card border-0 shadow rounded-3 my-5">
             <div class="card-body p-4 p-sm-5">
                 <h5 class="card-title text-center mb-5 fw-light fs-5">Rejestracja</h5>
-                <form action="/includes/register.inc.php" method="post" id="form">
+                <form action="/src/includes/register.inc.php" method="post" id="form">
                     <div class="form-floating mb-3 input-control">
                         <input type="text" class="form-control" id="username" name="username"
                                placeholder="Imię i nazwisko"

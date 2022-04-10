@@ -30,7 +30,7 @@ session_start();
         <form action="cart.php">
             <button type="submit" class="btn btn-block btn-success mb-3">Nie usuwaj</button>
         </form>
-        <form action="/includes/product-single-delete.inc.php" method="post" id="form">
+        <form action="/src/includes/product-single-delete.inc.php" method="post" id="form">
             <input type="hidden" value="<?= $productId ?>" id="product-id" name="product-id"/>
             <button type="submit" id="submit" name="submit" class="btn btn-block btn-danger">Usuń produkt
             </button>

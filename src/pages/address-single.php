@@ -30,7 +30,7 @@ session_start();
 
         if ($result > 0) {
             $address = $result->fetch_assoc(); ?>
-            <form action="../includes/address-remove.inc.php" method="post" id="form">
+            <form action="/src/includes/address-remove.inc.php" method="post" id="form">
                 <h3>Szczegóły adresu</h3>
                 <hr>
                 <div class="form-floating mb-3 input-control">

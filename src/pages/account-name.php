@@ -12,7 +12,7 @@ session_start();
 </head>
 
 <body>
-<script defer src="../static/js/account/name-validation.js"></script>
+<script defer src="/src/static/js/account/name-validation.js"></script>
 <header>
     <?php include_once('../static/elements/header.php') ?>
 </header>
@@ -30,7 +30,7 @@ session_start();
 
     if ($result > 0) {
         $user = $result->fetch_assoc(); ?>
-        <form action="/includes/account-name.inc.php" method="post" id="form">
+        <form action="/src/includes/account-name.inc.php" method="post" id="form">
             <div class="form-floating mb-3 input-control">
                 <input type="text" class="form-control" id="name" name="name" placeholder="Nowa nazwa użytkownika">
                 <label for="name">Nowa nazwa użytkownika</label>

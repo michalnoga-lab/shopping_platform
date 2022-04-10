@@ -12,7 +12,7 @@ session_start();
 </head>
 
 <body>
-<script defer src="../static/js/common/spinner.js"></script>
+<script defer src="/src/static/js/common/spinner.js"></script>
 <header>
     <?php include_once('../static/elements/header.php') ?>
 </header>
@@ -21,7 +21,7 @@ session_start();
     <?php
     $addressId = $_GET['id'] ?? 0;
     ?>
-    <form action="../includes/cart-submit.inc.php" method="post" id="form" name="form">
+    <form action="/src/includes/cart-submit.inc.php" method="post" id="form" name="form">
         <input type="hidden" value="<?= $addressId ?>" name="address-id" id="address-id"/>
         <button class="btn btn-block btn-success" name="submit" id="submit">Prześlij zamówienie do realizacji</button>
     </form>
