@@ -427,3 +427,6 @@ composer.lock-DELL
 
 # exclude log files
 /logs
+
+# exclude other files
+/.data.php

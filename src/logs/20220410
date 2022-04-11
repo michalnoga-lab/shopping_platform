@@ -10,3 +10,4 @@
 2022-04-10 18:12:08;127.0.0.1;;;Failed registration attempt with existing email user@gmail.com;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0
 2022-04-10 18:12:18;127.0.0.1;;;Failed registration attempt with existing email primakrakow@interia.pl;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0
 2022-04-10 18:12:40;127.0.0.1;36;user@gmail.com;Login successful;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0
+2022-04-10 21:45:24;127.0.0.1;36;user@gmail.com;Logout successful;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0
