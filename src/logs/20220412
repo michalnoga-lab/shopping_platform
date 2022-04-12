@@ -1,0 +1,7 @@
+2022-04-12 10:12:41;127.0.0.1;1;user@gmail.com;Login successful;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0
+2022-04-12 11:55:26;127.0.0.1;1;user@gmail.com;Delivery address added;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0
+2022-04-12 12:54:23;127.0.0.1;1;user@gmail.com;Delivery address added;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0
+2022-04-12 13:00:14;127.0.0.1;1;user@gmail.com;Logout successful;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0
+2022-04-12 13:00:53;127.0.0.1;;;user with email user12rt@gmail.com activated;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0
+2022-04-12 13:01:04;127.0.0.1;5;user12rt@gmail.com;Login successful;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0
+2022-04-12 13:01:14;127.0.0.1;5;user12rt@gmail.com;Logout successful;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0

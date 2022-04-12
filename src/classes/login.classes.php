@@ -26,6 +26,13 @@ class Login extends Dbh
         }
 
         $user = $stmt->fetch();
+
+        if ($user[6] == false) {
+            $stmt = null;
+            header($this->location . 'account_disabled');
+            exit();
+        }
+
         $check_passwords = password_verify($password, $user[3]);
 
         if ($check_passwords == false) {

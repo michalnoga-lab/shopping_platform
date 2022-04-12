@@ -26,6 +26,8 @@ session_start();
             echo('<div class="alert alert-danger text-center" role="alert">Błędne hasło</div>');
         } elseif ($infoCheck === 'empty_input') {
             echo('<div class="alert alert-danger text-center" role="alert">Nie wszystkie pola są wypełnione</div>');
+        } elseif ($infoCheck == 'account_disabled') {
+            echo('<div class="alert alert-danger text-center" role="alert">Konto nie zostało jeszcze aktywowane</div>');
         }
     }
     ?>
